@@ -1,0 +1,60 @@
+name: sloppy-paper-checker
+services:
+  api:
+    build: ./backend
+    command: uvicorn sloppy_checker.main:app --host 0.0.0.0 --port 8787
+    env_file: .env
+    environment:
+      SPC_EAGER_TASKS: "false"
+    ports: ["8787:8787"]
+    volumes: ["uploads:/app/uploads"]
+    depends_on:
+      postgres: {condition: service_healthy}
+      redis: {condition: service_healthy}
+  worker:
+    build: ./backend
+    command: celery -A sloppy_checker.tasks.celery_app worker --loglevel=INFO --concurrency=4
+    env_file: .env
+    environment:
+      SPC_EAGER_TASKS: "false"
+    volumes: ["uploads:/app/uploads"]
+    depends_on:
+      postgres: {condition: service_healthy}
+      redis: {condition: service_healthy}
+      grobid: {condition: service_started}
+  scheduler:
+    build: ./backend
+    command: celery -A sloppy_checker.tasks.celery_app beat --loglevel=INFO
+    env_file: .env
+    environment:
+      SPC_EAGER_TASKS: "false"
+    depends_on:
+      postgres: {condition: service_healthy}
+      redis: {condition: service_healthy}
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: paper
+      POSTGRES_PASSWORD: paper
+      POSTGRES_DB: paper
+    volumes: ["postgres:/var/lib/postgresql/data"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U paper"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+  redis:
+    image: redis:7-alpine
+    command: redis-server --save 60 1 --loglevel warning
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+  grobid:
+    image: lfoppiano/grobid:0.8.2
+    ports: ["8070:8070"]
+
+volumes:
+  postgres:
+  uploads:

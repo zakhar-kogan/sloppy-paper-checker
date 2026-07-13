@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0",
+  "cases": [
+    {"id": "robust-rct", "profile": "randomized_experiment", "status": "active"},
+    {"id": "corrected-review", "profile": "systematic_review_meta_analysis", "status": "corrected"},
+    {"id": "retracted-observational", "profile": "observational_study", "status": "retracted"},
+    {"id": "qualitative", "profile": "qualitative_research", "status": "active"},
+    {"id": "computational", "profile": "computational_ml_modeling", "status": "active"},
+    {"id": "diagnostic", "profile": "diagnostic_prediction", "status": "active"},
+    {"id": "unsupported-perspective", "profile": "common_core", "status": "active"}
+  ]
+}
+

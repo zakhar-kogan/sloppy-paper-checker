@@ -1,0 +1,1311 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Sloppy Paper Checker API",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/v1/uploads": {
+      "post": {
+        "summary": "Upload Pdf",
+        "operationId": "upload_pdf_v1_uploads_post",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_upload_pdf_v1_uploads_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UploadReceipt"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/v1/analyses": {
+      "post": {
+        "summary": "Create Analysis",
+        "operationId": "create_analysis_v1_analyses_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AnalysisRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "202": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AnalysisStatus"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/v1/analyses/{analysis_id}": {
+      "get": {
+        "summary": "Get Analysis",
+        "operationId": "get_analysis_v1_analyses__analysis_id__get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "analysis_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Analysis Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AnalysisStatus"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/analyses/{analysis_id}/events": {
+      "get": {
+        "summary": "Analysis Events",
+        "operationId": "analysis_events_v1_analyses__analysis_id__events_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "analysis_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Analysis Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/analyses/{analysis_id}/cancel": {
+      "post": {
+        "summary": "Cancel Analysis",
+        "operationId": "cancel_analysis_v1_analyses__analysis_id__cancel_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "analysis_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Analysis Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AnalysisStatus"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/analyses/{analysis_id}/report": {
+      "get": {
+        "summary": "Get Report",
+        "operationId": "get_report_v1_analyses__analysis_id__report_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "analysis_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Analysis Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AnalysisReport"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/settings": {
+      "get": {
+        "summary": "Get Provider Settings",
+        "operationId": "get_provider_settings_v1_settings_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProviderSettingsView"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      },
+      "put": {
+        "summary": "Put Provider Settings",
+        "operationId": "put_provider_settings_v1_settings_put",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProviderSettingsInput"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProviderSettingsView"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/v1/providers/models": {
+      "get": {
+        "summary": "Provider Models",
+        "operationId": "provider_models_v1_providers_models_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": {
+                    "items": {
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "type": "object",
+                  "title": "Response Provider Models V1 Providers Models Get"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AnalysisDepth": {
+        "type": "string",
+        "enum": [
+          "quick",
+          "standard",
+          "deep"
+        ],
+        "title": "AnalysisDepth"
+      },
+      "AnalysisReport": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "schema_version": {
+            "type": "string",
+            "const": "1.0",
+            "title": "Schema Version",
+            "default": "1.0"
+          },
+          "scoring_version": {
+            "type": "string",
+            "const": "1.0",
+            "title": "Scoring Version",
+            "default": "1.0"
+          },
+          "identity": {
+            "$ref": "#/components/schemas/PaperIdentity"
+          },
+          "profile": {
+            "$ref": "#/components/schemas/RubricProfile"
+          },
+          "language": {
+            "type": "string",
+            "title": "Language"
+          },
+          "composite_score": {
+            "type": "number",
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Composite Score"
+          },
+          "uncapped_score": {
+            "type": "number",
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Uncapped Score"
+          },
+          "dimensions": {
+            "items": {
+              "$ref": "#/components/schemas/DimensionScore"
+            },
+            "type": "array",
+            "title": "Dimensions"
+          },
+          "coverage": {
+            "$ref": "#/components/schemas/Coverage"
+          },
+          "context": {
+            "$ref": "#/components/schemas/ContextAssessment"
+          },
+          "findings": {
+            "items": {
+              "$ref": "#/components/schemas/Finding"
+            },
+            "type": "array",
+            "title": "Findings"
+          },
+          "banners": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Banners"
+          },
+          "limitations": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Limitations"
+          },
+          "audit_trail": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Audit Trail"
+          },
+          "completed_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Completed At"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "identity",
+          "profile",
+          "language",
+          "composite_score",
+          "uncapped_score",
+          "dimensions",
+          "coverage",
+          "context",
+          "findings",
+          "banners",
+          "limitations",
+          "audit_trail",
+          "completed_at"
+        ],
+        "title": "AnalysisReport"
+      },
+      "AnalysisRequest": {
+        "properties": {
+          "source": {
+            "$ref": "#/components/schemas/PaperSource"
+          },
+          "depth": {
+            "$ref": "#/components/schemas/AnalysisDepth",
+            "default": "standard"
+          },
+          "enabled_checks": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Enabled Checks"
+          },
+          "max_cost_usd": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 100.0,
+                "exclusiveMinimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Max Cost Usd"
+          },
+          "sequential": {
+            "type": "boolean",
+            "title": "Sequential",
+            "default": false
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "source"
+        ],
+        "title": "AnalysisRequest"
+      },
+      "AnalysisState": {
+        "type": "string",
+        "enum": [
+          "queued",
+          "running",
+          "completed",
+          "failed",
+          "cancelled"
+        ],
+        "title": "AnalysisState"
+      },
+      "AnalysisStatus": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "state": {
+            "$ref": "#/components/schemas/AnalysisState"
+          },
+          "progress": {
+            "type": "integer",
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Progress"
+          },
+          "stage": {
+            "type": "string",
+            "title": "Stage"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At"
+          },
+          "error": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Error"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "state",
+          "progress",
+          "stage",
+          "created_at",
+          "updated_at"
+        ],
+        "title": "AnalysisStatus"
+      },
+      "Body_upload_pdf_v1_uploads_post": {
+        "properties": {
+          "file": {
+            "type": "string",
+            "contentMediaType": "application/octet-stream",
+            "title": "File"
+          }
+        },
+        "type": "object",
+        "required": [
+          "file"
+        ],
+        "title": "Body_upload_pdf_v1_uploads_post"
+      },
+      "ContextAssessment": {
+        "properties": {
+          "retracted": {
+            "type": "boolean",
+            "title": "Retracted",
+            "default": false
+          },
+          "expression_of_concern": {
+            "type": "boolean",
+            "title": "Expression Of Concern",
+            "default": false
+          },
+          "corrections": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Corrections"
+          },
+          "venue_signals": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Venue Signals"
+          },
+          "author_conflict_signals": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Author Conflict Signals"
+          },
+          "metric_notes": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Metric Notes"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "ContextAssessment"
+      },
+      "Coverage": {
+        "properties": {
+          "paper": {
+            "type": "number",
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Paper"
+          },
+          "context": {
+            "type": "number",
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Context"
+          },
+          "overall": {
+            "type": "number",
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Overall"
+          },
+          "provisional": {
+            "type": "boolean",
+            "title": "Provisional"
+          },
+          "limitations": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Limitations"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "paper",
+          "context",
+          "overall",
+          "provisional"
+        ],
+        "title": "Coverage"
+      },
+      "DimensionScore": {
+        "properties": {
+          "key": {
+            "type": "string",
+            "title": "Key"
+          },
+          "label": {
+            "type": "string",
+            "title": "Label"
+          },
+          "weight": {
+            "type": "number",
+            "title": "Weight"
+          },
+          "score": {
+            "type": "number",
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Score"
+          },
+          "assessed_items": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Assessed Items"
+          },
+          "total_items": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Total Items"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "key",
+          "label",
+          "weight",
+          "score",
+          "assessed_items",
+          "total_items"
+        ],
+        "title": "DimensionScore"
+      },
+      "EvidenceSource": {
+        "properties": {
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "url": {
+            "type": "string",
+            "maxLength": 2083,
+            "minLength": 1,
+            "format": "uri",
+            "title": "Url"
+          },
+          "publisher": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Publisher"
+          },
+          "accessed_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Accessed At"
+          },
+          "identifier": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Identifier"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "title",
+          "url",
+          "accessed_at"
+        ],
+        "title": "EvidenceSource"
+      },
+      "Finding": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "category": {
+            "type": "string",
+            "title": "Category"
+          },
+          "rubric_item": {
+            "type": "string",
+            "title": "Rubric Item"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "explanation": {
+            "type": "string",
+            "title": "Explanation"
+          },
+          "severity": {
+            "$ref": "#/components/schemas/FindingSeverity"
+          },
+          "grade": {
+            "$ref": "#/components/schemas/RubricGrade"
+          },
+          "confidence": {
+            "type": "number",
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Confidence"
+          },
+          "paper_spans": {
+            "items": {
+              "$ref": "#/components/schemas/PaperSpan"
+            },
+            "type": "array",
+            "title": "Paper Spans"
+          },
+          "external_sources": {
+            "items": {
+              "$ref": "#/components/schemas/EvidenceSource"
+            },
+            "type": "array",
+            "title": "External Sources"
+          },
+          "affected_conclusions": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Affected Conclusions"
+          },
+          "counterevidence": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Counterevidence"
+          },
+          "limitations": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Limitations"
+          },
+          "critic_disposition": {
+            "type": "string",
+            "enum": [
+              "accepted",
+              "revised",
+              "discarded"
+            ],
+            "title": "Critic Disposition",
+            "default": "accepted"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "category",
+          "rubric_item",
+          "title",
+          "explanation",
+          "severity",
+          "grade",
+          "confidence"
+        ],
+        "title": "Finding"
+      },
+      "FindingSeverity": {
+        "type": "string",
+        "enum": [
+          "info",
+          "minor",
+          "major",
+          "critical"
+        ],
+        "title": "FindingSeverity"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "PaperIdentity": {
+        "properties": {
+          "doi": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Doi"
+          },
+          "title": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Title"
+          },
+          "authors": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Authors"
+          },
+          "journal": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Journal"
+          },
+          "published_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Published At"
+          },
+          "fingerprint": {
+            "type": "string",
+            "title": "Fingerprint"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "fingerprint"
+        ],
+        "title": "PaperIdentity"
+      },
+      "PaperSource": {
+        "properties": {
+          "kind": {
+            "$ref": "#/components/schemas/PaperSourceKind"
+          },
+          "value": {
+            "type": "string",
+            "maxLength": 2048,
+            "minLength": 1,
+            "title": "Value"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "kind",
+          "value"
+        ],
+        "title": "PaperSource"
+      },
+      "PaperSourceKind": {
+        "type": "string",
+        "enum": [
+          "doi",
+          "url",
+          "upload"
+        ],
+        "title": "PaperSourceKind"
+      },
+      "PaperSpan": {
+        "properties": {
+          "section": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Section"
+          },
+          "page": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Page"
+          },
+          "quote": {
+            "type": "string",
+            "maxLength": 1200,
+            "minLength": 1,
+            "title": "Quote"
+          },
+          "start": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Start"
+          },
+          "end": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "End"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "quote"
+        ],
+        "title": "PaperSpan"
+      },
+      "ProviderSettingsInput": {
+        "properties": {
+          "base_url": {
+            "type": "string",
+            "maxLength": 2083,
+            "minLength": 1,
+            "format": "uri",
+            "title": "Base Url",
+            "default": "https://api.tokenfactory.nebius.com/v1/"
+          },
+          "api_key": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 4096,
+                "minLength": 8
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Api Key"
+          },
+          "clear_api_key": {
+            "type": "boolean",
+            "title": "Clear Api Key",
+            "default": false
+          },
+          "planner_model": {
+            "type": "string",
+            "title": "Planner Model",
+            "default": ""
+          },
+          "worker_model": {
+            "type": "string",
+            "title": "Worker Model",
+            "default": ""
+          },
+          "critic_model": {
+            "type": "string",
+            "title": "Critic Model",
+            "default": ""
+          },
+          "default_depth": {
+            "$ref": "#/components/schemas/AnalysisDepth",
+            "default": "standard"
+          },
+          "max_concurrency": {
+            "type": "integer",
+            "maximum": 16.0,
+            "minimum": 1.0,
+            "title": "Max Concurrency",
+            "default": 5
+          },
+          "sequential_mode": {
+            "type": "boolean",
+            "title": "Sequential Mode",
+            "default": false
+          },
+          "max_cost_usd": {
+            "type": "number",
+            "maximum": 100.0,
+            "exclusiveMinimum": 0.0,
+            "title": "Max Cost Usd",
+            "default": 2.0
+          },
+          "retention_days": {
+            "type": "integer",
+            "maximum": 3650.0,
+            "minimum": 0.0,
+            "title": "Retention Days",
+            "default": 30
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "ProviderSettingsInput"
+      },
+      "ProviderSettingsView": {
+        "properties": {
+          "base_url": {
+            "type": "string",
+            "maxLength": 2083,
+            "minLength": 1,
+            "format": "uri",
+            "title": "Base Url"
+          },
+          "has_api_key": {
+            "type": "boolean",
+            "title": "Has Api Key"
+          },
+          "api_key_source": {
+            "type": "string",
+            "enum": [
+              "encrypted",
+              "environment",
+              "missing"
+            ],
+            "title": "Api Key Source"
+          },
+          "planner_model": {
+            "type": "string",
+            "title": "Planner Model"
+          },
+          "worker_model": {
+            "type": "string",
+            "title": "Worker Model"
+          },
+          "critic_model": {
+            "type": "string",
+            "title": "Critic Model"
+          },
+          "default_depth": {
+            "$ref": "#/components/schemas/AnalysisDepth"
+          },
+          "max_concurrency": {
+            "type": "integer",
+            "title": "Max Concurrency"
+          },
+          "sequential_mode": {
+            "type": "boolean",
+            "title": "Sequential Mode"
+          },
+          "max_cost_usd": {
+            "type": "number",
+            "title": "Max Cost Usd"
+          },
+          "retention_days": {
+            "type": "integer",
+            "title": "Retention Days"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "base_url",
+          "has_api_key",
+          "api_key_source",
+          "planner_model",
+          "worker_model",
+          "critic_model",
+          "default_depth",
+          "max_concurrency",
+          "sequential_mode",
+          "max_cost_usd",
+          "retention_days"
+        ],
+        "title": "ProviderSettingsView"
+      },
+      "RubricGrade": {
+        "type": "string",
+        "enum": [
+          "no_concern",
+          "minor_concern",
+          "major_concern",
+          "critical_concern",
+          "not_assessed"
+        ],
+        "title": "RubricGrade"
+      },
+      "RubricProfile": {
+        "type": "string",
+        "enum": [
+          "randomized_experiment",
+          "observational_study",
+          "qualitative_research",
+          "systematic_review_meta_analysis",
+          "diagnostic_prediction",
+          "computational_ml_modeling",
+          "common_core"
+        ],
+        "title": "RubricProfile"
+      },
+      "UploadReceipt": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "sha256": {
+            "type": "string",
+            "title": "Sha256"
+          },
+          "bytes": {
+            "type": "integer",
+            "title": "Bytes"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "sha256",
+          "bytes"
+        ],
+        "title": "UploadReceipt"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    },
+    "securitySchemes": {
+      "HTTPBearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  }
+}
