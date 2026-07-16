@@ -1,18 +1,13 @@
 {
   "manifest_version": 3,
   "name": "Sloppy Paper Checker",
-  "description": "Evidence-linked, rubric-backed scientific paper analysis.",
+  "description": "Send the current scholarly paper to Sloppy Paper Checker.",
   "version": "0.1.0",
   "minimum_chrome_version": "116",
-  "permissions": ["activeTab", "scripting", "storage", "sidePanel"],
-  "host_permissions": ["http://127.0.0.1:8787/*", "http://localhost:8787/*"],
-  "optional_host_permissions": ["https://*/*", "http://*/*"],
+  "permissions": ["activeTab", "scripting"],
   "background": {"service_worker": "assets/background.js", "type": "module"},
   "action": {"default_title": "Check this paper"},
-  "side_panel": {"default_path": "sidepanel.html"},
-  "options_page": "options.html",
   "content_security_policy": {
     "extension_pages": "script-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'"
   }
 }
-
