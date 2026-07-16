@@ -1,0 +1,78 @@
+version: "1.1"
+name: "Scientific paper review"
+worker_prompt: "prompts/worker-v1.md"
+reviewer_prompt: "prompts/reviewer-v1.md"
+grade_scores:
+  no_concern: 100
+  minor_concern: 75
+  major_concern: 35
+  critical_concern: 0
+profiles:
+  - general_empirical
+  - randomized_experiment
+  - observational_study
+  - systematic_review_meta_analysis
+  - computational_ml_modeling
+  - common_core
+routing:
+  target_chunk_chars: 4200
+  overlap_chars: 350
+  max_chunks_per_module: 8
+  max_module_chars: 36000
+  reviewer_max_chars: 120000
+evidence:
+  substantive_requires_span_or_source: true
+  reviewer_may_introduce_evidence: true
+  retrieve_cited_full_text: false
+external_adapters:
+  - crossref_publication_record
+modules:
+  - key: design
+    label: "Study design & risk of bias"
+    weight: 25
+    minimum_content_level: full_text
+    required_sections: [methods, participants, design]
+    keywords: [randomization, selection, confounding, comparator, blinding, attrition, exclusion, sampling]
+    items: [study_design, sampling, comparators, bias_controls, causal_scope]
+  - key: statistics
+    label: "Statistical & computational validity"
+    weight: 20
+    minimum_content_level: full_text
+    required_sections: [methods, results, statistical analysis]
+    keywords: [confidence interval, p-value, power, missing data, multiplicity, robustness, leakage, baseline]
+    items: [analysis_plan, assumptions, uncertainty, missing_data, robustness]
+  - key: claims
+    label: "Claim–evidence alignment"
+    weight: 20
+    minimum_content_level: abstract
+    required_sections: [abstract, results, discussion, conclusion]
+    keywords: [conclude, demonstrate, evidence, association, cause, significant, generalize]
+    items: [claim_strength, results_support, causal_language, generalization, limitations_alignment]
+  - key: transparency
+    label: "Transparency & reporting"
+    weight: 20
+    minimum_content_level: full_text
+    required_sections: [methods, data availability, code availability, ethics, supplementary]
+    keywords: [preregistration, protocol, ethics, consent, data availability, code, reproducibility]
+    items: [registration, ethics, data_code, reporting_completeness, reproducibility]
+  - key: record
+    label: "Record & venue context"
+    weight: 10
+    minimum_content_level: metadata
+    required_sections: [abstract]
+    keywords: [correction, retraction, journal, version]
+    items: [identity_consistency, version_status, record_updates, venue_provenance]
+  - key: disclosures
+    label: "Disclosures & affiliations"
+    weight: 5
+    minimum_content_level: metadata
+    required_sections: [funding, conflicts of interest, affiliations, acknowledgements]
+    keywords: [funding, grant, sponsor, conflict, competing interest, affiliation]
+    items: [funding_statement, conflict_statement, sponsor_role, affiliations]
+failure_policy:
+  reviewer_failure: provisional_unreviewed
+  module_failure: visible_incomplete
+  insufficient_evidence: not_assessed
+score:
+  provisional_full_review_coverage_below: 0.70
+  publication_status_caps: false

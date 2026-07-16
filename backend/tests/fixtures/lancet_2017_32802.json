@@ -1,0 +1,18 @@
+{
+  "doi": "10.1016/S0140-6736(17)32802-7",
+  "crossref": {
+    "message": {
+      "title": ["Comparative efficacy and acceptability of 21 antidepressant drugs for the acute treatment of adults with major depressive disorder"],
+      "container-title": ["The Lancet"],
+      "published": {"date-parts": [[2018]]},
+      "author": [{"given": "Andrea", "family": "Cipriani"}]
+    }
+  },
+  "unpaywall": {
+    "oa_locations": [
+      {"url_for_pdf": "https://research-information.bris.ac.uk/ws/files/submitted.pdf", "version": "submittedVersion", "license": "cc-by-nc-nd"},
+      {"url_for_pdf": "https://www.thelancet.com/action/showPdf?pii=S0140673617328027", "version": "publishedVersion", "license": "cc-by"}
+    ]
+  },
+  "ncbi": {"records": [{"pmid": "29477251", "pmcid": "PMC5889788"}]}
+}

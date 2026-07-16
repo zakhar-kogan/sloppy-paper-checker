@@ -3,25 +3,16 @@ from __future__ import annotations
 from collections import defaultdict
 from dataclasses import dataclass
 
-from .schemas import ContextAssessment, Coverage, DimensionScore, Finding, RubricGrade
-
-WEIGHTS = {
-    "design": ("Design & reasoning", 25.0, "paper"),
-    "statistics": ("Analysis & statistics", 20.0, "paper"),
-    "claims": ("Claim–evidence alignment", 20.0, "paper"),
-    "transparency": ("Transparency & reproducibility", 12.0, "paper"),
-    "reporting": ("Reporting & internal consistency", 8.0, "paper"),
-    "venue": ("Venue & record integrity", 6.0, "context"),
-    "authors": ("Relevant author & conflict evidence", 5.0, "context"),
-    "standing": ("Field-normalized journal standing", 4.0, "context"),
-}
-
-GRADE_SCORES = {
-    RubricGrade.NO_CONCERN: 100.0,
-    RubricGrade.MINOR_CONCERN: 75.0,
-    RubricGrade.MAJOR_CONCERN: 35.0,
-    RubricGrade.CRITICAL_CONCERN: 0.0,
-}
+from .methodology import content_allows, load_methodology
+from .schemas import (
+    ContentLevel,
+    ContextAssessment,
+    Coverage,
+    DimensionScore,
+    Finding,
+    ModuleStatus,
+    RubricGrade,
+)
 
 
 @dataclass(frozen=True)
@@ -31,99 +22,140 @@ class ScoreResult:
     dimensions: list[DimensionScore]
     coverage: Coverage
     banners: list[str]
+    module_statuses: list[ModuleStatus]
+    weighted_coverage: float
 
 
-def score_findings(findings: list[Finding], context: ContextAssessment) -> ScoreResult:
+def score_findings(
+    findings: list[Finding],
+    context: ContextAssessment,
+    content_level: ContentLevel = ContentLevel.FULL_TEXT,
+    module_failures: dict[str, str] | None = None,
+    reviewer_completed: bool = True,
+) -> ScoreResult:
+    methodology = load_methodology().definition
+    grade_scores = {
+        RubricGrade(key): float(value) for key, value in methodology.grade_scores.items()
+    }
+    failures = module_failures or {}
     grouped: dict[str, list[Finding]] = defaultdict(list)
     for finding in findings:
-        if finding.critic_disposition != "discarded" and finding.category in WEIGHTS:
+        if finding.critic_disposition != "discarded":
             grouped[finding.category].append(finding)
 
-    paper_values: list[tuple[float, float]] = []
     dimensions: list[DimensionScore] = []
-    for key, (label, weight, group) in WEIGHTS.items():
-        assessed = [f for f in grouped[key] if f.grade != RubricGrade.NOT_ASSESSED]
+    statuses: list[ModuleStatus] = []
+    weighted = 0.0
+    assessed_weight = 0.0
+    assessed_full_items = 0
+    assessed_eligible_items = 0
+    eligible_items = 0
+    eligible_weight = 0.0
+    total_items = sum(len(module.items) for module in methodology.modules)
+
+    for module in methodology.modules:
+        eligible = content_allows(content_level, module.minimum_content_level)
+        expected = len(module.items)
+        if eligible:
+            eligible_items += expected
+            eligible_weight += module.weight
+        assessed_by_item = {
+            finding.rubric_item: finding
+            for finding in grouped[module.key]
+            if finding.grade != RubricGrade.NOT_ASSESSED and finding.rubric_item in module.items
+        }
+        assessed = list(assessed_by_item.values())
+        assessed_count = len(assessed)
+        if eligible:
+            assessed_eligible_items += assessed_count
+        assessed_full_items += assessed_count
+        value = (
+            sum(grade_scores[finding.grade] for finding in assessed) / len(assessed)
+            if assessed
+            else 0.0
+        )
         if assessed:
-            value = sum(GRADE_SCORES[f.grade] for f in assessed) / len(assessed)
-        else:
-            value = 0.0
-        if group == "paper" and assessed:
-            paper_values.append((value, weight))
+            item_weight = module.weight / expected
+            weighted += sum(grade_scores[finding.grade] * item_weight for finding in assessed)
+            assessed_weight += assessed_count * item_weight
         dimensions.append(
             DimensionScore(
-                key=key,
-                label=label,
-                weight=weight,
+                key=module.key,
+                label=module.label,
+                weight=module.weight,
                 score=round(value, 1),
-                assessed_items=len(assessed),
-                total_items=max(len(grouped[key]), 1),
+                assessed_items=assessed_count,
+                total_items=expected,
+            )
+        )
+        if not eligible:
+            state = "ineligible_at_content_level"
+            limitation = f"Requires {module.minimum_content_level.value}."
+        elif module.key in failures:
+            state = "module_failed"
+            limitation = failures[module.key]
+        elif not reviewer_completed:
+            state = "unreviewed"
+            limitation = "Independent reviewer did not complete."
+        else:
+            state = "completed"
+            limitation = None
+        statuses.append(
+            ModuleStatus(
+                key=module.key,
+                label=module.label,
+                state=state,
+                assessed_items=assessed_count,
+                expected_items=expected,
+                limitation=limitation,
             )
         )
 
-    paper_score = (
-        sum(value * weight for value, weight in paper_values)
-        / sum(weight for _, weight in paper_values)
-        if paper_values
-        else 0.0
+    score = weighted / assessed_weight if assessed_weight else 0.0
+    available = assessed_eligible_items / eligible_items if eligible_items else 0.0
+    weighted_coverage = assessed_weight / eligible_weight if eligible_weight else 0.0
+    full_review = assessed_full_items / total_items if total_items else 0.0
+    provisional = (
+        full_review < float(methodology.score["provisional_full_review_coverage_below"])
+        or bool(failures)
+        or not reviewer_completed
     )
+    limitations: list[str] = []
+    if content_level != ContentLevel.FULL_TEXT:
+        limitations.append(f"The analysis used {content_level.value.replace('_', ' ')} content, not the full paper.")
+    if failures:
+        limitations.append("One or more methodology modules failed and remain visibly incomplete.")
+    if not reviewer_completed:
+        limitations.append("Findings were not independently reviewed.")
+    if provisional:
+        limitations.append("Low full-review coverage makes the Review score provisional.")
 
-    weighted = 0.0
-    assessed_weight = 0.0
-    paper_assessed = 0
-    paper_total = 0
-    context_assessed = 0
-    context_total = 0
-    neutralized: list[str] = []
-    for dimension in dimensions:
-        _, weight, group = WEIGHTS[dimension.key]
-        if group == "paper":
-            paper_total += dimension.total_items
-            paper_assessed += dimension.assessed_items
-            if dimension.assessed_items:
-                weighted += dimension.score * weight
-                assessed_weight += weight
-        else:
-            context_total += dimension.total_items
-            context_assessed += dimension.assessed_items
-            # Unknown context inherits paper score: neutral, but visibly uncovered.
-            value = dimension.score if dimension.assessed_items else paper_score
-            if not dimension.assessed_items:
-                neutralized.append(dimension.label)
-            weighted += value * weight
-            assessed_weight += weight
-
-    uncapped = weighted / assessed_weight if assessed_weight else 0.0
-    composite = uncapped
     banners: list[str] = []
     if context.retracted:
-        composite = min(composite, 10.0)
-        banners.append("Retracted record: composite score capped at 10.")
-    elif context.expression_of_concern:
-        composite = min(composite, 40.0)
-        banners.append("Expression of concern: composite score capped at 40.")
+        banners.append("Publication record reports a retraction; this status does not mathematically alter the Review score.")
+    if context.expression_of_concern:
+        banners.append("Publication record reports an expression of concern; inspect the sourced notice.")
     if context.corrections:
         banners.append("Corrections exist; conclusions should be checked against the latest version.")
 
-    paper_coverage = paper_assessed / paper_total if paper_total else 0.0
-    context_coverage = context_assessed / context_total if context_total else 0.0
-    overall_coverage = paper_coverage * 0.85 + context_coverage * 0.15
-    provisional = overall_coverage < 0.7
-    limitations = []
-    if neutralized:
-        limitations.append("Missing context was score-neutral: " + ", ".join(neutralized) + ".")
-    if provisional:
-        limitations.append("Low evidence coverage makes this result provisional.")
-
     return ScoreResult(
-        composite=round(composite, 1),
-        uncapped=round(uncapped, 1),
+        composite=round(score, 1),
+        uncapped=round(score, 1),
         dimensions=dimensions,
         coverage=Coverage(
-            paper=round(paper_coverage, 3),
-            context=round(context_coverage, 3),
-            overall=round(overall_coverage, 3),
+            paper=round(full_review, 3),
+            context=round(
+                sum(status.assessed_items for status in statuses if status.key in {"record", "disclosures"})
+                / max(1, sum(status.expected_items for status in statuses if status.key in {"record", "disclosures"})),
+                3,
+            ),
+            overall=round(full_review, 3),
+            available=round(available, 3),
+            full_review=round(full_review, 3),
             provisional=provisional,
             limitations=limitations,
         ),
         banners=banners,
+        module_statuses=statuses,
+        weighted_coverage=round(weighted_coverage, 3),
     )

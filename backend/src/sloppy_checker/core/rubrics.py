@@ -15,6 +15,25 @@ class RubricDefinition:
 
 
 RUBRICS: dict[RubricProfile, RubricDefinition] = {
+    RubricProfile.GENERAL_EMPIRICAL: RubricDefinition(
+        RubricProfile.GENERAL_EMPIRICAL,
+        "Relevant EQUATOR guideline when identifiable",
+        "General empirical-design and risk-of-bias concepts",
+        (
+            "study question and design",
+            "sampling and eligibility",
+            "measurement quality",
+            "comparators and controls",
+            "threats to validity",
+        ),
+        (
+            "analysis specification",
+            "effect size and uncertainty",
+            "missing data",
+            "robustness checks",
+            "claim calibration",
+        ),
+    ),
     RubricProfile.RANDOMIZED: RubricDefinition(
         RubricProfile.RANDOMIZED,
         "CONSORT / EQUATOR",
@@ -74,4 +93,3 @@ def rubric_prompt(profile: RubricProfile) -> str:
         f"{rubric.appraisal_reference}. Design items: {', '.join(rubric.design_items)}. "
         f"Analysis items: {', '.join(rubric.statistics_items)}."
     )
-

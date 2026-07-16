@@ -42,12 +42,3 @@ class EvidenceClient:
             result.data = result.data.get("message", {})
         return result
 
-    async def openalex(self, doi: str) -> AdapterResult:
-        return await self._get("OpenAlex", "https://api.openalex.org/works/https://doi.org/" + normalize_doi(doi))
-
-    async def datacite(self, doi: str) -> AdapterResult:
-        return await self._get("DataCite", "https://api.datacite.org/dois/" + normalize_doi(doi))
-
-    async def doaj(self, issn: str) -> AdapterResult:
-        return await self._get("DOAJ", f"https://doaj.org/api/search/journals/issn:{issn}")
-

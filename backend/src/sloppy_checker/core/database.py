@@ -36,25 +36,26 @@ class AnalysisRow(Base):
     )
 
 
-class UploadRow(Base):
-    __tablename__ = "uploads"
+class DocumentRow(Base):
+    __tablename__ = "documents"
 
     id: Mapped[str] = mapped_column(String(36), primary_key=True, default=lambda: str(uuid4()))
-    path: Mapped[str] = mapped_column(Text)
+    object_key: Mapped[str] = mapped_column(Text, unique=True)
     sha256: Mapped[str] = mapped_column(String(64), index=True)
-    size: Mapped[int] = mapped_column(Integer)
+    content_level: Mapped[str] = mapped_column(String(24))
+    source_format: Mapped[str] = mapped_column(String(24))
+    owner_hash: Mapped[str | None] = mapped_column(String(64), nullable=True, index=True)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=lambda: datetime.now(UTC))
 
 
-class ProviderSettingsRow(Base):
-    __tablename__ = "provider_settings"
+class ResolutionRow(Base):
+    __tablename__ = "resolutions"
 
-    id: Mapped[int] = mapped_column(Integer, primary_key=True, default=1)
-    values: Mapped[dict] = mapped_column(JSON, default=dict)
-    encrypted_api_key: Mapped[str | None] = mapped_column(Text, nullable=True)
-    updated_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), default=lambda: datetime.now(UTC), onupdate=lambda: datetime.now(UTC)
-    )
+    id: Mapped[str] = mapped_column(String(36), primary_key=True)
+    input_hash: Mapped[str] = mapped_column(String(64), unique=True, index=True)
+    payload: Mapped[dict] = mapped_column(JSON)
+    expires_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), index=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=lambda: datetime.now(UTC))
 
 
 settings = get_settings()
@@ -70,4 +71,3 @@ def create_schema() -> None:
 def get_db() -> Generator[Session, None, None]:
     with SessionLocal() as session:
         yield session
-

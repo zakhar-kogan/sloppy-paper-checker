@@ -1,14 +1,15 @@
 from __future__ import annotations
 
-import base64
 import hashlib
 import hmac
 import ipaddress
+import secrets
 import socket
 from collections.abc import Iterable
+from dataclasses import dataclass
+from datetime import UTC, datetime, timedelta
 from urllib.parse import urlparse
 
-from cryptography.fernet import Fernet
 from fastapi import Depends, HTTPException, Request, status
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 
@@ -17,19 +18,67 @@ from .config import AppSettings, get_settings
 bearer = HTTPBearer(auto_error=False)
 
 
-def require_api_token(
+@dataclass(frozen=True)
+class AccessContext:
+    is_admin: bool
+    owner_hash: str | None
+
+
+def _guest_signature(session_id: str, expires: int, settings: AppSettings) -> str:
+    payload = f"{session_id}.{expires}".encode()
+    return hmac.new(settings.api_token.encode(), payload, hashlib.sha256).hexdigest()
+
+
+def issue_guest_session(
+    settings: AppSettings, current_value: str | None = None
+) -> tuple[str, str, datetime]:
+    session_id = secrets.token_urlsafe(24)
+    if current_value and parse_guest_session(current_value, settings):
+        try:
+            session_id = current_value.rsplit(".", 2)[0]
+        except (ValueError, TypeError):
+            pass
+    expires_at = datetime.now(UTC) + timedelta(hours=settings.report_retention_hours)
+    expires = int(expires_at.timestamp())
+    value = f"{session_id}.{expires}.{_guest_signature(session_id, expires, settings)}"
+    owner_hash = hashlib.sha256(session_id.encode()).hexdigest()
+    return value, owner_hash, expires_at
+
+
+def parse_guest_session(value: str | None, settings: AppSettings) -> str | None:
+    if not value:
+        return None
+    try:
+        session_id, expires_raw, signature = value.rsplit(".", 2)
+        expires = int(expires_raw)
+    except (ValueError, TypeError):
+        return None
+    if expires <= int(datetime.now(UTC).timestamp()):
+        return None
+    if not hmac.compare_digest(signature, _guest_signature(session_id, expires, settings)):
+        return None
+    return hashlib.sha256(session_id.encode()).hexdigest()
+
+
+def require_client_access(
+    request: Request,
     credentials: HTTPAuthorizationCredentials | None = Depends(bearer),
     settings: AppSettings = Depends(get_settings),
-) -> None:
-    valid = credentials is not None and hmac.compare_digest(
+) -> AccessContext:
+    if request.url.path == "/v1/session":
+        return AccessContext(False, None)
+    if credentials is not None and hmac.compare_digest(
         credentials.credentials.encode(), settings.api_token.encode()
+    ):
+        return AccessContext(True, None)
+    owner_hash = parse_guest_session(request.cookies.get(settings.guest_cookie_name), settings)
+    if owner_hash:
+        return AccessContext(False, owner_hash)
+    raise HTTPException(
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        detail="Start an anonymous session or provide the backend bearer token",
+        headers={"WWW-Authenticate": "Bearer"},
     )
-    if not valid:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Invalid API token",
-            headers={"WWW-Authenticate": "Bearer"},
-        )
 
 
 def _is_public(address: str) -> bool:
@@ -60,23 +109,6 @@ def validate_redirect_chain(urls: Iterable[str]) -> None:
         validate_public_url(url)
 
 
-def _fernet(settings: AppSettings) -> Fernet:
-    if settings.encryption_key:
-        key = settings.encryption_key.encode()
-    else:
-        digest = hashlib.sha256(settings.api_token.encode()).digest()
-        key = base64.urlsafe_b64encode(digest)
-    return Fernet(key)
-
-
-def encrypt_secret(value: str, settings: AppSettings) -> str:
-    return _fernet(settings).encrypt(value.encode()).decode()
-
-
-def decrypt_secret(value: str, settings: AppSettings) -> str:
-    return _fernet(settings).decrypt(value.encode()).decode()
-
-
 async def add_security_headers(request: Request, call_next):
     response = await call_next(request)
     response.headers["X-Content-Type-Options"] = "nosniff"
@@ -86,4 +118,3 @@ async def add_security_headers(request: Request, call_next):
     response.headers["Cache-Control"] = "no-store"
     response.headers["Content-Security-Policy"] = "default-src 'none'; frame-ancestors 'none'"
     return response
-
