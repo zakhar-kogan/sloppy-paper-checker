@@ -1,23 +1,29 @@
-# Scoring methodology v1.0
+# Review scoring methodology v1.1
 
-The report calls the composite a **confidence score**. It is versioned, deterministic, and intended to help readers navigate a paper. It is not an estimate of the probability that conclusions are true.
+The displayed composite is the **Review score**. It is always shown for completed analyses, but findings, content scope, and coverage lead the report.
 
-| Dimension | Weight |
-|---|---:|
-| Design and reasoning | 25 |
-| Analysis and statistics | 20 |
-| Claim–evidence alignment | 20 |
-| Transparency and reproducibility | 12 |
-| Reporting and internal consistency | 8 |
-| Venue and record integrity | 6 |
-| Relevant author and conflict evidence | 5 |
-| Field-normalized journal standing | 4 |
+| Module | Weight | Minimum content |
+|---|---:|---|
+| Study design and risk-of-bias concepts | 25% | Full text |
+| Statistical/computational validity | 20% | Full text |
+| Claim–evidence alignment | 20% | Abstract |
+| Transparency and reporting | 20% | Full text |
+| Record and venue context | 10% | Metadata |
+| Disclosures and current-paper affiliations | 5% | Metadata |
 
-Rubric grades map to `100 / 75 / 35 / 0` for `no_concern / minor_concern / major_concern / critical_concern`. `not_assessed` is excluded. Context with no evidence inherits the assessed paper score, which keeps missing context score-neutral while reducing context coverage. Overall coverage is `85% paper coverage + 15% context coverage`; results below 70% are provisional.
+Expected items are fixed by the versioned methodology artifact. Grades map to `100 / 75 / 35 / 0` for `no_concern / minor_concern / major_concern / critical_concern`. `not_assessed`, failed, discarded, and content-ineligible items do not enter the numeric mean. Each assessed item receives an equal share of its module weight; the final number is normalized over assessed item weight only.
 
-A confirmed retraction caps the composite at 10. An expression of concern caps it at 40. Corrections produce a banner and require version-aware reassessment but do not impose a fixed cap. Both the uncapped score and the reason for any cap remain visible.
+Two denominators remain visible:
 
-EQUATOR guidelines inform reporting-completeness checks. Methodological appraisal is a separate concern informed, where applicable, by RoB 2, ROBINS-I, AMSTAR 2, and current QUADAS-3 concepts. The project does not claim to reproduce those instruments or replace trained assessors.
+- **Available-content coverage:** assessed items divided by items eligible at this paper’s content level.
+- **Full-review coverage:** assessed items divided by all standard full-text items.
 
-Every finding records category, rubric item, grade/severity, confidence, cited paper spans, external sources, affected conclusions, counterevidence, limitations, and critic disposition. Unsupported substantive findings fail schema validation or are discarded by the critic.
+A report is provisional when full-review coverage is below 70%, a required module failed, or reviewer adjudication did not complete. Ineligible modules are recorded as `ineligible_at_content_level`; failures are `module_failed`; unreviewed output stays `unreviewed`.
 
+The separate **analysis confidence** reports how much of the automated run can be relied on operationally. It is deterministic:
+
+`weighted assessment coverage × successful evidence-module coverage × exact quote-grounding rate × 100`
+
+A failed Qwen evidence module does not invalidate DeepSeek's full-paper judgment or depress the Review score; it lowers confidence and appears as an execution warning. Likewise, partial final output retains a score normalized over valid assessed items while missing items reduce confidence. A run with no evidence-grounded final grade fails instead of presenting a fabricated zero-quality score.
+
+Retractions, expressions of concern, and corrections are sourced banners and audit facts. They never cap or otherwise alter the Review score. The score is not a truth probability, evidence-certainty grade, or substitute for a validated appraisal performed by trained reviewers.
