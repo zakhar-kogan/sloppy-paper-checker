@@ -1,6 +1,7 @@
 import type { components } from "./generated/api";
 
 export type ResolvedPaper = components["schemas"]["ResolvedPaper"];
+export type ContentCandidate = components["schemas"]["ContentCandidate"];
 export type PaperDocument = components["schemas"]["PaperDocument"];
 export type PaperIdentity = components["schemas"]["PaperIdentity"];
 export type DocumentReceipt = components["schemas"]["DocumentReceipt"];

@@ -196,6 +196,23 @@
             }
           }
         ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/ResolvedDocumentPreparation"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Payload"
+              }
+            }
+          }
+        },
         "responses": {
           "201": {
             "description": "Successful Response",
@@ -2052,6 +2069,21 @@
           "value"
         ],
         "title": "ResolveRequest"
+      },
+      "ResolvedDocumentPreparation": {
+        "properties": {
+          "failed_candidate_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "maxItems": 10,
+            "title": "Failed Candidate Ids"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "ResolvedDocumentPreparation"
       },
       "ResolvedPaper": {
         "properties": {

@@ -29,8 +29,10 @@ from sloppy_checker.core.schemas import (
     AnalysisRequest,
     AnalysisState,
     AnalysisStatus,
+    ContentCandidate,
     DocumentReceipt,
     PaperDocument,
+    ResolvedDocumentPreparation,
     ResolvedPaper,
     ResolveRequest,
     SessionView,
@@ -92,6 +94,36 @@ def _candidate(resolution: ResolvedPaper, candidate_id: str):
     if not candidate:
         raise HTTPException(404, "Resolved artifact was not found")
     return candidate
+
+
+def _source_label(candidate: ContentCandidate) -> str:
+    parts = [candidate.format.value.upper(), candidate.provider]
+    if candidate.version:
+        parts.append(candidate.version)
+    return " · ".join(" ".join(part.split())[:80] for part in parts)
+
+
+def _fallback_warnings(
+    resolution: ResolvedPaper,
+    failed_candidate_ids: list[str],
+    used_candidate: ContentCandidate | None,
+) -> list[str]:
+    known = {candidate.id: candidate for candidate in resolution.candidates}
+    unknown = [candidate_id for candidate_id in failed_candidate_ids if candidate_id not in known]
+    if unknown:
+        raise HTTPException(422, "A failed source does not belong to this resolution")
+    used_label = _source_label(used_candidate) if used_candidate else (
+        "abstract only" if resolution.abstract else "metadata only"
+    )
+    warnings = []
+    for candidate_id in dict.fromkeys(failed_candidate_ids):
+        failed = known[candidate_id]
+        if used_candidate and failed.id == used_candidate.id:
+            continue
+        warnings.append(
+            f"{_source_label(failed)} could not be used; analysis used {used_label} instead."
+        )
+    return warnings
 
 
 @router.post("/session", response_model=SessionView)
@@ -162,7 +194,14 @@ async def relay_artifact(
     try:
         data = await fetch_bounded_pdf(str(candidate.url), settings)
     except (httpx.HTTPError, ValueError) as exc:
-        raise HTTPException(502, str(exc)) from exc
+        raise HTTPException(
+            502,
+            {
+                "code": "source_unavailable",
+                "candidate_id": candidate.id,
+                "message": "The selected PDF source could not be retrieved or validated.",
+            },
+        ) from exc
     return BinaryResponse(data, media_type="application/pdf", headers={"Cache-Control": "private, no-store"})
 
 
@@ -205,6 +244,7 @@ def create_document(
 async def create_jats_document(
     resolution_id: UUID,
     candidate_id: str,
+    payload: ResolvedDocumentPreparation | None = None,
     access: AccessContext = Depends(require_client_access),
     db: Session = Depends(get_db),
     settings: AppSettings = Depends(get_settings),
@@ -216,7 +256,21 @@ async def create_jats_document(
     try:
         document = await fetch_jats_document(candidate, resolution.identity, settings)
     except (httpx.HTTPError, ValueError) as exc:
-        raise HTTPException(502, str(exc)) from exc
+        raise HTTPException(
+            502,
+            {
+                "code": "source_unavailable",
+                "candidate_id": candidate.id,
+                "message": "The selected JATS source could not be retrieved or validated.",
+            },
+        ) from exc
+    document.extraction_warnings.extend(
+        _fallback_warnings(
+            resolution,
+            (payload or ResolvedDocumentPreparation()).failed_candidate_ids,
+            candidate,
+        )
+    )
     return _save_document(document, access.owner_hash, db, settings)
 
 

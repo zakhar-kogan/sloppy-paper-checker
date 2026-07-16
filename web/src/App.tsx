@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "preact/hooks";
-import { api } from "./api";
+import { ApiError, api } from "./api";
 import type {
   AnalysisReport,
   AnalysisStatus,
@@ -7,7 +7,7 @@ import type {
   PaperDocument,
   ResolvedPaper,
 } from "./domain";
-import { duration, isResolvableInput } from "./intake";
+import { duration, fallbackWarnings, isResolvableInput, orderedCandidates, sourceLabel } from "./intake";
 import { parsePdf } from "./pdf";
 
 type Phase = "input" | "resolving" | "resolved" | "preparing" | "running" | "report";
@@ -23,7 +23,7 @@ async function hashText(text: string): Promise<string> {
   return [...new Uint8Array(digest)].map((item) => item.toString(16).padStart(2, "0")).join("");
 }
 
-async function metadataDocument(resolution: ResolvedPaper): Promise<PaperDocument> {
+async function metadataDocument(resolution: ResolvedPaper, failedCandidateIds: string[] = []): Promise<PaperDocument> {
   const identity = resolution.identity;
   const metadata = [
     identity.title,
@@ -53,7 +53,7 @@ async function metadataDocument(resolution: ResolvedPaper): Promise<PaperDocumen
       : [],
     spans: [{ id: "metadata", text: metadata, start: 0, end: metadata.length }],
     references: [],
-    extraction_warnings: resolution.limitations ?? [],
+    extraction_warnings: [...(resolution.limitations ?? []), ...fallbackWarnings(resolution, failedCandidateIds)],
   };
 }
 
@@ -439,19 +439,44 @@ export default function App() {
       return api.createDocument(await parsePdf(await file.arrayBuffer()));
     }
     if (!activeResolution) throw new Error("The paper could not be resolved.");
-    const candidate = (activeResolution.candidates ?? []).find((item) => item.id === activeCandidateId);
-    if (candidate?.format === "pdf") {
-      setLocalStage("Retrieving the resolved PDF through the bounded relay");
-      const bytes = await api.relayPdf(activeResolution.id, candidate.id);
-      setLocalStage("Parsing PDF locally with PDF.js");
-      return api.createDocument(await parsePdf(bytes, activeResolution.identity));
+    const failedCandidateIds: string[] = [];
+    const candidates = orderedCandidates(activeResolution, activeCandidateId);
+    for (const candidate of candidates) {
+      if (candidate.format === "pdf") {
+        let document: PaperDocument;
+        try {
+          const previous = candidates.find((item) => item.id === failedCandidateIds.at(-1));
+          setLocalStage(previous
+            ? `${sourceLabel(previous)} unavailable; trying ${sourceLabel(candidate)}`
+            : `Retrieving ${sourceLabel(candidate)}`);
+          const bytes = await api.relayPdf(activeResolution.id, candidate.id);
+          setLocalStage(`Parsing ${sourceLabel(candidate)} locally with PDF.js`);
+          document = await parsePdf(bytes, activeResolution.identity);
+        } catch (caught) {
+          if (caught instanceof ApiError && caught.status !== 502) throw caught;
+          failedCandidateIds.push(candidate.id);
+          continue;
+        }
+        (document.extraction_warnings ??= []).push(
+          ...fallbackWarnings(activeResolution, failedCandidateIds, candidate),
+        );
+        return api.createDocument(document);
+      }
+      if (candidate.format === "jats") {
+        try {
+          const previous = candidates.find((item) => item.id === failedCandidateIds.at(-1));
+          setLocalStage(previous
+            ? `${sourceLabel(previous)} unavailable; trying ${sourceLabel(candidate)}`
+            : `Normalizing ${sourceLabel(candidate)} with stable paragraph anchors`);
+          return await api.createJatsDocument(activeResolution.id, candidate.id, failedCandidateIds);
+        } catch (caught) {
+          if (!(caught instanceof ApiError) || caught.status !== 502) throw caught;
+          failedCandidateIds.push(candidate.id);
+        }
+      }
     }
-    if (candidate?.format === "jats") {
-      setLocalStage("Normalizing PMC JATS with stable paragraph anchors");
-      return api.createJatsDocument(activeResolution.id, candidate.id);
-    }
-    setLocalStage(`Preparing ${words(activeResolution.content_level)} content`);
-    return api.createDocument(await metadataDocument(activeResolution));
+    setLocalStage(`Full text unavailable; preparing ${words(activeResolution.content_level)} content`);
+    return api.createDocument(await metadataDocument(activeResolution, failedCandidateIds));
   };
 
   const analyze = async () => {

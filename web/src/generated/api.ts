@@ -779,6 +779,11 @@ export interface components {
             /** Value */
             value: string;
         };
+        /** ResolvedDocumentPreparation */
+        ResolvedDocumentPreparation: {
+            /** Failed Candidate Ids */
+            failed_candidate_ids?: string[];
+        };
         /** ResolvedPaper */
         ResolvedPaper: {
             /**
@@ -981,7 +986,11 @@ export interface operations {
             };
             cookie?: never;
         };
-        requestBody?: never;
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["ResolvedDocumentPreparation"] | null;
+            };
+        };
         responses: {
             /** @description Successful Response */
             201: {
