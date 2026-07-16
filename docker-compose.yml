@@ -1,36 +1,31 @@
 name: sloppy-paper-checker
 services:
+  gateway:
+    image: caddy:2.10-alpine
+    env_file: .env
+    ports: ["80:80", "443:443", "443:443/udp"]
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      web: {condition: service_started}
+  web:
+    build: ./web
+    depends_on:
+      api: {condition: service_started}
   api:
     build: ./backend
-    command: uvicorn sloppy_checker.main:app --host 0.0.0.0 --port 8787
+    command: sh -c "alembic upgrade head && uvicorn sloppy_checker.main:app --host 0.0.0.0 --port 8787 --proxy-headers --forwarded-allow-ips=*"
     env_file: .env
     environment:
-      SPC_EAGER_TASKS: "false"
-    ports: ["8787:8787"]
-    volumes: ["uploads:/app/uploads"]
+      SPC_DOCUMENT_STORE: filesystem
+      SPC_DOCUMENT_STORE_PATH: /app/data/documents
+      SPC_ANALYSIS_DISPATCHER: inline
+    ports: ["127.0.0.1:8787:8787"]
+    volumes: ["documents:/app/data/documents"]
     depends_on:
       postgres: {condition: service_healthy}
-      redis: {condition: service_healthy}
-  worker:
-    build: ./backend
-    command: celery -A sloppy_checker.tasks.celery_app worker --loglevel=INFO --concurrency=4
-    env_file: .env
-    environment:
-      SPC_EAGER_TASKS: "false"
-    volumes: ["uploads:/app/uploads"]
-    depends_on:
-      postgres: {condition: service_healthy}
-      redis: {condition: service_healthy}
-      grobid: {condition: service_started}
-  scheduler:
-    build: ./backend
-    command: celery -A sloppy_checker.tasks.celery_app beat --loglevel=INFO
-    env_file: .env
-    environment:
-      SPC_EAGER_TASKS: "false"
-    depends_on:
-      postgres: {condition: service_healthy}
-      redis: {condition: service_healthy}
   postgres:
     image: postgres:17-alpine
     environment:
@@ -43,18 +38,8 @@ services:
       interval: 5s
       timeout: 3s
       retries: 20
-  redis:
-    image: redis:7-alpine
-    command: redis-server --save 60 1 --loglevel warning
-    healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
-      interval: 5s
-      timeout: 3s
-      retries: 20
-  grobid:
-    image: lfoppiano/grobid:0.8.2
-    ports: ["8070:8070"]
-
 volumes:
+  caddy_data:
+  caddy_config:
   postgres:
-  uploads:
+  documents:

@@ -15,4 +15,7 @@ extension/test-results/
 extension/playwright-report/
 extension/vite.config.js
 extension/vite.config.d.ts
+web/node_modules/
+web/dist/
+web/coverage/
 .DS_Store
