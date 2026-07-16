@@ -196,11 +196,8 @@ async def relay_artifact(
     except (httpx.HTTPError, ValueError) as exc:
         raise HTTPException(
             502,
-            {
-                "code": "source_unavailable",
-                "candidate_id": candidate.id,
-                "message": "The selected PDF source could not be retrieved or validated.",
-            },
+            "The selected PDF source could not be retrieved or validated.",
+            headers={"X-SPC-Error-Code": "source_unavailable"},
         ) from exc
     return BinaryResponse(data, media_type="application/pdf", headers={"Cache-Control": "private, no-store"})
 
@@ -258,11 +255,8 @@ async def create_jats_document(
     except (httpx.HTTPError, ValueError) as exc:
         raise HTTPException(
             502,
-            {
-                "code": "source_unavailable",
-                "candidate_id": candidate.id,
-                "message": "The selected JATS source could not be retrieved or validated.",
-            },
+            "The selected JATS source could not be retrieved or validated.",
+            headers={"X-SPC-Error-Code": "source_unavailable"},
         ) from exc
     document.extraction_warnings.extend(
         _fallback_warnings(

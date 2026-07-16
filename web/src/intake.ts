@@ -1,5 +1,19 @@
 import type { ContentCandidate, ResolvedPaper } from "./domain";
 
+export function errorMessage(caught: unknown): string {
+  if (caught instanceof Error && caught.message && caught.message !== "[object Object]") return caught.message;
+  if (caught && typeof caught === "object") {
+    const value = caught as { message?: unknown; detail?: unknown };
+    if (typeof value.message === "string" && value.message !== "[object Object]") return value.message;
+    if (typeof value.detail === "string" && value.detail !== "[object Object]") return value.detail;
+    if (value.detail && typeof value.detail === "object") {
+      const detail = value.detail as { message?: unknown };
+      if (typeof detail.message === "string") return detail.message;
+    }
+  }
+  return "The paper source could not be prepared. Try another source version.";
+}
+
 export function isResolvableInput(value: string): boolean {
   const input = value.trim();
   return /^(https?:\/\/\S+|10\.\d{4,9}\/\S+|pmc\d+|pmid:\s*\d+|arxiv:\s*\S+|\d{4}\.\d{4,5}(v\d+)?|\d{5,9})$/i.test(input);

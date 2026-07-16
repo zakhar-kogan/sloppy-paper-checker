@@ -17,7 +17,11 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
     const payload = await response.json().catch(() => ({ detail: response.statusText }));
     const detail = payload.detail;
     const message = typeof detail === "string" ? detail : detail?.message || response.statusText;
-    throw new ApiError(response.status, message, typeof detail === "object" ? detail?.code : undefined);
+    throw new ApiError(
+      response.status,
+      message,
+      response.headers.get("X-SPC-Error-Code") ?? (typeof detail === "object" ? detail?.code : undefined),
+    );
   }
   return response.status === 204 ? (undefined as T) : response.json();
 }
@@ -47,7 +51,7 @@ export const api = {
       throw new ApiError(
         response.status,
         typeof detail === "object" ? detail?.message || "PDF retrieval failed" : detail || "PDF retrieval failed",
-        typeof detail === "object" ? detail?.code : undefined,
+        response.headers.get("X-SPC-Error-Code") ?? (typeof detail === "object" ? detail?.code : undefined),
       );
     }
     return response.arrayBuffer();

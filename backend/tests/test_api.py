@@ -131,11 +131,8 @@ def test_pdf_relay_error_is_safe_and_structured(monkeypatch):
             headers=AUTH,
         )
     assert response.status_code == 502
-    assert response.json()["detail"] == {
-        "code": "source_unavailable",
-        "candidate_id": "unpaywall-pdf",
-        "message": "The selected PDF source could not be retrieved or validated.",
-    }
+    assert response.json()["detail"] == "The selected PDF source could not be retrieved or validated."
+    assert response.headers["X-SPC-Error-Code"] == "source_unavailable"
     assert "publisher.example" not in response.text
 
 

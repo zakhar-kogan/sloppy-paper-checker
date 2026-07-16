@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import type { ContentCandidate, ResolvedPaper } from "./domain";
-import { duration, fallbackWarnings, isResolvableInput, orderedCandidates } from "./intake";
+import { duration, errorMessage, fallbackWarnings, isResolvableInput, orderedCandidates } from "./intake";
 
 const candidate = (id: string, rank: number, format: "pdf" | "jats", provider: string): ContentCandidate => ({
   id,
@@ -23,6 +23,15 @@ const resolution = {
 } as ResolvedPaper;
 
 describe("single-action paper intake", () => {
+  it("never renders structured failures as object coercion noise", () => {
+    expect(errorMessage({ detail: { message: "The selected PDF source is unavailable." } })).toBe(
+      "The selected PDF source is unavailable.",
+    );
+    expect(errorMessage(new Error("[object Object]"))).toBe(
+      "The paper source could not be prepared. Try another source version.",
+    );
+  });
+
   it("starts automatic preflight only for complete identifiers and URLs", () => {
     expect(isResolvableInput("10.1016/S0140-6736(17)32802-7")).toBe(true);
     expect(isResolvableInput("https://pubmed.ncbi.nlm.nih.gov/41366844/")).toBe(true);

@@ -7,7 +7,7 @@ import type {
   PaperDocument,
   ResolvedPaper,
 } from "./domain";
-import { duration, fallbackWarnings, isResolvableInput, orderedCandidates, sourceLabel } from "./intake";
+import { duration, errorMessage, fallbackWarnings, isResolvableInput, orderedCandidates, sourceLabel } from "./intake";
 import { parsePdf } from "./pdf";
 
 type Phase = "input" | "resolving" | "resolved" | "preparing" | "running" | "report";
@@ -355,7 +355,7 @@ export default function App() {
         }
       })
       .catch((caught) => {
-        setError(caught instanceof Error ? caught.message : String(caught));
+        setError(errorMessage(caught));
         setPhase("input");
       });
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -394,7 +394,7 @@ export default function App() {
       })
       .catch((caught) => {
         if (queryRef.current.trim() === normalized) {
-          setError(caught instanceof Error ? caught.message : String(caught));
+          setError(errorMessage(caught));
           setPhase("input");
         }
         throw caught;
@@ -499,7 +499,7 @@ export default function App() {
       await pollAnalysis(initial.id);
       await api.session();
     } catch (caught) {
-      setError(caught instanceof Error ? caught.message : String(caught));
+      setError(errorMessage(caught));
       setPhase(resolution ? "resolved" : "input");
     }
   };
@@ -511,7 +511,7 @@ export default function App() {
       setStatus(await api.cancel(status.id));
     } catch (caught) {
       setCancelling(false);
-      setError(caught instanceof Error ? caught.message : String(caught));
+      setError(errorMessage(caught));
     }
   };
 
