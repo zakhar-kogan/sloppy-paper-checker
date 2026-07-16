@@ -37,6 +37,8 @@ npm --prefix web run dev -- --host 127.0.0.1
 
 Open `http://127.0.0.1:5173`. URLs are reload-safe: `?paper=...` reopens resolution and `?analysis=...` resumes status polling or displays the completed report.
 
+The intake has one explicit `Analyze paper` action. Identifier and URL inputs are resolved automatically as a source preflight, so ranked source candidates can still be inspected or changed before analysis. Running reports expose durable per-module progress, bounded unreviewed extraction notes with verified quote previews, and cancellation; the final reviewer has a configurable total deadline through `SPC_REVIEWER_DEADLINE_SECONDS` (240 seconds by default). Total guest-run quotas are disabled unless `SPC_HOSTED_RUNS_PER_SESSION` is explicitly configured, while the concurrent-run guard remains enabled.
+
 The Docker Compose stack is a small single-host deployment: Caddy, the static web container, FastAPI with inline execution, and PostgreSQL. Run `docker compose up --build` after configuring `.env`.
 
 ## Nebius deployment

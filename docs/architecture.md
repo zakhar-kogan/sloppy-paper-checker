@@ -29,4 +29,6 @@ The job specification contains the analysis ID, non-secret adapter coordinates, 
 
 Agno is intentionally narrow: `Agent` and `OpenAILike` provide structured model calls. Scheduling, persistence, source resolution, and scoring are ordinary application code. The unused Agno `Workflow` factory was removed.
 
+Analysis progress is stored as safe stage and module events in the existing analysis JSON event field. The polling status contract exposes labels, completion state, evidence-note counts, bounded observations, and short exact-quote previews verified against the canonical document; it never exposes prompts, the complete paper, raw model output, or credentials. Reviewer execution has a total deadline; timeout or provider failure produces an explicitly provisional, unreviewed report rather than leaving the lifecycle running indefinitely.
+
 Anonymous sessions use an HttpOnly SameSite cookie; production cookies are Secure. Reports and canonical documents are owner-scoped. Native Nebius logs plus report audit fields are the initial observability layer; vendor tracing is deferred until concrete debugging needs justify it.

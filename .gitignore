@@ -8,6 +8,7 @@ __pycache__/
 *.tsbuildinfo
 backend/data/
 backend/uploads/
+data/
 extension/node_modules/
 extension/dist/
 extension/coverage/
