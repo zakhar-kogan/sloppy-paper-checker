@@ -104,6 +104,25 @@ def test_progress_notes_are_bounded_and_only_keep_grounded_quotes():
     assert len(notes[0].quotes) <= 2
 
 
+def test_worker_quote_aliases_are_grounded_to_exact_normalized_paper_text():
+    paper = "The study used\nrandom allocation for every participant."
+    evidence = _coerce_worker_evidence(
+        {
+            "evidence": [
+                {
+                    "rubric_item": "study_design",
+                    "observation": "Random allocation was reported.",
+                    "evidence_quotes": ["The study used random allocation for every participant."],
+                }
+            ]
+        },
+        "design",
+        ["study_design"],
+        paper,
+    )
+    assert evidence.items[0].quotes == [paper]
+
+
 def test_reviewer_payload_is_valid_bounded_json_without_raw_worker_text():
     evidence = analysis_module.WorkerEvidence(
         module="design",
@@ -241,14 +260,16 @@ async def test_reviewer_request_is_compact_and_has_no_hidden_retries(monkeypatch
     assert paper_text not in captured[0]["prompt"]
     assert captured[0]["model"].retries == 0
     assert captured[0]["model"].max_completion_tokens == 6144
-    assert captured[0]["model"].reasoning_effort == "low"
+    assert captured[0]["model"].reasoning_effort is None
 
 
 @pytest.mark.asyncio
 async def test_module_progress_reports_completed_and_skipped_categories(monkeypatch):
+    captured: list[dict] = []
+
     class FakeAgent:
         def __init__(self, **kwargs):
-            pass
+            captured.append(kwargs)
 
         async def arun(self, prompt):
             return SimpleNamespace(content="Evidence note", metrics=None)
@@ -268,6 +289,8 @@ async def test_module_progress_reports_completed_and_skipped_categories(monkeypa
     assert sum(event[2] == "running" for event in events) == 2
     assert sum(event[2] == "completed" for event in events) == 2
     assert sum(event[2] == "skipped" for event in events) == 4
+    assert all(item["structured_outputs"] for item in captured)
+    assert all(item["output_schema"] is analysis_module.WorkerEvidenceOutput for item in captured)
 
 
 @pytest.mark.asyncio

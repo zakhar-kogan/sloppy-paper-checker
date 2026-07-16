@@ -29,8 +29,8 @@ class AppSettings(BaseSettings):
     nebius_job_secret_id: str | None = None
     nebius_api_key: str | None = None
     nebius_api_key_file: Path | None = None
-    token_factory_worker_model: str = ""
-    token_factory_reviewer_model: str = ""
+    token_factory_worker_model: str = "Qwen/Qwen3-30B-A3B-Instruct-2507"
+    token_factory_reviewer_model: str = "Qwen/Qwen3-235B-A22B-Instruct-2507"
     unpaywall_email: str = "operator@example.invalid"
     ncbi_email: str = "operator@example.invalid"
     allowed_hosts: list[str] = Field(default_factory=lambda: ["localhost", "127.0.0.1", "testserver"])

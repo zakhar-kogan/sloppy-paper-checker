@@ -56,6 +56,18 @@ class WorkerEvidence(BaseModel):
     raw_text: str = ""
 
 
+class WorkerNoteOutput(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    rubric_item: str
+    observation: str
+    quotes: list[str] = Field(default_factory=list, max_length=2)
+
+
+class WorkerEvidenceOutput(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    evidence: list[WorkerNoteOutput]
+
+
 class FinalDecision(BaseModel):
     model_config = ConfigDict(extra="forbid")
     rubric_item: str
@@ -153,6 +165,19 @@ def _candidate_quotes(value: object) -> list[str]:
     return []
 
 
+def _ground_quote(value: str, paper_text: str) -> str | None:
+    quote = value.strip().strip('"\'“”‘’').strip()
+    if not quote:
+        return None
+    if quote in paper_text:
+        return quote
+    tokens = quote.split()
+    if not tokens or len(quote) > 1200:
+        return None
+    match = re.search(r"\s+".join(re.escape(token) for token in tokens), paper_text)
+    return match.group(0) if match else None
+
+
 def _coerce_worker_evidence(
     content: object,
     module_key: str,
@@ -182,16 +207,17 @@ def _coerce_worker_evidence(
         rubric_item = record.get("rubric_item") or record.get("item") or record.get("criterion")
         if rubric_item not in expected_items:
             continue
-        quotes = _candidate_quotes(record.get("quotes") or record.get("paper_spans"))
+        quotes = _candidate_quotes(
+            record.get("quotes")
+            or record.get("evidence_quotes")
+            or record.get("supporting_quotes")
+            or record.get("paper_spans")
+        )
         if not quotes:
             quotes = _candidate_quotes(
                 record.get("evidence") or record.get("quote") or record.get("citation")
             )
-        grounded_quotes = [
-            quote.strip()
-            for quote in quotes
-            if quote.strip() and quote.strip() in paper_text
-        ]
+        grounded_quotes = [grounded for quote in quotes if (grounded := _ground_quote(quote, paper_text))]
         observation = (
             record.get("observation")
             or record.get("notes")
@@ -353,7 +379,6 @@ def _model(values: dict, api_key: str, role: str) -> OpenAILike:
         base_url=values.get("base_url", "https://api.tokenfactory.nebius.com/v1/"),
         temperature=0,
         max_completion_tokens=6144 if role == "reviewer" else None,
-        reasoning_effort="low" if role == "reviewer" else None,
         retries=0 if role == "reviewer" else 2,
         exponential_backoff=role != "reviewer",
         http_client=values.get("_http_client"),
@@ -461,6 +486,8 @@ async def llm_evidence(
         agent = Agent(
             name=module.label,
             model=_model(values, key, "worker"),
+            output_schema=WorkerEvidenceOutput,
+            structured_outputs=True,
             parse_response=False,
             instructions=[
                 methodology.worker_prompt,
@@ -831,6 +858,11 @@ async def execute_analysis(
             "English is validated first; other languages are experimental.",
         ]
         limitations.extend(str(item) for item in metadata.get("extraction_warnings", []))
+        source_fallback_warnings = [
+            str(item)
+            for item in metadata.get("extraction_warnings", [])
+            if "could not be used; analysis used" in str(item)
+        ]
         if identity.doi:
             client = EvidenceClient(app.upstream_timeout_seconds)
             try:
@@ -862,7 +894,7 @@ async def execute_analysis(
             row,
             "Generating final assessment",
             84,
-            detail="Single bounded low-reasoning reviewer attempt; maximum 6,144 completion tokens.",
+            detail="Single bounded reviewer attempt; maximum 6,144 completion tokens.",
         )
         db.commit()
         summary: list[str] = []
@@ -991,6 +1023,7 @@ async def execute_analysis(
             finding.grade != RubricGrade.NOT_ASSESSED for finding in findings
         )
         execution_warnings: list[str] = []
+        execution_warnings.extend(source_fallback_warnings)
         execution_warnings.extend(adjudication_warnings)
         if reviewer_failure_warning:
             execution_warnings.append(reviewer_failure_warning)
