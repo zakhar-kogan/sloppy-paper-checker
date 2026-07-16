@@ -167,6 +167,51 @@ export interface components {
          * @enum {string}
          */
         AnalysisDepth: "quick" | "standard" | "deep";
+        /** AnalysisEvidenceNote */
+        AnalysisEvidenceNote: {
+            /** Module Key */
+            module_key: string;
+            /** Rubric Item */
+            rubric_item: string;
+            /** Observation */
+            observation: string;
+            /** Quotes */
+            quotes?: string[];
+        };
+        /** AnalysisProgressEvent */
+        AnalysisProgressEvent: {
+            /**
+             * At
+             * Format: date-time
+             */
+            at: string;
+            /**
+             * Kind
+             * @default stage
+             * @enum {string}
+             */
+            kind: "stage" | "module";
+            /** Key */
+            key?: string | null;
+            /** Label */
+            label: string;
+            /**
+             * State
+             * @enum {string}
+             */
+            state: "pending" | "running" | "completed" | "failed" | "skipped" | "cancelled";
+            /** Progress */
+            progress: number;
+            /**
+             * Evidence Count
+             * @default 0
+             */
+            evidence_count: number;
+            /** Notes */
+            notes?: components["schemas"]["AnalysisEvidenceNote"][];
+            /** Detail */
+            detail?: string | null;
+        };
         /** AnalysisReport */
         AnalysisReport: {
             /**
@@ -228,6 +273,8 @@ export interface components {
             repaired_output: boolean;
             /** Execution Warnings */
             execution_warnings?: string[];
+            /** Evidence Notes */
+            evidence_notes?: components["schemas"]["AnalysisEvidenceNote"][];
             /**
              * Evidence Verification Rate
              * @default 0
@@ -345,6 +392,13 @@ export interface components {
              * Format: date-time
              */
             updated_at: string;
+            /**
+             * Stage Started At
+             * Format: date-time
+             */
+            stage_started_at: string;
+            /** Events */
+            events?: components["schemas"]["AnalysisProgressEvent"][];
             /** Error */
             error?: string | null;
         };
@@ -768,7 +822,7 @@ export interface components {
              */
             expires_at: string;
             /** Hosted Remaining */
-            hosted_remaining: number;
+            hosted_remaining?: number | null;
             /** Concurrent Limit */
             concurrent_limit: number;
         };

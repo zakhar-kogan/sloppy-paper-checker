@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "preact/hooks";
+import { useEffect, useMemo, useRef, useState } from "preact/hooks";
 import { api } from "./api";
 import type {
   AnalysisReport,
@@ -6,8 +6,8 @@ import type {
   DocumentReceipt,
   PaperDocument,
   ResolvedPaper,
-  SessionView,
 } from "./domain";
+import { duration, isResolvableInput } from "./intake";
 import { parsePdf } from "./pdf";
 
 type Phase = "input" | "resolving" | "resolved" | "preparing" | "running" | "report";
@@ -15,6 +15,7 @@ type Phase = "input" | "resolving" | "resolved" | "preparing" | "running" | "rep
 const wait = (milliseconds: number) => new Promise((resolve) => setTimeout(resolve, milliseconds));
 const percent = (value: number) => `${Math.round(value * 100)}%`;
 const words = (value: string) => value.replaceAll("_", " ");
+const terminalStates = new Set(["completed", "failed", "skipped"]);
 
 async function hashText(text: string): Promise<string> {
   const bytes = new TextEncoder().encode(text);
@@ -130,22 +131,73 @@ function ResolutionCard({
   );
 }
 
-function Progress({ status, localStage }: { status: AnalysisStatus | null; localStage: string }) {
+function Progress({
+  status,
+  localStage,
+  cancelling,
+  onCancel,
+}: {
+  status: AnalysisStatus | null;
+  localStage: string;
+  cancelling: boolean;
+  onCancel: () => void;
+}) {
+  const [clock, setClock] = useState(() => Date.now());
+  useEffect(() => {
+    const timer = window.setInterval(() => setClock(Date.now()), 1000);
+    return () => window.clearInterval(timer);
+  }, []);
   const progress = status?.progress || (localStage ? 12 : 0);
+  const stageStarted = status?.stage_started_at ? new Date(status.stage_started_at).getTime() : clock;
+  const elapsed = Math.max(0, Math.floor((clock - stageStarted) / 1000));
+  const moduleMap = new Map<string, NonNullable<AnalysisStatus["events"]>[number]>();
+  (status?.events ?? []).filter((event) => event.kind === "module" && event.key).forEach((event) => moduleMap.set(event.key!, event));
+  const modules = [...moduleMap.values()];
+  const finishedModules = modules.filter((event) => terminalStates.has(event.state)).length;
+  const evidenceCount = modules.reduce((total, event) => total + event.evidence_count, 0);
+  const awaitingReviewer = Boolean(status && status.state === "running" && progress >= 84);
   return (
     <main class="progress-page">
       <span class="eyebrow">Review in progress</span>
-      <h1>{status?.stage || localStage}</h1>
-      <div class="progress-track" aria-label={`${progress}% complete`}><span style={{ width: `${progress}%` }} /></div>
-      <p>{progress}%</p>
-      <ol class="stage-list">
-        <li class={progress >= 8 ? "done" : ""}>Normalize paper</li>
-        <li class={progress >= 22 ? "done" : ""}>Route relevant sections</li>
-        <li class={progress >= 35 ? "done" : ""}>Run methodology modules</li>
-        <li class={progress >= 84 ? "done" : ""}>Audit evidence</li>
-        <li class={progress >= 100 ? "done" : ""}>Compile report</li>
-      </ol>
-      <p class="quiet">You can leave this tab open. The web client polls for stage updates; it does not stream partial findings.</p>
+      <h1>{cancelling ? "Cancelling review" : status?.stage || localStage}</h1>
+      <div class={`progress-track ${awaitingReviewer ? "indeterminate" : ""}`} aria-label="Analysis progress"><span style={{ width: `${progress}%` }} /></div>
+      <div class="progress-facts">
+        <div><span>Current operation</span><strong>{duration(elapsed)}</strong></div>
+        <div><span>Methodology categories</span><strong>{modules.length ? `${finishedModules} / ${modules.length}` : "Preparing"}</strong></div>
+        <div><span>Evidence notes collected</span><strong>{evidenceCount || "—"}</strong></div>
+      </div>
+      {modules.length > 0 && (
+        <ol class="module-progress" aria-label="Methodology category progress">
+          {modules.map((event) => (
+            <li class={`module-${event.state}`} key={event.key}>
+              <span class="module-dot" aria-hidden="true" />
+              <div>
+                <strong>{event.label}</strong>
+                <small>{event.state === "completed" ? `${event.evidence_count} evidence note${event.evidence_count === 1 ? "" : "s"}` : event.detail || words(event.state)}</small>
+                {(event.notes?.length ?? 0) > 0 && (
+                  <details class="evidence-notes">
+                    <summary>Unreviewed extraction notes</summary>
+                    <ul>{event.notes?.map((note) => (
+                      <li key={`${event.key}-${note.rubric_item}`}>
+                        <strong>{words(note.rubric_item)}</strong>
+                        <p>{note.observation}</p>
+                        {note.quotes?.map((quote, index) => <blockquote key={`${note.rubric_item}-${index}`}>“{quote}”</blockquote>)}
+                      </li>
+                    ))}</ul>
+                  </details>
+                )}
+              </div>
+            </li>
+          ))}
+        </ol>
+      )}
+      {elapsed >= 45 && status?.state === "running" && (
+        <p class="slow-note"><strong>This step is taking longer than usual.</strong> The reviewer stage has a four-minute total deadline, including validation and one possible schema repair.</p>
+      )}
+      <div class="progress-actions">
+        <p class="quiet">Updates are polled from the backend. Category evidence is operational progress, not a provisional grade.</p>
+        {status && status.state === "running" && <button class="secondary-button" type="button" disabled={cancelling} onClick={onCancel}>{cancelling ? "Cancelling…" : "Cancel review"}</button>}
+      </div>
     </main>
   );
 }
@@ -153,6 +205,7 @@ function Progress({ status, localStage }: { status: AnalysisStatus | null; local
 function Report({ report, onReset }: { report: AnalysisReport; onReset: () => void }) {
   const title = report.identity.title || report.identity.doi || "Paper review";
   const findings = report.findings.filter((finding) => finding.critic_disposition !== "discarded");
+  const hasFinalScore = (report.assessed_item_count ?? 0) > 0;
   return (
     <main class="report-page">
       <section class="report-title">
@@ -172,8 +225,8 @@ function Report({ report, onReset }: { report: AnalysisReport; onReset: () => vo
         </div>
         <div class="score-card">
           <span class="score-label">Review score</span>
-          <strong>{Math.round(report.review_score)}</strong><span class="score-denominator">/100</span>
-          <p class={report.coverage.provisional ? "provisional" : "complete-label"}>{report.coverage.provisional ? "Provisional" : "Reviewed"}</p>
+          <strong>{hasFinalScore ? Math.round(report.review_score) : "—"}</strong>{hasFinalScore && <span class="score-denominator">/100</span>}
+          <p class={report.coverage.provisional ? "provisional" : "complete-label"}>{hasFinalScore ? (report.coverage.provisional ? "Provisional" : "Reviewed") : "No final score"}</p>
           <dl>
             <div><dt>Analysis confidence</dt><dd>{Math.round(report.confidence_score ?? 0)}%</dd></div>
             <div><dt>Items assessed</dt><dd>{report.assessed_item_count ?? report.findings.filter((item) => item.grade !== "not_assessed").length}</dd></div>
@@ -226,8 +279,32 @@ function Report({ report, onReset }: { report: AnalysisReport; onReset: () => vo
         </div>
       </section>
 
+      {(report.evidence_notes?.length ?? 0) > 0 && (
+        <section class="extraction-section">
+          <div class="section-heading"><span class="index">03</span><div><span class="eyebrow">Worker evidence</span><h2>Unreviewed extraction notes</h2></div></div>
+          <p class="quiet">These are grounded retrieval notes collected before final adjudication. They are not findings or grades.</p>
+          <div class="report-evidence-notes">
+            {(report.module_statuses ?? []).map((module) => {
+              const notes = report.evidence_notes?.filter((note) => note.module_key === module.key) ?? [];
+              if (!notes.length) return null;
+              return (
+                <details key={module.key}>
+                  <summary>{module.label} <span>{notes.length} notes</span></summary>
+                  <ul>{notes.map((note) => (
+                    <li key={`${module.key}-${note.rubric_item}`}>
+                      <strong>{words(note.rubric_item)}</strong><p>{note.observation}</p>
+                      {note.quotes?.map((quote, index) => <blockquote key={`${note.rubric_item}-${index}`}>“{quote}”</blockquote>)}
+                    </li>
+                  ))}</ul>
+                </details>
+              );
+            })}
+          </div>
+        </section>
+      )}
+
       <section class="audit-section">
-        <div class="section-heading"><span class="index">03</span><div><span class="eyebrow">Reproducibility</span><h2>Provenance & audit</h2></div></div>
+        <div class="section-heading"><span class="index">04</span><div><span class="eyebrow">Reproducibility</span><h2>Provenance & audit</h2></div></div>
         <dl class="audit-grid">
           <div><dt>Methodology</dt><dd>{report.methodology_version}<code>{report.methodology_hash.slice(0, 12)}</code></dd></div>
           <div><dt>Parser</dt><dd>{report.parser_name} {report.parser_version}</dd></div>
@@ -251,17 +328,20 @@ export default function App() {
   const [query, setQuery] = useState("");
   const [file, setFile] = useState<File | null>(null);
   const [resolution, setResolution] = useState<ResolvedPaper | null>(null);
+  const [resolvedQuery, setResolvedQuery] = useState("");
   const [candidateId, setCandidateId] = useState("");
-  const [session, setSession] = useState<SessionView | null>(null);
   const [status, setStatus] = useState<AnalysisStatus | null>(null);
   const [report, setReport] = useState<AnalysisReport | null>(null);
   const [error, setError] = useState("");
   const [localStage, setLocalStage] = useState("");
+  const [cancelling, setCancelling] = useState(false);
+  const queryRef = useRef("");
+  const resolutionRequest = useRef<{ value: string; promise: Promise<ResolvedPaper> } | null>(null);
 
+  // Bootstrap only once; later navigation is driven by the durable query parameters we write.
   useEffect(() => {
     api.session()
-      .then(async (nextSession) => {
-        setSession(nextSession);
+      .then(async () => {
         const params = new URLSearchParams(window.location.search);
         const analysisId = params.get("analysis");
         const paper = params.get("paper");
@@ -270,6 +350,7 @@ export default function App() {
           await pollAnalysis(analysisId);
         } else if (paper) {
           setQuery(paper);
+          queryRef.current = paper;
           await resolveValue(paper, false);
         }
       })
@@ -277,38 +358,60 @@ export default function App() {
         setError(caught instanceof Error ? caught.message : String(caught));
         setPhase("input");
       });
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const canAnalyze = useMemo(() => {
-    return mode === "upload" ? Boolean(file) : Boolean(resolution);
-  }, [file, mode, resolution]);
+    return mode === "upload" ? Boolean(file) : Boolean(query.trim());
+  }, [file, mode, query]);
 
   const reset = () => {
-    setPhase("input"); setResolution(null); setCandidateId(""); setStatus(null); setReport(null); setError(""); setLocalStage(""); setFile(null); setQuery("");
+    setPhase("input"); setResolution(null); setResolvedQuery(""); setCandidateId(""); setStatus(null); setReport(null); setError(""); setLocalStage(""); setFile(null); setQuery(""); setCancelling(false);
+    queryRef.current = "";
+    resolutionRequest.current = null;
     window.history.replaceState({}, "", window.location.pathname);
   };
 
-  const resolveValue = async (value: string, updateHistory = true) => {
-    if (!value.trim()) return;
-    setError(""); setPhase("resolving");
-    try {
-      const result = await api.resolve(value.trim());
-      setResolution(result);
-      setCandidateId(result.candidates?.[0]?.id || "");
-      setPhase("resolved");
-      if (updateHistory) {
-        const params = new URLSearchParams({ paper: value.trim() });
-        window.history.replaceState({}, "", `${window.location.pathname}?${params}`);
-      }
-    } catch (caught) {
-      setError(caught instanceof Error ? caught.message : String(caught));
-      setPhase("input");
-    }
+  const resolveValue = (value: string, updateHistory = true): Promise<ResolvedPaper> => {
+    const normalized = value.trim();
+    if (!normalized) return Promise.reject(new Error("Enter a paper identifier or URL."));
+    if (resolution && resolvedQuery === normalized) return Promise.resolve(resolution);
+    if (resolutionRequest.current?.value === normalized) return resolutionRequest.current.promise;
+    setError("");
+    setPhase("resolving");
+    const promise = api.resolve(normalized)
+      .then((result) => {
+        if (queryRef.current.trim() === normalized) {
+          setResolution(result);
+          setResolvedQuery(normalized);
+          setCandidateId(result.candidates?.[0]?.id || "");
+          setPhase("resolved");
+          if (updateHistory) {
+            const params = new URLSearchParams({ paper: normalized });
+            window.history.replaceState({}, "", `${window.location.pathname}?${params}`);
+          }
+        }
+        return result;
+      })
+      .catch((caught) => {
+        if (queryRef.current.trim() === normalized) {
+          setError(caught instanceof Error ? caught.message : String(caught));
+          setPhase("input");
+        }
+        throw caught;
+      })
+      .finally(() => {
+        if (resolutionRequest.current?.value === normalized) resolutionRequest.current = null;
+      });
+    resolutionRequest.current = { value: normalized, promise };
+    return promise;
   };
 
-  const resolve = async () => {
-    await resolveValue(query);
-  };
+  // The resolver request is deduplicated through resolutionRequest; input changes own this timer.
+  useEffect(() => {
+    if (mode !== "identifier" || !isResolvableInput(query) || resolvedQuery === query.trim()) return;
+    const timer = window.setTimeout(() => { void resolveValue(query).catch(() => undefined); }, 650);
+    return () => window.clearTimeout(timer);
+  }, [mode, query, resolvedQuery]); // eslint-disable-line react-hooks/exhaustive-deps
 
   async function pollAnalysis(analysisId: string) {
     let current = await api.status(analysisId);
@@ -318,52 +421,79 @@ export default function App() {
       current = await api.status(current.id);
       setStatus(current);
     }
+    if (current.state === "cancelled") {
+      setCancelling(false);
+      setError("Review cancelled.");
+      setPhase(resolution ? "resolved" : "input");
+      return;
+    }
     if (current.state !== "completed") throw new Error(current.error || `Analysis ${current.state}.`);
     const completedReport = await api.report(current.id);
     setReport(completedReport);
     setPhase("report");
   }
 
-  const prepareDocument = async (): Promise<DocumentReceipt> => {
+  const prepareDocument = async (activeResolution: ResolvedPaper | null, activeCandidateId: string): Promise<DocumentReceipt> => {
     if (mode === "upload" && file) {
       setLocalStage("Parsing PDF locally with PDF.js");
       return api.createDocument(await parsePdf(await file.arrayBuffer()));
     }
-    if (!resolution) throw new Error("Resolve a paper first.");
-    const candidate = (resolution.candidates ?? []).find((item) => item.id === candidateId);
+    if (!activeResolution) throw new Error("The paper could not be resolved.");
+    const candidate = (activeResolution.candidates ?? []).find((item) => item.id === activeCandidateId);
     if (candidate?.format === "pdf") {
       setLocalStage("Retrieving the resolved PDF through the bounded relay");
-      const bytes = await api.relayPdf(resolution.id, candidate.id);
+      const bytes = await api.relayPdf(activeResolution.id, candidate.id);
       setLocalStage("Parsing PDF locally with PDF.js");
-      return api.createDocument(await parsePdf(bytes, resolution.identity));
+      return api.createDocument(await parsePdf(bytes, activeResolution.identity));
     }
     if (candidate?.format === "jats") {
       setLocalStage("Normalizing PMC JATS with stable paragraph anchors");
-      return api.createJatsDocument(resolution.id, candidate.id);
+      return api.createJatsDocument(activeResolution.id, candidate.id);
     }
-    setLocalStage(`Preparing ${words(resolution.content_level)} content`);
-    return api.createDocument(await metadataDocument(resolution));
+    setLocalStage(`Preparing ${words(activeResolution.content_level)} content`);
+    return api.createDocument(await metadataDocument(activeResolution));
   };
 
   const analyze = async () => {
-    setError(""); setPhase("preparing");
+    setError("");
     try {
-      const receipt = await prepareDocument();
+      let activeResolution = mode === "identifier" ? resolution : null;
+      let activeCandidateId = candidateId;
+      if (mode === "identifier" && (!activeResolution || resolvedQuery !== query.trim())) {
+        setLocalStage("Finding the best available paper source");
+        const pendingResolution = resolveValue(query);
+        setPhase("preparing");
+        activeResolution = await pendingResolution;
+        activeCandidateId = activeResolution.candidates?.[0]?.id || "";
+      }
+      setPhase("preparing");
+      const receipt = await prepareDocument(activeResolution, activeCandidateId);
       const initial = await api.analyze(receipt.id);
       setStatus(initial); setPhase("running");
       window.history.replaceState({}, "", `${window.location.pathname}?${new URLSearchParams({ analysis: initial.id })}`);
       await pollAnalysis(initial.id);
-      setSession(await api.session());
+      await api.session();
     } catch (caught) {
       setError(caught instanceof Error ? caught.message : String(caught));
       setPhase(resolution ? "resolved" : "input");
     }
   };
 
+  const cancelAnalysis = async () => {
+    if (!status || cancelling) return;
+    setCancelling(true);
+    try {
+      setStatus(await api.cancel(status.id));
+    } catch (caught) {
+      setCancelling(false);
+      setError(caught instanceof Error ? caught.message : String(caught));
+    }
+  };
+
   return (
     <div class="app-shell">
       <Header onReset={reset} />
-      {phase === "report" && report ? <Report report={report} onReset={reset} /> : phase === "preparing" || phase === "running" ? <Progress status={status} localStage={localStage} /> : (
+      {phase === "report" && report ? <Report report={report} onReset={reset} /> : phase === "preparing" || phase === "running" ? <Progress status={status} localStage={localStage} cancelling={cancelling} onCancel={() => void cancelAnalysis()} /> : (
         <main class="intake-page">
           <section class="hero">
             <div>
@@ -381,8 +511,26 @@ export default function App() {
             </div>
             {mode === "identifier" ? (
               <div class="resolver-form">
-                <label class="field input-large"><span>DOI, arXiv ID, PMID, PMCID, or scholarly URL</span><input value={query} onInput={(event) => setQuery(event.currentTarget.value)} onKeyDown={(event) => { if (event.key === "Enter") void resolve(); }} placeholder="10.1038/…  ·  arXiv:…  ·  pubmed.ncbi.nlm.nih.gov/…" /></label>
-                <button class="resolve-button" type="button" disabled={!query.trim() || phase === "resolving"} onClick={() => void resolve()}>{phase === "resolving" ? "Resolving…" : "Resolve paper"}</button>
+                <label class="field input-large">
+                  <span>DOI, arXiv ID, PMID, PMCID, or scholarly URL</span>
+                  <input
+                    value={query}
+                    onInput={(event) => {
+                      const value = event.currentTarget.value;
+                      setQuery(value);
+                      queryRef.current = value;
+                      if (resolvedQuery !== value.trim()) {
+                        setResolution(null);
+                        setCandidateId("");
+                        setPhase("input");
+                      }
+                    }}
+                    onBlur={() => { if (query.trim()) void resolveValue(query).catch(() => undefined); }}
+                    onKeyDown={(event) => { if (event.key === "Enter" && canAnalyze) void analyze(); }}
+                    placeholder="10.1038/…  ·  arXiv:…  ·  pubmed.ncbi.nlm.nih.gov/…"
+                  />
+                  <small>{phase === "resolving" ? "Finding metadata and open full-text sources…" : resolution ? "Source preflight complete. You can change the version below." : "Sources are checked automatically before analysis."}</small>
+                </label>
               </div>
             ) : (
               <label class="drop-zone">
@@ -393,7 +541,7 @@ export default function App() {
             {resolution && <ResolutionCard resolution={resolution} selected={candidateId} onSelect={setCandidateId} />}
             {error && <div class="error-box" role="alert">{error}</div>}
             <div class="action-row">
-              <div><span>Standard review</span><small>{session?.hosted_remaining ?? "—"} hosted runs remaining</small></div>
+              <div><span>Standard review</span><small>Full text when available · one active review at a time</small></div>
               <button class="analyze-button" type="button" disabled={!canAnalyze} onClick={() => void analyze()}>Analyze paper <span>→</span></button>
             </div>
           </section>

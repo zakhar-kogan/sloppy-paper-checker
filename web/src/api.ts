@@ -41,5 +41,6 @@ export const api = {
       body: JSON.stringify({ source: { kind: "document", value: documentId } }),
     }),
   status: (id: string) => request<AnalysisStatus>(`/v1/analyses/${id}`),
+  cancel: (id: string) => request<AnalysisStatus>(`/v1/analyses/${id}/cancel`, { method: "POST" }),
   report: (id: string) => request<AnalysisReport>(`/v1/analyses/${id}/report`),
 };
