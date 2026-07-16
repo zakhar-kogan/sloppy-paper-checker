@@ -45,9 +45,22 @@ from sloppy_checker.evidence.resolver import PaperResolver, fetch_bounded_pdf, f
 from sloppy_checker.workflows.analysis import execute_analysis
 
 router = APIRouter(prefix="/v1", dependencies=[Depends(require_client_access)])
+RESOLUTION_CACHE_VERSION = "2"
 
 
 def _status(row: AnalysisRow) -> AnalysisStatus:
+    events = []
+    for raw in row.events or []:
+        event = dict(raw)
+        legacy_stage = event.pop("stage", None)
+        event.setdefault("kind", "stage")
+        event.setdefault("label", legacy_stage or row.stage)
+        event.setdefault("state", "completed" if event.get("progress") == 100 else "running")
+        event.setdefault("evidence_count", 0)
+        event.setdefault("notes", [])
+        events.append(event)
+    stage_events = [event for event in events if event["kind"] == "stage"]
+    stage_started_at = stage_events[-1]["at"] if stage_events else row.updated_at
     return AnalysisStatus(
         id=UUID(row.id),
         state=AnalysisState(row.state),
@@ -55,6 +68,8 @@ def _status(row: AnalysisRow) -> AnalysisStatus:
         stage=row.stage,
         created_at=row.created_at.replace(tzinfo=row.created_at.tzinfo or UTC),
         updated_at=row.updated_at.replace(tzinfo=row.updated_at.tzinfo or UTC),
+        stage_started_at=stage_started_at,
+        events=events,
         error=row.error,
     )
 
@@ -98,10 +113,9 @@ def create_session(
         samesite="lax",
         path="/",
     )
-    repo = SqlAlchemyAnalysisRepository(db)
     return SessionView(
         expires_at=expires_at,
-        hosted_remaining=max(0, settings.hosted_runs_per_session - repo.count_recent(owner_hash, "hosted")),
+        hosted_remaining=None,
         concurrent_limit=settings.concurrent_runs_per_session,
     )
 
@@ -112,7 +126,8 @@ async def resolve_paper(
     settings: AppSettings = Depends(get_settings),
     db: Session = Depends(get_db),
 ) -> ResolvedPaper:
-    input_hash = hashlib.sha256(payload.value.strip().casefold().encode()).hexdigest()
+    cache_input = f"{RESOLUTION_CACHE_VERSION}:{payload.value.strip().casefold()}"
+    input_hash = hashlib.sha256(cache_input.encode()).hexdigest()
     repository = ResolutionRepository(db)
     cached = repository.get_by_input_hash(input_hash)
     if cached:
@@ -218,7 +233,7 @@ def _enforce_quota(
     if repository.count_active(access.owner_hash) >= settings.concurrent_runs_per_session:
         raise HTTPException(429, "This anonymous session already has an active analysis")
     limit = settings.hosted_runs_per_session
-    if repository.count_recent(access.owner_hash, mode) >= limit:
+    if limit is not None and repository.count_recent(access.owner_hash, mode) >= limit:
         raise HTTPException(429, f"Anonymous {mode} analysis quota reached")
 
 

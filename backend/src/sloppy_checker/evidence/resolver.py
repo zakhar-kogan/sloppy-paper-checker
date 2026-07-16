@@ -29,6 +29,7 @@ from sloppy_checker.core.security import validate_public_url
 ARXIV_RE = re.compile(r"(?:arxiv\.org/(?:abs|pdf)/|arxiv:\s*)?((?:[a-z-]+/)?\d{4}\.\d{4,5}|[a-z-]+/\d{7})(?:v\d+)?", re.I)
 PMCID_RE = re.compile(r"\bPMC(\d+)\b", re.I)
 PMID_URL_RE = re.compile(r"(?:pubmed\.ncbi\.nlm\.nih\.gov/)?(\d{6,9})(?:/|\b)")
+ELSEVIER_PII_RE = re.compile(r"\b(S\d{4}-\d{4}\(\d{2}\)\d{5}-\d)\b", re.I)
 
 
 def _strip_markup(value: str | None) -> str | None:
@@ -225,6 +226,13 @@ class PaperResolver:
     async def _resolve_url(self, url: str) -> ResolvedPaper:
         validate_public_url(url)
         parsed = urlparse(url)
+        if parsed.hostname and (
+            parsed.hostname.lower().endswith("thelancet.com")
+            or parsed.hostname.lower().endswith("sciencedirect.com")
+        ):
+            pii = ELSEVIER_PII_RE.search(parsed.path)
+            if pii:
+                return await self._resolve_doi(f"10.1016/{pii.group(1)}".lower())
         if parsed.path.lower().endswith(".pdf") or "/pdf/" in parsed.path.lower():
             return self._finish(PaperIdentity(), None, [_candidate(SourceFormat.PDF, parsed.hostname or "URL", 40, url)], [ProvenanceRecord(provider="Direct URL", accessed_at=datetime.now(UTC))], [])
         try:

@@ -446,6 +446,124 @@
         ],
         "title": "AnalysisDepth"
       },
+      "AnalysisEvidenceNote": {
+        "properties": {
+          "module_key": {
+            "type": "string",
+            "title": "Module Key"
+          },
+          "rubric_item": {
+            "type": "string",
+            "title": "Rubric Item"
+          },
+          "observation": {
+            "type": "string",
+            "maxLength": 500,
+            "title": "Observation"
+          },
+          "quotes": {
+            "items": {
+              "type": "string",
+              "maxLength": 280
+            },
+            "type": "array",
+            "maxItems": 2,
+            "title": "Quotes"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "module_key",
+          "rubric_item",
+          "observation"
+        ],
+        "title": "AnalysisEvidenceNote"
+      },
+      "AnalysisProgressEvent": {
+        "properties": {
+          "at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "At"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "stage",
+              "module"
+            ],
+            "title": "Kind",
+            "default": "stage"
+          },
+          "key": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Key"
+          },
+          "label": {
+            "type": "string",
+            "title": "Label"
+          },
+          "state": {
+            "type": "string",
+            "enum": [
+              "pending",
+              "running",
+              "completed",
+              "failed",
+              "skipped",
+              "cancelled"
+            ],
+            "title": "State"
+          },
+          "progress": {
+            "type": "integer",
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Progress"
+          },
+          "evidence_count": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Evidence Count",
+            "default": 0
+          },
+          "notes": {
+            "items": {
+              "$ref": "#/components/schemas/AnalysisEvidenceNote"
+            },
+            "type": "array",
+            "title": "Notes"
+          },
+          "detail": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Detail"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "at",
+          "label",
+          "state",
+          "progress"
+        ],
+        "title": "AnalysisProgressEvent"
+      },
       "AnalysisReport": {
         "properties": {
           "id": {
@@ -561,6 +679,13 @@
             },
             "type": "array",
             "title": "Execution Warnings"
+          },
+          "evidence_notes": {
+            "items": {
+              "$ref": "#/components/schemas/AnalysisEvidenceNote"
+            },
+            "type": "array",
+            "title": "Evidence Notes"
           },
           "evidence_verification_rate": {
             "type": "number",
@@ -776,6 +901,18 @@
             "format": "date-time",
             "title": "Updated At"
           },
+          "stage_started_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Stage Started At"
+          },
+          "events": {
+            "items": {
+              "$ref": "#/components/schemas/AnalysisProgressEvent"
+            },
+            "type": "array",
+            "title": "Events"
+          },
           "error": {
             "anyOf": [
               {
@@ -796,7 +933,8 @@
           "progress",
           "stage",
           "created_at",
-          "updated_at"
+          "updated_at",
+          "stage_started_at"
         ],
         "title": "AnalysisStatus"
       },
@@ -2016,8 +2154,15 @@
             "title": "Expires At"
           },
           "hosted_remaining": {
-            "type": "integer",
-            "minimum": 0.0,
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Hosted Remaining"
           },
           "concurrent_limit": {
@@ -2030,7 +2175,6 @@
         "type": "object",
         "required": [
           "expires_at",
-          "hosted_remaining",
           "concurrent_limit"
         ],
         "title": "SessionView"

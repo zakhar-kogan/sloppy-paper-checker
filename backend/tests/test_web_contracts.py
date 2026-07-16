@@ -65,6 +65,13 @@ def test_session_refresh_keeps_the_same_anonymous_owner():
         assert client.cookies.get("spc_guest").split(".", 1)[0] == original
 
 
+def test_guest_run_quota_is_disabled_but_concurrency_limit_remains_visible():
+    with TestClient(app) as client:
+        session = client.post("/v1/session").json()
+    assert session["hosted_remaining"] is None
+    assert session["concurrent_limit"] == 1
+
+
 def test_paper_document_rejects_out_of_bounds_anchors():
     with pytest.raises(ValueError, match="anchor exceeds"):
         PaperDocument(
@@ -188,6 +195,37 @@ async def test_lancet_fixture_preserves_version_license_and_provider_provenance(
         "Unpaywall",
         "NCBI",
     ]
+
+
+@pytest.mark.asyncio
+@respx.mock
+async def test_lancet_pii_url_resolves_without_fetching_publisher_page():
+    fixture = json.loads(
+        (Path(__file__).parent / "fixtures" / "lancet_2017_32802.json").read_text()
+    )
+    doi = fixture["doi"].lower()
+    respx.get(f"https://api.crossref.org/works/{doi}").mock(
+        return_value=Response(200, json=fixture["crossref"])
+    )
+    respx.get(f"https://api.unpaywall.org/v2/{doi}").mock(
+        return_value=Response(200, json=fixture["unpaywall"])
+    )
+    respx.get("https://pmc.ncbi.nlm.nih.gov/tools/idconv/api/v1/articles/").mock(
+        return_value=Response(200, json=fixture["ncbi"])
+    )
+    publisher = respx.get(
+        "https://www.thelancet.com/article/S0140-6736(17)32802-7/fulltext"
+    ).mock(return_value=Response(403))
+    resolver = resolver_module.PaperResolver(AppSettings())
+    try:
+        resolved = await resolver.resolve(
+            "https://www.thelancet.com/article/S0140-6736(17)32802-7/fulltext"
+        )
+    finally:
+        await resolver.close()
+    assert resolved.identity.doi == doi
+    assert resolved.identity.title.startswith("Comparative efficacy")
+    assert publisher.called is False
 
 
 @pytest.mark.asyncio

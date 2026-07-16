@@ -38,10 +38,11 @@ class AppSettings(BaseSettings):
     max_upload_bytes: int = 25 * 1024 * 1024
     upstream_timeout_seconds: float = 12.0
     provider_timeout_seconds: float = Field(default=120.0, ge=10, le=600)
+    reviewer_deadline_seconds: float = Field(default=240.0, ge=30, le=900)
     report_retention_hours: int = Field(default=24, ge=1, le=720)
     resolution_ttl_seconds: int = Field(default=900, ge=60, le=3600)
     guest_cookie_name: str = "spc_guest"
-    hosted_runs_per_session: int = Field(default=3, ge=1, le=100)
+    hosted_runs_per_session: int | None = Field(default=None, ge=1, le=100)
     concurrent_runs_per_session: int = Field(default=1, ge=1, le=10)
 
     @field_validator("document_store")

@@ -53,6 +53,8 @@ def test_canonical_document_analysis_completes_inline():
         status = client.get(f"/v1/analyses/{analysis_id}", headers=AUTH)
         report = client.get(f"/v1/analyses/{analysis_id}/report", headers=AUTH)
     assert status.json()["state"] == "completed"
+    assert status.json()["stage_started_at"]
+    assert any(event["kind"] == "module" for event in status.json()["events"])
     assert report.status_code == 200
     assert report.json()["identity"]["title"] == "A canonical test paper"
     with SessionLocal() as db:

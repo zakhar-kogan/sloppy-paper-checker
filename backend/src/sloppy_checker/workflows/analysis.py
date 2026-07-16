@@ -4,6 +4,8 @@ import asyncio
 import hashlib
 import json
 import re
+from collections.abc import Callable, Coroutine
+from contextlib import suppress
 from dataclasses import dataclass
 from datetime import UTC, datetime
 from uuid import UUID
@@ -20,6 +22,7 @@ from sloppy_checker.core.ingest import fingerprint_text
 from sloppy_checker.core.methodology import content_allows, load_methodology
 from sloppy_checker.core.rubrics import rubric_prompt
 from sloppy_checker.core.schemas import (
+    AnalysisEvidenceNote,
     AnalysisReport,
     ConfidenceComponents,
     ContentLevel,
@@ -57,13 +60,9 @@ class FinalDecision(BaseModel):
     model_config = ConfigDict(extra="forbid")
     rubric_item: str
     grade: RubricGrade
-    title: str
     explanation: str
     confidence: float = Field(ge=0, le=1)
     evidence_quotes: list[str] = Field(default_factory=list)
-    affected_conclusions: list[str] = Field(default_factory=list)
-    counterevidence: list[str] = Field(default_factory=list)
-    limitations: list[str] = Field(default_factory=list)
 
 
 class FinalAssessmentOutput(BaseModel):
@@ -92,6 +91,10 @@ class AdjudicationResult:
     grounded_assessed: int
     validation_warnings: list[str]
     usage: dict[str, int]
+
+
+class AnalysisCancelled(Exception):
+    """Raised when a durable cancellation request interrupts an active model call."""
 
 
 def _json_value(content: object) -> object:
@@ -208,6 +211,55 @@ def _coerce_worker_evidence(
     return WorkerEvidence(module=module_key, items=notes, raw_text=raw_text)
 
 
+def _analysis_notes(evidence: list[WorkerEvidence]) -> list[AnalysisEvidenceNote]:
+    notes: list[AnalysisEvidenceNote] = []
+    for module in evidence:
+        for item in module.items:
+            notes.append(
+                AnalysisEvidenceNote(
+                    module_key=module.module,
+                    rubric_item=item.rubric_item,
+                    observation=item.observation.strip()[:500],
+                    quotes=[quote.strip()[:280] for quote in item.quotes[:2]],
+                )
+            )
+    return notes
+
+
+def _reviewer_evidence_payload(
+    evidence: list[WorkerEvidence], max_chars: int
+) -> list[dict[str, object]]:
+    methodology = load_methodology().definition
+    by_item = {
+        (module.module, note.rubric_item): note
+        for module in evidence
+        for note in module.items
+    }
+    payload: list[dict[str, object]] = [
+        {
+            "module": module.key,
+            "rubric_item": rubric_item,
+            "evidence": [],
+        }
+        for module in methodology.modules
+        for rubric_item in module.items
+    ]
+    if len(json.dumps(payload, ensure_ascii=False)) > max_chars:
+        raise ValueError("Reviewer evidence limit is too small for the methodology manifest")
+    for entry in payload:
+        note = by_item.get((str(entry["module"]), str(entry["rubric_item"])))
+        if not note:
+            continue
+        candidate = {
+            "observation": note.observation.strip()[:500],
+            "quotes": [quote.strip()[:280] for quote in note.quotes[:2]],
+        }
+        entry["evidence"] = [candidate]
+        if len(json.dumps(payload, ensure_ascii=False)) > max_chars:
+            entry["evidence"] = []
+    return payload
+
+
 def _parse_final_assessment(content: object, paper_text: str) -> ParsedAssessment:
     output = FinalAssessmentOutput.model_validate(_json_value(content))
     methodology = load_methodology().definition
@@ -232,7 +284,7 @@ def _parse_final_assessment(content: object, paper_text: str) -> ParsedAssessmen
         grade = decision.grade
         quotes = list(dict.fromkeys(quote.strip() for quote in decision.evidence_quotes if quote.strip()))
         grounded_quotes = [quote for quote in quotes if quote in paper_text]
-        limitations = list(decision.limitations)
+        limitations: list[str] = []
         if grade != RubricGrade.NOT_ASSESSED:
             assessed_attempts += 1
             if grounded_quotes:
@@ -257,14 +309,14 @@ def _parse_final_assessment(content: object, paper_text: str) -> ParsedAssessmen
                 ).hexdigest()[:12],
                 category=category,
                 rubric_item=rubric_item,
-                title=decision.title,
+                title=f"{rubric_item.replace('_', ' ').title()}: {grade.value.replace('_', ' ')}",
                 explanation=decision.explanation,
                 severity=severity,
                 grade=grade,
                 confidence=decision.confidence if grade != RubricGrade.NOT_ASSESSED else 0,
                 paper_spans=[{"quote": quote} for quote in grounded_quotes],
-                affected_conclusions=decision.affected_conclusions,
-                counterevidence=decision.counterevidence,
+                affected_conclusions=[],
+                counterevidence=[],
                 limitations=limitations,
                 critic_disposition="accepted",
             )
@@ -300,8 +352,10 @@ def _model(values: dict, api_key: str, role: str) -> OpenAILike:
         api_key=api_key,
         base_url=values.get("base_url", "https://api.tokenfactory.nebius.com/v1/"),
         temperature=0,
-        retries=2,
-        exponential_backoff=True,
+        max_completion_tokens=6144 if role == "reviewer" else None,
+        reasoning_effort="low" if role == "reviewer" else None,
+        retries=0 if role == "reviewer" else 2,
+        exponential_backoff=role != "reviewer",
         http_client=values.get("_http_client"),
     )
 
@@ -342,6 +396,7 @@ def baseline_findings(
     text: str,
     profile: RubricProfile,
     content_level: ContentLevel = ContentLevel.FULL_TEXT,
+    reason: str = "No worker model was configured.",
 ) -> list[Finding]:
     """Visible no-provider fallback; it never turns lexical presence into methodological credit."""
     del profile, text
@@ -357,12 +412,12 @@ def baseline_findings(
                     category=module.key,
                     rubric_item=item,
                     title=f"{item.replace('_', ' ').title()}: not assessed",
-                    explanation="No worker model was configured, so this methodology item was not assessed.",
+                    explanation=f"{reason} This methodology item was not assessed.",
                     severity=FindingSeverity.INFO,
                     grade=RubricGrade.NOT_ASSESSED,
                     confidence=0.0,
                     paper_spans=[],
-                    limitations=["Deterministic baseline; no worker model was configured."],
+                    limitations=[f"Deterministic baseline; {reason}"],
                     critic_disposition="unreviewed",
                 )
             )
@@ -388,6 +443,10 @@ async def llm_evidence(
     values: dict,
     key: str,
     sequential: bool,
+    on_module_event: Callable[
+        [str, str, str, int, str | None, list[AnalysisEvidenceNote]], None
+    ]
+    | None = None,
 ) -> tuple[list[WorkerEvidence], dict[str, str], dict[str, int]]:
     methodology = load_methodology()
     routing = methodology.definition.routing
@@ -396,6 +455,8 @@ async def llm_evidence(
     async def run_one(module) -> tuple[WorkerEvidence | None, str | None, dict[str, int]]:
         if not content_allows(content_level, module.minimum_content_level):
             return None, None, {}
+        if on_module_event:
+            on_module_event(module.key, module.label, "running", 0, None, [])
         routed = route_chunks(chunks, module, routing.max_chunks_per_module)
         agent = Agent(
             name=module.label,
@@ -423,13 +484,33 @@ async def llm_evidence(
         except Exception as exc:
             return None, f"{type(exc).__name__}: evidence extraction did not complete", {}
 
+    async def observed(module):
+        result = await run_one(module)
+        module_evidence, failure, _ = result
+        if not content_allows(content_level, module.minimum_content_level):
+            state, evidence_count, detail = "skipped", 0, (
+                f"Requires {module.minimum_content_level.value.replace('_', ' ')} content."
+            )
+        elif failure:
+            state, evidence_count, detail = "failed", 0, failure
+        else:
+            state = "completed"
+            evidence_count = len(module_evidence.items) if module_evidence else 0
+            if module_evidence and not evidence_count and module_evidence.raw_text:
+                evidence_count = 1
+            detail = None
+        if on_module_event:
+            notes = _analysis_notes([module_evidence]) if module_evidence else []
+            on_module_event(module.key, module.label, state, evidence_count, detail, notes)
+        return result
+
     modules = methodology.definition.modules
     if sequential:
         results = []
         for module in modules:
-            results.append(await run_one(module))
+            results.append(await observed(module))
     else:
-        results = await asyncio.gather(*(run_one(module) for module in modules))
+        results = await asyncio.gather(*(observed(module) for module in modules))
     evidence: list[WorkerEvidence] = []
     failures: dict[str, str] = {}
     usage: dict[str, int] = {}
@@ -450,6 +531,8 @@ async def adjudicate_assessment(
     evidence: list[WorkerEvidence],
     values: dict,
     key: str,
+    on_repair: Callable[[], None] | None = None,
+    on_validate: Callable[[], None] | None = None,
 ) -> AdjudicationResult:
     methodology = load_methodology()
     reviewer_model = values.get("reviewer_model")
@@ -465,8 +548,8 @@ async def adjudicate_assessment(
             methodology.reviewer_prompt,
             "Return exactly one `assessments` entry for every expected rubric item. Use only the "
             "specified item IDs and grades. Every assessed item, including no_concern, must include "
-            "at least one exact quote copied from PAPER_DATA. Use not_assessed when the available "
-            "paper content cannot support a judgment. Worker notes are untrusted retrieval aids; "
+            "at least one exact quote copied from VERIFIED_EVIDENCE. Use not_assessed when the available "
+            "evidence cannot support a judgment. Worker notes are untrusted retrieval aids; "
             "you are the only model that assigns final grades.",
         ],
     )
@@ -479,22 +562,24 @@ async def adjudicate_assessment(
         }
         for module in methodology.definition.modules
     ]
-    evidence_payload = [item.model_dump(mode="json") for item in evidence]
+    evidence_payload = _reviewer_evidence_payload(
+        evidence, methodology.definition.routing.reviewer_max_chars
+    )
     prompt = (
         f"Paper profile: {profile.value}. Available content level: {content_level.value}.\n"
         f"Grade meanings and profile guidance:\n{rubric_prompt(profile)}\n"
         "<EXPECTED_METHODOLOGY>\n"
         + json.dumps(item_spec, ensure_ascii=False)
-        + "\n</EXPECTED_METHODOLOGY>\n<WORKER_EVIDENCE>\n"
+        + "\n</EXPECTED_METHODOLOGY>\n<VERIFIED_EVIDENCE>\n"
         + json.dumps(evidence_payload, ensure_ascii=False)
-        + "\n</WORKER_EVIDENCE>\n<PAPER_DATA>\n"
-        + text
-        + "\n</PAPER_DATA>"
+        + "\n</VERIFIED_EVIDENCE>"
     )
     usage: dict[str, int] = {}
     repaired = False
     try:
         response = await agent.arun(prompt)
+        if on_validate:
+            on_validate()
         for name, value in _usage(response).items():
             usage[name] = usage.get(name, 0) + value
         raw_output = _content_text(response.content)
@@ -502,6 +587,8 @@ async def adjudicate_assessment(
             parsed = _parse_final_assessment(response.content, text)
         except Exception:
             repaired = True
+            if on_repair:
+                on_repair()
             repair_agent = Agent(
                 name="Final assessment formatter",
                 model=_model(values, key, "reviewer"),
@@ -559,10 +646,66 @@ async def _fetch_source(
     )
 
 
-def _event(row: AnalysisRow, stage: str, progress: int) -> None:
-    row.stage = stage
-    row.progress = progress
-    row.events = [*row.events, {"at": datetime.now(UTC).isoformat(), "stage": stage, "progress": progress}]
+def _event(
+    row: AnalysisRow,
+    label: str,
+    progress: int,
+    *,
+    kind: str = "stage",
+    state: str = "running",
+    key: str | None = None,
+    evidence_count: int = 0,
+    notes: list[AnalysisEvidenceNote] | None = None,
+    detail: str | None = None,
+) -> None:
+    events = [dict(event) for event in row.events or []]
+    if kind == "stage":
+        for event in reversed(events):
+            if event.get("kind", "stage") == "stage" and event.get("state", "running") == "running":
+                event["state"] = "completed"
+                break
+        row.stage = label
+        row.progress = progress
+    events.append(
+        {
+            "at": datetime.now(UTC).isoformat(),
+            "kind": kind,
+            "key": key,
+            "label": label,
+            "state": state,
+            "progress": progress,
+            "evidence_count": evidence_count,
+            "notes": [note.model_dump(mode="json") for note in notes or []],
+            "detail": detail,
+        }
+    )
+    row.events = events
+
+
+async def _await_active_reviewer(
+    awaitable: Coroutine[object, object, AdjudicationResult],
+    row: AnalysisRow,
+    db: Session,
+    deadline_seconds: float,
+) -> AdjudicationResult:
+    task = asyncio.create_task(awaitable)
+    deadline = asyncio.get_running_loop().time() + deadline_seconds
+    while True:
+        remaining = deadline - asyncio.get_running_loop().time()
+        if remaining <= 0:
+            task.cancel()
+            with suppress(asyncio.CancelledError):
+                await task
+            raise TimeoutError("Final reviewer exceeded its total deadline")
+        done, _ = await asyncio.wait({task}, timeout=min(1.0, remaining))
+        if done:
+            return task.result()
+        db.refresh(row, attribute_names=["cancel_requested"])
+        if row.cancel_requested:
+            task.cancel()
+            with suppress(asyncio.CancelledError):
+                await task
+            raise AnalysisCancelled
 
 
 async def execute_analysis(
@@ -582,7 +725,7 @@ async def execute_analysis(
         text, identity, metadata, content_level, source_format, parser_name, parser_version, paper_sha = await _fetch_source(row, db, app)
         if row.cancel_requested:
             row.state = "cancelled"
-            _event(row, "Cancelled", row.progress)
+            _event(row, "Cancelled", row.progress, state="cancelled")
             db.commit()
             return
 
@@ -603,18 +746,81 @@ async def execute_analysis(
         _event(row, "Gathering methodology evidence", 35)
         db.commit()
         token_usage: dict[str, int] = {}
+        modules = load_methodology().definition.modules
+        module_count = len(modules)
+        completed_modules = 0
+
+        for module in modules:
+            _event(
+                row,
+                module.label,
+                35,
+                kind="module",
+                state="pending",
+                key=module.key,
+                detail="Waiting to start.",
+            )
+        db.commit()
+
+        def record_module(
+            key: str,
+            label: str,
+            state: str,
+            evidence_count: int,
+            detail: str | None,
+            notes: list[AnalysisEvidenceNote],
+        ) -> None:
+            nonlocal completed_modules
+            if state in {"completed", "failed", "skipped"}:
+                completed_modules += 1
+            progress = 35 + round((completed_modules / module_count) * 33)
+            _event(
+                row,
+                label,
+                progress,
+                kind="module",
+                state=state,
+                key=key,
+                evidence_count=evidence_count,
+                notes=notes,
+                detail=detail,
+            )
+            row.progress = progress
+            db.commit()
+
         if api_key and values.get("worker_model"):
             worker_evidence, evidence_failures, worker_usage = await llm_evidence(
-                text, profile, content_level, values, api_key, row.request.get("sequential", False)
+                text,
+                profile,
+                content_level,
+                values,
+                api_key,
+                row.request.get("sequential", False),
+                record_module,
             )
             token_usage.update(worker_usage)
         else:
             worker_evidence = []
             evidence_failures = {
                 module.key: "No worker model was configured for this hosted profile."
-                for module in load_methodology().definition.modules
+                for module in modules
                 if content_allows(content_level, module.minimum_content_level)
             }
+            for module in modules:
+                eligible = content_allows(content_level, module.minimum_content_level)
+                record_module(
+                    module.key,
+                    module.label,
+                    "failed" if eligible else "skipped",
+                    0,
+                    evidence_failures.get(module.key)
+                    or f"Requires {module.minimum_content_level.value.replace('_', ' ')} content.",
+                    [],
+                )
+
+        db.refresh(row, attribute_names=["cancel_requested"])
+        if row.cancel_requested:
+            raise AnalysisCancelled
 
         _event(row, "Checking current-paper scholarly context", 72)
         db.commit()
@@ -652,7 +858,12 @@ async def execute_analysis(
         else:
             limitations.append("No DOI was resolved; publication-record context is limited.")
 
-        _event(row, "Final methodology adjudication", 84)
+        _event(
+            row,
+            "Generating final assessment",
+            84,
+            detail="Single bounded low-reasoning reviewer attempt; maximum 6,144 completion tokens.",
+        )
         db.commit()
         summary: list[str] = []
         reviewer_completed = False
@@ -661,27 +872,81 @@ async def execute_analysis(
         assessed_attempts = 0
         grounded_assessed = 0
         adjudication_warnings: list[str] = []
+        reviewer_failure_warning: str | None = None
         if api_key and values.get("reviewer_model"):
-            adjudication = await adjudicate_assessment(
-                text,
-                profile,
-                content_level,
-                worker_evidence,
-                values,
-                api_key,
-            )
-            findings = adjudication.findings
-            summary = adjudication.summary
-            reviewer_completed = True
-            missing_item_ids = adjudication.missing_item_ids
-            repaired_output = adjudication.repaired_output
-            assessed_attempts = adjudication.assessed_attempts
-            grounded_assessed = adjudication.grounded_assessed
-            adjudication_warnings = adjudication.validation_warnings
-            for key_name, value in adjudication.usage.items():
-                token_usage[key_name] = token_usage.get(key_name, 0) + value
-            if not any(finding.grade != RubricGrade.NOT_ASSESSED for finding in findings):
-                raise ValueError("Final assessment produced no evidence-grounded grades")
+            def record_repair() -> None:
+                _event(
+                    row,
+                    "Repairing response format",
+                    92,
+                    detail="One schema-only repair attempt; no new analysis.",
+                )
+                db.commit()
+
+            def record_validation() -> None:
+                _event(
+                    row,
+                    "Validating reviewer response",
+                    90,
+                    detail="Checking methodology coverage and exact-quote grounding.",
+                )
+                db.commit()
+
+            try:
+                adjudication = await _await_active_reviewer(
+                    adjudicate_assessment(
+                        text,
+                        profile,
+                        content_level,
+                        worker_evidence,
+                        values,
+                        api_key,
+                        record_repair,
+                        record_validation,
+                    ),
+                    row,
+                    db,
+                    app.reviewer_deadline_seconds,
+                )
+                findings = adjudication.findings
+                summary = adjudication.summary
+                reviewer_completed = True
+                missing_item_ids = adjudication.missing_item_ids
+                repaired_output = adjudication.repaired_output
+                assessed_attempts = adjudication.assessed_attempts
+                grounded_assessed = adjudication.grounded_assessed
+                adjudication_warnings = adjudication.validation_warnings
+                for key_name, value in adjudication.usage.items():
+                    token_usage[key_name] = token_usage.get(key_name, 0) + value
+                if not any(finding.grade != RubricGrade.NOT_ASSESSED for finding in findings):
+                    raise ValueError("Final assessment produced no evidence-grounded grades")
+            except AnalysisCancelled:
+                raise
+            except Exception as exc:
+                safe_failure = (
+                    str(exc)
+                    if isinstance(exc, ValueError)
+                    and str(exc).startswith("Final assessment did not complete:")
+                    else type(exc).__name__
+                )
+                reviewer_failure_warning = (
+                    f"Final reviewer did not complete ({safe_failure}); "
+                    "this provisional report contains no final methodology grades."
+                )
+                _event(
+                    row,
+                    "Final reviewer unavailable",
+                    94,
+                    state="failed",
+                    detail=f"{safe_failure}; preparing a provisional report.",
+                )
+                db.commit()
+                findings = baseline_findings(
+                    text,
+                    profile,
+                    content_level,
+                    reason="The final reviewer did not complete.",
+                )
         else:
             findings = baseline_findings(text, profile, content_level)
 
@@ -727,11 +992,13 @@ async def execute_analysis(
         )
         execution_warnings: list[str] = []
         execution_warnings.extend(adjudication_warnings)
+        if reviewer_failure_warning:
+            execution_warnings.append(reviewer_failure_warning)
         if evidence_failures:
             execution_warnings.append(
                 "Worker evidence extraction was unavailable for: "
                 + ", ".join(sorted(evidence_failures))
-                + "; the final model assessed those items directly from the paper."
+                + "; those items had no module evidence for final adjudication."
             )
         if repaired_output:
             execution_warnings.append(
@@ -749,7 +1016,7 @@ async def execute_analysis(
                 f"{unsupported_attempts} attempted judgments lacked an exact normalized-paper "
                 "quote and were excluded from scoring."
             )
-        if not reviewer_completed:
+        if not reviewer_completed and not reviewer_failure_warning:
             execution_warnings.append(
                 "No final adjudicator model was configured; deterministic not-assessed entries "
                 "are shown for compatibility."
@@ -778,6 +1045,7 @@ async def execute_analysis(
             failed_evidence_modules=sorted(evidence_failures),
             repaired_output=repaired_output,
             execution_warnings=execution_warnings,
+            evidence_notes=_analysis_notes(worker_evidence),
             evidence_verification_rate=round(quote_grounding_rate, 3),
             context=context,
             module_statuses=score.module_statuses,
@@ -800,7 +1068,7 @@ async def execute_analysis(
         )
         row.report = report.model_dump(mode="json")
         row.state = "completed"
-        _event(row, "Complete", 100)
+        _event(row, "Complete", 100, state="completed")
         db.commit()
         document_row = db.get(DocumentRow, row.source.get("value"))
         if document_row:
@@ -810,10 +1078,14 @@ async def execute_analysis(
                 db.commit()
             except Exception:
                 db.rollback()
+    except AnalysisCancelled:
+        row.state = "cancelled"
+        _event(row, "Cancelled", row.progress, state="cancelled")
+        db.commit()
     except Exception as exc:
         row.state = "failed"
         row.error = str(exc)[:1000]
-        _event(row, "Analysis failed", row.progress)
+        _event(row, "Analysis failed", row.progress, state="failed", detail=row.error)
         db.commit()
     finally:
         if provider_http_client:

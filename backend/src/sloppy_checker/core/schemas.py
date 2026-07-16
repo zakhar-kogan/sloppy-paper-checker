@@ -307,6 +307,25 @@ class AnalysisRequest(StrictModel):
     sequential: bool = False
 
 
+class AnalysisEvidenceNote(StrictModel):
+    module_key: str
+    rubric_item: str
+    observation: str = Field(max_length=500)
+    quotes: list[Annotated[str, Field(max_length=280)]] = Field(default_factory=list, max_length=2)
+
+
+class AnalysisProgressEvent(StrictModel):
+    at: datetime
+    kind: Literal["stage", "module"] = "stage"
+    key: str | None = None
+    label: str
+    state: Literal["pending", "running", "completed", "failed", "skipped", "cancelled"]
+    progress: int = Field(ge=0, le=100)
+    evidence_count: int = Field(default=0, ge=0)
+    notes: list[AnalysisEvidenceNote] = Field(default_factory=list)
+    detail: str | None = None
+
+
 class AnalysisStatus(StrictModel):
     id: UUID
     state: AnalysisState
@@ -314,6 +333,8 @@ class AnalysisStatus(StrictModel):
     stage: str
     created_at: datetime
     updated_at: datetime
+    stage_started_at: datetime
+    events: list[AnalysisProgressEvent] = Field(default_factory=list)
     error: str | None = None
 
 
@@ -338,6 +359,7 @@ class AnalysisReport(StrictModel):
     failed_evidence_modules: list[str] = Field(default_factory=list)
     repaired_output: bool = False
     execution_warnings: list[str] = Field(default_factory=list)
+    evidence_notes: list[AnalysisEvidenceNote] = Field(default_factory=list)
     evidence_verification_rate: Annotated[float, Field(ge=0, le=1)] = 0
     context: ContextAssessment
     module_statuses: list[ModuleStatus] = Field(default_factory=list)
@@ -373,5 +395,5 @@ class AnalysisReport(StrictModel):
 
 class SessionView(StrictModel):
     expires_at: datetime
-    hosted_remaining: int = Field(ge=0)
+    hosted_remaining: int | None = Field(default=None, ge=0)
     concurrent_limit: int = Field(ge=1)
