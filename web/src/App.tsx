@@ -11,6 +11,14 @@ import type {
 import { duration, errorMessage, fallbackWarnings, isResolvableInput, orderedCandidates, sourceLabel } from "./intake";
 import { parsePdf } from "./pdf";
 import { buildAssessmentGroups, coverageStateLabel, findingDisplayTitle, moduleStateLabel } from "./report";
+import {
+  exampleHref,
+  exampleIdFromSearch,
+  fetchExampleManifest,
+  fetchExampleReport,
+  STATIC_SHOWCASE,
+  type ExampleManifest,
+} from "./showcase";
 
 type Phase = "input" | "resolving" | "resolved" | "preparing" | "running" | "report";
 type InputMode = "identifier" | "upload";
@@ -206,7 +214,7 @@ function Progress({
   );
 }
 
-function Report({ report, onReset }: { report: AnalysisReport; onReset: () => void }) {
+function Report({ report, onReset, precomputed = false }: { report: AnalysisReport; onReset: () => void; precomputed?: boolean }) {
   const title = report.identity.title || report.identity.doi || "Paper review";
   const findings = report.findings.filter((finding) => finding.critic_disposition !== "discarded");
   const assessmentGroups = buildAssessmentGroups(report);
@@ -218,6 +226,12 @@ function Report({ report, onReset }: { report: AnalysisReport; onReset: () => vo
   }, {});
   return (
     <main class="report-page">
+      {precomputed && (
+        <div class="precomputed-banner">
+          <span>Precomputed example</span>
+          <p>This is a fixed demonstration report, not a live analysis or validated accuracy result.</p>
+        </div>
+      )}
       <section class="report-title">
         <span class="eyebrow">Automated evidence review</span>
         <h1>{title}</h1>
@@ -234,16 +248,19 @@ function Report({ report, onReset }: { report: AnalysisReport; onReset: () => vo
           <ul>{(report.summary ?? []).map((item) => <li key={item}>{item}</li>)}</ul>
         </div>
         <div class="score-card">
-          <span class="score-label">Full-review coverage</span>
-          <strong>{percent(report.coverage.full_review)}</strong>
-          <p class={report.coverage.provisional ? "provisional" : "complete-label"}>{coverageStateLabel(report.coverage.provisional)}</p>
+          <span class="score-label">Methodology review score</span>
+          <div class="score-primary">
+            <strong>{hasFinalScore ? Math.round(report.review_score) : "—"}</strong>
+            {hasFinalScore && <span>/100</span>}
+          </div>
+          <p class={report.coverage.provisional ? "provisional" : "complete-label"}>{!hasFinalScore ? "Not scored" : report.coverage.provisional ? "Provisional score" : "Completed score"}</p>
           <dl>
             <div><dt>Grounded concerns</dt><dd>{(gradeCounts.critical_concern ?? 0) + (gradeCounts.major_concern ?? 0) + (gradeCounts.minor_concern ?? 0)}</dd></div>
             <div><dt>No concern</dt><dd>{gradeCounts.no_concern ?? 0}</dd></div>
             <div><dt>Items assessed</dt><dd>{report.assessed_item_count ?? report.findings.filter((item) => item.grade !== "not_assessed").length}</dd></div>
             <div><dt>Content</dt><dd>{words(report.content_level)}</dd></div>
+            <div><dt>Full-review coverage</dt><dd>{percent(report.coverage.full_review)}<small>{coverageStateLabel(report.coverage.provisional)}</small></dd></div>
             <div><dt>Available-content coverage</dt><dd>{percent(report.coverage.available)}</dd></div>
-            <div><dt>Coverage-weighted heuristic</dt><dd>{hasFinalScore ? `${Math.round(report.review_score)}/100` : "—"}</dd></div>
           </dl>
         </div>
       </section>
@@ -334,8 +351,60 @@ function Report({ report, onReset }: { report: AnalysisReport; onReset: () => vo
         <details class="limitations"><summary>Limitations and execution record</summary><ul>{report.limitations.map((item) => <li key={item}>{item}</li>)}</ul></details>
       </section>
 
-      <button class="secondary-button new-review" type="button" onClick={onReset}>Review another paper</button>
+      {precomputed
+        ? <a class="secondary-button new-review" href={`${import.meta.env.BASE_URL}#examples`}>Back to examples</a>
+        : <button class="secondary-button new-review" type="button" onClick={onReset}>Review another paper</button>}
     </main>
+  );
+}
+
+function ExampleGallery({
+  manifest,
+  loading,
+  error,
+}: {
+  manifest: ExampleManifest | null;
+  loading: boolean;
+  error: string;
+}) {
+  return (
+    <section class="examples-section" id="examples" aria-labelledby="examples-title">
+      <div class="examples-heading">
+        <div>
+          <span class="eyebrow">A fixed field set</span>
+          <h2 id="examples-title">Example reviews</h2>
+        </div>
+        <p>Ten papers across computational, clinical, observational, diagnostic, qualitative, and general empirical research. These are demonstrations, not benchmark results.</p>
+      </div>
+      {loading && <p class="examples-status" role="status">Loading the example index…</p>}
+      {error && <div class="error-box examples-error" role="alert">{error}</div>}
+      {manifest && (
+        <div class="example-grid">
+          {manifest.examples.map((example, index) => (
+            <a
+              class="example-card"
+              href={exampleHref(example.id)}
+              key={example.id}
+            >
+              <div class="example-number" aria-hidden="true">{String(index + 1).padStart(2, "0")}</div>
+              <div class="example-copy">
+                <span class="example-profile">{words(example.profile)}</span>
+                <h3>{example.title}</h3>
+                <p>{example.identifier}</p>
+              </div>
+              <dl class="example-facts">
+                <div><dt>Year</dt><dd>{example.year}</dd></div>
+                <div><dt>Content</dt><dd>{words(example.content_level)}</dd></div>
+                <div><dt>Coverage</dt><dd>{percent(example.coverage)}</dd></div>
+                <div><dt>Concerns</dt><dd>{example.concern_count}</dd></div>
+              </dl>
+              <span class="example-open">Read review <span aria-hidden="true">↗</span></span>
+            </a>
+          ))}
+        </div>
+      )}
+      {manifest && <p class="examples-disclosure">{manifest.disclosure}</p>}
+    </section>
   );
 }
 
@@ -352,11 +421,32 @@ export default function App() {
   const [error, setError] = useState("");
   const [localStage, setLocalStage] = useState("");
   const [cancelling, setCancelling] = useState(false);
+  const [exampleManifest, setExampleManifest] = useState<ExampleManifest | null>(null);
+  const [exampleLoading, setExampleLoading] = useState(STATIC_SHOWCASE);
+  const [exampleError, setExampleError] = useState("");
   const queryRef = useRef("");
   const resolutionRequest = useRef<{ value: string; promise: Promise<ResolvedPaper> } | null>(null);
 
   // Bootstrap only once; later navigation is driven by the durable query parameters we write.
   useEffect(() => {
+    if (STATIC_SHOWCASE) {
+      fetchExampleManifest()
+        .then(async (manifest) => {
+          setExampleManifest(manifest);
+          const exampleId = exampleIdFromSearch(window.location.search);
+          if (!exampleId) return;
+          const example = manifest.examples.find((item) => item.id === exampleId);
+          if (!example) {
+            setExampleError(`Example “${exampleId}” was not found. Browse the available reviews below.`);
+            return;
+          }
+          setReport(await fetchExampleReport(example));
+          setPhase("report");
+        })
+        .catch((caught) => setExampleError(errorMessage(caught)))
+        .finally(() => setExampleLoading(false));
+      return;
+    }
     api.session()
       .then(async () => {
         const params = new URLSearchParams(window.location.search);
@@ -378,6 +468,7 @@ export default function App() {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const canAnalyze = useMemo(() => {
+    if (STATIC_SHOWCASE) return false;
     if (mode === "upload") return Boolean(file);
     if (!query.trim()) return false;
     if (!resolution || resolvedQuery !== query.trim()) return true;
@@ -398,6 +489,7 @@ export default function App() {
     queryRef.current = "";
     resolutionRequest.current = null;
     window.history.replaceState({}, "", window.location.pathname);
+    if (STATIC_SHOWCASE) window.requestAnimationFrame(() => document.getElementById("examples")?.scrollIntoView());
   };
 
   const changeMode = (nextMode: InputMode) => {
@@ -458,6 +550,7 @@ export default function App() {
 
   // The resolver request is deduplicated through resolutionRequest; input changes own this timer.
   useEffect(() => {
+    if (STATIC_SHOWCASE) return;
     if (mode !== "identifier" || !isResolvableInput(query) || resolvedQuery === query.trim()) return;
     const timer = window.setTimeout(() => { void resolveValue(query).catch(() => undefined); }, 650);
     return () => window.clearTimeout(timer);
@@ -568,7 +661,7 @@ export default function App() {
   return (
     <div class="app-shell">
       <Header onReset={reset} />
-      {phase === "report" && report ? <Report report={report} onReset={reset} /> : phase === "preparing" || phase === "running" ? <Progress status={status} localStage={localStage} cancelling={cancelling} onCancel={() => void cancelAnalysis()} /> : (
+      {phase === "report" && report ? <Report report={report} onReset={reset} precomputed={STATIC_SHOWCASE} /> : phase === "preparing" || phase === "running" ? <Progress status={status} localStage={localStage} cancelling={cancelling} onCancel={() => void cancelAnalysis()} /> : (
         <main class="intake-page">
           <section class="hero">
             <div>
@@ -630,11 +723,11 @@ export default function App() {
                         setPhase("input");
                       }
                     }}
-                    onBlur={() => { if (query.trim()) void resolveValue(query).catch(() => undefined); }}
-                    onKeyDown={(event) => { if (event.key === "Enter" && canAnalyze) void analyze(); }}
+                    onBlur={() => { if (!STATIC_SHOWCASE && query.trim()) void resolveValue(query).catch(() => undefined); }}
+                    onKeyDown={(event) => { if (!STATIC_SHOWCASE && event.key === "Enter" && canAnalyze) void analyze(); }}
                     placeholder="10.1038/…  ·  arXiv:…  ·  pubmed.ncbi.nlm.nih.gov/…"
                   />
-                  <small id="identifier-help" aria-live="polite">{phase === "resolving" ? "Finding metadata and open full-text sources…" : resolution ? "Source preflight complete. You can change the version below." : "Sources are checked automatically before analysis."}</small>
+                  <small id="identifier-help" aria-live="polite">{STATIC_SHOWCASE ? "Live source lookup is disabled in this static showcase." : phase === "resolving" ? "Finding metadata and open full-text sources…" : resolution ? "Source preflight complete. You can change the version below." : "Sources are checked automatically before analysis."}</small>
                 </label>
               </div>
             ) : (
@@ -651,15 +744,16 @@ export default function App() {
             {error && <div class="error-box" role="alert">{error}</div>}
             <div class="action-row">
               <div>
-                <span>Standard review</span>
-                <small>Full text when available · extracted text is sent to the configured review service · do not submit confidential material</small>
+                <span>{STATIC_SHOWCASE ? "Live analysis available soon" : "Standard review"}</span>
+                <small>{STATIC_SHOWCASE ? <>This Pages release contains precomputed reports and sends no paper data. <a href="#examples">Browse example reviews</a></> : "Full text when available · extracted text is sent to the configured review service · do not submit confidential material"}</small>
               </div>
               <button class="analyze-button" type="button" disabled={!canAnalyze} onClick={() => void analyze()}>Analyze paper <span>→</span></button>
             </div>
           </section>
+          {STATIC_SHOWCASE && <ExampleGallery manifest={exampleManifest} loading={exampleLoading} error={exampleError} />}
         </main>
       )}
-      <footer><span>Sloppy Paper Checker</span><span>Reports expire after 24 hours · No cited full texts retrieved</span></footer>
+      <footer><span>Sloppy Paper Checker</span><span>{STATIC_SHOWCASE ? "Precomputed examples · Model inference via Nebius Token Factory · No visitor data saved" : "Reports expire after 24 hours · No cited full texts retrieved"}</span></footer>
     </div>
   );
 }

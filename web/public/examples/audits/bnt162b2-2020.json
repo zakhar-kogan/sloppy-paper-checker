@@ -1,0 +1,14 @@
+{
+  "audited_at": "2026-07-18T21:18:02.267401Z",
+  "case_id": "bnt162b2-2020",
+  "displayed_quotations_checked": 62,
+  "identity_verified": true,
+  "quotation_mismatch_count": 0,
+  "quotation_mismatches": [],
+  "schema_version": "1.0",
+  "secret_scan": "passed",
+  "source_kind": "jats",
+  "source_verified": true,
+  "warnings": [],
+  "warnings_reviewed": true
+}

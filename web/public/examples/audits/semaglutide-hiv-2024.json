@@ -1,0 +1,16 @@
+{
+  "audited_at": "2026-07-18T21:17:06.575987Z",
+  "case_id": "semaglutide-hiv-2024",
+  "displayed_quotations_checked": 52,
+  "identity_verified": true,
+  "quotation_mismatch_count": 0,
+  "quotation_mismatches": [],
+  "schema_version": "1.0",
+  "secret_scan": "passed",
+  "source_kind": "jats",
+  "source_verified": true,
+  "warnings": [
+    "2 attempted judgments cited no permitted verified evidence and were excluded from scoring."
+  ],
+  "warnings_reviewed": true
+}

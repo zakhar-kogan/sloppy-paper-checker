@@ -1,0 +1,1407 @@
+{
+  "assessed_item_count": 14,
+  "audit_trail": [
+    {
+      "at": "2026-07-18T21:38:32.396005+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": null,
+      "kind": "stage",
+      "label": "Ingesting and fingerprinting",
+      "notes": [],
+      "progress": 8,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T21:38:32.399410+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": null,
+      "kind": "stage",
+      "label": "Classifying paper and routing evidence",
+      "notes": [],
+      "progress": 22,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T21:38:32.425866+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": null,
+      "kind": "stage",
+      "label": "Gathering methodology evidence",
+      "notes": [],
+      "progress": 35,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T21:38:32.426842+00:00",
+      "detail": "Waiting to start.",
+      "evidence_count": 0,
+      "key": "design",
+      "kind": "module",
+      "label": "Study design & risk of bias",
+      "notes": [],
+      "progress": 35,
+      "state": "pending"
+    },
+    {
+      "at": "2026-07-18T21:38:32.426861+00:00",
+      "detail": "Waiting to start.",
+      "evidence_count": 0,
+      "key": "statistics",
+      "kind": "module",
+      "label": "Statistical & computational validity",
+      "notes": [],
+      "progress": 35,
+      "state": "pending"
+    },
+    {
+      "at": "2026-07-18T21:38:32.426866+00:00",
+      "detail": "Waiting to start.",
+      "evidence_count": 0,
+      "key": "claims",
+      "kind": "module",
+      "label": "Claim\u2013evidence alignment",
+      "notes": [],
+      "progress": 35,
+      "state": "pending"
+    },
+    {
+      "at": "2026-07-18T21:38:32.426869+00:00",
+      "detail": "Waiting to start.",
+      "evidence_count": 0,
+      "key": "transparency",
+      "kind": "module",
+      "label": "Transparency & reporting",
+      "notes": [],
+      "progress": 35,
+      "state": "pending"
+    },
+    {
+      "at": "2026-07-18T21:38:32.426872+00:00",
+      "detail": "Waiting to start.",
+      "evidence_count": 0,
+      "key": "disclosures",
+      "kind": "module",
+      "label": "Disclosures & affiliations",
+      "notes": [],
+      "progress": 35,
+      "state": "pending"
+    },
+    {
+      "at": "2026-07-18T21:38:32.428647+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": "design",
+      "kind": "module",
+      "label": "Study design & risk of bias",
+      "notes": [],
+      "progress": 35,
+      "state": "running"
+    },
+    {
+      "at": "2026-07-18T21:38:32.862835+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": "statistics",
+      "kind": "module",
+      "label": "Statistical & computational validity",
+      "notes": [],
+      "progress": 35,
+      "state": "running"
+    },
+    {
+      "at": "2026-07-18T21:38:32.877903+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": "claims",
+      "kind": "module",
+      "label": "Claim\u2013evidence alignment",
+      "notes": [],
+      "progress": 35,
+      "state": "running"
+    },
+    {
+      "at": "2026-07-18T21:38:32.884333+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": "transparency",
+      "kind": "module",
+      "label": "Transparency & reporting",
+      "notes": [],
+      "progress": 35,
+      "state": "running"
+    },
+    {
+      "at": "2026-07-18T21:38:32.904576+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": "disclosures",
+      "kind": "module",
+      "label": "Disclosures & affiliations",
+      "notes": [],
+      "progress": 35,
+      "state": "running"
+    },
+    {
+      "at": "2026-07-18T21:38:39.512351+00:00",
+      "detail": null,
+      "evidence_count": 4,
+      "key": "disclosures",
+      "kind": "module",
+      "label": "Disclosures & affiliations",
+      "notes": [
+        {
+          "evidence_state": "observed",
+          "module_key": "disclosures",
+          "observation": "The authors acknowledge support from Qualcomm and Amazon for this research.",
+          "quotes": [
+            "We thank Qualcomm and Amazon for their support of this research."
+          ],
+          "rubric_item": "funding_statement"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "disclosures",
+          "observation": "The authors declare no financial conflicts of interest related to this work.",
+          "quotes": [
+            "Conflict of Interest Disclosure. The authors declare no financial conflicts of interest related to this work."
+          ],
+          "rubric_item": "conflict_statement"
+        },
+        {
+          "evidence_state": "ambiguous",
+          "module_key": "disclosures",
+          "observation": "Qualcomm and Amazon are acknowledged for supporting the research, but their specific role in the research is not detailed beyond general support.",
+          "quotes": [],
+          "rubric_item": "sponsor_role"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "disclosures",
+          "observation": "The first author is affiliated with UC San Diego, and the corresponding author is Zhijian Liu from UC San Diego.",
+          "quotes": [
+            "1. Introduction Large language models (LLMs) have enabled a wide range of powerful applications, including conversational agents (Yang et al., 2025; Guo et al., 2025) and automated programming tools. Despite their success, LLM inference 1 UC San Diego. Correspondence to: Zhijian"
+          ],
+          "rubric_item": "affiliations"
+        }
+      ],
+      "progress": 42,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T21:38:47.207266+00:00",
+      "detail": null,
+      "evidence_count": 5,
+      "key": "design",
+      "kind": "module",
+      "label": "Study design & risk of bias",
+      "notes": [
+        {
+          "evidence_state": "observed",
+          "module_key": "design",
+          "observation": "The training data for DFlash is constructed from responses generated by the target model to ensure better target alignment.",
+          "quotes": [
+            "Instead of directly using the original dataset, we construct our training set with the responses generated by the target model for better target alignment."
+          ],
+          "rubric_item": "dataset_provenance"
+        },
+        {
+          "evidence_state": "ambiguous",
+          "module_key": "design",
+          "observation": "The draft model is trained on target model outputs, and target context features are extracted from the target model during training, which may lead to information leakage.",
+          "quotes": [],
+          "rubric_item": "leakage"
+        },
+        {
+          "evidence_state": "ambiguous",
+          "module_key": "design",
+          "observation": "The worker returned an observation, but its quote did not match the normalized paper exactly.",
+          "quotes": [],
+          "rubric_item": "baseline_choice"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "design",
+          "observation": "The paper evaluates a five-layer DFlash model without conditioning from the target model, showing modest speedups around 2\u20133\u00d7, which supports the importance of target context conditioning.",
+          "quotes": [
+            "To validate this, we train a five-layer block diffusion draft model without any conditioning from the target model and evaluate it on several math benchmarks. As the results shown in the Table 10, the resulting speedups are modest, typically around 2 \u2013 3 \u00d7 ."
+          ],
+          "rubric_item": "ablation"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "design",
+          "observation": "DFlash is evaluated on multiple models (Qwen3, LLaMA-3.1) and tasks (Math, Code, Chat), and tested in real-world serving frameworks (SGLang, vLLM), demonstrating broad applicability.",
+          "quotes": [
+            "We conduct experiments on LLaMA-3.1 Instruct (8B) and Qwen3 (4B, 8B, Coder-30B- A3B-Instruct) pre-trained models.",
+            "We evaluate tasks in three categories: Math: GSM8K (Cobbe et al., 2021), MATH (Lightman et al., 2023), and AIME25 (MAA, 2025); Code: HumanEval (Chen, 2021), MBPP (Austin et al., 2021), and LiveCodeBench (Jain et al., 2024); Chat: MT- Bench (Zheng et al., 2023) and Alpaca (Taori e"
+          ],
+          "rubric_item": "external_validity"
+        }
+      ],
+      "progress": 48,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T21:38:47.931244+00:00",
+      "detail": null,
+      "evidence_count": 5,
+      "key": "transparency",
+      "kind": "module",
+      "label": "Transparency & reporting",
+      "notes": [
+        {
+          "evidence_state": "not_found",
+          "module_key": "transparency",
+          "observation": "The paper does not mention any pre-registration of the study, experiment, or analysis plan.",
+          "quotes": [],
+          "rubric_item": "registration"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "transparency",
+          "observation": "The paper states that the proposed method is a system- and algorithm-level optimization that reduces LLM inference and serving costs, without altering model capabilities or intended use cases. It also claims no significant new ethical risks beyond those already associated with large language models in general.",
+          "quotes": [
+            "We do not foresee significant new ethical risks beyond those already associated with large language models in general."
+          ],
+          "rubric_item": "ethics"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "transparency",
+          "observation": "The paper provides links to code and models: Code (GitHub) | Models (Hugging Face). It also states that training data is collected from NVIDIA Nemotron Post-Training Dataset V2 and CodeAlpaca, with responses generated by the target model for better target alignment.",
+          "quotes": [
+            "Links: Code (GitHub) | Models (Hugging Face)"
+          ],
+          "rubric_item": "data_code"
+        },
+        {
+          "evidence_state": "ambiguous",
+          "module_key": "transparency",
+          "observation": "The paper reports model details, evaluation tasks, datasets, implementation settings, baselines, and ablation studies. It includes tables with speedup, acceptance length, and throughput across multiple models and tasks. However, it does not report the exact number of training samples used for each model or the full training hyperparameters.",
+          "quotes": [],
+          "rubric_item": "reporting_completeness"
+        },
+        {
+          "evidence_state": "ambiguous",
+          "module_key": "transparency",
+          "observation": "The paper provides code and model links, training data sources, model configurations, and evaluation settings. However, it does not specify the exact random seeds, training duration, or full hyperparameter values (e.g., learning rate, optimizer, batch size) used in training.",
+          "quotes": [],
+          "rubric_item": "reproducibility"
+        }
+      ],
+      "progress": 55,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T21:38:47.938704+00:00",
+      "detail": null,
+      "evidence_count": 5,
+      "key": "claims",
+      "kind": "module",
+      "label": "Claim\u2013evidence alignment",
+      "notes": [
+        {
+          "evidence_state": "observed",
+          "module_key": "claims",
+          "observation": "The paper asserts that DFlash achieves over 6\u00d7 lossless acceleration across a range of models and tasks, delivering up to 2.5\u00d7 higher speedup than the state-of-the-art speculative decoding method EAGLE-3.",
+          "quotes": [
+            "Experiments show that DFlash achieves over 6 \u00d7 lossless acceleration across a range of models and tasks, delivering up to 2.5 \u00d7 higher speedup than the state-of-the-art speculative decoding method EAGLE-3.",
+            "DFlash achieves up to a 6.1 \u00d7 speedup on Qwen3-8B (Yang et al., 2025), and is nearly 2.5 \u00d7 faster than the state-of-the-art EAGLE-3 across most benchmarks."
+          ],
+          "rubric_item": "claim_strength"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "claims",
+          "observation": "The paper provides experimental results across multiple benchmarks and models, including speedup comparisons, acceptance lengths, and performance on serving frameworks like SGLang and vLLM.",
+          "quotes": [
+            "As shown in Figure 1, DFlash achieves up to a 6.1 \u00d7 speedup on Qwen3-8B (Yang et al., 2025), and is nearly 2.5 \u00d7 faster than the state-of-the-art EAGLE-3 across most benchmarks.",
+            "Table 3. Throughput (tok/s), speedup over baseline, and average acceptance length \u03c4 on SGLang (FA4 backend)."
+          ],
+          "rubric_item": "results_support"
+        },
+        {
+          "evidence_state": "ambiguous",
+          "module_key": "claims",
+          "observation": "The worker returned an observation, but its quote did not match the normalized paper exactly.",
+          "quotes": [],
+          "rubric_item": "causal_language"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "claims",
+          "observation": "The paper evaluates DFlash on multiple models and benchmarks, including Qwen3, LLaMA-3.1, GPT-OSS, and Qwen3-Coder, across tasks like math, code, and reasoning, suggesting broad applicability.",
+          "quotes": [
+            "Table 11. Results across more models on SGLang. Each cell reports acceptance length / speedup. Model Method Math500 HumanEval MT-Bench Qwen3.5-4B MTP 6.5 / 1.5 \u00d7 6.3 / 1.6 \u00d7 5.3 / 1.3 \u00d7 DFlash 7.1 / 3.0 \u00d7 7.3 / 2.9 \u00d7 5.6 / 2.3 \u00d7",
+            "We also evaluate DFlash in vLLM on Qwen3.5-9B."
+          ],
+          "rubric_item": "generalization"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "claims",
+          "observation": "The paper acknowledges limitations such as the need for future work on adaptive block-size scheduling and the potential for increased verification cost under compute-bound settings.",
+          "quotes": [
+            "We leave adaptive block-size scheduling to future work."
+          ],
+          "rubric_item": "limitations_alignment"
+        }
+      ],
+      "progress": 61,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T21:38:50.064636+00:00",
+      "detail": null,
+      "evidence_count": 5,
+      "key": "statistics",
+      "kind": "module",
+      "label": "Statistical & computational validity",
+      "notes": [
+        {
+          "evidence_state": "observed",
+          "module_key": "statistics",
+          "observation": "The paper evaluates DFlash on multiple benchmarks including LongBench, GSM8K, MATH, AIME25, HumanEval, MBPP, LiveCodeBench, MT-Bench, and Alpaca, using datasets from LongBench (Bai et al., 2024b), and other established benchmarks. The evaluation includes both in-domain and long-context tasks, with no explicit mention of test set contamination or data leakage.",
+          "quotes": [
+            "We fine-tune the base Qwen3.5-27B draft model with 1.6K samples from LongAlign-10K (Bai et al., 2024a) for 3 epochs and test the performance on several datasets from LongBench (Bai et al., 2024b)."
+          ],
+          "rubric_item": "test_set_isolation"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "statistics",
+          "observation": "The paper reports specific hyperparameters used in training and evaluation, such as block size (16 for Qwen3, 10 for LLaMA-3.1), number of layers (5 for Qwen3, 8 for Qwen3 Coder), and training data size (100K samples). However, no systematic search over hyperparameters is described; the choices appear fixed and not optimized via ablation or grid search.",
+          "quotes": [
+            "For DFlash draft models, we set the number of layers to 5 (8 for Qwen3 Coder) and use a block size of 16 (10 for LLaMA 3.1)."
+          ],
+          "rubric_item": "hyperparameter_search"
+        },
+        {
+          "evidence_state": "not_found",
+          "module_key": "statistics",
+          "observation": "The paper reports average acceptance length (\u03c4) and speedup over baseline across multiple tasks and concurrency levels, but does not provide confidence intervals, standard deviations, or statistical significance tests for these metrics. No uncertainty quantification is presented for the reported performance gains.",
+          "quotes": [],
+          "rubric_item": "uncertainty"
+        },
+        {
+          "evidence_state": "ambiguous",
+          "module_key": "statistics",
+          "observation": "The worker returned an observation, but its quote did not match the normalized paper exactly.",
+          "quotes": [],
+          "rubric_item": "multiple_benchmarks"
+        },
+        {
+          "evidence_state": "ambiguous",
+          "module_key": "statistics",
+          "observation": "The paper provides links to code (GitHub) and models (Hugging Face), and includes detailed implementation notes such as model layers, block size, training data, and inference setup. However, no explicit description of the exact training scripts, data preprocessing pipelines, or environment configurations is provided in the main text.",
+          "quotes": [],
+          "rubric_item": "replication_artifacts"
+        }
+      ],
+      "progress": 68,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T21:38:50.069965+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": null,
+      "kind": "stage",
+      "label": "Checking current-paper scholarly context",
+      "notes": [],
+      "progress": 72,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T21:38:50.070814+00:00",
+      "detail": "Single bounded reviewer attempt; maximum 6,144 completion tokens.",
+      "evidence_count": 0,
+      "key": null,
+      "kind": "stage",
+      "label": "Generating final assessment",
+      "notes": [],
+      "progress": 84,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T21:39:02.594480+00:00",
+      "detail": "Checking methodology coverage and exact-quote grounding.",
+      "evidence_count": 0,
+      "key": null,
+      "kind": "stage",
+      "label": "Validating reviewer response",
+      "notes": [],
+      "progress": 90,
+      "state": "running"
+    },
+    {
+      "at": "2026-07-18T21:39:02.597609+00:00",
+      "progress": 96,
+      "stage": "Scored"
+    }
+  ],
+  "banners": [],
+  "completed_at": "2026-07-18T21:39:02.597626Z",
+  "composite_score": 91.5,
+  "confidence_components": {
+    "assessment_coverage": 0.557,
+    "evidence_module_coverage": 1.0,
+    "quote_grounding_rate": 0.875,
+    "source_quality": 0.9
+  },
+  "confidence_score": 79.9,
+  "content_level": "full_text",
+  "context": {
+    "author_conflict_signals": [],
+    "corrections": [],
+    "expression_of_concern": false,
+    "metric_notes": [],
+    "record_sources": [],
+    "retracted": false,
+    "venue_signals": []
+  },
+  "coverage": {
+    "available": 0.583,
+    "context": 0.75,
+    "full_review": 0.583,
+    "limitations": [
+      "Low full-review coverage makes the Review score provisional."
+    ],
+    "overall": 0.583,
+    "paper": 0.583,
+    "provisional": true
+  },
+  "dimensions": [
+    {
+      "assessed_items": 3,
+      "key": "design",
+      "label": "Study design & risk of bias",
+      "score": 91.7,
+      "total_items": 5,
+      "weight": 30.0
+    },
+    {
+      "assessed_items": 2,
+      "key": "statistics",
+      "label": "Statistical & computational validity",
+      "score": 67.5,
+      "total_items": 5,
+      "weight": 25.0
+    },
+    {
+      "assessed_items": 4,
+      "key": "claims",
+      "label": "Claim\u2013evidence alignment",
+      "score": 100.0,
+      "total_items": 5,
+      "weight": 20.0
+    },
+    {
+      "assessed_items": 2,
+      "key": "transparency",
+      "label": "Transparency & reporting",
+      "score": 100.0,
+      "total_items": 5,
+      "weight": 20.0
+    },
+    {
+      "assessed_items": 3,
+      "key": "disclosures",
+      "label": "Disclosures & affiliations",
+      "score": 100.0,
+      "total_items": 4,
+      "weight": 5.0
+    }
+  ],
+  "evidence_notes": [
+    {
+      "evidence_state": "observed",
+      "module_key": "design",
+      "observation": "The training data for DFlash is constructed from responses generated by the target model to ensure better target alignment.",
+      "quotes": [
+        "Instead of directly using the original dataset, we construct our training set with the responses generated by the target model for better target alignment."
+      ],
+      "rubric_item": "dataset_provenance"
+    },
+    {
+      "evidence_state": "ambiguous",
+      "module_key": "design",
+      "observation": "The draft model is trained on target model outputs, and target context features are extracted from the target model during training, which may lead to information leakage.",
+      "quotes": [],
+      "rubric_item": "leakage"
+    },
+    {
+      "evidence_state": "ambiguous",
+      "module_key": "design",
+      "observation": "The worker returned an observation, but its quote did not match the normalized paper exactly.",
+      "quotes": [],
+      "rubric_item": "baseline_choice"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "design",
+      "observation": "The paper evaluates a five-layer DFlash model without conditioning from the target model, showing modest speedups around 2\u20133\u00d7, which supports the importance of target context conditioning.",
+      "quotes": [
+        "To validate this, we train a five-layer block diffusion draft model without any conditioning from the target model and evaluate it on several math benchmarks. As the results shown in the Table 10, the resulting speedups are modest, typically around 2 \u2013 3 \u00d7 ."
+      ],
+      "rubric_item": "ablation"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "design",
+      "observation": "DFlash is evaluated on multiple models (Qwen3, LLaMA-3.1) and tasks (Math, Code, Chat), and tested in real-world serving frameworks (SGLang, vLLM), demonstrating broad applicability.",
+      "quotes": [
+        "We conduct experiments on LLaMA-3.1 Instruct (8B) and Qwen3 (4B, 8B, Coder-30B- A3B-Instruct) pre-trained models.",
+        "We evaluate tasks in three categories: Math: GSM8K (Cobbe et al., 2021), MATH (Lightman et al., 2023), and AIME25 (MAA, 2025); Code: HumanEval (Chen, 2021), MBPP (Austin et al., 2021), and LiveCodeBench (Jain et al., 2024); Chat: MT- Bench (Zheng et al., 2023) and Alpaca (Taori e"
+      ],
+      "rubric_item": "external_validity"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "statistics",
+      "observation": "The paper evaluates DFlash on multiple benchmarks including LongBench, GSM8K, MATH, AIME25, HumanEval, MBPP, LiveCodeBench, MT-Bench, and Alpaca, using datasets from LongBench (Bai et al., 2024b), and other established benchmarks. The evaluation includes both in-domain and long-context tasks, with no explicit mention of test set contamination or data leakage.",
+      "quotes": [
+        "We fine-tune the base Qwen3.5-27B draft model with 1.6K samples from LongAlign-10K (Bai et al., 2024a) for 3 epochs and test the performance on several datasets from LongBench (Bai et al., 2024b)."
+      ],
+      "rubric_item": "test_set_isolation"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "statistics",
+      "observation": "The paper reports specific hyperparameters used in training and evaluation, such as block size (16 for Qwen3, 10 for LLaMA-3.1), number of layers (5 for Qwen3, 8 for Qwen3 Coder), and training data size (100K samples). However, no systematic search over hyperparameters is described; the choices appear fixed and not optimized via ablation or grid search.",
+      "quotes": [
+        "For DFlash draft models, we set the number of layers to 5 (8 for Qwen3 Coder) and use a block size of 16 (10 for LLaMA 3.1)."
+      ],
+      "rubric_item": "hyperparameter_search"
+    },
+    {
+      "evidence_state": "not_found",
+      "module_key": "statistics",
+      "observation": "The paper reports average acceptance length (\u03c4) and speedup over baseline across multiple tasks and concurrency levels, but does not provide confidence intervals, standard deviations, or statistical significance tests for these metrics. No uncertainty quantification is presented for the reported performance gains.",
+      "quotes": [],
+      "rubric_item": "uncertainty"
+    },
+    {
+      "evidence_state": "ambiguous",
+      "module_key": "statistics",
+      "observation": "The worker returned an observation, but its quote did not match the normalized paper exactly.",
+      "quotes": [],
+      "rubric_item": "multiple_benchmarks"
+    },
+    {
+      "evidence_state": "ambiguous",
+      "module_key": "statistics",
+      "observation": "The paper provides links to code (GitHub) and models (Hugging Face), and includes detailed implementation notes such as model layers, block size, training data, and inference setup. However, no explicit description of the exact training scripts, data preprocessing pipelines, or environment configurations is provided in the main text.",
+      "quotes": [],
+      "rubric_item": "replication_artifacts"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "claims",
+      "observation": "The paper asserts that DFlash achieves over 6\u00d7 lossless acceleration across a range of models and tasks, delivering up to 2.5\u00d7 higher speedup than the state-of-the-art speculative decoding method EAGLE-3.",
+      "quotes": [
+        "Experiments show that DFlash achieves over 6 \u00d7 lossless acceleration across a range of models and tasks, delivering up to 2.5 \u00d7 higher speedup than the state-of-the-art speculative decoding method EAGLE-3.",
+        "DFlash achieves up to a 6.1 \u00d7 speedup on Qwen3-8B (Yang et al., 2025), and is nearly 2.5 \u00d7 faster than the state-of-the-art EAGLE-3 across most benchmarks."
+      ],
+      "rubric_item": "claim_strength"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "claims",
+      "observation": "The paper provides experimental results across multiple benchmarks and models, including speedup comparisons, acceptance lengths, and performance on serving frameworks like SGLang and vLLM.",
+      "quotes": [
+        "As shown in Figure 1, DFlash achieves up to a 6.1 \u00d7 speedup on Qwen3-8B (Yang et al., 2025), and is nearly 2.5 \u00d7 faster than the state-of-the-art EAGLE-3 across most benchmarks.",
+        "Table 3. Throughput (tok/s), speedup over baseline, and average acceptance length \u03c4 on SGLang (FA4 backend)."
+      ],
+      "rubric_item": "results_support"
+    },
+    {
+      "evidence_state": "ambiguous",
+      "module_key": "claims",
+      "observation": "The worker returned an observation, but its quote did not match the normalized paper exactly.",
+      "quotes": [],
+      "rubric_item": "causal_language"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "claims",
+      "observation": "The paper evaluates DFlash on multiple models and benchmarks, including Qwen3, LLaMA-3.1, GPT-OSS, and Qwen3-Coder, across tasks like math, code, and reasoning, suggesting broad applicability.",
+      "quotes": [
+        "Table 11. Results across more models on SGLang. Each cell reports acceptance length / speedup. Model Method Math500 HumanEval MT-Bench Qwen3.5-4B MTP 6.5 / 1.5 \u00d7 6.3 / 1.6 \u00d7 5.3 / 1.3 \u00d7 DFlash 7.1 / 3.0 \u00d7 7.3 / 2.9 \u00d7 5.6 / 2.3 \u00d7",
+        "We also evaluate DFlash in vLLM on Qwen3.5-9B."
+      ],
+      "rubric_item": "generalization"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "claims",
+      "observation": "The paper acknowledges limitations such as the need for future work on adaptive block-size scheduling and the potential for increased verification cost under compute-bound settings.",
+      "quotes": [
+        "We leave adaptive block-size scheduling to future work."
+      ],
+      "rubric_item": "limitations_alignment"
+    },
+    {
+      "evidence_state": "not_found",
+      "module_key": "transparency",
+      "observation": "The paper does not mention any pre-registration of the study, experiment, or analysis plan.",
+      "quotes": [],
+      "rubric_item": "registration"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "transparency",
+      "observation": "The paper states that the proposed method is a system- and algorithm-level optimization that reduces LLM inference and serving costs, without altering model capabilities or intended use cases. It also claims no significant new ethical risks beyond those already associated with large language models in general.",
+      "quotes": [
+        "We do not foresee significant new ethical risks beyond those already associated with large language models in general."
+      ],
+      "rubric_item": "ethics"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "transparency",
+      "observation": "The paper provides links to code and models: Code (GitHub) | Models (Hugging Face). It also states that training data is collected from NVIDIA Nemotron Post-Training Dataset V2 and CodeAlpaca, with responses generated by the target model for better target alignment.",
+      "quotes": [
+        "Links: Code (GitHub) | Models (Hugging Face)"
+      ],
+      "rubric_item": "data_code"
+    },
+    {
+      "evidence_state": "ambiguous",
+      "module_key": "transparency",
+      "observation": "The paper reports model details, evaluation tasks, datasets, implementation settings, baselines, and ablation studies. It includes tables with speedup, acceptance length, and throughput across multiple models and tasks. However, it does not report the exact number of training samples used for each model or the full training hyperparameters.",
+      "quotes": [],
+      "rubric_item": "reporting_completeness"
+    },
+    {
+      "evidence_state": "ambiguous",
+      "module_key": "transparency",
+      "observation": "The paper provides code and model links, training data sources, model configurations, and evaluation settings. However, it does not specify the exact random seeds, training duration, or full hyperparameter values (e.g., learning rate, optimizer, batch size) used in training.",
+      "quotes": [],
+      "rubric_item": "reproducibility"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "disclosures",
+      "observation": "The authors acknowledge support from Qualcomm and Amazon for this research.",
+      "quotes": [
+        "We thank Qualcomm and Amazon for their support of this research."
+      ],
+      "rubric_item": "funding_statement"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "disclosures",
+      "observation": "The authors declare no financial conflicts of interest related to this work.",
+      "quotes": [
+        "Conflict of Interest Disclosure. The authors declare no financial conflicts of interest related to this work."
+      ],
+      "rubric_item": "conflict_statement"
+    },
+    {
+      "evidence_state": "ambiguous",
+      "module_key": "disclosures",
+      "observation": "Qualcomm and Amazon are acknowledged for supporting the research, but their specific role in the research is not detailed beyond general support.",
+      "quotes": [],
+      "rubric_item": "sponsor_role"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "disclosures",
+      "observation": "The first author is affiliated with UC San Diego, and the corresponding author is Zhijian Liu from UC San Diego.",
+      "quotes": [
+        "1. Introduction Large language models (LLMs) have enabled a wide range of powerful applications, including conversational agents (Yang et al., 2025; Guo et al., 2025) and automated programming tools. Despite their success, LLM inference 1 UC San Diego. Correspondence to: Zhijian"
+      ],
+      "rubric_item": "affiliations"
+    }
+  ],
+  "evidence_verification_rate": 0.875,
+  "execution_warnings": [
+    "2 attempted judgments cited no permitted verified evidence and were excluded from scoring."
+  ],
+  "failed_evidence_modules": [],
+  "findings": [
+    {
+      "affected_conclusions": [],
+      "category": "design",
+      "confidence": 0.9,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The paper states that the training set is constructed from responses generated by the target model for better alignment, indicating a non-standard dataset provenance (evidence_id: span-0ea29c385b284ebd). While this is explicitly described, it raises concerns about potential circularity or dependency on the target model, which may affect generalizability. However, the source of the initial prompts or data used to elicit these responses is not fully detailed, limiting full transparency.",
+      "external_sources": [],
+      "grade": "minor_concern",
+      "id": "606055d0f09e",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 24927,
+          "page": 6,
+          "paragraph": null,
+          "quote": "Instead of directly using the original dataset, we construct our training set with the responses generated by the target model for better target alignment.",
+          "section": null,
+          "start": 24772
+        }
+      ],
+      "rubric_item": "dataset_provenance",
+      "severity": "minor",
+      "title": "Dataset Provenance"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "design",
+      "confidence": 0.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "No evidence is provided regarding data leakage or safeguards against it. The verified evidence ledger is empty for this item.",
+      "external_sources": [],
+      "grade": "not_assessed",
+      "id": "39ff2246dc98",
+      "limitations": [],
+      "paper_spans": [],
+      "rubric_item": "leakage",
+      "severity": "info",
+      "title": "Leakage"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "design",
+      "confidence": 0.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "No evidence is provided about the selection or justification of baseline methods. The verified evidence ledger is empty for this item.",
+      "external_sources": [],
+      "grade": "not_assessed",
+      "id": "b68372bcf75e",
+      "limitations": [],
+      "paper_spans": [],
+      "rubric_item": "baseline_choice",
+      "severity": "info",
+      "title": "Baseline Choice"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "design",
+      "confidence": 0.9,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The paper includes an ablation study of a five-layer diffusion draft model without conditioning from the target model, showing modest speedups (2\u20133\u00d7) compared to the full method (evidence_id: span-f31c9801c8da8cd2). This supports the necessity of target context conditioning and constitutes a valid ablation analysis.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "20802d3ec346",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 14606,
+          "page": 4,
+          "paragraph": null,
+          "quote": "To validate this, we train a five-layer block diffusion draft model without any conditioning from the target model and evaluate it on several math benchmarks. As the results shown in the Table 10, the resulting speedups are modest, typically around 2 \u2013 3 \u00d7 .",
+          "section": null,
+          "start": 14348
+        }
+      ],
+      "rubric_item": "ablation",
+      "severity": "info",
+      "title": "Ablation"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "design",
+      "confidence": 0.9,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "DFlash is evaluated across multiple models (LLaMA-3.1, Qwen3 variants) and diverse tasks (math, code, chat) using established benchmarks (GSM8K, MATH, HumanEval, MT-Bench, etc.) and real-world serving frameworks (SGLang, vLLM) (evidence_ids: span-efd82f18d21c2a1b, span-256fb4689f441d00). This demonstrates broad external validity across architectures and applications.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "3ebccfefc944",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 24033,
+          "page": 6,
+          "paragraph": null,
+          "quote": "We conduct experiments on LLaMA-3.1 Instruct (8B) and Qwen3 (4B, 8B, Coder-30B- A3B-Instruct) pre-trained models.",
+          "section": null,
+          "start": 23920
+        },
+        {
+          "bbox": null,
+          "end": 24327,
+          "page": 6,
+          "paragraph": null,
+          "quote": "We evaluate tasks in three categories: Math: GSM8K (Cobbe et al., 2021), MATH (Lightman et al., 2023), and AIME25 (MAA, 2025); Code: HumanEval (Chen, 2021), MBPP (Austin et al., 2021), and LiveCodeBench (Jain et al., 2024); Chat: MT- Bench (Zheng et al., 2023) and Alpaca (Taori et al., 2023).",
+          "section": null,
+          "start": 24034
+        }
+      ],
+      "rubric_item": "external_validity",
+      "severity": "info",
+      "title": "External Validity"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "statistics",
+      "confidence": 0.9,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The paper explicitly states that the draft model is fine-tuned on LongAlign-10K and tested on LongBench and other independent datasets (evidence_id: span-a32b3783257abddd). There is no indication of test set contamination, and the separation between training and evaluation data is clearly described.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "dbe50ea048af",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 29005,
+          "page": 7,
+          "paragraph": null,
+          "quote": "We fine-tune the base Qwen3.5-27B draft model with 1.6K samples from LongAlign-10K (Bai et al., 2024a) for 3 epochs and test the performance on several datasets from LongBench (Bai et al., 2024b).",
+          "section": null,
+          "start": 28809
+        }
+      ],
+      "rubric_item": "test_set_isolation",
+      "severity": "info",
+      "title": "Test Set Isolation"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "statistics",
+      "confidence": 0.9,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The paper reports fixed hyperparameter choices (e.g., 5 layers, block size 16) without describing any systematic search or ablation to justify them (evidence_id: span-ac29b8692c584b79). This lack of optimization or sensitivity analysis raises concerns about the robustness and generalizability of the reported results.",
+      "external_sources": [],
+      "grade": "major_concern",
+      "id": "469f730c412a",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 25068,
+          "page": 6,
+          "paragraph": null,
+          "quote": "For DFlash draft models, we set the number of layers to 5 (8 for Qwen3 Coder) and use a block size of 16 (10 for LLaMA 3.1).",
+          "section": null,
+          "start": 24944
+        }
+      ],
+      "rubric_item": "hyperparameter_search",
+      "severity": "major",
+      "title": "Hyperparameter Search"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "statistics",
+      "confidence": 0.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "No evidence is provided regarding quantification of uncertainty in performance metrics (e.g., confidence intervals, variance across runs). The verified evidence ledger is empty for this item.",
+      "external_sources": [],
+      "grade": "not_assessed",
+      "id": "5d06b1d7dfed",
+      "limitations": [],
+      "paper_spans": [],
+      "rubric_item": "uncertainty",
+      "severity": "info",
+      "title": "Uncertainty"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "statistics",
+      "confidence": 0.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The paper evaluates DFlash across multiple benchmarks in math (GSM8K, MATH, AIME25), code (HumanEval, MBPP, LiveCodeBench), and chat (MT-Bench, Alpaca) (evidence_id: span-256fb4689f441d00). This constitutes strong evidence of evaluation across diverse and established benchmarks, supporting robustness claims.",
+      "external_sources": [],
+      "grade": "not_assessed",
+      "id": "0ef81b32567d",
+      "limitations": [
+        "The final judgment cited no matching observed paper evidence."
+      ],
+      "paper_spans": [],
+      "rubric_item": "multiple_benchmarks",
+      "severity": "info",
+      "title": "Multiple Benchmarks"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "statistics",
+      "confidence": 0.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The paper provides direct links to code (GitHub) and models (Hugging Face) (evidence_id: span-1dc50365bb60a98f), enabling replication. This satisfies the requirement for replication artifacts.",
+      "external_sources": [],
+      "grade": "not_assessed",
+      "id": "85fac3598de8",
+      "limitations": [
+        "The final judgment cited no matching observed paper evidence."
+      ],
+      "paper_spans": [],
+      "rubric_item": "replication_artifacts",
+      "severity": "info",
+      "title": "Replication Artifacts"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "claims",
+      "confidence": 0.9,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The paper makes strong claims about speedup (over 6\u00d7, up to 2.5\u00d7 faster than EAGLE-3), which are directly supported by empirical results (evidence_ids: span-0f1908a659b1ee98, span-a0a95d51a5f917f0). The claims are precise and bounded to specific metrics and comparisons.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "1d655bd7fb95",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 1434,
+          "page": 1,
+          "paragraph": null,
+          "quote": "Experiments show that DFlash achieves over 6 \u00d7 lossless acceleration across a range of models and tasks, delivering up to 2.5 \u00d7 higher speedup than the state-of-the-art speculative decoding method EAGLE-3.",
+          "section": null,
+          "start": 1229
+        },
+        {
+          "bbox": null,
+          "end": 7000,
+          "page": 2,
+          "paragraph": null,
+          "quote": "DFlash achieves up to a 6.1 \u00d7 speedup on Qwen3-8B (Yang et al., 2025), and is nearly 2.5 \u00d7 faster than the state-of-the-art EAGLE-3 across most benchmarks.",
+          "section": null,
+          "start": 6845
+        }
+      ],
+      "rubric_item": "claim_strength",
+      "severity": "info",
+      "title": "Claim Strength"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "claims",
+      "confidence": 0.9,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The claims are supported by multiple tables and figures showing speedup, throughput, and acceptance length across models and frameworks (evidence_ids: span-cf2ecf498a561bb0, span-329a4a00a8b3f45e, span-d96381252c110009, span-4f1cda39c287a313). The results are detailed and reproducible.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "73fac2b298c2",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 7000,
+          "page": 2,
+          "paragraph": null,
+          "quote": "As shown in Figure 1, DFlash achieves up to a 6.1 \u00d7 speedup on Qwen3-8B (Yang et al., 2025), and is nearly 2.5 \u00d7 faster than the state-of-the-art EAGLE-3 across most benchmarks.",
+          "section": null,
+          "start": 6823
+        },
+        {
+          "bbox": null,
+          "end": 29284,
+          "page": 7,
+          "paragraph": null,
+          "quote": "Table 3. Throughput (tok/s), speedup over baseline, and average acceptance length \u03c4 on SGLang (FA4 backend).",
+          "section": null,
+          "start": 29176
+        },
+        {
+          "bbox": null,
+          "end": 51967,
+          "page": 12,
+          "paragraph": null,
+          "quote": "Table 11. Results across more models on SGLang. Each cell reports acceptance length / speedup.",
+          "section": null,
+          "start": 51873
+        },
+        {
+          "bbox": null,
+          "end": 52941,
+          "page": 12,
+          "paragraph": null,
+          "quote": "Table 12. vLLM results for Qwen3.5-9B. Each cell reports DFlash throughput in tok/s, with speedup over autoregressive decoding in parentheses.",
+          "section": null,
+          "start": 52799
+        }
+      ],
+      "rubric_item": "results_support",
+      "severity": "info",
+      "title": "Results Support"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "claims",
+      "confidence": 0.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "No evidence is provided regarding the use or avoidance of causal language in interpreting results. The verified evidence ledger is empty for this item.",
+      "external_sources": [],
+      "grade": "not_assessed",
+      "id": "18773ff8e67b",
+      "limitations": [],
+      "paper_spans": [],
+      "rubric_item": "causal_language",
+      "severity": "info",
+      "title": "Causal Language"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "claims",
+      "confidence": 0.9,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The method is tested across multiple models (Qwen3, LLaMA-3.1, GPT-OSS, Qwen3-Coder) and tasks (math, code, chat), with consistent performance gains (evidence_ids: span-6c9fcf1f817f82ba, span-6518d520bd9ba16c). This supports strong generalization claims.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "c4ab4fc87dc7",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 52101,
+          "page": 12,
+          "paragraph": null,
+          "quote": "Table 11. Results across more models on SGLang. Each cell reports acceptance length / speedup. Model Method Math500 HumanEval MT-Bench Qwen3.5-4B MTP 6.5 / 1.5 \u00d7 6.3 / 1.6 \u00d7 5.3 / 1.3 \u00d7 DFlash 7.1 / 3.0 \u00d7 7.3 / 2.9 \u00d7 5.6 / 2.3 \u00d7",
+          "section": null,
+          "start": 51873
+        },
+        {
+          "bbox": null,
+          "end": 52567,
+          "page": 12,
+          "paragraph": null,
+          "quote": "We also evaluate DFlash in vLLM on Qwen3.5-9B.",
+          "section": null,
+          "start": 52521
+        }
+      ],
+      "rubric_item": "generalization",
+      "severity": "info",
+      "title": "Generalization"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "claims",
+      "confidence": 0.9,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The paper explicitly acknowledges limitations, including the need for future work on adaptive block-size scheduling and potential increased verification cost in compute-bound settings (evidence_id: span-918908be6d1d4a9a). These limitations are directly relevant to the method\u2019s design and deployment.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "929e81976c18",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 37033,
+          "page": 9,
+          "paragraph": null,
+          "quote": "We leave adaptive block-size scheduling to future work.",
+          "section": null,
+          "start": 36978
+        }
+      ],
+      "rubric_item": "limitations_alignment",
+      "severity": "info",
+      "title": "Limitations Alignment"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "transparency",
+      "confidence": 0.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "No evidence is provided regarding pre-registration of study design or analysis plans. The verified evidence ledger is empty for this item.",
+      "external_sources": [],
+      "grade": "not_assessed",
+      "id": "019411af601d",
+      "limitations": [],
+      "paper_spans": [],
+      "rubric_item": "registration",
+      "severity": "info",
+      "title": "Registration"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "transparency",
+      "confidence": 0.9,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The paper states that the method introduces no significant new ethical risks beyond those inherent to large language models (evidence_id: span-76e3d8af6b8b8eb3), which is a reasonable and transparent assessment for a system-level optimization.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "e88129dc3999",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 40821,
+          "page": 10,
+          "paragraph": null,
+          "quote": "We do not foresee significant new ethical risks beyond those already associated with large language models in general.",
+          "section": null,
+          "start": 40703
+        }
+      ],
+      "rubric_item": "ethics",
+      "severity": "info",
+      "title": "Ethics"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "transparency",
+      "confidence": 0.9,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The paper provides links to both code (GitHub) and models (Hugging Face) (evidence_id: span-1dc50365bb60a98f), fulfilling transparency requirements for data and code availability.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "c014a0e5ac4b",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 1479,
+          "page": 1,
+          "paragraph": null,
+          "quote": "Links: Code (GitHub) | Models (Hugging Face)",
+          "section": null,
+          "start": 1435
+        }
+      ],
+      "rubric_item": "data_code",
+      "severity": "info",
+      "title": "Data Code"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "transparency",
+      "confidence": 0.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "No evidence is provided to assess overall reporting completeness against a standard (e.g., EQUATOR). The verified evidence ledger is empty for this item.",
+      "external_sources": [],
+      "grade": "not_assessed",
+      "id": "0dcdc7c43d12",
+      "limitations": [],
+      "paper_spans": [],
+      "rubric_item": "reporting_completeness",
+      "severity": "info",
+      "title": "Reporting Completeness"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "transparency",
+      "confidence": 0.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "While code and models are available, no evidence is provided about detailed procedures, environment setup, or instructions for reproducing results. The verified evidence ledger is empty for this specific item.",
+      "external_sources": [],
+      "grade": "not_assessed",
+      "id": "1c6882f79821",
+      "limitations": [],
+      "paper_spans": [],
+      "rubric_item": "reproducibility",
+      "severity": "info",
+      "title": "Reproducibility"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "disclosures",
+      "confidence": 0.9,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The paper acknowledges support from Qualcomm and Amazon (evidence_id: span-ab39b6e3bec6deae), providing a clear funding statement.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "46b512bed4af",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 40191,
+          "page": 9,
+          "paragraph": null,
+          "quote": "We thank Qualcomm and Amazon for their support of this research.",
+          "section": null,
+          "start": 40127
+        }
+      ],
+      "rubric_item": "funding_statement",
+      "severity": "info",
+      "title": "Funding Statement"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "disclosures",
+      "confidence": 0.9,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The authors declare no financial conflicts of interest (evidence_id: span-226fe3409bb8b9cf), satisfying disclosure requirements.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "c8a1dda9ed8e",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 7236,
+          "page": 2,
+          "paragraph": null,
+          "quote": "Conflict of Interest Disclosure. The authors declare no financial conflicts of interest related to this work.",
+          "section": null,
+          "start": 7127
+        }
+      ],
+      "rubric_item": "conflict_statement",
+      "severity": "info",
+      "title": "Conflict Statement"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "disclosures",
+      "confidence": 0.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "No evidence is provided about the role of sponsors (Qualcomm, Amazon) in the research process. The verified evidence ledger is empty for this item.",
+      "external_sources": [],
+      "grade": "not_assessed",
+      "id": "679579b2f58b",
+      "limitations": [],
+      "paper_spans": [],
+      "rubric_item": "sponsor_role",
+      "severity": "info",
+      "title": "Sponsor Role"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "disclosures",
+      "confidence": 0.9,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The paper identifies the affiliation of the first and corresponding author as UC San Diego (evidence_id: span-1b3e0c37466e8681), meeting basic affiliation disclosure requirements.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "e5c6eaec3031",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 1928,
+          "page": 1,
+          "paragraph": null,
+          "quote": "1. Introduction Large language models (LLMs) have enabled a wide range of powerful applications, including conversational agents (Yang et al., 2025; Guo et al., 2025) and automated programming tools. Despite their success, LLM inference 1 UC San Diego. Correspondence to: Zhijian Liu < zhijian@ ucsd.edu > . Proceedings of the 43 rd International Conference on Machine Learning , Seoul, South Korea. PMLR 306, 2026. Copyright 2026 by the author(s).",
+          "section": null,
+          "start": 1480
+        }
+      ],
+      "rubric_item": "affiliations",
+      "severity": "info",
+      "title": "Affiliations"
+    }
+  ],
+  "id": "0af4b9b0-ab53-401b-a1e8-fd3b5aefbba4",
+  "identity": {
+    "arxiv_id": "2602.06036",
+    "authors": [
+      "Jian Chen",
+      "Yesheng Liang",
+      "Zhijian Liu"
+    ],
+    "doi": null,
+    "fingerprint": "f3cb05cb26767630f18ab76209a579035cbabe81f69240f88691a78932db4a26",
+    "journal": null,
+    "pmcid": null,
+    "pmid": null,
+    "published_at": "2026-02-05T18:59:30Z",
+    "title": "DFlash: Block Diffusion for Flash Speculative Decoding",
+    "updated_at": "2026-05-28T09:13:25Z",
+    "versions": []
+  },
+  "language": "en",
+  "limitations": [
+    "The Review score summarizes assessed methodology items; it is not the probability that the conclusions are true.",
+    "No cited-paper full texts were retrieved or analyzed.",
+    "English is validated first; other languages are experimental.",
+    "Generated locally with the release-only Node PDF.js normalizer.",
+    "No DOI was resolved; publication-record context is limited.",
+    "Low full-review coverage makes the Review score provisional.",
+    "2 attempted judgments cited no permitted verified evidence and were excluded from scoring."
+  ],
+  "methodology_hash": "66b93ef58957399335661945dbad5a3e6e38a565ffc1cfd42b62dc31eca72965",
+  "methodology_version": "1.3",
+  "missing_item_ids": [],
+  "module_statuses": [
+    {
+      "assessed_items": 3,
+      "expected_items": 5,
+      "key": "design",
+      "label": "Study design & risk of bias",
+      "limitation": null,
+      "state": "completed"
+    },
+    {
+      "assessed_items": 2,
+      "expected_items": 5,
+      "key": "statistics",
+      "label": "Statistical & computational validity",
+      "limitation": null,
+      "state": "completed"
+    },
+    {
+      "assessed_items": 4,
+      "expected_items": 5,
+      "key": "claims",
+      "label": "Claim\u2013evidence alignment",
+      "limitation": null,
+      "state": "completed"
+    },
+    {
+      "assessed_items": 2,
+      "expected_items": 5,
+      "key": "transparency",
+      "label": "Transparency & reporting",
+      "limitation": null,
+      "state": "completed"
+    },
+    {
+      "assessed_items": 3,
+      "expected_items": 4,
+      "key": "disclosures",
+      "label": "Disclosures & affiliations",
+      "limitation": null,
+      "state": "completed"
+    }
+  ],
+  "paper_sha256": "ffa514e6ce180eb1f7a39c49372f3b8170b99f8bc142d4a4daa0f087bf2ceb91",
+  "parser_name": "pdf.js-node",
+  "parser_version": "5.7.284",
+  "profile": "computational_ml_modeling",
+  "provider_profile": "token_factory",
+  "provider_protocol": "openai-compatible",
+  "repaired_output": false,
+  "review_score": 91.5,
+  "reviewer_model": "Qwen/Qwen3-235B-A22B-Instruct-2507",
+  "schema_version": "1.3",
+  "scoring_version": "1.3",
+  "source_format": "pdf",
+  "summary": [
+    "Hyperparameter Search. The paper reports fixed hyperparameter choices (e.g., 5 layers, block size 16) without describing any systematic search or ablation to justify them (evidence_id: span-ac29b8692c584b79). This lack of optimization or sensitivity analysis raises concerns about the robustness and\u2026",
+    "Dataset Provenance. The paper states that the training set is constructed from responses generated by the target model for better alignment, indicating a non-standard dataset provenance (evidence_id: span-0ea29c385b284ebd). While this is explicitly described, it raises concerns about potential\u2026",
+    "The final review assessed 14 of 24 methodology items."
+  ],
+  "token_usage": {
+    "input_tokens": 46564,
+    "output_tokens": 6957,
+    "total_tokens": 53521
+  },
+  "uncapped_score": 91.5,
+  "worker_model": "Qwen/Qwen3-30B-A3B-Instruct-2507"
+}
