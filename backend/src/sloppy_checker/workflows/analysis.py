@@ -8,19 +8,20 @@ from collections.abc import Callable, Coroutine
 from contextlib import suppress
 from dataclasses import dataclass
 from datetime import UTC, datetime
+from typing import Literal
 from uuid import UUID
 
 import httpx
 from agno.agent import Agent
 from agno.models.openai.like import OpenAILike
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, ValidationError
 from sqlalchemy.orm import Session
 
 from sloppy_checker.core.config import AppSettings
 from sloppy_checker.core.database import AnalysisRow, DocumentRow
 from sloppy_checker.core.ingest import fingerprint_text
 from sloppy_checker.core.methodology import content_allows, load_methodology
-from sloppy_checker.core.rubrics import rubric_prompt
+from sloppy_checker.core.rubrics import rubric_items, rubric_prompt
 from sloppy_checker.core.schemas import (
     AnalysisEvidenceNote,
     AnalysisReport,
@@ -30,7 +31,8 @@ from sloppy_checker.core.schemas import (
     EvidenceSource,
     Finding,
     FindingSeverity,
-    PaperIdentity,
+    PaperDocument,
+    PaperSpan,
     RubricGrade,
     RubricProfile,
     SourceFormat,
@@ -47,20 +49,22 @@ class EvidenceNote(BaseModel):
     rubric_item: str
     observation: str
     quotes: list[str] = Field(default_factory=list)
+    evidence_ids: list[str] = Field(default_factory=list)
+    evidence_state: Literal["observed", "not_found", "ambiguous"] = "ambiguous"
 
 
 class WorkerEvidence(BaseModel):
     model_config = ConfigDict(extra="forbid")
     module: str
     items: list[EvidenceNote] = Field(default_factory=list)
-    raw_text: str = ""
 
 
 class WorkerNoteOutput(BaseModel):
     model_config = ConfigDict(extra="forbid")
     rubric_item: str
     observation: str
-    quotes: list[str] = Field(default_factory=list, max_length=2)
+    quotes: list[str] = Field(default_factory=list, max_length=8)
+    evidence_state: Literal["observed", "not_found", "ambiguous"] = "ambiguous"
 
 
 class WorkerEvidenceOutput(BaseModel):
@@ -73,20 +77,27 @@ class FinalDecision(BaseModel):
     rubric_item: str
     grade: RubricGrade
     explanation: str
-    confidence: float = Field(ge=0, le=1)
-    evidence_quotes: list[str] = Field(default_factory=list)
+    evidence_ids: list[str] = Field(default_factory=list)
 
 
 class FinalAssessmentOutput(BaseModel):
     model_config = ConfigDict(extra="forbid")
     assessments: list[FinalDecision]
-    summary: list[str] = Field(max_length=6)
+
+
+@dataclass(frozen=True)
+class VerifiedEvidence:
+    id: str
+    module_key: str
+    rubric_item: str
+    evidence_state: Literal["observed", "not_found", "ambiguous"]
+    quote: str
+    paper_span: PaperSpan
 
 
 @dataclass(frozen=True)
 class ParsedAssessment:
     findings: list[Finding]
-    summary: list[str]
     missing_item_ids: list[str]
     assessed_attempts: int
     grounded_assessed: int
@@ -96,7 +107,6 @@ class ParsedAssessment:
 @dataclass(frozen=True)
 class AdjudicationResult:
     findings: list[Finding]
-    summary: list[str]
     missing_item_ids: list[str]
     repaired_output: bool
     assessed_attempts: int
@@ -107,6 +117,39 @@ class AdjudicationResult:
 
 class AnalysisCancelled(Exception):
     """Raised when a durable cancellation request interrupts an active model call."""
+
+
+def _derived_summary(findings: list[Finding], assessed: int, expected: int) -> list[str]:
+    severity_order = {
+        FindingSeverity.CRITICAL: 0,
+        FindingSeverity.MAJOR: 1,
+        FindingSeverity.MINOR: 2,
+        FindingSeverity.INFO: 3,
+    }
+    concerns = sorted(
+        (
+            finding
+            for finding in findings
+            if finding.grade
+            in {
+                RubricGrade.MINOR_CONCERN,
+                RubricGrade.MAJOR_CONCERN,
+                RubricGrade.CRITICAL_CONCERN,
+            }
+            and finding.paper_spans
+        ),
+        key=lambda finding: (severity_order[finding.severity], finding.category, finding.rubric_item),
+    )
+    summary = [
+        f"{finding.title}. {finding.explanation.strip()[:280]}" for finding in concerns[:4]
+    ]
+    summary.append(f"The final review assessed {assessed} of {expected} methodology items.")
+    if not concerns:
+        summary.insert(
+            0,
+            "No evidence-grounded methodological concern was accepted in the assessed items.",
+        )
+    return summary[:6]
 
 
 def _json_value(content: object) -> object:
@@ -120,6 +163,19 @@ def _json_value(content: object) -> object:
     return content
 
 
+def _ensure_document(document_or_text: PaperDocument | str) -> PaperDocument:
+    if isinstance(document_or_text, PaperDocument):
+        return document_or_text
+    return PaperDocument(
+        content_level=ContentLevel.FULL_TEXT,
+        source_format=SourceFormat.PDF,
+        sha256=hashlib.sha256(document_or_text.encode()).hexdigest(),
+        parser_name="plain-text-test-adapter",
+        parser_version="1",
+        text=document_or_text,
+    )
+
+
 def _content_text(content: object) -> str:
     if content is None:
         return ""
@@ -130,39 +186,6 @@ def _content_text(content: object) -> str:
         return json.dumps(value, ensure_ascii=False)
     except (TypeError, ValueError):
         return str(content).strip()
-
-
-def _canonical_grade(value: object) -> RubricGrade | None:
-    normalized = re.sub(r"[\s-]+", "_", str(value or "").strip().lower())
-    aliases = {
-        "none": RubricGrade.NO_CONCERN,
-        "no_issue": RubricGrade.NO_CONCERN,
-        "no_concern": RubricGrade.NO_CONCERN,
-        "minor": RubricGrade.MINOR_CONCERN,
-        "minor_concern": RubricGrade.MINOR_CONCERN,
-        "major": RubricGrade.MAJOR_CONCERN,
-        "major_concern": RubricGrade.MAJOR_CONCERN,
-        "critical": RubricGrade.CRITICAL_CONCERN,
-        "critical_concern": RubricGrade.CRITICAL_CONCERN,
-        "not_assessed": RubricGrade.NOT_ASSESSED,
-        "insufficient_evidence": RubricGrade.NOT_ASSESSED,
-        "unknown": RubricGrade.NOT_ASSESSED,
-    }
-    return aliases.get(normalized)
-
-
-def _candidate_quotes(value: object) -> list[str]:
-    if isinstance(value, str):
-        return [value] if value.strip() else []
-    if isinstance(value, dict):
-        quote = value.get("quote") or value.get("text") or value.get("evidence")
-        return [str(quote)] if quote else []
-    if isinstance(value, list):
-        quotes: list[str] = []
-        for item in value:
-            quotes.extend(_candidate_quotes(item))
-        return quotes
-    return []
 
 
 def _ground_quote(value: str, paper_text: str) -> str | None:
@@ -178,63 +201,117 @@ def _ground_quote(value: str, paper_text: str) -> str | None:
     return match.group(0) if match else None
 
 
-def _coerce_worker_evidence(
+def _page_and_section(
+    document: PaperDocument | None, start: int
+) -> tuple[int | None, str | None]:
+    if not document:
+        return None, None
+    page = next(
+        (item.number for item in document.pages if item.start <= start < item.end),
+        None,
+    )
+    sections = [
+        item for item in document.sections if item.start <= start < item.end
+    ]
+    section = (
+        min(sections, key=lambda item: item.end - item.start).title
+        if sections
+        else None
+    )
+    return page, section
+
+
+def _verified_quote(
+    quote: str,
+    document_or_text: PaperDocument | str,
+    module_key: str,
+    rubric_item: str,
+    evidence_state: Literal["observed", "not_found", "ambiguous"],
+) -> VerifiedEvidence | None:
+    document = document_or_text if isinstance(document_or_text, PaperDocument) else None
+    text = document.text if document else document_or_text
+    grounded = _ground_quote(quote, text)
+    if not grounded:
+        return None
+    start = text.find(grounded)
+    end = start + len(grounded)
+    page, section = _page_and_section(document, start)
+    evidence_id = hashlib.sha1(
+        f"{module_key}:{rubric_item}:{evidence_state}:{start}:{end}:{grounded}".encode(),
+        usedforsecurity=False,
+    ).hexdigest()[:16]
+    return VerifiedEvidence(
+        id=f"span-{evidence_id}",
+        module_key=module_key,
+        rubric_item=rubric_item,
+        evidence_state=evidence_state,
+        quote=grounded,
+        paper_span=PaperSpan(
+            quote=grounded,
+            start=start,
+            end=end,
+            page=page,
+            section=section,
+        ),
+    )
+
+
+def _parse_worker_evidence(
     content: object,
     module_key: str,
-    expected_items: list[str],
-    paper_text: str,
+    expected_items: tuple[str, ...],
+    document_or_text: PaperDocument | str,
 ) -> WorkerEvidence:
-    """Extract useful worker notes when possible and always preserve non-empty raw output."""
-    raw_text = _content_text(content)
-    try:
-        payload = _json_value(content)
-    except (TypeError, ValueError, json.JSONDecodeError):
-        return WorkerEvidence(module=module_key, raw_text=raw_text)
-    records: list[object] = []
-    if isinstance(payload, list):
-        records = list(payload)
-    elif isinstance(payload, dict):
-        for key in ("evidence", "items", "notes", "findings", "assessments", "results"):
-            if isinstance(payload.get(key), list):
-                records = list(payload[key])
-                break
-        if not records and any(key in payload for key in ("rubric_item", "item", "criterion")):
-            records = [payload]
-    notes: list[EvidenceNote] = []
-    for record in records:
-        if not isinstance(record, dict):
-            continue
-        rubric_item = record.get("rubric_item") or record.get("item") or record.get("criterion")
-        if rubric_item not in expected_items:
-            continue
-        quotes = _candidate_quotes(
-            record.get("quotes")
-            or record.get("evidence_quotes")
-            or record.get("supporting_quotes")
-            or record.get("paper_spans")
-        )
-        if not quotes:
-            quotes = _candidate_quotes(
-                record.get("evidence") or record.get("quote") or record.get("citation")
+    output = WorkerEvidenceOutput.model_validate(_json_value(content))
+    by_item: dict[str, EvidenceNote] = {}
+    for record in output.evidence:
+        if record.rubric_item not in expected_items:
+            raise ValueError(f"unknown rubric item: {record.rubric_item}")
+        if record.rubric_item in by_item:
+            raise ValueError(f"duplicate rubric item: {record.rubric_item}")
+        verified = [
+            item
+            for quote in record.quotes
+            if (
+                item := _verified_quote(
+                    quote,
+                    document_or_text,
+                    module_key,
+                    record.rubric_item,
+                    record.evidence_state,
+                )
             )
-        grounded_quotes = [grounded for quote in quotes if (grounded := _ground_quote(quote, paper_text))]
-        observation = (
-            record.get("observation")
-            or record.get("notes")
-            or record.get("explanation")
-            or record.get("reasoning")
-            or record.get("rationale")
-            or record.get("finding")
-            or "Relevant evidence was identified without a separate explanation."
-        )
-        notes.append(
+            is not None
+        ]
+        evidence_state = record.evidence_state
+        observation = record.observation
+        if evidence_state == "observed" and not verified:
+            evidence_state = "ambiguous"
+            observation = (
+                "The worker returned an observation, but its quote did not match the "
+                "normalized paper exactly."
+            )
+        if evidence_state != "observed":
+            verified = []
+        by_item[record.rubric_item] = (
             EvidenceNote(
-                rubric_item=str(rubric_item),
-                observation=str(observation),
-                quotes=list(dict.fromkeys(grounded_quotes)),
+                rubric_item=record.rubric_item,
+                observation=observation,
+                quotes=list(dict.fromkeys(item.quote for item in verified)),
+                evidence_ids=list(dict.fromkeys(item.id for item in verified)),
+                evidence_state=evidence_state,
             )
         )
-    return WorkerEvidence(module=module_key, items=notes, raw_text=raw_text)
+    items = [
+        by_item.get(item)
+        or EvidenceNote(
+            rubric_item=item,
+            observation="The worker returned no extraction note for this item.",
+            evidence_state="ambiguous",
+        )
+        for item in expected_items
+    ]
+    return WorkerEvidence(module=module_key, items=items)
 
 
 def _analysis_notes(evidence: list[WorkerEvidence]) -> list[AnalysisEvidenceNote]:
@@ -247,13 +324,38 @@ def _analysis_notes(evidence: list[WorkerEvidence]) -> list[AnalysisEvidenceNote
                     rubric_item=item.rubric_item,
                     observation=item.observation.strip()[:500],
                     quotes=[quote.strip()[:280] for quote in item.quotes[:2]],
+                    evidence_state=item.evidence_state,
                 )
             )
     return notes
 
 
+def _evidence_registry(
+    evidence: list[WorkerEvidence], document: PaperDocument
+) -> dict[str, VerifiedEvidence]:
+    registry: dict[str, VerifiedEvidence] = {}
+    for module in evidence:
+        for note in module.items:
+            if note.evidence_state != "observed":
+                continue
+            for evidence_id, quote in zip(note.evidence_ids, note.quotes, strict=False):
+                verified = _verified_quote(
+                    quote,
+                    document,
+                    module.module,
+                    note.rubric_item,
+                    note.evidence_state,
+                )
+                if verified and verified.id == evidence_id:
+                    registry[evidence_id] = verified
+    return registry
+
+
 def _reviewer_evidence_payload(
-    evidence: list[WorkerEvidence], max_chars: int
+    evidence: list[WorkerEvidence],
+    profile: RubricProfile,
+    max_chars: int,
+    registry: dict[str, VerifiedEvidence],
 ) -> list[dict[str, object]]:
     methodology = load_methodology().definition
     by_item = {
@@ -268,34 +370,67 @@ def _reviewer_evidence_payload(
             "evidence": [],
         }
         for module in methodology.modules
-        for rubric_item in module.items
+        for rubric_item in rubric_items(profile, module.key, module.items)
     ]
     if len(json.dumps(payload, ensure_ascii=False)) > max_chars:
         raise ValueError("Reviewer evidence limit is too small for the methodology manifest")
     for entry in payload:
         note = by_item.get((str(entry["module"]), str(entry["rubric_item"])))
-        if not note:
+        if not note or note.evidence_state != "observed":
             continue
-        candidate = {
-            "observation": note.observation.strip()[:500],
-            "quotes": [quote.strip()[:280] for quote in note.quotes[:2]],
-        }
-        entry["evidence"] = [candidate]
+        cited_evidence: list[dict[str, str]] = []
+        for evidence_id in note.evidence_ids:
+            ref = registry.get(evidence_id)
+            if (
+                ref is None
+                or ref.module_key != entry["module"]
+                or ref.rubric_item != entry["rubric_item"]
+                or ref.evidence_state != "observed"
+            ):
+                continue
+            cited_evidence.append(
+                {
+                    "id": evidence_id,
+                    "quote": ref.quote[:280],
+                }
+            )
+        if cited_evidence:
+            entry["observation"] = note.observation[:500]
+            entry["evidence"] = cited_evidence
         if len(json.dumps(payload, ensure_ascii=False)) > max_chars:
+            entry.pop("observation", None)
             entry["evidence"] = []
     return payload
 
 
-def _parse_final_assessment(content: object, paper_text: str) -> ParsedAssessment:
+def _source_quality(document: PaperDocument) -> float:
+    return {
+        SourceFormat.JATS: 1.0,
+        SourceFormat.PDF: 0.9,
+        SourceFormat.HTML: 0.85,
+        SourceFormat.ABSTRACT: 0.65,
+        SourceFormat.METADATA: 0.45,
+    }[document.source_format]
+
+
+def _parse_final_assessment(
+    content: object,
+    document: PaperDocument,
+    registry: dict[str, VerifiedEvidence],
+    profile: RubricProfile = RubricProfile.GENERAL_EMPIRICAL,
+) -> ParsedAssessment:
     output = FinalAssessmentOutput.model_validate(_json_value(content))
     methodology = load_methodology().definition
     item_modules = {
-        item: module.key for module in methodology.modules for item in module.items
+        item: module.key
+        for module in methodology.modules
+        for item in rubric_items(profile, module.key, module.items)
     }
     findings: list[Finding] = []
     seen: set[str] = set()
     duplicate_items: set[str] = set()
     unknown_items: set[str] = set()
+    unknown_evidence_ids: set[str] = set()
     assessed_attempts = 0
     grounded_assessed = 0
     for decision in output.assessments:
@@ -308,17 +443,27 @@ def _parse_final_assessment(content: object, paper_text: str) -> ParsedAssessmen
             continue
         seen.add(rubric_item)
         grade = decision.grade
-        quotes = list(dict.fromkeys(quote.strip() for quote in decision.evidence_quotes if quote.strip()))
-        grounded_quotes = [quote for quote in quotes if quote in paper_text]
+        evidence_ids = list(dict.fromkeys(decision.evidence_ids))
+        unknown_evidence_ids.update(item for item in evidence_ids if item not in registry)
+        category = item_modules[rubric_item]
+        references = [
+            registry[item]
+            for item in evidence_ids
+            if item in registry
+            and registry[item].module_key == category
+            and registry[item].rubric_item == rubric_item
+            and registry[item].evidence_state == "observed"
+        ]
+        spans = [item.paper_span for item in references]
         limitations: list[str] = []
         if grade != RubricGrade.NOT_ASSESSED:
             assessed_attempts += 1
-            if grounded_quotes:
+            if spans:
                 grounded_assessed += 1
             else:
                 grade = RubricGrade.NOT_ASSESSED
                 limitations.append(
-                    "The final judgment supplied no exact quote from the normalized paper."
+                    "The final judgment cited no matching observed paper evidence."
                 )
         severity = {
             RubricGrade.NO_CONCERN: FindingSeverity.INFO,
@@ -327,7 +472,6 @@ def _parse_final_assessment(content: object, paper_text: str) -> ParsedAssessmen
             RubricGrade.MAJOR_CONCERN: FindingSeverity.MAJOR,
             RubricGrade.CRITICAL_CONCERN: FindingSeverity.CRITICAL,
         }[grade]
-        category = item_modules[rubric_item]
         findings.append(
             Finding(
                 id=hashlib.sha1(
@@ -339,8 +483,12 @@ def _parse_final_assessment(content: object, paper_text: str) -> ParsedAssessmen
                 explanation=decision.explanation,
                 severity=severity,
                 grade=grade,
-                confidence=decision.confidence if grade != RubricGrade.NOT_ASSESSED else 0,
-                paper_spans=[{"quote": quote} for quote in grounded_quotes],
+                confidence=(
+                    round(_source_quality(document) * (1.0 if spans else 0.7), 2)
+                    if grade != RubricGrade.NOT_ASSESSED
+                    else 0
+                ),
+                paper_spans=spans,
                 affected_conclusions=[],
                 counterevidence=[],
                 limitations=limitations,
@@ -361,9 +509,12 @@ def _parse_final_assessment(content: object, paper_text: str) -> ParsedAssessmen
             + ", ".join(sorted(unknown_items))
             + "."
         )
+    if unknown_evidence_ids:
+        validation_warnings.append(
+            f"{len(unknown_evidence_ids)} unknown reviewer evidence IDs were ignored."
+        )
     return ParsedAssessment(
         findings=findings,
-        summary=output.summary,
         missing_item_ids=missing_item_ids,
         assessed_attempts=assessed_attempts,
         grounded_assessed=grounded_assessed,
@@ -420,7 +571,18 @@ def classify_profile(text: str) -> RubricProfile:
         return RubricProfile.SYSTEMATIC_REVIEW
     rules = [
         (RubricProfile.RANDOMIZED, ("randomized", "randomised", "randomly assigned")),
-        (RubricProfile.COMPUTATIONAL, ("machine learning", "neural network", "simulation study")),
+        (
+            RubricProfile.COMPUTATIONAL,
+            (
+                "machine learning",
+                "neural network",
+                "simulation study",
+                "transformer",
+                "language model",
+                "benchmark",
+                "algorithm",
+            ),
+        ),
         (RubricProfile.OBSERVATIONAL, ("cohort", "case-control", "cross-sectional", "observational")),
         (RubricProfile.SYSTEMATIC_REVIEW, ("systematic review", "meta-analysis")),
         (RubricProfile.GENERAL_EMPIRICAL, ("methods", "participants", "experiment", "dataset")),
@@ -438,13 +600,13 @@ def baseline_findings(
     reason: str = "No worker model was configured.",
 ) -> list[Finding]:
     """Visible no-provider fallback; it never turns lexical presence into methodological credit."""
-    del profile, text
+    del text
     methodology = load_methodology().definition
     findings: list[Finding] = []
     for module in methodology.modules:
         if not content_allows(content_level, module.minimum_content_level):
             continue
-        for item in module.items:
+        for item in rubric_items(profile, module.key, module.items):
             findings.append(
                 Finding(
                     id=hashlib.sha1(f"{module.key}:{item}".encode(), usedforsecurity=False).hexdigest()[:12],
@@ -475,8 +637,24 @@ def _usage(response: object) -> dict[str, int]:
     return result
 
 
+def _safe_module_failure(exc: Exception) -> str:
+    if isinstance(exc, ValidationError):
+        fields = [
+            ".".join(str(part) for part in error.get("loc", ()))
+            + ":"
+            + str(error.get("type", "invalid"))
+            for error in exc.errors(include_url=False, include_context=False, include_input=False)[:4]
+        ]
+        return "Invalid structured output (" + ", ".join(fields) + ")."
+    if isinstance(exc, ValueError) and str(exc).startswith(
+        ("unknown rubric item:", "duplicate rubric item:")
+    ):
+        return str(exc)[:200] + "."
+    return f"{type(exc).__name__}: evidence extraction did not complete"
+
+
 async def llm_evidence(
-    text: str,
+    document: PaperDocument | str,
     profile: RubricProfile,
     content_level: ContentLevel,
     values: dict,
@@ -489,14 +667,18 @@ async def llm_evidence(
 ) -> tuple[list[WorkerEvidence], dict[str, str], dict[str, int]]:
     methodology = load_methodology()
     routing = methodology.definition.routing
-    chunks = chunk_document(text, routing.target_chunk_chars, routing.overlap_chars)
+    canonical_document = _ensure_document(document)
+    chunks = chunk_document(canonical_document, routing.target_chunk_chars, routing.overlap_chars)
 
     async def run_one(module) -> tuple[WorkerEvidence | None, str | None, dict[str, int]]:
         if not content_allows(content_level, module.minimum_content_level):
             return None, None, {}
         if on_module_event:
             on_module_event(module.key, module.label, "running", 0, None, [])
-        routed = route_chunks(chunks, module, routing.max_chunks_per_module)
+        routed = route_chunks(
+            chunks, module, routing.max_chunks_per_module, canonical_document
+        )
+        expected_items = rubric_items(profile, module.key, module.items)
         agent = Agent(
             name=module.label,
             model=_model(values, key, "worker"),
@@ -505,25 +687,33 @@ async def llm_evidence(
             parse_response=False,
             instructions=[
                 methodology.worker_prompt,
-                f"Module={module.key}. Expected rubric_item values: {', '.join(module.items)}.",
-                "Prefer a JSON object with an `evidence` array. Each entry should contain "
-                "rubric_item, observation, and exact quotes. If JSON is difficult, return clear "
-                "text notes instead. Do not assign grades or scores.",
+                f"Module={module.key}. Expected rubric_item values: {', '.join(expected_items)}.",
+                "Return a JSON object with an `evidence` array. Each entry must contain only "
+                "rubric_item, observation, evidence_state (observed, not_found, or ambiguous), "
+                "and exact quotes. Every observed item must include at least one exact quote; "
+                "use ambiguous when you cannot copy a supporting quote. The observation may state "
+                "only what its quotes establish; put the strongest direct quote first and return no "
+                "more than two. Do not assign grades or scores.",
             ],
         )
         prompt = (
             f"Paper profile: {profile.value}. Module: {module.label}. "
-            f"{rubric_prompt(profile)} Analyze only the routed evidence below.\n"
+            f"Retrieve evidence only for these rubric items: {', '.join(expected_items)}. "
+            "Ignore every other methodology item, even when it appears relevant. "
+            "Analyze only the routed evidence below.\n"
             + format_routed_chunks(routed)[: routing.max_module_chars]
         )
         try:
             response = await agent.arun(prompt)
-            evidence = _coerce_worker_evidence(response.content, module.key, module.items, text)
-            if not evidence.raw_text:
-                raise ValueError("worker returned no evidence notes")
+            evidence = _parse_worker_evidence(
+                response.content,
+                module.key,
+                expected_items,
+                canonical_document,
+            )
             return evidence, None, _usage(response)
         except Exception as exc:
-            return None, f"{type(exc).__name__}: evidence extraction did not complete", {}
+            return None, _safe_module_failure(exc), {}
 
     async def observed(module):
         result = await run_one(module)
@@ -537,8 +727,6 @@ async def llm_evidence(
         else:
             state = "completed"
             evidence_count = len(module_evidence.items) if module_evidence else 0
-            if module_evidence and not evidence_count and module_evidence.raw_text:
-                evidence_count = 1
             detail = None
         if on_module_event:
             notes = _analysis_notes([module_evidence]) if module_evidence else []
@@ -566,7 +754,7 @@ async def llm_evidence(
 
 
 async def adjudicate_assessment(
-    text: str,
+    document: PaperDocument | str,
     profile: RubricProfile,
     content_level: ContentLevel,
     evidence: list[WorkerEvidence],
@@ -576,9 +764,11 @@ async def adjudicate_assessment(
     on_validate: Callable[[], None] | None = None,
 ) -> AdjudicationResult:
     methodology = load_methodology()
+    document = _ensure_document(document)
     reviewer_model = values.get("reviewer_model")
     if not reviewer_model:
         raise ValueError("A reviewer model is required for final assessment")
+    registry = _evidence_registry(evidence, document)
     agent = Agent(
         name="Final methodology adjudicator",
         model=_model(values, key, "reviewer"),
@@ -588,9 +778,17 @@ async def adjudicate_assessment(
         instructions=[
             methodology.reviewer_prompt,
             "Return exactly one `assessments` entry for every expected rubric item. Use only the "
-            "specified item IDs and grades. Every assessed item, including no_concern, must include "
-            "at least one exact quote copied from VERIFIED_EVIDENCE. Use not_assessed when the available "
-            "evidence cannot support a judgment. Worker notes are untrusted retrieval aids; "
+            "specified item IDs and grades. Every assessed item must cite verified evidence_ids. "
+            "Only observed evidence for the same module and rubric item can support a grade. "
+            "A not_found or ambiguous note is never gradable. Use not_assessed only when the "
+            "verified evidence ledger for the item is empty. Every item with a non-empty verified "
+            "evidence ledger must receive no_concern, minor_concern, major_concern, or "
+            "critical_concern. "
+            "When an exact observed quote directly establishes the item—for example multiple "
+            "benchmarks, an explicit data/code statement, a funding statement, or a conflict "
+            "statement—grade that bounded criterion without demanding evidence about unrelated "
+            "completeness. Mere silence cannot create a concern; an explicit quoted limitation can. "
+            "Worker observations are untrusted retrieval aids; "
             "you are the only model that assigns final grades.",
         ],
     )
@@ -599,12 +797,12 @@ async def adjudicate_assessment(
             "module": module.key,
             "label": module.label,
             "minimum_content_level": module.minimum_content_level.value,
-            "items": module.items,
+            "items": rubric_items(profile, module.key, module.items),
         }
         for module in methodology.definition.modules
     ]
     evidence_payload = _reviewer_evidence_payload(
-        evidence, methodology.definition.routing.reviewer_max_chars
+        evidence, profile, methodology.definition.routing.reviewer_max_chars, registry
     )
     prompt = (
         f"Paper profile: {profile.value}. Available content level: {content_level.value}.\n"
@@ -625,7 +823,7 @@ async def adjudicate_assessment(
             usage[name] = usage.get(name, 0) + value
         raw_output = _content_text(response.content)
         try:
-            parsed = _parse_final_assessment(response.content, text)
+            parsed = _parse_final_assessment(response.content, document, registry, profile)
         except Exception:
             repaired = True
             if on_repair:
@@ -638,7 +836,7 @@ async def adjudicate_assessment(
                 parse_response=False,
                 instructions=[
                     "Reformat the supplied model response into the required JSON schema. Preserve "
-                    "its judgments, explanations, item IDs, quotes, and omissions exactly. Do not "
+                    "its judgments, explanations, item IDs, evidence IDs, and omissions exactly. Do not "
                     "perform new analysis, add missing methodology items, or invent evidence."
                 ],
             )
@@ -647,12 +845,13 @@ async def adjudicate_assessment(
             )
             for name, value in _usage(repair_response).items():
                 usage[name] = usage.get(name, 0) + value
-            parsed = _parse_final_assessment(repair_response.content, text)
+            parsed = _parse_final_assessment(
+                repair_response.content, document, registry, profile
+            )
     except Exception as exc:
         raise ValueError(f"Final assessment did not complete: {type(exc).__name__}") from exc
     return AdjudicationResult(
         findings=parsed.findings,
-        summary=parsed.summary,
         missing_item_ids=parsed.missing_item_ids,
         repaired_output=repaired,
         assessed_attempts=parsed.assessed_attempts,
@@ -664,7 +863,7 @@ async def adjudicate_assessment(
 
 async def _fetch_source(
     row: AnalysisRow, db: Session, app: AppSettings
-) -> tuple[str, PaperIdentity, dict, ContentLevel, SourceFormat, str, str, str]:
+) -> PaperDocument:
     source = row.source
     if source.get("kind") != "document":
         raise ValueError("Analysis requires a canonical PaperDocument")
@@ -672,19 +871,10 @@ async def _fetch_source(
     if not document_row:
         raise ValueError("Parsed document was not found or has expired")
     document = get_document_store(app).get(document_row.object_key)
-    text = document.text
-    identity = document.identity
-    identity.fingerprint = identity.fingerprint or fingerprint_text(text)
-    return (
-        text,
-        identity,
-        {"extraction_warnings": document.extraction_warnings},
-        document.content_level,
-        document.source_format,
-        document.parser_name,
-        document.parser_version,
-        document.sha256,
+    document.identity.fingerprint = document.identity.fingerprint or fingerprint_text(
+        document.text
     )
+    return document
 
 
 def _event(
@@ -763,7 +953,15 @@ async def execute_analysis(
         row.state = "running"
         _event(row, "Ingesting and fingerprinting", 8)
         db.commit()
-        text, identity, metadata, content_level, source_format, parser_name, parser_version, paper_sha = await _fetch_source(row, db, app)
+        document = await _fetch_source(row, db, app)
+        text = document.text
+        identity = document.identity
+        metadata = {"extraction_warnings": document.extraction_warnings}
+        content_level = document.content_level
+        source_format = document.source_format
+        parser_name = document.parser_name
+        parser_version = document.parser_version
+        paper_sha = document.sha256
         if row.cancel_requested:
             row.state = "cancelled"
             _event(row, "Cancelled", row.progress, state="cancelled")
@@ -831,7 +1029,7 @@ async def execute_analysis(
 
         if api_key and values.get("worker_model"):
             worker_evidence, evidence_failures, worker_usage = await llm_evidence(
-                text,
+                document,
                 profile,
                 content_level,
                 values,
@@ -911,7 +1109,6 @@ async def execute_analysis(
             detail="Single bounded reviewer attempt; maximum 6,144 completion tokens.",
         )
         db.commit()
-        summary: list[str] = []
         reviewer_completed = False
         missing_item_ids: list[str] = []
         repaired_output = False
@@ -941,7 +1138,7 @@ async def execute_analysis(
             try:
                 adjudication = await _await_active_reviewer(
                     adjudicate_assessment(
-                        text,
+                        document,
                         profile,
                         content_level,
                         worker_evidence,
@@ -955,7 +1152,6 @@ async def execute_analysis(
                     app.reviewer_deadline_seconds,
                 )
                 findings = adjudication.findings
-                summary = adjudication.summary
                 reviewer_completed = True
                 missing_item_ids = adjudication.missing_item_ids
                 repaired_output = adjudication.repaired_output
@@ -964,15 +1160,15 @@ async def execute_analysis(
                 adjudication_warnings = adjudication.validation_warnings
                 for key_name, value in adjudication.usage.items():
                     token_usage[key_name] = token_usage.get(key_name, 0) + value
-                if not any(finding.grade != RubricGrade.NOT_ASSESSED for finding in findings):
-                    raise ValueError("Final assessment produced no evidence-grounded grades")
             except AnalysisCancelled:
                 raise
             except Exception as exc:
                 safe_failure = (
                     str(exc)
                     if isinstance(exc, ValueError)
-                    and str(exc).startswith("Final assessment did not complete:")
+                    and str(exc).startswith(
+                        "Final assessment did not complete:"
+                    )
                     else type(exc).__name__
                 )
                 reviewer_failure_warning = (
@@ -999,13 +1195,19 @@ async def execute_analysis(
         bundle = load_methodology()
         missing_by_module: dict[str, str] = {}
         for module in bundle.definition.modules:
-            missing = [item for item in module.items if item in missing_item_ids]
+            expected_items = rubric_items(profile, module.key, module.items)
+            missing = [item for item in expected_items if item in missing_item_ids]
             if missing:
                 missing_by_module[module.key] = (
                     "Final assessment omitted: " + ", ".join(missing) + "."
                 )
         score = score_findings(
-            findings, context, content_level, missing_by_module, reviewer_completed
+            findings,
+            context,
+            content_level,
+            missing_by_module,
+            reviewer_completed,
+            profile,
         )
         eligible_modules = [
             module
@@ -1025,11 +1227,15 @@ async def execute_analysis(
             assessment_coverage=score.weighted_coverage,
             evidence_module_coverage=round(evidence_module_coverage, 3),
             quote_grounding_rate=round(quote_grounding_rate, 3),
+            source_quality=_source_quality(document),
         )
         confidence_score = round(
-            confidence_components.assessment_coverage
-            * confidence_components.evidence_module_coverage
-            * confidence_components.quote_grounding_rate
+            (
+                0.35 * confidence_components.assessment_coverage
+                + 0.25 * confidence_components.evidence_module_coverage
+                + 0.25 * confidence_components.quote_grounding_rate
+                + 0.15 * confidence_components.source_quality
+            )
             * 100,
             1,
         )
@@ -1060,19 +1266,19 @@ async def execute_analysis(
         unsupported_attempts = assessed_attempts - grounded_assessed
         if unsupported_attempts:
             execution_warnings.append(
-                f"{unsupported_attempts} attempted judgments lacked an exact normalized-paper "
-                "quote and were excluded from scoring."
+                f"{unsupported_attempts} attempted judgments cited no permitted verified evidence "
+                "and were excluded from scoring."
             )
         if not reviewer_completed and not reviewer_failure_warning:
             execution_warnings.append(
                 "No final adjudicator model was configured; deterministic not-assessed entries "
                 "are shown for compatibility."
             )
-        if not summary:
-            summary = [
-                f"This {content_level.value.replace('_', ' ')} review assessed {sum(item.assessed_items for item in score.module_statuses)} of {sum(item.expected_items for item in score.module_statuses)} standard methodology items.",
-                "Open the evidence ledger before drawing conclusions from any automated concern.",
-            ]
+        summary = _derived_summary(
+            findings,
+            sum(item.assessed_items for item in score.module_statuses),
+            sum(item.expected_items for item in score.module_statuses),
+        )
         report = AnalysisReport(
             id=UUID(row.id),
             identity=identity,

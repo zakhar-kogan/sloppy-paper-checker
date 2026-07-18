@@ -4,7 +4,6 @@ import os
 import tempfile
 from pathlib import Path
 
-
 # Settings are instantiated while test modules import the application. Pin the
 # infrastructure adapters before collection so a developer's deployment .env
 # can never redirect the ordinary test suite to shared services.

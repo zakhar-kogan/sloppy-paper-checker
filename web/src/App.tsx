@@ -180,6 +180,7 @@ function Progress({
                     <ul>{event.notes?.map((note) => (
                       <li key={`${event.key}-${note.rubric_item}`}>
                         <strong>{words(note.rubric_item)}</strong>
+                        <small>{words(note.evidence_state ?? "ambiguous")}</small>
                         <p>{note.observation}</p>
                         {note.quotes?.map((quote, index) => <blockquote key={`${note.rubric_item}-${index}`}>“{quote}”</blockquote>)}
                       </li>
@@ -206,6 +207,10 @@ function Report({ report, onReset }: { report: AnalysisReport; onReset: () => vo
   const title = report.identity.title || report.identity.doi || "Paper review";
   const findings = report.findings.filter((finding) => finding.critic_disposition !== "discarded");
   const hasFinalScore = (report.assessed_item_count ?? 0) > 0;
+  const gradeCounts = findings.reduce<Record<string, number>>((counts, finding) => {
+    if (finding.grade !== "not_assessed") counts[finding.grade] = (counts[finding.grade] ?? 0) + 1;
+    return counts;
+  }, {});
   return (
     <main class="report-page">
       <section class="report-title">
@@ -224,15 +229,16 @@ function Report({ report, onReset }: { report: AnalysisReport; onReset: () => vo
           <ul>{(report.summary ?? []).map((item) => <li key={item}>{item}</li>)}</ul>
         </div>
         <div class="score-card">
-          <span class="score-label">Review score</span>
-          <strong>{hasFinalScore ? Math.round(report.review_score) : "—"}</strong>{hasFinalScore && <span class="score-denominator">/100</span>}
-          <p class={report.coverage.provisional ? "provisional" : "complete-label"}>{hasFinalScore ? (report.coverage.provisional ? "Provisional" : "Reviewed") : "No final score"}</p>
+          <span class="score-label">Full-review coverage</span>
+          <strong>{percent(report.coverage.full_review)}</strong>
+          <p class={report.coverage.provisional ? "provisional" : "complete-label"}>{report.coverage.provisional ? "Provisional coverage" : "Complete coverage"}</p>
           <dl>
-            <div><dt>Analysis confidence</dt><dd>{Math.round(report.confidence_score ?? 0)}%</dd></div>
+            <div><dt>Grounded concerns</dt><dd>{(gradeCounts.critical_concern ?? 0) + (gradeCounts.major_concern ?? 0) + (gradeCounts.minor_concern ?? 0)}</dd></div>
+            <div><dt>No concern</dt><dd>{gradeCounts.no_concern ?? 0}</dd></div>
             <div><dt>Items assessed</dt><dd>{report.assessed_item_count ?? report.findings.filter((item) => item.grade !== "not_assessed").length}</dd></div>
             <div><dt>Content</dt><dd>{words(report.content_level)}</dd></div>
             <div><dt>Available-content coverage</dt><dd>{percent(report.coverage.available)}</dd></div>
-            <div><dt>Full-review coverage</dt><dd>{percent(report.coverage.full_review)}</dd></div>
+            <div><dt>Coverage-weighted heuristic</dt><dd>{hasFinalScore ? `${Math.round(report.review_score)}/100` : "—"}</dd></div>
           </dl>
         </div>
       </section>
@@ -262,7 +268,7 @@ function Report({ report, onReset }: { report: AnalysisReport; onReset: () => vo
               <summary>
                 <span class="finding-grade">{words(finding.grade)}</span>
                 <strong>{finding.title}</strong>
-                <span>{Math.round(finding.confidence * 100)}% confidence</span>
+                <span>{words(finding.grade)}</span>
               </summary>
               <div class="finding-body">
                 <p>{finding.explanation}</p>
@@ -292,7 +298,7 @@ function Report({ report, onReset }: { report: AnalysisReport; onReset: () => vo
                   <summary>{module.label} <span>{notes.length} notes</span></summary>
                   <ul>{notes.map((note) => (
                     <li key={`${module.key}-${note.rubric_item}`}>
-                      <strong>{words(note.rubric_item)}</strong><p>{note.observation}</p>
+                      <strong>{words(note.rubric_item)}</strong> <small>{words(note.evidence_state ?? "ambiguous")}</small><p>{note.observation}</p>
                       {note.quotes?.map((quote, index) => <blockquote key={`${note.rubric_item}-${index}`}>“{quote}”</blockquote>)}
                     </li>
                   ))}</ul>
@@ -312,7 +318,7 @@ function Report({ report, onReset }: { report: AnalysisReport; onReset: () => vo
           <div><dt>Models</dt><dd>Worker: {report.worker_model || "deterministic fallback"}<br />Reviewer: {report.reviewer_model || "not run"}</dd></div>
           <div><dt>Paper content hash</dt><dd><code>{report.paper_sha256.slice(0, 18)}…</code></dd></div>
           <div><dt>Token usage</dt><dd>{Object.keys(report.token_usage ?? {}).length ? Object.entries(report.token_usage ?? {}).map(([key, value]) => `${key}: ${value}`).join(" · ") : "No model usage recorded"}</dd></div>
-          <div><dt>Confidence components</dt><dd>Assessment: {percent(report.confidence_components?.assessment_coverage ?? 0)}<br />Evidence modules: {percent(report.confidence_components?.evidence_module_coverage ?? 0)}<br />Verified quotes: {percent(report.confidence_components?.quote_grounding_rate ?? 0)}</dd></div>
+          <div><dt>Coverage diagnostics</dt><dd>Assessment: {percent(report.confidence_components?.assessment_coverage ?? 0)}<br />Evidence modules: {percent(report.confidence_components?.evidence_module_coverage ?? 0)}<br />Grounded evidence: {percent(report.confidence_components?.quote_grounding_rate ?? 0)}<br />Source quality: {percent(report.confidence_components?.source_quality ?? 0)}</dd></div>
         </dl>
         <details class="limitations"><summary>Limitations and execution record</summary><ul>{report.limitations.map((item) => <li key={item}>{item}</li>)}</ul></details>
       </section>

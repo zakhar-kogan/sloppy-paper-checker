@@ -3,6 +3,7 @@ import json
 from types import SimpleNamespace
 
 import pytest
+from pydantic import ValidationError
 
 from sloppy_checker.core.config import AppSettings
 from sloppy_checker.core.database import AnalysisRow, DocumentRow, SessionLocal, create_schema
@@ -19,15 +20,28 @@ from sloppy_checker.workflows import analysis as analysis_module
 from sloppy_checker.workflows.analysis import (
     _analysis_notes,
     _await_active_reviewer,
-    _coerce_worker_evidence,
+    _evidence_registry,
     _parse_final_assessment,
+    _parse_worker_evidence,
     _reviewer_evidence_payload,
+    _safe_module_failure,
     adjudicate_assessment,
     baseline_findings,
     classify_profile,
     execute_analysis,
     llm_evidence,
 )
+
+
+def paper_document(text: str, source_format: SourceFormat = SourceFormat.PDF) -> PaperDocument:
+    return PaperDocument(
+        content_level=ContentLevel.FULL_TEXT,
+        source_format=source_format,
+        sha256=hashlib.sha256(text.encode()).hexdigest(),
+        parser_name="test",
+        parser_version="1",
+        text=text,
+    )
 
 
 def test_profile_routing():
@@ -49,60 +63,75 @@ def test_baseline_is_conservative_and_traceable():
         "Abstract. Methods. Participants. Statistical analysis used confidence intervals. Results. Discussion. Data availability: repository.",
         RubricProfile.OBSERVATIONAL,
     )
-    assert len(findings) == 28
+    assert len(findings) == 24
     assert all(f.severity.value == "info" for f in findings)
     assert all(not f.paper_spans and f.grade.value == "not_assessed" for f in findings)
 
 
-def test_worker_output_accepts_common_openai_compatible_array_shape_without_grading():
-    output = _coerce_worker_evidence(
-        [
+def test_worker_output_requires_the_exact_schema_without_grading():
+    output = _parse_worker_evidence(
+        {
+            "evidence": [
             {
-                "rubric_item": "design_identification",
-                "judgment": "critical_concern",
-                "evidence": "We conducted a randomized controlled trial.",
-                "reasoning": "The study design is named explicitly.",
+                "rubric_item": "study_question_design",
+                "observation": "The study design is named explicitly.",
+                "quotes": ["We conducted a randomized controlled trial."],
+                "evidence_state": "observed",
             }
-        ],
+        ]},
         "design",
-        ["design_identification"],
+        ("study_question_design",),
         "Methods. We conducted a randomized controlled trial. Results.",
     )
     assert output.items[0].quotes == ["We conducted a randomized controlled trial."]
     assert "grade" not in output.items[0].model_dump()
 
 
-def test_malformed_worker_output_is_preserved_as_text():
-    output = _coerce_worker_evidence(
-        "Useful notes, but definitely not JSON: funding is described in acknowledgments.",
-        "record",
-        ["identity_and_version"],
-        "Title and abstract only.",
-    )
-    assert not output.items
-    assert output.raw_text.startswith("Useful notes")
+def test_malformed_worker_output_fails_instead_of_becoming_evidence():
+    with pytest.raises(ValueError):
+        _parse_worker_evidence(
+            "Useful notes, but definitely not JSON.",
+            "claims",
+            ("claim_strength",),
+            "Title and abstract only.",
+        )
 
 
-def test_empty_worker_output_is_not_mistaken_for_evidence():
-    output = _coerce_worker_evidence(None, "record", ["identity_consistency"], "Paper")
-    assert output.raw_text == ""
-    assert not output.items
+def test_legacy_worker_field_aliases_are_rejected():
+    with pytest.raises(ValueError):
+        _parse_worker_evidence(
+            {"items": [{"item": "claim_strength", "notes": "legacy"}]},
+            "claims",
+            ("claim_strength",),
+            "Paper",
+        )
+
+
+def test_module_validation_diagnostics_expose_only_schema_locations():
+    with pytest.raises(ValidationError) as caught:
+        analysis_module.WorkerEvidenceOutput.model_validate(
+            {"evidence": [{"rubric_item": "claim_strength", "unexpected": "secret"}]}
+        )
+    diagnostic = _safe_module_failure(caught.value)
+    assert "evidence.0" in diagnostic
+    assert "secret" not in diagnostic
 
 
 def test_progress_notes_are_bounded_and_only_keep_grounded_quotes():
     paper = "Verified quote from the normalized paper."
-    evidence = _coerce_worker_evidence(
+    evidence = _parse_worker_evidence(
         {
             "evidence": [
                 {
-                    "rubric_item": "study_design",
+                    "rubric_item": "study_question_design",
                     "observation": "x" * 700,
-                    "quotes": [paper, "invented quote", paper],
+                    "quotes": [paper, "invented quote"],
+                    "evidence_state": "observed",
                 }
             ]
         },
         "design",
-        ["study_design"],
+        ("study_question_design",),
         paper,
     )
     notes = _analysis_notes([evidence])
@@ -111,87 +140,186 @@ def test_progress_notes_are_bounded_and_only_keep_grounded_quotes():
     assert len(notes[0].quotes) <= 2
 
 
-def test_worker_quote_aliases_are_grounded_to_exact_normalized_paper_text():
-    paper = "The study used\nrandom allocation for every participant."
-    evidence = _coerce_worker_evidence(
+def test_worker_quotes_remain_internal_while_public_notes_keep_two_previews():
+    paper = "First exact quote. Second exact quote. Third exact quote."
+    evidence = _parse_worker_evidence(
         {
             "evidence": [
                 {
-                    "rubric_item": "study_design",
-                    "observation": "Random allocation was reported.",
-                    "evidence_quotes": ["The study used random allocation for every participant."],
+                    "rubric_item": "claim_strength",
+                    "observation": "Several passages support the extraction.",
+                    "quotes": [
+                        "First exact quote.",
+                        "Second exact quote.",
+                        "Third exact quote.",
+                    ],
+                    "evidence_state": "observed",
                 }
             ]
         },
-        "design",
-        ["study_design"],
+        "claims",
+        ("claim_strength",),
         paper,
     )
-    assert evidence.items[0].quotes == [paper]
+    assert evidence.items[0].quotes == [
+        "First exact quote.",
+        "Second exact quote.",
+        "Third exact quote.",
+    ]
+    assert _analysis_notes([evidence])[0].quotes == [
+        "First exact quote.",
+        "Second exact quote.",
+    ]
 
 
-def test_reviewer_payload_is_valid_bounded_json_without_raw_worker_text():
-    evidence = analysis_module.WorkerEvidence(
-        module="design",
-        items=[
-            analysis_module.EvidenceNote(
-                rubric_item="study_design",
-                observation="A concise observation.",
-                quotes=["Grounded quote."],
-            )
-        ],
-        raw_text="RAW MODEL RESPONSE MUST NOT LEAK",
+def test_not_found_is_an_unreviewed_note_without_evidence_ids():
+    evidence = _parse_worker_evidence(
+        {
+            "evidence": [
+                {
+                    "rubric_item": "conflict_statement",
+                    "observation": "No explicit conflict statement was found.",
+                    "quotes": [],
+                    "evidence_state": "not_found",
+                }
+            ]
+        },
+        "disclosures",
+        ("conflict_statement",),
+        "Methods only.",
     )
-    payload = _reviewer_evidence_payload([evidence], 10_000)
+    assert evidence.items[0].evidence_state == "not_found"
+    assert evidence.items[0].evidence_ids == []
+
+
+def test_unmatched_observed_quote_is_downgraded_without_failing_the_module():
+    evidence = _parse_worker_evidence(
+        {
+            "evidence": [
+                {
+                    "rubric_item": "claim_strength",
+                    "observation": "A paraphrased claim.",
+                    "quotes": ["This quote is not in the paper."],
+                    "evidence_state": "observed",
+                }
+            ]
+        },
+        "claims",
+        ("claim_strength",),
+        "The canonical paper has different text.",
+    )
+    assert evidence.items[0].evidence_state == "ambiguous"
+    assert evidence.items[0].evidence_ids == []
+
+
+def test_verified_evidence_ids_are_bound_to_module_item_and_state():
+    document = paper_document("A shared exact quote.")
+    design = _parse_worker_evidence(
+        {"evidence": [{"rubric_item": "study_question_design", "observation": "Observed.", "quotes": [document.text], "evidence_state": "observed"}]},
+        "design",
+        ("study_question_design",),
+        document,
+    )
+    claims = _parse_worker_evidence(
+        {"evidence": [{"rubric_item": "claim_strength", "observation": "Observed.", "quotes": [document.text], "evidence_state": "observed"}]},
+        "claims",
+        ("claim_strength",),
+        document,
+    )
+    assert design.items[0].evidence_ids != claims.items[0].evidence_ids
+
+    registry = _evidence_registry([design, claims], document)
+    result = _parse_final_assessment(
+        {
+            "assessments": [
+                {
+                    "rubric_item": "study_question_design",
+                    "grade": "major_concern",
+                    "explanation": "Cross-item evidence must not support this judgment.",
+                    "evidence_ids": claims.items[0].evidence_ids,
+                }
+            ]
+        },
+        document,
+        registry,
+    )
+    assert result.findings[0].grade == RubricGrade.NOT_ASSESSED
+
+
+def test_reviewer_payload_is_valid_bounded_json_with_only_structured_worker_context():
+    document = paper_document("Grounded quote.")
+    evidence = _parse_worker_evidence(
+        {"evidence": [{"rubric_item": "study_question_design", "observation": "A concise observation.", "quotes": ["Grounded quote."], "evidence_state": "observed"}]},
+        "design",
+        ("study_question_design",),
+        document,
+    )
+    payload = _reviewer_evidence_payload(
+        [evidence], RubricProfile.GENERAL_EMPIRICAL, 10_000, _evidence_registry([evidence], document)
+    )
     serialized = json.dumps(payload)
     assert len(serialized) <= 10_000
-    assert "RAW MODEL RESPONSE" not in serialized
     assert "Grounded quote." in serialized
+    assert "A concise observation." in serialized
 
 
 def test_final_assessment_is_the_only_source_of_grades_and_checks_quotes():
+    document = paper_document("The study used a randomized design.")
+    evidence = _parse_worker_evidence(
+        {"evidence": [{"rubric_item": "study_question_design", "observation": "Design stated.", "quotes": [document.text], "evidence_state": "observed"}]},
+        "design",
+        ("study_question_design",),
+        document,
+    )
+    registry = _evidence_registry([evidence], document)
     output = _parse_final_assessment(
         {
             "assessments": [
                 {
-                    "rubric_item": "study_design",
+                    "rubric_item": "study_question_design",
                     "grade": "no_concern",
                     "explanation": "The paper identifies its design.",
-                    "confidence": 0.9,
-                    "evidence_quotes": ["The study used a randomized design."],
+                    "evidence_ids": evidence.items[0].evidence_ids,
                 },
                 {
-                    "rubric_item": "sampling",
+                    "rubric_item": "sampling_eligibility",
                     "grade": "major_concern",
                     "explanation": "This quote is absent.",
-                    "confidence": 0.8,
-                    "evidence_quotes": ["Not in the normalized paper."],
+                    "evidence_ids": ["span-unknown"],
                 },
             ],
-            "summary": ["Two items were returned."],
         },
-        "The study used a randomized design.",
+        document,
+        registry,
     )
     by_item = {finding.rubric_item: finding for finding in output.findings}
-    assert by_item["study_design"].grade == RubricGrade.NO_CONCERN
-    assert by_item["sampling"].grade == RubricGrade.NOT_ASSESSED
+    assert by_item["study_question_design"].grade == RubricGrade.NO_CONCERN
+    assert by_item["sampling_eligibility"].grade == RubricGrade.NOT_ASSESSED
     assert output.assessed_attempts == 2
     assert output.grounded_assessed == 1
-    assert "comparators" in output.missing_item_ids
+    assert "comparators_controls" in output.missing_item_ids
 
 
 def test_final_assessment_reports_duplicate_and_unknown_item_ids():
+    document = paper_document("Randomized study.")
+    evidence = _parse_worker_evidence(
+        {"evidence": [{"rubric_item": "study_question_design", "observation": "Design stated.", "quotes": [document.text], "evidence_state": "observed"}]},
+        "design",
+        ("study_question_design",),
+        document,
+    )
+    registry = _evidence_registry([evidence], document)
     decision = {
-        "rubric_item": "study_design",
+        "rubric_item": "study_question_design",
         "grade": "no_concern",
         "explanation": "The design is stated.",
-        "confidence": 0.8,
-        "evidence_quotes": ["Randomized study."],
+        "evidence_ids": evidence.items[0].evidence_ids,
     }
     unknown = {**decision, "rubric_item": "invented_item"}
     output = _parse_final_assessment(
-        {"assessments": [decision, decision, unknown], "summary": []},
-        "Randomized study.",
+        {"assessments": [decision, decision, unknown]},
+        document,
+        registry,
     )
     assert len(output.findings) == 1
     assert any("Duplicate" in warning for warning in output.validation_warnings)
@@ -200,18 +328,23 @@ def test_final_assessment_reports_duplicate_and_unknown_item_ids():
 
 @pytest.mark.asyncio
 async def test_final_assessment_gets_one_format_repair_and_preserves_partial_result(monkeypatch):
+    document = paper_document("The study used a randomized design.")
+    evidence = _parse_worker_evidence(
+        {"evidence": [{"rubric_item": "randomization_process", "observation": "Design stated.", "quotes": [document.text], "evidence_state": "observed"}]},
+        "design",
+        ("randomization_process",),
+        document,
+    )
     valid_partial = json.dumps(
         {
             "assessments": [
             {
-                    "rubric_item": "study_design",
+                    "rubric_item": "randomization_process",
                     "grade": "no_concern",
                     "explanation": "The paper identifies its design.",
-                    "confidence": 0.9,
-                    "evidence_quotes": ["The study used a randomized design."],
+                    "evidence_ids": evidence.items[0].evidence_ids,
                 }
             ],
-            "summary": ["Partial but usable assessment."],
         }
     )
     responses = iter(
@@ -230,16 +363,16 @@ async def test_final_assessment_gets_one_format_repair_and_preserves_partial_res
 
     monkeypatch.setattr(analysis_module, "Agent", FakeAgent)
     result = await adjudicate_assessment(
-        "The study used a randomized design.",
+        document,
         RubricProfile.RANDOMIZED,
         ContentLevel.FULL_TEXT,
-        [],
+        [evidence],
         {"reviewer_model": "reviewer", "worker_model": "worker"},
         "unused-key",
     )
     assert result.repaired_output
     assert result.findings[0].grade == RubricGrade.NO_CONCERN
-    assert len(result.missing_item_ids) == 27
+    assert len(result.missing_item_ids) == 23
 
 
 @pytest.mark.asyncio
@@ -252,7 +385,7 @@ async def test_reviewer_request_is_compact_and_has_no_hidden_retries(monkeypatch
 
         async def arun(self, prompt):
             captured[-1]["prompt"] = prompt
-            return SimpleNamespace(content={"assessments": [], "summary": []}, metrics=None)
+            return SimpleNamespace(content={"assessments": []}, metrics=None)
 
     monkeypatch.setattr(analysis_module, "Agent", FakeAgent)
     paper_text = "FULL PAPER SENTINEL THAT MUST NOT ENTER THE REVIEWER PROMPT"
@@ -279,7 +412,7 @@ async def test_module_progress_reports_completed_and_skipped_categories(monkeypa
             captured.append(kwargs)
 
         async def arun(self, prompt):
-            return SimpleNamespace(content="Evidence note", metrics=None)
+            return SimpleNamespace(content={"evidence": []}, metrics=None)
 
     monkeypatch.setattr(analysis_module, "Agent", FakeAgent)
     events = []
@@ -292,9 +425,9 @@ async def test_module_progress_reports_completed_and_skipped_categories(monkeypa
         False,
         lambda *event: events.append(event),
     )
-    assert len(events) == 8
-    assert sum(event[2] == "running" for event in events) == 2
-    assert sum(event[2] == "completed" for event in events) == 2
+    assert len(events) == 6
+    assert sum(event[2] == "running" for event in events) == 1
+    assert sum(event[2] == "completed" for event in events) == 1
     assert sum(event[2] == "skipped" for event in events) == 4
     assert all(item["structured_outputs"] for item in captured)
     assert all(item["output_schema"] is analysis_module.WorkerEvidenceOutput for item in captured)
@@ -339,9 +472,10 @@ async def test_reviewer_failure_completes_a_provisional_report(monkeypatch, tmp_
             module="design",
             items=[
                 analysis_module.EvidenceNote(
-                    rubric_item="study_design",
+                    rubric_item="study_question_design",
                     observation="The design evidence is incomplete.",
                     quotes=["Methods and participants."],
+                    evidence_state="observed",
                 )
             ],
         )
@@ -381,8 +515,8 @@ async def test_reviewer_failure_completes_a_provisional_report(monkeypatch, tmp_
         assert all(item["grade"] == "not_assessed" for item in row.report["findings"])
         assert row.report["evidence_notes"][0]["observation"] == "The design evidence is incomplete."
         module_events = [event for event in row.events if event["kind"] == "module"]
-        assert [event["state"] for event in module_events[:6]] == ["pending"] * 6
-        assert {event["key"] for event in module_events[:6]} == {
+        assert [event["state"] for event in module_events[:5]] == ["pending"] * 5
+        assert {event["key"] for event in module_events[:5]} == {
             module.key for module in analysis_module.load_methodology().definition.modules
         }
         db.delete(row)

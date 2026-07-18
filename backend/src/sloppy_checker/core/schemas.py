@@ -244,7 +244,10 @@ class Finding(StrictModel):
 
     @model_validator(mode="after")
     def require_evidence(self) -> Finding:
-        if self.severity != FindingSeverity.INFO and not (self.paper_spans or self.external_sources):
+        if self.severity != FindingSeverity.INFO and not (
+            self.paper_spans
+            or self.external_sources
+        ):
             raise ValueError("substantive findings require a paper span or external source")
         return self
 
@@ -282,6 +285,7 @@ class ConfidenceComponents(StrictModel):
     assessment_coverage: Annotated[float, Field(ge=0, le=1)] = 0
     evidence_module_coverage: Annotated[float, Field(ge=0, le=1)] = 0
     quote_grounding_rate: Annotated[float, Field(ge=0, le=1)] = 0
+    source_quality: Annotated[float, Field(ge=0, le=1)] = 0
 
 
 class ContextAssessment(StrictModel):
@@ -316,6 +320,7 @@ class AnalysisEvidenceNote(StrictModel):
     rubric_item: str
     observation: str = Field(max_length=500)
     quotes: list[Annotated[str, Field(max_length=280)]] = Field(default_factory=list, max_length=2)
+    evidence_state: Literal["observed", "not_found", "ambiguous"] = "ambiguous"
 
 
 class AnalysisProgressEvent(StrictModel):
@@ -344,8 +349,8 @@ class AnalysisStatus(StrictModel):
 
 class AnalysisReport(StrictModel):
     id: UUID
-    schema_version: Literal["1.0", "1.1", "1.2"] = "1.2"
-    scoring_version: Literal["1.0", "1.1", "1.2"] = "1.2"
+    schema_version: Literal["1.0", "1.1", "1.2", "1.3"] = "1.3"
+    scoring_version: Literal["1.0", "1.1", "1.2", "1.3"] = "1.3"
     identity: PaperIdentity
     profile: RubricProfile
     language: str
