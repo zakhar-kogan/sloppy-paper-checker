@@ -1,8 +1,23 @@
 # Sloppy Paper Checker
 
-A web-first, evidence-linked paper review service. Resolve a DOI, PMID, PMCID, arXiv record, scholarly URL, or choose a local PDF; the UI produces a canonical `PaperDocument` and submits it for a content-aware methodology review.
+[![CI](https://github.com/zakhar-kogan/sloppy-paper-checker/actions/workflows/ci.yml/badge.svg)](https://github.com/zakhar-kogan/sloppy-paper-checker/actions/workflows/ci.yml)
+[![MIT License](https://img.shields.io/badge/license-MIT-1646e8.svg)](LICENSE)
+
+A web-first, evidence-linked scientific paper review service. Give it a DOI, PMID, PMCID, arXiv record, scholarly URL, or local PDF. It returns a content-aware methodology review with quoted evidence, explicit assessment gaps, source provenance, and an auditable scoring record.
 
 The Review score is a navigation aid, not the probability that a paper is true, peer review, or a misconduct verdict. Content level, coverage, exact quotations, and limitations remain visible in every report.
+
+## Why this project exists
+
+Automated paper summaries often blur together what a paper says, what a model inferred, and what could not be checked. Sloppy Paper Checker keeps those boundaries visible:
+
+- Workers retrieve item-specific evidence but do not assign grades.
+- A final reviewer assigns grades against a versioned methodology.
+- Exact quotations are checked against the normalized paper before they become evidence.
+- Abstract-only and failed modules remain visibly unassessed instead of becoming fabricated zeroes.
+- Every report records methodology, parser, model, coverage, token usage, and source context.
+
+For a representative full-text smoke test, use `10.1016/S0140-6736(17)32802-7`. The expected flow is resolution, source preflight, local PDF parsing or PMC JATS normalization, per-module progress, final adjudication, and a reload-safe report URL.
 
 ## Architecture
 
@@ -16,6 +31,12 @@ The Review score is a navigation aid, not the probability that a paper is true, 
 - The Chrome extension only detects the current DOI/URL and opens the web UI with `?paper=`. Set `VITE_WEB_APP_URL=https://your-host/` for a deployment build; development defaults to `http://127.0.0.1:5173/`.
 
 There is no Celery, Redis, Beat, GROBID, backend PDF extraction, legacy upload API, or SSE path.
+
+## Data handling
+
+PDF.js extracts PDF text in the browser. The normalized text, not the original local PDF bytes, is sent to the FastAPI service and its configured model provider for review. Do not submit confidential or unpublished material to a deployment whose operator and model-provider policy you do not trust.
+
+Completed analyses delete their canonical stored document after the report is written. Public deployments must also configure Object Storage lifecycle expiry and terminal-path cleanup for failed or cancelled analyses. Guest report access is owner-scoped and expires with the anonymous session.
 
 ## Local development
 
@@ -40,6 +61,15 @@ Open `http://127.0.0.1:5173`. URLs are reload-safe: `?paper=...` reopens resolut
 The intake has one explicit `Analyze paper` action. Identifier and URL inputs are resolved automatically as a source preflight, so ranked source candidates can still be inspected or changed before analysis. Running reports expose durable per-module progress, bounded unreviewed extraction notes with verified quote previews, and cancellation; the final reviewer has a configurable total deadline through `SPC_REVIEWER_DEADLINE_SECONDS` (240 seconds by default). Total guest-run quotas are disabled unless `SPC_HOSTED_RUNS_PER_SESSION` is explicitly configured, while the concurrent-run guard remains enabled.
 
 The Docker Compose stack is a small single-host deployment: Caddy, the static web container, FastAPI with inline execution, and PostgreSQL. Run `docker compose up --build` after configuring `.env`.
+
+## Deployment shapes
+
+The repository currently supports two runtime shapes:
+
+1. **Single host:** Caddy serves the web UI and proxies FastAPI on one origin. Docker Compose supplies PostgreSQL and local document storage.
+2. **Nebius:** FastAPI is the control plane, Managed PostgreSQL stores lifecycle and report state, Object Storage holds canonical documents, and each analysis runs as a Serverless AI Job.
+
+GitHub Pages can host the static web bundle, but it cannot run FastAPI or protect model credentials. The current frontend uses same-origin `/v1` requests, so a Pages deployment still needs a configurable public API base URL, HTTPS, CORS, and a cross-origin-safe guest-session design. Only the public API URL may be compiled into the Pages bundle. Database, storage, Nebius, and model credentials must remain in MysteryBox or another server-side secret store.
 
 ## Nebius deployment
 

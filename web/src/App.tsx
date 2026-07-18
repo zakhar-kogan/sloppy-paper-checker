@@ -1,3 +1,4 @@
+import type { JSX } from "preact";
 import { useEffect, useMemo, useRef, useState } from "preact/hooks";
 import { ApiError, api } from "./api";
 import type {
@@ -9,8 +10,10 @@ import type {
 } from "./domain";
 import { duration, errorMessage, fallbackWarnings, isResolvableInput, orderedCandidates, sourceLabel } from "./intake";
 import { parsePdf } from "./pdf";
+import { buildAssessmentGroups, coverageStateLabel, findingDisplayTitle, moduleStateLabel } from "./report";
 
 type Phase = "input" | "resolving" | "resolved" | "preparing" | "running" | "report";
+type InputMode = "identifier" | "upload";
 
 const wait = (milliseconds: number) => new Promise((resolve) => setTimeout(resolve, milliseconds));
 const percent = (value: number) => `${Math.round(value * 100)}%`;
@@ -206,7 +209,9 @@ function Progress({
 function Report({ report, onReset }: { report: AnalysisReport; onReset: () => void }) {
   const title = report.identity.title || report.identity.doi || "Paper review";
   const findings = report.findings.filter((finding) => finding.critic_disposition !== "discarded");
+  const assessmentGroups = buildAssessmentGroups(report);
   const hasFinalScore = (report.assessed_item_count ?? 0) > 0;
+  const hasEvidenceNotes = (report.evidence_notes?.length ?? 0) > 0;
   const gradeCounts = findings.reduce<Record<string, number>>((counts, finding) => {
     if (finding.grade !== "not_assessed") counts[finding.grade] = (counts[finding.grade] ?? 0) + 1;
     return counts;
@@ -231,7 +236,7 @@ function Report({ report, onReset }: { report: AnalysisReport; onReset: () => vo
         <div class="score-card">
           <span class="score-label">Full-review coverage</span>
           <strong>{percent(report.coverage.full_review)}</strong>
-          <p class={report.coverage.provisional ? "provisional" : "complete-label"}>{report.coverage.provisional ? "Provisional coverage" : "Complete coverage"}</p>
+          <p class={report.coverage.provisional ? "provisional" : "complete-label"}>{coverageStateLabel(report.coverage.provisional)}</p>
           <dl>
             <div><dt>Grounded concerns</dt><dd>{(gradeCounts.critical_concern ?? 0) + (gradeCounts.major_concern ?? 0) + (gradeCounts.minor_concern ?? 0)}</dd></div>
             <div><dt>No concern</dt><dd>{gradeCounts.no_concern ?? 0}</dd></div>
@@ -243,51 +248,57 @@ function Report({ report, onReset }: { report: AnalysisReport; onReset: () => vo
         </div>
       </section>
 
-      <section class="module-section">
-        <div class="section-heading"><span class="index">01</span><div><span class="eyebrow">Methodology modules</span><h2>What was—and was not—assessed</h2></div></div>
-        <div class="module-grid">
-          {(report.module_statuses ?? []).map((module) => {
-            const dimension = report.dimensions.find((item) => item.key === module.key);
-            return (
-              <article class="module-card" key={module.key}>
-                <div class="module-top"><h3>{module.label}</h3><span>{dimension?.score ?? 0}</span></div>
-                <p class={`module-state state-${module.state}`}>{words(module.state)}</p>
-                <p>{module.assessed_items} of {module.expected_items} expected items assessed</p>
-                {module.limitation && <small>{module.limitation}</small>}
-              </article>
-            );
-          })}
-        </div>
-      </section>
-
-      <section class="ledger-section">
-        <div class="section-heading"><span class="index">02</span><div><span class="eyebrow">Technical evidence ledger</span><h2>Findings tied to the paper</h2></div></div>
-        <div class="ledger">
-          {findings.map((finding) => (
-            <details class={`finding severity-${finding.severity}`} key={finding.id} open={finding.severity === "major" || finding.severity === "critical"}>
+      <section class="assessment-section">
+        <div class="section-heading"><span class="index">01</span><div><span class="eyebrow">Methodology & findings</span><h2>Assessment by category</h2></div></div>
+        <div class="assessment-groups">
+          {assessmentGroups.map((group) => (
+            <details class="assessment-category" key={group.key} open={group.hasConcern}>
               <summary>
-                <span class="finding-grade">{words(finding.grade)}</span>
-                <strong>{finding.title}</strong>
-                <span>{words(finding.grade)}</span>
+                <div class="category-copy">
+                  <h3>{group.label}</h3>
+                  <div class="category-meta">
+                    <span class={`concern-count ${group.hasConcern ? "has-concerns" : "no-concerns"}`}>
+                      {group.concernLabel}
+                    </span>
+                    <span>{group.assessedItems} of {group.expectedItems} assessed</span>
+                    {group.gapCount > 0 && <span>{group.gapCount} assessment gap{group.gapCount === 1 ? "" : "s"}</span>}
+                    <span class={`review-state state-${group.state ?? "unknown"}`}>{moduleStateLabel(group.state)}</span>
+                  </div>
+                  {group.limitation && <small>{group.limitation}</small>}
+                </div>
+                <div class="category-score"><span>Score</span><strong>{group.score === null ? "—" : `${Math.round(group.score)}/100`}</strong></div>
+                <span class="disclosure-mark" aria-hidden="true" />
               </summary>
-              <div class="finding-body">
-                <p>{finding.explanation}</p>
-                {(finding.paper_spans ?? []).map((span, index) => (
-                  <blockquote key={`${finding.id}-${index}`}>
-                    “{span.quote}”
-                    <cite>{span.page ? `Page ${span.page}` : span.section || span.paragraph || "Normalized paper"}</cite>
-                  </blockquote>
+              <div class="assessment-items">
+                {group.items.map((finding) => (
+                  <details class={`assessment-item grade-${finding.grade}`} key={finding.id} open={finding.grade === "major_concern" || finding.grade === "critical_concern"}>
+                    <summary>
+                      <span class="finding-grade">{words(finding.grade)}</span>
+                      <strong>{findingDisplayTitle(finding)}</strong>
+                      <span class="disclosure-mark" aria-hidden="true" />
+                    </summary>
+                    <div class="assessment-body">
+                      <p>{finding.explanation}</p>
+                      {(finding.paper_spans ?? []).map((span, index) => (
+                        <blockquote key={`${finding.id}-${index}`}>
+                          “{span.quote}”
+                          <cite>{span.page ? `Page ${span.page}` : span.section || span.paragraph || "Normalized paper"}</cite>
+                        </blockquote>
+                      ))}
+                      {(finding.limitations?.length ?? 0) > 0 && <p class="quiet">Limitations: {finding.limitations?.join(" ")}</p>}
+                    </div>
+                  </details>
                 ))}
-                {(finding.limitations?.length ?? 0) > 0 && <p class="quiet">Limitations: {finding.limitations?.join(" ")}</p>}
+                {group.items.length === 0 && <p class="assessment-empty">No item-level assessments were returned for this category.</p>}
               </div>
             </details>
           ))}
         </div>
       </section>
 
-      {(report.evidence_notes?.length ?? 0) > 0 && (
+      {hasEvidenceNotes && (
         <section class="extraction-section">
-          <div class="section-heading"><span class="index">03</span><div><span class="eyebrow">Worker evidence</span><h2>Unreviewed extraction notes</h2></div></div>
+          <div class="section-heading"><span class="index">02</span><div><span class="eyebrow">Worker evidence</span><h2>Unreviewed extraction notes</h2></div></div>
           <p class="quiet">These are grounded retrieval notes collected before final adjudication. They are not findings or grades.</p>
           <div class="report-evidence-notes">
             {(report.module_statuses ?? []).map((module) => {
@@ -310,7 +321,7 @@ function Report({ report, onReset }: { report: AnalysisReport; onReset: () => vo
       )}
 
       <section class="audit-section">
-        <div class="section-heading"><span class="index">04</span><div><span class="eyebrow">Reproducibility</span><h2>Provenance & audit</h2></div></div>
+        <div class="section-heading"><span class="index">{hasEvidenceNotes ? "03" : "02"}</span><div><span class="eyebrow">Reproducibility</span><h2>Provenance & audit</h2></div></div>
         <dl class="audit-grid">
           <div><dt>Methodology</dt><dd>{report.methodology_version}<code>{report.methodology_hash.slice(0, 12)}</code></dd></div>
           <div><dt>Parser</dt><dd>{report.parser_name} {report.parser_version}</dd></div>
@@ -330,7 +341,7 @@ function Report({ report, onReset }: { report: AnalysisReport; onReset: () => vo
 
 export default function App() {
   const [phase, setPhase] = useState<Phase>("input");
-  const [mode, setMode] = useState<"identifier" | "upload">("identifier");
+  const [mode, setMode] = useState<InputMode>("identifier");
   const [query, setQuery] = useState("");
   const [file, setFile] = useState<File | null>(null);
   const [resolution, setResolution] = useState<ResolvedPaper | null>(null);
@@ -387,6 +398,27 @@ export default function App() {
     queryRef.current = "";
     resolutionRequest.current = null;
     window.history.replaceState({}, "", window.location.pathname);
+  };
+
+  const changeMode = (nextMode: InputMode) => {
+    setMode(nextMode);
+    setResolution(null);
+    setPhase("input");
+  };
+
+  const handleModeKeyDown = (event: JSX.TargetedKeyboardEvent<HTMLButtonElement>) => {
+    if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
+    event.preventDefault();
+    const currentMode: InputMode = event.currentTarget.id.endsWith("upload") ? "upload" : "identifier";
+    const nextMode: InputMode = event.key === "Home"
+      ? "identifier"
+      : event.key === "End"
+        ? "upload"
+        : currentMode === "identifier"
+          ? "upload"
+          : "identifier";
+    changeMode(nextMode);
+    document.getElementById(`paper-mode-${nextMode}`)?.focus();
   };
 
   const resolveValue = (value: string, updateHistory = true): Promise<ResolvedPaper> => {
@@ -549,14 +581,44 @@ export default function App() {
 
           <section class="intake-card">
             <div class="mode-tabs" role="tablist" aria-label="Paper input type">
-              <button class={mode === "identifier" ? "active" : ""} type="button" onClick={() => { setMode("identifier"); setResolution(null); setPhase("input"); }}>Identifier or URL</button>
-              <button class={mode === "upload" ? "active" : ""} type="button" onClick={() => { setMode("upload"); setResolution(null); setPhase("input"); }}>Upload PDF</button>
+              <button
+                id="paper-mode-identifier"
+                class={mode === "identifier" ? "active" : ""}
+                type="button"
+                role="tab"
+                aria-controls="paper-panel-identifier"
+                aria-selected={mode === "identifier"}
+                tabIndex={mode === "identifier" ? 0 : -1}
+                onClick={() => changeMode("identifier")}
+                onKeyDown={handleModeKeyDown}
+              >
+                Identifier or URL
+              </button>
+              <button
+                id="paper-mode-upload"
+                class={mode === "upload" ? "active" : ""}
+                type="button"
+                role="tab"
+                aria-controls="paper-panel-upload"
+                aria-selected={mode === "upload"}
+                tabIndex={mode === "upload" ? 0 : -1}
+                onClick={() => changeMode("upload")}
+                onKeyDown={handleModeKeyDown}
+              >
+                Upload PDF
+              </button>
             </div>
             {mode === "identifier" ? (
-              <div class="resolver-form">
+              <div
+                id="paper-panel-identifier"
+                class="resolver-form"
+                role="tabpanel"
+                aria-labelledby="paper-mode-identifier"
+              >
                 <label class="field input-large">
                   <span>DOI, arXiv ID, PMID, PMCID, or scholarly URL</span>
                   <input
+                    aria-describedby="identifier-help"
                     value={query}
                     onInput={(event) => {
                       const value = event.currentTarget.value;
@@ -572,19 +634,26 @@ export default function App() {
                     onKeyDown={(event) => { if (event.key === "Enter" && canAnalyze) void analyze(); }}
                     placeholder="10.1038/…  ·  arXiv:…  ·  pubmed.ncbi.nlm.nih.gov/…"
                   />
-                  <small>{phase === "resolving" ? "Finding metadata and open full-text sources…" : resolution ? "Source preflight complete. You can change the version below." : "Sources are checked automatically before analysis."}</small>
+                  <small id="identifier-help" aria-live="polite">{phase === "resolving" ? "Finding metadata and open full-text sources…" : resolution ? "Source preflight complete. You can change the version below." : "Sources are checked automatically before analysis."}</small>
                 </label>
               </div>
             ) : (
-              <label class="drop-zone">
-                <input type="file" accept="application/pdf,.pdf" onChange={(event) => setFile(event.currentTarget.files?.[0] || null)} />
-                <span class="drop-icon">↓</span><strong>{file ? file.name : "Choose a PDF"}</strong><small>{file ? `${(file.size / 1024 / 1024).toFixed(1)} MB · parsed locally` : "Up to 25 MB · PDF.js parsing stays in this tab"}</small>
-              </label>
+              <div id="paper-panel-upload" role="tabpanel" aria-labelledby="paper-mode-upload">
+                <label class="drop-zone">
+                  <input type="file" accept="application/pdf,.pdf" onChange={(event) => setFile(event.currentTarget.files?.[0] || null)} />
+                  <span class="drop-icon" aria-hidden="true">↓</span>
+                  <strong>{file ? file.name : "Choose a PDF"}</strong>
+                  <small>{file ? `${(file.size / 1024 / 1024).toFixed(1)} MB · parsed locally` : "Up to 25 MB · parsed locally with PDF.js"}</small>
+                </label>
+              </div>
             )}
             {resolution && <ResolutionCard resolution={resolution} selected={candidateId} onSelect={setCandidateId} />}
             {error && <div class="error-box" role="alert">{error}</div>}
             <div class="action-row">
-              <div><span>Standard review</span><small>Full text when available · one active review at a time</small></div>
+              <div>
+                <span>Standard review</span>
+                <small>Full text when available · extracted text is sent to the configured review service · do not submit confidential material</small>
+              </div>
               <button class="analyze-button" type="button" disabled={!canAnalyze} onClick={() => void analyze()}>Analyze paper <span>→</span></button>
             </div>
           </section>
