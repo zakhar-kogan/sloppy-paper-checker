@@ -25,9 +25,9 @@ The browser parses local and relayed PDFs; PDF bytes are never posted to the API
 
 SQLite is deliberately single-process and local. Nebius jobs require PostgreSQL and S3 storage; startup validation rejects SQLite or filesystem storage with `nebius_job`.
 
-The job specification contains the analysis ID, non-secret adapter coordinates, image and model IDs. PostgreSQL, Object Storage, and Token Factory credentials are MysteryBox references. The job loads the document by ID, runs the same Agno engine as inline mode, and updates PostgreSQL. FastAPI remains the owner of sessions, resolution, lifecycle access control, and reports.
+The job specification contains the analysis ID, non-secret adapter coordinates, image and model IDs. PostgreSQL, Object Storage, and model-provider credentials are MysteryBox references. The job loads the document by ID, runs the same Agno engine as inline mode, and updates PostgreSQL. FastAPI remains the owner of sessions, resolution, lifecycle access control, and reports.
 
-Agno is intentionally narrow: `Agent` and `OpenAILike` provide structured model calls. Scheduling, persistence, source resolution, and scoring are ordinary application code. The unused Agno `Workflow` factory was removed.
+Agno is intentionally narrow: `Agent` and `OpenAILike` provide structured model calls through an operator-configured OpenAI-compatible API, with Nebius Token Factory as the default. Scheduling, persistence, source resolution, and scoring are ordinary application code. The unused Agno `Workflow` factory was removed.
 
 Analysis progress is stored as safe stage and module events in the existing analysis JSON event field. The polling status contract exposes labels, completion state, evidence-note counts, bounded observations, and short exact-quote previews verified against the canonical document; it never exposes prompts, the complete paper, raw model output, or credentials. Deterministic routing only selects likely chunks; Agno workers interpret evidence and the Agno reviewer assigns judgments. Reviewer execution has a total deadline; timeout or provider failure produces an explicitly provisional, unreviewed report rather than leaving the lifecycle running indefinitely.
 

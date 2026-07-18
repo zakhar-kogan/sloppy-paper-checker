@@ -24,6 +24,7 @@ from sloppy_checker.workflows.analysis import (
     _evidence_registry,
     _parse_final_assessment,
     _parse_worker_evidence,
+    _provider_for_run,
     _reviewer_evidence_payload,
     _safe_module_failure,
     adjudicate_assessment,
@@ -57,6 +58,55 @@ def test_profile_routing():
         == RubricProfile.RANDOMIZED
     )
     assert classify_profile("A theoretical perspective") == RubricProfile.COMMON_CORE
+
+
+def test_generic_provider_configuration_overrides_nebius_defaults():
+    settings = AppSettings(
+        provider_profile="custom-compatible",
+        provider_base_url="https://models.example/v1",
+        provider_api_key="generic-key",  # noqa: S106 -- test credential
+        provider_worker_model="small-model",
+        provider_reviewer_model="large-model",
+        nebius_api_key="legacy-key",  # noqa: S106 -- precedence fixture
+    )
+    values, api_key, profile = _provider_for_run(
+        AnalysisRow(request={}),
+        settings,
+        None,
+    )
+
+    assert values == {
+        "base_url": "https://models.example/v1/",
+        "worker_model": "small-model",
+        "reviewer_model": "large-model",
+    }
+    assert api_key == "generic-key"
+    assert profile == "custom-compatible"
+    assert settings.provider_credential_env_name == "SPC_PROVIDER_API_KEY"
+    worker = analysis_module._model(values, api_key, "worker")
+    assert worker.id == "small-model"
+    assert worker.base_url == "https://models.example/v1/"
+    assert analysis_module._model(values, api_key, "reviewer").id == "large-model"
+
+
+def test_legacy_nebius_provider_configuration_remains_supported():
+    settings = AppSettings(
+        nebius_api_key="legacy-key",  # noqa: S106 -- compatibility fixture
+        token_factory_worker_model="legacy-worker",  # noqa: S106 -- model ID fixture
+        token_factory_reviewer_model="legacy-reviewer",  # noqa: S106 -- model ID fixture
+    )
+    values, api_key, profile = _provider_for_run(
+        AnalysisRow(request={}),
+        settings,
+        None,
+    )
+
+    assert values["base_url"] == "https://api.tokenfactory.nebius.com/v1/"
+    assert values["worker_model"] == "legacy-worker"
+    assert values["reviewer_model"] == "legacy-reviewer"
+    assert api_key == "legacy-key"
+    assert profile == "token_factory"
+    assert settings.provider_credential_env_name == "SPC_NEBIUS_API_KEY"
 
 
 def test_baseline_is_conservative_and_traceable():

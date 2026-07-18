@@ -2,9 +2,14 @@ from __future__ import annotations
 
 from functools import lru_cache
 from pathlib import Path
+from urllib.parse import urlsplit
 
 from pydantic import Field, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
+
+DEFAULT_PROVIDER_BASE_URL = "https://api.tokenfactory.nebius.com/v1/"
+DEFAULT_PROVIDER_WORKER_MODEL = "Qwen/Qwen3-30B-A3B-Instruct-2507"
+DEFAULT_PROVIDER_REVIEWER_MODEL = "Qwen/Qwen3-235B-A22B-Instruct-2507"
 
 
 class AppSettings(BaseSettings):
@@ -29,8 +34,14 @@ class AppSettings(BaseSettings):
     nebius_job_secret_id: str | None = None
     nebius_api_key: str | None = None
     nebius_api_key_file: Path | None = None
-    token_factory_worker_model: str = "Qwen/Qwen3-30B-A3B-Instruct-2507"
-    token_factory_reviewer_model: str = "Qwen/Qwen3-235B-A22B-Instruct-2507"
+    token_factory_worker_model: str = DEFAULT_PROVIDER_WORKER_MODEL
+    token_factory_reviewer_model: str = DEFAULT_PROVIDER_REVIEWER_MODEL
+    provider_profile: str = "token_factory"
+    provider_base_url: str = DEFAULT_PROVIDER_BASE_URL
+    provider_api_key: str | None = None
+    provider_api_key_file: Path | None = None
+    provider_worker_model: str | None = None
+    provider_reviewer_model: str | None = None
     unpaywall_email: str = "operator@example.invalid"
     ncbi_email: str = "operator@example.invalid"
     allowed_hosts: list[str] = Field(default_factory=lambda: ["localhost", "127.0.0.1", "testserver"])
@@ -70,10 +81,19 @@ class AppSettings(BaseSettings):
             return [part.strip() for part in value.split(",") if part.strip()]
         return value
 
-    @field_validator("nebius_api_key_file", mode="before")
+    @field_validator("nebius_api_key_file", "provider_api_key_file", mode="before")
     @classmethod
     def empty_secret_file(cls, value: object) -> object:
         return None if value == "" else value
+
+    @field_validator("provider_base_url")
+    @classmethod
+    def valid_provider_base_url(cls, value: str) -> str:
+        normalized = value.strip()
+        parsed = urlsplit(normalized)
+        if parsed.scheme not in {"http", "https"} or not parsed.netloc:
+            raise ValueError("SPC_PROVIDER_BASE_URL must be an absolute HTTP(S) URL")
+        return normalized.rstrip("/") + "/"
 
     @field_validator("api_token")
     @classmethod
@@ -92,8 +112,33 @@ class AppSettings(BaseSettings):
         return None
 
     @property
-    def token_factory_api_key(self) -> str | None:
-        return self._secret_value(self.nebius_api_key, self.nebius_api_key_file)
+    def configured_provider_api_key(self) -> str | None:
+        return self._secret_value(
+            self.provider_api_key,
+            self.provider_api_key_file,
+        ) or self._secret_value(self.nebius_api_key, self.nebius_api_key_file)
+
+    @property
+    def configured_provider_worker_model(self) -> str:
+        return self.provider_worker_model or self.token_factory_worker_model
+
+    @property
+    def configured_provider_reviewer_model(self) -> str:
+        return self.provider_reviewer_model or self.token_factory_reviewer_model
+
+    @property
+    def provider_credential_env_name(self) -> str:
+        generic_fields = {
+            "provider_profile",
+            "provider_base_url",
+            "provider_api_key",
+            "provider_api_key_file",
+            "provider_worker_model",
+            "provider_reviewer_model",
+        }
+        if self.model_fields_set & generic_fields:
+            return "SPC_PROVIDER_API_KEY"
+        return "SPC_NEBIUS_API_KEY"
 
     def validate_adapters(self) -> None:
         if self.observability_enabled and not self.otel_exporter_otlp_endpoint:

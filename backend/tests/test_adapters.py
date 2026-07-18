@@ -131,6 +131,40 @@ def test_nebius_job_contains_id_and_secret_references_only():
     environment = {item.name: item for item in request.spec.environment_variables}
     assert environment["SPC_ANALYSIS_ID"].value == "00000000-0000-0000-0000-000000000001"
     assert environment["SPC_DATABASE_URL"].mysterybox_secret.secret_id == "mbsec-test"
+    assert environment["SPC_PROVIDER_BASE_URL"].value == "https://api.tokenfactory.nebius.com/v1/"
+    assert environment["SPC_PROVIDER_WORKER_MODEL"].value == settings.token_factory_worker_model
+    assert environment["SPC_PROVIDER_REVIEWER_MODEL"].value == settings.token_factory_reviewer_model
+    assert environment["SPC_NEBIUS_API_KEY"].mysterybox_secret.secret_id == "mbsec-test"
     serialized = request.__pb2_message__.SerializeToString()
     assert b"postgresql+psycopg" not in serialized
     assert b"paper text" not in serialized
+
+
+def test_nebius_job_uses_generic_provider_secret_without_serializing_it():
+    settings = AppSettings(
+        database_url="postgresql+psycopg://placeholder",
+        document_store="s3",
+        analysis_dispatcher="nebius_job",
+        s3_endpoint_url="https://storage.eu-north1.nebius.cloud",
+        s3_bucket="papers",
+        nebius_project_id="project-test",
+        nebius_job_image="registry.example/spc:test",
+        nebius_job_secret_id="mbsec-test",  # noqa: S106 -- opaque fixture resource ID
+        provider_profile="custom-compatible",
+        provider_base_url="https://models.example/v1",
+        provider_api_key="generic-secret",  # noqa: S106 -- serialization fixture
+        provider_worker_model="small-model",
+        provider_reviewer_model="large-model",
+    )
+    request = NebiusJobDispatcher(settings, SimpleNamespace()).build_request(
+        "00000000-0000-0000-0000-000000000001"
+    )
+    environment = {item.name: item for item in request.spec.environment_variables}
+
+    assert environment["SPC_PROVIDER_PROFILE"].value == "custom-compatible"
+    assert environment["SPC_PROVIDER_BASE_URL"].value == "https://models.example/v1/"
+    assert environment["SPC_PROVIDER_WORKER_MODEL"].value == "small-model"
+    assert environment["SPC_PROVIDER_REVIEWER_MODEL"].value == "large-model"
+    assert environment["SPC_PROVIDER_API_KEY"].mysterybox_secret.secret_id == "mbsec-test"
+    serialized = request.__pb2_message__.SerializeToString()
+    assert b"generic-secret" not in serialized

@@ -309,7 +309,7 @@ async def create_analysis(
     persisted_request["_owner_hash"] = access.owner_hash
     persisted_request["provider_runtime"] = {
         "mode": mode,
-        "profile": "token_factory",
+        "profile": settings.provider_profile,
     }
     source = {"kind": "document", "value": value}
     row = AnalysisRow(source=source, request=persisted_request, events=[])

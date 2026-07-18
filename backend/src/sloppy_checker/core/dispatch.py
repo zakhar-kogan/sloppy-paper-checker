@@ -32,7 +32,6 @@ class NebiusJobDispatcher:
         "SPC_DATABASE_URL",
         "SPC_S3_ACCESS_KEY_ID",
         "SPC_S3_SECRET_ACCESS_KEY",
-        "SPC_NEBIUS_API_KEY",
     )
 
     def __init__(self, settings: AppSettings, service: object | None = None):
@@ -67,17 +66,25 @@ class NebiusJobDispatcher:
             JobSpec.EnvironmentVariable(name="SPC_S3_REGION", value=self.settings.s3_region),
             JobSpec.EnvironmentVariable(name="SPC_S3_BUCKET", value=self.settings.s3_bucket or ""),
             JobSpec.EnvironmentVariable(
-                name="SPC_TOKEN_FACTORY_WORKER_MODEL",
-                value=self.settings.token_factory_worker_model,
+                name="SPC_PROVIDER_PROFILE",
+                value=self.settings.provider_profile,
             ),
             JobSpec.EnvironmentVariable(
-                name="SPC_TOKEN_FACTORY_REVIEWER_MODEL",
-                value=self.settings.token_factory_reviewer_model,
+                name="SPC_PROVIDER_BASE_URL",
+                value=self.settings.provider_base_url,
+            ),
+            JobSpec.EnvironmentVariable(
+                name="SPC_PROVIDER_WORKER_MODEL",
+                value=self.settings.configured_provider_worker_model,
+            ),
+            JobSpec.EnvironmentVariable(
+                name="SPC_PROVIDER_REVIEWER_MODEL",
+                value=self.settings.configured_provider_reviewer_model,
             ),
         ]
         environment.extend(
             JobSpec.EnvironmentVariable(name=name, mysterybox_secret=secret)
-            for name in self.SECRET_ENV_NAMES
+            for name in (*self.SECRET_ENV_NAMES, self.settings.provider_credential_env_name)
         )
         return CreateJobRequest(
             metadata=ResourceMetadata(
