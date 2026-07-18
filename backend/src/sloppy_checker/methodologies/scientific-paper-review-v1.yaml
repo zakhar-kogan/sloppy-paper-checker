@@ -1,4 +1,4 @@
-version: "1.1"
+version: "1.3"
 name: "Scientific paper review"
 worker_prompt: "prompts/worker-v1.md"
 reviewer_prompt: "prompts/reviewer-v1.md"
@@ -29,18 +29,18 @@ external_adapters:
 modules:
   - key: design
     label: "Study design & risk of bias"
-    weight: 25
+    weight: 30
     minimum_content_level: full_text
     required_sections: [methods, participants, design]
     keywords: [randomization, selection, confounding, comparator, blinding, attrition, exclusion, sampling]
-    items: [study_design, sampling, comparators, bias_controls, causal_scope]
+    items: [study_question_design, sampling_eligibility, measurement_quality, comparators_controls, threats_to_validity]
   - key: statistics
     label: "Statistical & computational validity"
-    weight: 20
+    weight: 25
     minimum_content_level: full_text
     required_sections: [methods, results, statistical analysis]
-    keywords: [confidence interval, p-value, power, missing data, multiplicity, robustness, leakage, baseline]
-    items: [analysis_plan, assumptions, uncertainty, missing_data, robustness]
+    keywords: [confidence interval, p-value, power, missing data, imputed, imputation, heterogeneity, transitivity, consistency, multiplicity, robustness, leakage, baseline]
+    items: [analysis_specification, effect_size_uncertainty, missing_data, robustness_checks, claim_calibration]
   - key: claims
     label: "Claim–evidence alignment"
     weight: 20
@@ -55,13 +55,6 @@ modules:
     required_sections: [methods, data availability, code availability, ethics, supplementary]
     keywords: [preregistration, protocol, ethics, consent, data availability, code, reproducibility]
     items: [registration, ethics, data_code, reporting_completeness, reproducibility]
-  - key: record
-    label: "Record & venue context"
-    weight: 10
-    minimum_content_level: metadata
-    required_sections: [abstract]
-    keywords: [correction, retraction, journal, version]
-    items: [identity_consistency, version_status, record_updates, venue_provenance]
   - key: disclosures
     label: "Disclosures & affiliations"
     weight: 5

@@ -4,6 +4,7 @@ from collections import defaultdict
 from dataclasses import dataclass
 
 from .methodology import content_allows, load_methodology
+from .rubrics import rubric_items
 from .schemas import (
     ContentLevel,
     ContextAssessment,
@@ -12,6 +13,7 @@ from .schemas import (
     Finding,
     ModuleStatus,
     RubricGrade,
+    RubricProfile,
 )
 
 
@@ -32,6 +34,7 @@ def score_findings(
     content_level: ContentLevel = ContentLevel.FULL_TEXT,
     module_failures: dict[str, str] | None = None,
     reviewer_completed: bool = True,
+    profile: RubricProfile = RubricProfile.GENERAL_EMPIRICAL,
 ) -> ScoreResult:
     methodology = load_methodology().definition
     grade_scores = {
@@ -51,18 +54,23 @@ def score_findings(
     assessed_eligible_items = 0
     eligible_items = 0
     eligible_weight = 0.0
-    total_items = sum(len(module.items) for module in methodology.modules)
+    total_items = sum(
+        len(rubric_items(profile, module.key, module.items))
+        for module in methodology.modules
+    )
 
     for module in methodology.modules:
         eligible = content_allows(content_level, module.minimum_content_level)
-        expected = len(module.items)
+        expected_items = rubric_items(profile, module.key, module.items)
+        expected = len(expected_items)
         if eligible:
             eligible_items += expected
             eligible_weight += module.weight
         assessed_by_item = {
             finding.rubric_item: finding
             for finding in grouped[module.key]
-            if finding.grade != RubricGrade.NOT_ASSESSED and finding.rubric_item in module.items
+            if finding.grade != RubricGrade.NOT_ASSESSED
+            and finding.rubric_item in expected_items
         }
         assessed = list(assessed_by_item.values())
         assessed_count = len(assessed)
@@ -145,8 +153,8 @@ def score_findings(
         coverage=Coverage(
             paper=round(full_review, 3),
             context=round(
-                sum(status.assessed_items for status in statuses if status.key in {"record", "disclosures"})
-                / max(1, sum(status.expected_items for status in statuses if status.key in {"record", "disclosures"})),
+                sum(status.assessed_items for status in statuses if status.key == "disclosures")
+                / max(1, sum(status.expected_items for status in statuses if status.key == "disclosures")),
                 3,
             ),
             overall=round(full_review, 3),

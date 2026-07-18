@@ -404,11 +404,25 @@ def _provider_for_run(
 
 def classify_profile(text: str) -> RubricProfile:
     sample = text[:40000].lower()
+    systematic_position = min(
+        (position for term in ("systematic review", "meta-analysis") if (position := sample.find(term)) >= 0),
+        default=len(sample) + 1,
+    )
+    randomized_position = min(
+        (
+            position
+            for term in ("randomized", "randomised", "randomly assigned")
+            if (position := sample.find(term)) >= 0
+        ),
+        default=len(sample) + 1,
+    )
+    if systematic_position < randomized_position:
+        return RubricProfile.SYSTEMATIC_REVIEW
     rules = [
-        (RubricProfile.SYSTEMATIC_REVIEW, ("systematic review", "meta-analysis")),
         (RubricProfile.RANDOMIZED, ("randomized", "randomised", "randomly assigned")),
         (RubricProfile.COMPUTATIONAL, ("machine learning", "neural network", "simulation study")),
         (RubricProfile.OBSERVATIONAL, ("cohort", "case-control", "cross-sectional", "observational")),
+        (RubricProfile.SYSTEMATIC_REVIEW, ("systematic review", "meta-analysis")),
         (RubricProfile.GENERAL_EMPIRICAL, ("methods", "participants", "experiment", "dataset")),
     ]
     for profile, needles in rules:

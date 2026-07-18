@@ -34,6 +34,13 @@ def test_profile_routing():
     assert classify_profile("We conducted a randomized controlled trial") == RubricProfile.RANDOMIZED
     assert classify_profile("A systematic review and meta-analysis") == RubricProfile.SYSTEMATIC_REVIEW
     assert classify_profile("A neural network simulation study") == RubricProfile.COMPUTATIONAL
+    assert classify_profile("A transformer language model benchmark") == RubricProfile.COMPUTATIONAL
+    assert (
+        classify_profile(
+            "Efficacy trial. Participants were randomized. Prior work included a systematic review."
+        )
+        == RubricProfile.RANDOMIZED
+    )
     assert classify_profile("A theoretical perspective") == RubricProfile.COMMON_CORE
 
 
