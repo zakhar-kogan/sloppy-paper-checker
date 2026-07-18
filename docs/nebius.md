@@ -6,7 +6,7 @@ FastAPI and Serverless Jobs use the same backend image. The API container starts
 
 Nebius Serverless AI Jobs are background workloads and do not expose a public request URL. The FastAPI control plane must therefore run separately. A Serverless AI Endpoint can run the FastAPI container and expose its port, but it is a long-running container over a VM rather than a browser-function or automatic scale-to-zero service.
 
-An HTTPS frontend such as GitHub Pages must call an HTTPS API. Put a TLS-capable domain or proxy in front of the FastAPI endpoint before connecting it to Pages. The browser bundle may contain the public API base URL, never `SPC_API_TOKEN`, Token Factory credentials, PostgreSQL credentials, Object Storage keys, a Nebius API key, or an endpoint authentication token.
+An HTTPS frontend such as GitHub Pages must call an HTTPS API. Put a TLS-capable domain or proxy in front of the FastAPI endpoint before connecting it to Pages. The browser bundle may contain the public API base URL, never `SPC_API_TOKEN`, model-provider credentials, PostgreSQL credentials, Object Storage keys, a Nebius API key, or an endpoint authentication token.
 
 The current anonymous session is an HttpOnly, SameSite=Lax cookie designed for a same-origin deployment. A Pages domain and a Nebius API IP/domain are cross-origin and may also be cross-site. Before deploying that split, choose one of these session designs:
 
@@ -31,12 +31,12 @@ The job's boot disk is disposable. Do not use SQLite or the container filesystem
 1. Managed PostgreSQL reachable from the API and job subnet.
 2. Object Storage bucket with an expiry/lifecycle policy matching report retention.
 3. Container Registry image containing the backend package and migrations.
-4. MysteryBox secret whose payload keys are `SPC_DATABASE_URL`, `SPC_S3_ACCESS_KEY_ID`, `SPC_S3_SECRET_ACCESS_KEY`, and `SPC_NEBIUS_API_KEY`.
+4. MysteryBox secret whose payload keys are `SPC_DATABASE_URL`, `SPC_S3_ACCESS_KEY_ID`, `SPC_S3_SECRET_ACCESS_KEY`, and the configured provider credential. Use `SPC_PROVIDER_API_KEY` for generic provider configuration or `SPC_NEBIUS_API_KEY` for the backward-compatible Token Factory configuration.
 5. FastAPI service credentials authorized to create Serverless AI jobs.
 
 Apply `alembic upgrade head` once per release, then start FastAPI with `SPC_ANALYSIS_DISPATCHER=nebius_job` and `SPC_DOCUMENT_STORE=s3`.
 
-The dispatcher uses the Nebius Python SDK `JobServiceClient`. It never invokes a CLI subprocess. Job configuration deliberately excludes canonical paper text, PDF bytes, database URLs, object-storage keys, and Token Factory credentials. Only the UUID analysis ID varies per job.
+The dispatcher uses the Nebius Python SDK `JobServiceClient`. It never invokes a CLI subprocess. Job configuration deliberately excludes canonical paper text, PDF bytes, database URLs, object-storage keys, and provider credentials. The selected provider profile, base URL, and model IDs are passed as non-secret configuration; only the UUID analysis ID varies per job.
 
 ## Smoke test
 

@@ -17,7 +17,7 @@ from agno.models.openai.like import OpenAILike
 from pydantic import BaseModel, ConfigDict, Field, ValidationError
 from sqlalchemy.orm import Session
 
-from sloppy_checker.core.config import AppSettings
+from sloppy_checker.core.config import DEFAULT_PROVIDER_BASE_URL, AppSettings
 from sloppy_checker.core.database import AnalysisRow, DocumentRow
 from sloppy_checker.core.ingest import fingerprint_text
 from sloppy_checker.core.methodology import content_allows, load_methodology
@@ -537,7 +537,7 @@ def _model(values: dict, api_key: str, role: str) -> OpenAILike:
     return OpenAILike(
         id=model_id,
         api_key=api_key,
-        base_url=values.get("base_url", "https://api.tokenfactory.nebius.com/v1/"),
+        base_url=values.get("base_url", DEFAULT_PROVIDER_BASE_URL),
         temperature=0,
         max_completion_tokens=6144 if role == "reviewer" else None,
         retries=0 if role == "reviewer" else 2,
@@ -554,13 +554,13 @@ def _provider_for_run(
     if provider_override:
         return provider_override, provider_override.get("api_key"), str(provider_override.get("profile", "byok"))
     runtime = (row.request or {}).get("provider_runtime") or {}
-    profile = runtime.get("profile", "token_factory")
+    profile = runtime.get("profile") or app.provider_profile
     values = {
-        "base_url": "https://api.tokenfactory.nebius.com/v1/",
-        "worker_model": app.token_factory_worker_model,
-        "reviewer_model": app.token_factory_reviewer_model,
+        "base_url": app.provider_base_url,
+        "worker_model": app.configured_provider_worker_model,
+        "reviewer_model": app.configured_provider_reviewer_model,
     }
-    return values, app.token_factory_api_key, profile
+    return values, app.configured_provider_api_key, profile
 
 
 def classify_profile(text: str) -> RubricProfile:

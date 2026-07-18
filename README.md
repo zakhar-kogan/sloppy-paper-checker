@@ -22,7 +22,7 @@ For a representative full-text test, try `10.1016/S0140-6736(17)32802-7`.
 
 ## How it works
 
-The web app parses PDFs with PDF.js. PMC JATS documents are normalized by the FastAPI backend. The resulting text and document structure are stored temporarily while Agno workers and a final reviewer analyze the paper using Nebius Token Factory models. Progress is saved in the database and displayed by polling, so reports survive page reloads.
+The web app parses PDFs with PDF.js. PMC JATS documents are normalized by the FastAPI backend. The resulting text and document structure are stored temporarily while Agno workers and a final reviewer analyze the paper through a configurable OpenAI-compatible API. Nebius Token Factory is the default provider. Progress is saved in the database and displayed by polling, so reports survive page reloads.
 
 Local development uses SQLite, filesystem storage, and analysis running in the FastAPI process. A production deployment can use PostgreSQL, S3-compatible Nebius Object Storage, and one Nebius Serverless Job per analysis. These choices are configured independently.
 
@@ -44,9 +44,9 @@ Requirements:
 
 - Python 3.12–3.14 and [uv](https://docs.astral.sh/uv/)
 - Node.js 22.12 or later and npm
-- A Nebius Token Factory API key for model-backed reviews
+- An API key for an OpenAI-compatible model provider; Nebius Token Factory is the default
 
-Create the environment file and set `SPC_NEBIUS_API_KEY`, `SPC_UNPAYWALL_EMAIL`, and `SPC_NCBI_EMAIL`:
+Create the environment file and set the provider credentials and contact emails:
 
 ```bash
 cp .env.example .env
@@ -74,6 +74,8 @@ npm --prefix web run dev -- --host 127.0.0.1
 ```
 
 Open `http://127.0.0.1:5173`. The API documentation is available at `http://127.0.0.1:8787/docs` in development mode.
+
+Model inference is configured with `SPC_PROVIDER_BASE_URL`, `SPC_PROVIDER_API_KEY`, `SPC_PROVIDER_WORKER_MODEL`, and `SPC_PROVIDER_REVIEWER_MODEL`. The defaults target Nebius Token Factory. Existing `SPC_NEBIUS_API_KEY` and `SPC_TOKEN_FACTORY_*_MODEL` settings remain supported as fallbacks.
 
 ## Static example showcase
 

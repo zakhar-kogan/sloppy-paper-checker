@@ -77,6 +77,28 @@ def test_canonical_document_analysis_completes_inline():
         assert "text" not in row.report
 
 
+def test_analysis_records_the_configured_provider_profile():
+    settings = get_settings().model_copy(update={"provider_profile": "custom-compatible"})
+    app.dependency_overrides[get_settings] = lambda: settings
+    try:
+        with TestClient(app) as client:
+            receipt = client.post("/v1/documents", headers=AUTH, json=document_payload())
+            created = client.post(
+                "/v1/analyses",
+                headers=AUTH,
+                json={"source": {"kind": "document", "value": receipt.json()["id"]}},
+            )
+        assert created.status_code == 202
+        with SessionLocal() as db:
+            row = db.get(AnalysisRow, created.json()["id"])
+            assert row.request["provider_runtime"] == {
+                "mode": "hosted",
+                "profile": "custom-compatible",
+            }
+    finally:
+        app.dependency_overrides.pop(get_settings, None)
+
+
 def resolved_sources() -> ResolvedPaper:
     return ResolvedPaper(
         id=uuid4(),
