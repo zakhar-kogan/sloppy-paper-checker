@@ -1,13 +1,69 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "cases": [
-    {"id": "robust-rct", "profile": "randomized_experiment", "status": "active"},
-    {"id": "corrected-review", "profile": "systematic_review_meta_analysis", "status": "corrected"},
-    {"id": "retracted-observational", "profile": "observational_study", "status": "retracted"},
-    {"id": "qualitative", "profile": "qualitative_research", "status": "active"},
-    {"id": "computational", "profile": "computational_ml_modeling", "status": "active"},
-    {"id": "diagnostic", "profile": "diagnostic_prediction", "status": "active"},
-    {"id": "unsupported-perspective", "profile": "common_core", "status": "active"}
+    {
+      "id": "dflash-2026",
+      "profile": "computational_ml_modeling",
+      "source_format": "pdf",
+      "identifier": "arxiv:2602.06036",
+      "expected_evidence": [
+        {"id": "dataset-provenance", "module_key": "design", "rubric_item": "dataset_provenance", "terms": ["dataset"]},
+        {"id": "benchmark", "module_key": "statistics", "rubric_item": "multiple_benchmarks", "terms": ["benchmark"]}
+      ],
+      "expected_findings": [],
+      "forbidden_assessed_items": ["missing_data", "causal_scope"]
+    },
+    {
+      "id": "nejm-2022",
+      "profile": "randomized_experiment",
+      "source_format": "jats",
+      "doi": "10.1056/NEJMoa2206443",
+      "expected_evidence": [
+        {"id": "randomization", "module_key": "design", "rubric_item": "randomization_process", "terms": ["random"]}
+      ],
+      "expected_findings": [],
+      "forbidden_assessed_items": ["version_status"]
+    },
+    {
+      "id": "jama-2026",
+      "profile": "randomized_experiment",
+      "source_format": "jats",
+      "doi": "10.1001/jamapsychiatry.2026.0132",
+      "expected_evidence": [
+        {"id": "conflicts", "module_key": "disclosures", "rubric_item": "conflict_statement", "terms": ["conflict of interest", "no other disclosures"]}
+      ],
+      "expected_findings": [],
+      "forbidden_assessed_items": ["version_status"]
+    },
+    {
+      "id": "lancet-semaglutide-2024",
+      "profile": "randomized_experiment",
+      "source_format": "jats",
+      "doi": "10.1016/S2213-8587(24)00150-5",
+      "expected_evidence": [
+        {"id": "trial-design", "module_key": "design", "rubric_item": "randomization_process", "terms": ["random"]}
+      ],
+      "expected_findings": [],
+      "forbidden_assessed_items": ["data_code"]
+    },
+    {
+      "id": "cipriani-2018",
+      "profile": "systematic_review_meta_analysis",
+      "source_format": "jats",
+      "doi": "10.1016/S0140-6736(17)32802-7",
+      "expected_evidence": [
+        {"id": "bipolar-trd-exclusion", "module_key": "claims", "rubric_item": "generalization", "terms": ["bipolar", "treatment-resistant"]},
+        {"id": "funding-role", "module_key": "disclosures", "rubric_item": "sponsor_role", "terms": ["funder", "funding source"]},
+        {"id": "conflict-declaration", "module_key": "disclosures", "rubric_item": "conflict_statement", "terms": ["competing interests", "declaration of interests"]},
+        {"id": "affiliations", "module_key": "disclosures", "rubric_item": "affiliations", "terms": ["university", "department"]},
+        {"id": "heterogeneity", "module_key": "statistics", "rubric_item": "heterogeneity", "terms": ["heterogeneity"]},
+        {"id": "response-imputation", "module_key": "statistics", "rubric_item": "response_imputation", "terms": ["imputed", "imputation"]}
+      ],
+      "expected_findings": [
+        {"id": "generalization-concern", "rubric_item": "generalization", "grades": ["minor_concern", "major_concern"]},
+        {"id": "response-imputation-concern", "rubric_item": "response_imputation", "grades": ["minor_concern", "major_concern", "critical_concern"]}
+      ],
+      "forbidden_assessed_items": []
+    }
   ]
 }
-

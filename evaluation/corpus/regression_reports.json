@@ -1,0 +1,54 @@
+{
+  "dflash-2026": {
+    "profile": "computational_ml_modeling",
+    "source_format": "pdf",
+    "evidence_notes": [
+      {"module_key": "design", "rubric_item": "dataset_provenance", "observation": "Dataset provenance is described.", "quotes": ["We construct the training dataset from public traces."], "evidence_state": "observed"},
+      {"module_key": "statistics", "rubric_item": "multiple_benchmarks", "observation": "Multiple benchmark tasks are reported.", "quotes": ["We evaluate on three benchmark suites."], "evidence_state": "observed"}
+    ],
+    "findings": [],
+    "coverage": {"full_review": 0.8}
+  },
+  "nejm-2022": {
+    "profile": "randomized_experiment",
+    "source_format": "jats",
+    "evidence_notes": [
+      {"module_key": "design", "rubric_item": "randomization_process", "observation": "Random assignment is reported.", "quotes": ["Participants were randomly assigned."], "evidence_state": "observed"}
+    ],
+    "findings": [],
+    "execution_warnings": ["PDF · Publisher could not be used; analysis used JATS · PMC instead."]
+  },
+  "jama-2026": {
+    "profile": "randomized_experiment",
+    "source_format": "jats",
+    "evidence_notes": [
+      {"module_key": "disclosures", "rubric_item": "conflict_statement", "observation": "The conflict disclosure is present.", "quotes": ["Conflict of Interest Disclosures: No other disclosures were reported."], "evidence_state": "observed"}
+    ],
+    "findings": []
+  },
+  "lancet-semaglutide-2024": {
+    "profile": "randomized_experiment",
+    "source_format": "jats",
+    "evidence_notes": [
+      {"module_key": "design", "rubric_item": "randomization_process", "observation": "The trial reports random assignment.", "quotes": ["Participants were randomly assigned to treatment groups."], "evidence_state": "observed"},
+      {"module_key": "transparency", "rubric_item": "data_code", "observation": "No extraction note was returned.", "quotes": [], "evidence_state": "ambiguous"}
+    ],
+    "findings": []
+  },
+  "cipriani-2018": {
+    "profile": "systematic_review_meta_analysis",
+    "source_format": "jats",
+    "evidence_notes": [
+      {"module_key": "claims", "rubric_item": "generalization", "observation": "Eligibility excluded bipolar and treatment-resistant depression.", "quotes": ["We excluded bipolar disorder and treatment-resistant depression."], "evidence_state": "observed"},
+      {"module_key": "disclosures", "rubric_item": "sponsor_role", "observation": "The funding source had no role.", "quotes": ["The funder had no role in the study."], "evidence_state": "observed"},
+      {"module_key": "disclosures", "rubric_item": "conflict_statement", "observation": "A declaration of interests is present.", "quotes": ["The remaining authors declare no competing interests."], "evidence_state": "observed"},
+      {"module_key": "disclosures", "rubric_item": "affiliations", "observation": "Author affiliations are present.", "quotes": ["Department of Psychiatry, University of Oxford."], "evidence_state": "observed"},
+      {"module_key": "statistics", "rubric_item": "heterogeneity", "observation": "A common heterogeneity assumption is used.", "quotes": ["We assumed a common heterogeneity parameter."], "evidence_state": "observed"},
+      {"module_key": "statistics", "rubric_item": "response_imputation", "observation": "Response outcomes were imputed.", "quotes": ["Missing response outcomes were imputed."], "evidence_state": "observed"}
+    ],
+    "findings": [
+      {"rubric_item": "generalization", "grade": "major_concern", "paper_spans": [{"quote": "We excluded bipolar disorder and treatment-resistant depression."}]},
+      {"rubric_item": "response_imputation", "grade": "major_concern", "paper_spans": [{"quote": "Missing response outcomes were imputed."}]}
+    ]
+  }
+}
