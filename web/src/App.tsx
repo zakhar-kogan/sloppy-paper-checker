@@ -361,8 +361,20 @@ export default function App() {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const canAnalyze = useMemo(() => {
-    return mode === "upload" ? Boolean(file) : Boolean(query.trim());
-  }, [file, mode, query]);
+    if (mode === "upload") return Boolean(file);
+    if (!query.trim()) return false;
+    if (!resolution || resolvedQuery !== query.trim()) return true;
+    const identity = resolution.identity;
+    return Boolean(
+      resolution.abstract
+      || resolution.candidates?.length
+      || identity.doi
+      || identity.arxiv_id
+      || identity.pmid
+      || identity.pmcid
+      || identity.title,
+    );
+  }, [file, mode, query, resolution, resolvedQuery]);
 
   const reset = () => {
     setPhase("input"); setResolution(null); setResolvedQuery(""); setCandidateId(""); setStatus(null); setReport(null); setError(""); setLocalStage(""); setFile(null); setQuery(""); setCancelling(false);

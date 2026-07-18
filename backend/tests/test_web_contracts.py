@@ -129,7 +129,7 @@ async def test_bounded_pdf_checks_magic_and_size(monkeypatch):
 
 @pytest.mark.asyncio
 @respx.mock
-async def test_doi_resolution_ranks_pdf_versions_before_jats():
+async def test_doi_resolution_prefers_published_jats_to_submitted_pdf():
     resolver = resolver_module.PaperResolver(AppSettings())
     doi = "10.5555/resolution.1"
     respx.get(f"https://api.crossref.org/works/{doi}").mock(
@@ -156,8 +156,8 @@ async def test_doi_resolution_ranks_pdf_versions_before_jats():
         await resolver.close()
     assert [candidate.format for candidate in resolved.candidates] == [
         SourceFormat.PDF,
-        SourceFormat.PDF,
         SourceFormat.JATS,
+        SourceFormat.PDF,
     ]
     assert resolved.identity.versions == ["publishedVersion", "submittedVersion"]
 
@@ -186,8 +186,8 @@ async def test_lancet_fixture_preserves_version_license_and_provider_provenance(
     assert resolved.identity.journal == "The Lancet"
     assert [candidate.version for candidate in resolved.candidates] == [
         "publishedVersion",
-        "submittedVersion",
         "publishedVersion",
+        "submittedVersion",
     ]
     assert resolved.candidates[0].license == "cc-by"
     assert [record.provider for record in resolved.provenance] == [
@@ -226,6 +226,73 @@ async def test_lancet_pii_url_resolves_without_fetching_publisher_page():
     assert resolved.identity.doi == doi
     assert resolved.identity.title.startswith("Comparative efficacy")
     assert publisher.called is False
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize(
+    "url",
+    [
+        "https://www.thelancet.com/journals/landia/article/PIIS2213-8587(24)00150-5/abstract?rss=yes",
+        "https://www.thelancet.com/journals/landia/article/S2213-8587(24)00150-5/fulltext",
+    ],
+)
+async def test_nested_lancet_pii_variants_resolve_through_doi(monkeypatch, url):
+    resolver = resolver_module.PaperResolver(AppSettings())
+    requested: list[str] = []
+
+    async def resolve_doi(doi: str):
+        requested.append(doi)
+        return resolver._finish(PaperIdentity(doi=doi), None, [], [], [])
+
+    monkeypatch.setattr(resolver, "_resolve_doi", resolve_doi)
+    try:
+        resolved = await resolver.resolve(url)
+    finally:
+        await resolver.close()
+    assert requested == ["10.1016/s2213-8587(24)00150-5"]
+    assert resolved.identity.doi == requested[0]
+
+
+@pytest.mark.asyncio
+async def test_publisher_numeric_path_cannot_become_an_arxiv_identifier(monkeypatch):
+    resolver = resolver_module.PaperResolver(AppSettings())
+    seen: list[str] = []
+
+    async def resolve_url(url: str):
+        seen.append(url)
+        raise ValueError("Enter the paper's DOI, PMID, or PMCID instead.")
+
+    monkeypatch.setattr(resolver, "_resolve_url", resolve_url)
+    url = "https://jamanetwork.com/journals/jamapsychiatry/fullarticle/2846478"
+    try:
+        with pytest.raises(ValueError, match="DOI, PMID, or PMCID"):
+            await resolver.resolve(url)
+    finally:
+        await resolver.close()
+    assert seen == [url]
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize(
+    ("value", "expected"),
+    [
+        ("2602.06036", "2602.06036"),
+        ("arXiv:2602.06036v2", "2602.06036v2"),
+        ("https://arxiv.org/abs/2602.06036", "2602.06036"),
+    ],
+)
+async def test_supported_arxiv_forms_remain_distinct(monkeypatch, value, expected):
+    resolver = resolver_module.PaperResolver(AppSettings())
+
+    async def resolve_arxiv(identifier: str):
+        return resolver._finish(PaperIdentity(arxiv_id=identifier), None, [], [], [])
+
+    monkeypatch.setattr(resolver, "_resolve_arxiv", resolve_arxiv)
+    try:
+        resolved = await resolver.resolve(value)
+    finally:
+        await resolver.close()
+    assert resolved.identity.arxiv_id == expected
 
 
 @pytest.mark.asyncio
@@ -311,7 +378,9 @@ async def test_namespaced_pmc_jats_produces_stable_paragraph_anchors(monkeypatch
       <article-meta><article-id pub-id-type="doi">10.1234/TEST.1</article-id><title-group><article-title>Test article</article-title></title-group>
       <abstract><p>Structured abstract text.</p></abstract><contrib-group><aff id="A1">Example University</aff></contrib-group>
       <funding-group><award-group><funding-source>Example Funder</funding-source></award-group></funding-group>
-      <author-notes><fn fn-type="conflict"><p>No competing interests.</p></fn></author-notes></article-meta></front>
+      <author-notes><fn fn-type="conflict"><p>No competing interests.</p></fn>
+      <p content-type="COI-statement"><bold>Conflict of Interest Disclosures:</bold> No other disclosures were reported.</p>
+      </author-notes></article-meta></front>
       <body><sec><title>Methods</title><p>Participants were randomly assigned.</p>
       <fig><label>Figure 1</label><caption><p>Participant flow.</p></caption></fig></sec></body>
       <back><ack><p>The sponsor had no role in the study.</p></ack>
@@ -333,11 +402,12 @@ async def test_namespaced_pmc_jats_produces_stable_paragraph_anchors(monkeypatch
     assert "[Affiliations]\nExample University" in document.text
     assert "[Funding]\nExample Funder" in document.text
     assert "[Author notes and conflicts]\nNo competing interests." in document.text
+    assert "Conflict of Interest Disclosures: No other disclosures were reported." in document.text
     assert "[Acknowledgments]\nThe sponsor had no role in the study." in document.text
     assert "[Figure and table captions]\nFigure 1: Participant flow." in document.text
     assert "[Supplementary material]\nSupplemental methods." in document.text
     assert document.extraction_warnings == [
         "Supplementary files were linked by the article, but their file contents were not parsed."
     ]
-    assert document.parser_version == "1.1"
+    assert document.parser_version == "1.2"
     assert document.references[0].doi == "10.1234/test.1"

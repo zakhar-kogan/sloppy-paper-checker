@@ -26,10 +26,31 @@ from sloppy_checker.core.schemas import (
 )
 from sloppy_checker.core.security import validate_public_url
 
-ARXIV_RE = re.compile(r"(?:arxiv\.org/(?:abs|pdf)/|arxiv:\s*)?((?:[a-z-]+/)?\d{4}\.\d{4,5}|[a-z-]+/\d{7})(?:v\d+)?", re.I)
+ARXIV_ID_RE = re.compile(
+    r"(?:arxiv:\s*)?((?:\d{4}\.\d{4,5}|[a-z-]+(?:\.[a-z-]+)?/\d{7})(?:v\d+)?)",
+    re.I,
+)
 PMCID_RE = re.compile(r"\bPMC(\d+)\b", re.I)
 PMID_URL_RE = re.compile(r"(?:pubmed\.ncbi\.nlm\.nih\.gov/)?(\d{6,9})(?:/|\b)")
-ELSEVIER_PII_RE = re.compile(r"\b(S\d{4}-\d{4}\(\d{2}\)\d{5}-\d)\b", re.I)
+ELSEVIER_PII_RE = re.compile(r"(?:PII)?(S\d{4}-\d{4}\(\d{2}\)\d{5}-\d)", re.I)
+
+
+def _arxiv_identifier(value: str) -> str | None:
+    bare = ARXIV_ID_RE.fullmatch(value.strip())
+    if bare:
+        return bare.group(1)
+    if not value.startswith(("http://", "https://")):
+        return None
+    parsed = urlparse(value)
+    if (parsed.hostname or "").casefold() not in {"arxiv.org", "www.arxiv.org"}:
+        return None
+    path = parsed.path.strip("/")
+    for prefix in ("abs/", "pdf/"):
+        if path.casefold().startswith(prefix):
+            identifier = path[len(prefix) :].removesuffix(".pdf")
+            match = ARXIV_ID_RE.fullmatch(identifier)
+            return match.group(1) if match else None
+    return None
 
 
 def _strip_markup(value: str | None) -> str | None:
@@ -86,7 +107,7 @@ class PaperResolver:
             doi = normalize_doi(value)
         except ValueError:
             doi = None
-        arxiv = ARXIV_RE.search(value)
+        arxiv = _arxiv_identifier(value)
         pmcid = PMCID_RE.search(value)
         pmid = PMID_URL_RE.search(value) if not pmcid else None
         if doi:
@@ -96,7 +117,7 @@ class PaperResolver:
         if pmid and (value.isdigit() or "pubmed" in value.lower()):
             return await self._resolve_ncbi(pmid.group(1))
         if arxiv:
-            return await self._resolve_arxiv(arxiv.group(1))
+            return await self._resolve_arxiv(arxiv)
         if value.startswith(("http://", "https://")):
             return await self._resolve_url(value)
         raise ValueError("Enter a DOI, arXiv ID, PMID, PMCID, or absolute scholarly URL")
@@ -163,7 +184,7 @@ class PaperResolver:
         if record.get("pmcid"):
             identity.pmcid = record["pmcid"]
             identity.pmid = str(record.get("pmid") or "") or None
-            candidates.append(_candidate(SourceFormat.JATS, "PMC", 40, self._pmc_jats_url(record["pmcid"]), "publishedVersion"))
+            candidates.append(_candidate(SourceFormat.JATS, "PMC", 25, self._pmc_jats_url(record["pmcid"]), "publishedVersion"))
         return self._finish(identity, abstract, candidates, provenance, limitations)
 
     async def _resolve_arxiv(self, arxiv_id: str) -> ResolvedPaper:
@@ -220,7 +241,7 @@ class PaperResolver:
                 abstract = " ".join(" ".join(node.itertext()) for node in root.findall(".//AbstractText")) or None
             except (httpx.HTTPError, ET.ParseError):
                 limitations.append("PubMed metadata unavailable.")
-        candidates = [_candidate(SourceFormat.JATS, "PMC", 40, self._pmc_jats_url(pmcid), "publishedVersion")] if pmcid else []
+        candidates = [_candidate(SourceFormat.JATS, "PMC", 25, self._pmc_jats_url(pmcid), "publishedVersion")] if pmcid else []
         return self._finish(identity, abstract, candidates, [ProvenanceRecord(provider="NCBI", available=not id_error, detail=id_error, accessed_at=now)], limitations)
 
     async def _resolve_url(self, url: str) -> ResolvedPaper:
@@ -255,9 +276,18 @@ class PaperResolver:
             identity = PaperIdentity(title=meta("citation_title") or meta("og:title"))
             candidates = [_candidate(SourceFormat.PDF, parsed.hostname or "Publisher", 40, urljoin(url, pdf_url))] if pdf_url else []
             abstract = meta("citation_abstract") or meta("description") or meta("og:description")
-            return self._finish(identity, abstract, candidates, [ProvenanceRecord(provider=parsed.hostname or "Publisher", accessed_at=datetime.now(UTC))], [] if candidates or abstract else ["No canonical identifier, abstract, or PDF metadata was found on this page."])
-        except (httpx.HTTPError, ValueError) as exc:
-            return self._finish(PaperIdentity(), None, [], [ProvenanceRecord(provider=parsed.hostname or "Publisher", available=False, detail=type(exc).__name__, accessed_at=datetime.now(UTC))], ["Publisher page could not be resolved."])
+            if not any(
+                [identity.title, identity.authors, identity.journal, identity.doi, abstract, candidates]
+            ):
+                raise ValueError(
+                    "The publisher page did not expose a canonical paper record. "
+                    "Enter its DOI, PMID, or PMCID instead."
+                )
+            return self._finish(identity, abstract, candidates, [ProvenanceRecord(provider=parsed.hostname or "Publisher", accessed_at=datetime.now(UTC))], [])
+        except httpx.HTTPError as exc:
+            raise ValueError(
+                "The publisher page could not be accessed. Enter the paper's DOI, PMID, or PMCID instead."
+            ) from exc
 
 
 async def fetch_bounded_pdf(url: str, settings: AppSettings) -> bytes:
@@ -375,7 +405,14 @@ async def fetch_jats_document(candidate: ContentCandidate, identity: PaperIdenti
         front_funding = [node_text(node) for node in article_meta.findall(".//funding-group")]
         append_section("Funding", front_funding, "front-funding")
 
-        author_notes = [node_text(node) for node in article_meta.findall(".//author-notes//fn")]
+        author_notes = list(
+            dict.fromkeys(
+                node_text(child)
+                for notes in article_meta.findall(".//author-notes")
+                for child in notes
+                if child.tag in {"fn", "p"} and node_text(child)
+            )
+        )
         append_section("Author notes and conflicts", author_notes, "front-author-notes")
 
         custom_disclosures: list[str] = []
@@ -469,7 +506,7 @@ async def fetch_jats_document(candidate: ContentCandidate, identity: PaperIdenti
         source_format=SourceFormat.JATS,
         sha256=digest,
         parser_name="pmc-jats",
-        parser_version="1.1",
+        parser_version="1.2",
         text=text,
         spans=spans,
         sections=sections,

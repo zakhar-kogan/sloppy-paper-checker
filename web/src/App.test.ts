@@ -56,7 +56,6 @@ describe("single-action paper intake", () => {
     expect(fallbackWarnings(resolution, ["published-pdf", "accepted-pdf", "published-pdf"], resolution.candidates![2]))
       .toEqual([
         "PDF · Unpaywall · publishedVersion could not be used; analysis used JATS · PMC · publishedVersion instead.",
-        "PDF · Unpaywall · publishedVersion could not be used; analysis used JATS · PMC · publishedVersion instead.",
       ]);
   });
 
@@ -64,5 +63,16 @@ describe("single-action paper intake", () => {
     expect(fallbackWarnings({ ...resolution, abstract: null }, ["published-pdf"])[0]).toContain(
       "analysis used metadata only instead",
     );
+  });
+
+  it("collapses fallback failures that have the same public source label", () => {
+    const duplicate = {
+      ...resolution.candidates![0],
+      id: "published-pdf-copy",
+      url: "https://mirror.example/published.pdf",
+    };
+    const withDuplicate = { ...resolution, candidates: [...resolution.candidates!, duplicate] };
+    expect(fallbackWarnings(withDuplicate, ["published-pdf", duplicate.id], resolution.candidates![2]))
+      .toHaveLength(1);
   });
 });

@@ -49,9 +49,13 @@ export function fallbackWarnings(
     : resolution.abstract
       ? "abstract only"
       : "metadata only";
+  const failedLabels = new Set<string>();
   return [...new Set(failedCandidateIds)].flatMap((candidateId) => {
     const failed = byId.get(candidateId);
     if (!failed || failed.id === usedCandidate?.id) return [];
-    return [`${sourceLabel(failed)} could not be used; analysis used ${usedLabel} instead.`];
+    const failedLabel = sourceLabel(failed);
+    if (failedLabel === usedLabel || failedLabels.has(failedLabel)) return [];
+    failedLabels.add(failedLabel);
+    return [`${failedLabel} could not be used; analysis used ${usedLabel} instead.`];
   });
 }
