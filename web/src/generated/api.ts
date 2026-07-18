@@ -177,6 +177,12 @@ export interface components {
             observation: string;
             /** Quotes */
             quotes?: string[];
+            /**
+             * Evidence State
+             * @default ambiguous
+             * @enum {string}
+             */
+            evidence_state: "observed" | "not_found" | "ambiguous";
         };
         /** AnalysisProgressEvent */
         AnalysisProgressEvent: {
@@ -221,16 +227,16 @@ export interface components {
             id: string;
             /**
              * Schema Version
-             * @default 1.2
+             * @default 1.3
              * @enum {string}
              */
-            schema_version: "1.0" | "1.1" | "1.2";
+            schema_version: "1.0" | "1.1" | "1.2" | "1.3";
             /**
              * Scoring Version
-             * @default 1.2
+             * @default 1.3
              * @enum {string}
              */
-            scoring_version: "1.0" | "1.1" | "1.2";
+            scoring_version: "1.0" | "1.1" | "1.2" | "1.3";
             identity: components["schemas"]["PaperIdentity"];
             profile: components["schemas"]["RubricProfile"];
             /** Language */
@@ -430,6 +436,11 @@ export interface components {
              * @default 0
              */
             quote_grounding_rate: number;
+            /**
+             * Source Quality
+             * @default 0
+             */
+            source_quality: number;
         };
         /** ContentCandidate */
         ContentCandidate: {

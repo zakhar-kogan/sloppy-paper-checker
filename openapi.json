@@ -486,6 +486,16 @@
             "type": "array",
             "maxItems": 2,
             "title": "Quotes"
+          },
+          "evidence_state": {
+            "type": "string",
+            "enum": [
+              "observed",
+              "not_found",
+              "ambiguous"
+            ],
+            "title": "Evidence State",
+            "default": "ambiguous"
           }
         },
         "additionalProperties": false,
@@ -593,20 +603,22 @@
             "enum": [
               "1.0",
               "1.1",
-              "1.2"
+              "1.2",
+              "1.3"
             ],
             "title": "Schema Version",
-            "default": "1.2"
+            "default": "1.3"
           },
           "scoring_version": {
             "type": "string",
             "enum": [
               "1.0",
               "1.1",
-              "1.2"
+              "1.2",
+              "1.3"
             ],
             "title": "Scoring Version",
-            "default": "1.2"
+            "default": "1.3"
           },
           "identity": {
             "$ref": "#/components/schemas/PaperIdentity"
@@ -1007,6 +1019,13 @@
             "maximum": 1.0,
             "minimum": 0.0,
             "title": "Quote Grounding Rate",
+            "default": 0
+          },
+          "source_quality": {
+            "type": "number",
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Source Quality",
             "default": 0
           }
         },
