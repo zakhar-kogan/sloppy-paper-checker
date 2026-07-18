@@ -20,6 +20,7 @@ from sloppy_checker.workflows import analysis as analysis_module
 from sloppy_checker.workflows.analysis import (
     _analysis_notes,
     _await_active_reviewer,
+    _bounded_summary_text,
     _evidence_registry,
     _parse_final_assessment,
     _parse_worker_evidence,
@@ -66,6 +67,17 @@ def test_baseline_is_conservative_and_traceable():
     assert len(findings) == 24
     assert all(f.severity.value == "info" for f in findings)
     assert all(not f.paper_spans and f.grade.value == "not_assessed" for f in findings)
+    assert all(not finding.title.lower().endswith("not assessed") for finding in findings)
+
+
+def test_summary_text_truncates_at_a_word_boundary():
+    text = "A grounded methodological explanation " * 20
+    shortened = _bounded_summary_text(text)
+    assert len(shortened) <= 281
+    assert shortened.endswith("…")
+    assert text.startswith(shortened[:-1])
+    assert shortened[-2].isalnum()
+    assert _bounded_summary_text("Already concise.") == "Already concise."
 
 
 def test_worker_output_requires_the_exact_schema_without_grading():
@@ -294,6 +306,7 @@ def test_final_assessment_is_the_only_source_of_grades_and_checks_quotes():
     )
     by_item = {finding.rubric_item: finding for finding in output.findings}
     assert by_item["study_question_design"].grade == RubricGrade.NO_CONCERN
+    assert by_item["study_question_design"].title == "Study Question Design"
     assert by_item["sampling_eligibility"].grade == RubricGrade.NOT_ASSESSED
     assert output.assessed_attempts == 2
     assert output.grounded_assessed == 1

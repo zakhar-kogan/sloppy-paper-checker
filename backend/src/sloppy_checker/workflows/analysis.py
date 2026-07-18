@@ -120,6 +120,14 @@ class AnalysisCancelled(Exception):
     """Raised when a durable cancellation request interrupts an active model call."""
 
 
+def _bounded_summary_text(value: str, limit: int = 280) -> str:
+    cleaned = " ".join(value.split())
+    if len(cleaned) <= limit:
+        return cleaned
+    shortened = cleaned[: limit + 1].rsplit(" ", 1)[0].rstrip(".,;:")
+    return f"{shortened}…"
+
+
 def _derived_summary(findings: list[Finding], assessed: int, expected: int) -> list[str]:
     severity_order = {
         FindingSeverity.CRITICAL: 0,
@@ -142,7 +150,8 @@ def _derived_summary(findings: list[Finding], assessed: int, expected: int) -> l
         key=lambda finding: (severity_order[finding.severity], finding.category, finding.rubric_item),
     )
     summary = [
-        f"{finding.title}. {finding.explanation.strip()[:280]}" for finding in concerns[:4]
+        f"{finding.title}. {_bounded_summary_text(finding.explanation)}"
+        for finding in concerns[:4]
     ]
     summary.append(f"The final review assessed {assessed} of {expected} methodology items.")
     if not concerns:
@@ -480,7 +489,7 @@ def _parse_final_assessment(
                 ).hexdigest()[:12],
                 category=category,
                 rubric_item=rubric_item,
-                title=f"{rubric_item.replace('_', ' ').title()}: {grade.value.replace('_', ' ')}",
+                title=rubric_item.replace("_", " ").title(),
                 explanation=decision.explanation,
                 severity=severity,
                 grade=grade,
@@ -613,7 +622,7 @@ def baseline_findings(
                     id=hashlib.sha1(f"{module.key}:{item}".encode(), usedforsecurity=False).hexdigest()[:12],
                     category=module.key,
                     rubric_item=item,
-                    title=f"{item.replace('_', ' ').title()}: not assessed",
+                    title=item.replace("_", " ").title(),
                     explanation=f"{reason} This methodology item was not assessed.",
                     severity=FindingSeverity.INFO,
                     grade=RubricGrade.NOT_ASSESSED,
