@@ -21,6 +21,7 @@ from sloppy_checker.core.config import AppSettings
 from sloppy_checker.core.database import AnalysisRow, DocumentRow
 from sloppy_checker.core.ingest import fingerprint_text
 from sloppy_checker.core.methodology import content_allows, load_methodology
+from sloppy_checker.core.observability import AnalysisTelemetry
 from sloppy_checker.core.rubrics import rubric_items, rubric_prompt
 from sloppy_checker.core.schemas import (
     AnalysisEvidenceNote,
@@ -653,6 +654,26 @@ def _safe_module_failure(exc: Exception) -> str:
     return f"{type(exc).__name__}: evidence extraction did not complete"
 
 
+async def _model_request(
+    values: dict,
+    awaitable,
+    *,
+    role: str,
+    attempt: str,
+    module: str | None = None,
+):
+    telemetry: AnalysisTelemetry | None = values.get("_telemetry")
+    if telemetry is None:
+        return await awaitable
+    return await telemetry.model_request(
+        awaitable,
+        role=role,
+        model_id=str(values.get(f"{role}_model") or values.get("worker_model") or ""),
+        attempt=attempt,
+        module=module,
+    )
+
+
 async def llm_evidence(
     document: PaperDocument | str,
     profile: RubricProfile,
@@ -704,7 +725,13 @@ async def llm_evidence(
             + format_routed_chunks(routed)[: routing.max_module_chars]
         )
         try:
-            response = await agent.arun(prompt)
+            response = await _model_request(
+                values,
+                agent.arun(prompt),
+                role="worker",
+                attempt="initial",
+                module=module.key,
+            )
             evidence = _parse_worker_evidence(
                 response.content,
                 module.key,
@@ -816,7 +843,9 @@ async def adjudicate_assessment(
     usage: dict[str, int] = {}
     repaired = False
     try:
-        response = await agent.arun(prompt)
+        response = await _model_request(
+            values, agent.arun(prompt), role="reviewer", attempt="initial"
+        )
         if on_validate:
             on_validate()
         for name, value in _usage(response).items():
@@ -840,8 +869,13 @@ async def adjudicate_assessment(
                     "perform new analysis, add missing methodology items, or invent evidence."
                 ],
             )
-            repair_response = await repair_agent.arun(
-                "<ORIGINAL_RESPONSE>\n" + raw_output + "\n</ORIGINAL_RESPONSE>"
+            repair_response = await _model_request(
+                values,
+                repair_agent.arun(
+                    "<ORIGINAL_RESPONSE>\n" + raw_output + "\n</ORIGINAL_RESPONSE>"
+                ),
+                role="reviewer",
+                attempt="schema_repair",
             )
             for name, value in _usage(repair_response).items():
                 usage[name] = usage.get(name, 0) + value
@@ -948,6 +982,7 @@ async def execute_analysis(
     row = db.get(AnalysisRow, analysis_id)
     if not row:
         return
+    telemetry = AnalysisTelemetry.start(app, analysis_id)
     provider_http_client: httpx.AsyncClient | None = None
     try:
         row.state = "running"
@@ -972,6 +1007,15 @@ async def execute_analysis(
         profile = classify_profile(text)
         db.commit()
         values, api_key, provider_profile = _provider_for_run(row, app, provider_override)
+        values["_telemetry"] = telemetry
+        telemetry.annotate(
+            **{
+                "analysis.profile": profile.value,
+                "analysis.content_level": content_level.value,
+                "analysis.source_format": source_format.value,
+                "provider.profile": provider_profile,
+            }
+        )
         if api_key:
             async def validate_provider_request(request: httpx.Request) -> None:
                 validate_public_url(str(request.url))
@@ -1321,6 +1365,19 @@ async def execute_analysis(
         )
         row.report = report.model_dump(mode="json")
         row.state = "completed"
+        telemetry.annotate(
+            **{
+                "analysis.methodology_version": bundle.definition.version,
+                "analysis.methodology_hash": bundle.bundle_hash,
+                "analysis.reviewer_repaired": repaired_output,
+                "analysis.assessed_items": assessed_item_count,
+                "analysis.expected_items": sum(
+                    item.expected_items for item in score.module_statuses
+                ),
+                "analysis.grounding_rate": quote_grounding_rate,
+                "analysis.coverage": score.weighted_coverage,
+            }
+        )
         _event(row, "Complete", 100, state="completed")
         db.commit()
         document_row = db.get(DocumentRow, row.source.get("value"))
@@ -1337,9 +1394,11 @@ async def execute_analysis(
         db.commit()
     except Exception as exc:
         row.state = "failed"
+        telemetry.finish("failed", exc)
         row.error = str(exc)[:1000]
         _event(row, "Analysis failed", row.progress, state="failed", detail=row.error)
         db.commit()
     finally:
         if provider_http_client:
             await provider_http_client.aclose()
+        telemetry.finish(row.state)

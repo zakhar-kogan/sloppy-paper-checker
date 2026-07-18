@@ -44,6 +44,10 @@ class AppSettings(BaseSettings):
     guest_cookie_name: str = "spc_guest"
     hosted_runs_per_session: int | None = Field(default=None, ge=1, le=100)
     concurrent_runs_per_session: int = Field(default=1, ge=1, le=10)
+    observability_enabled: bool = False
+    otel_exporter_otlp_endpoint: str | None = None
+    otel_exporter_otlp_headers: str | None = None
+    otel_service_name: str = "sloppy-paper-checker"
 
     @field_validator("document_store")
     @classmethod
@@ -92,6 +96,10 @@ class AppSettings(BaseSettings):
         return self._secret_value(self.nebius_api_key, self.nebius_api_key_file)
 
     def validate_adapters(self) -> None:
+        if self.observability_enabled and not self.otel_exporter_otlp_endpoint:
+            raise ValueError(
+                "SPC_OBSERVABILITY_ENABLED requires SPC_OTEL_EXPORTER_OTLP_ENDPOINT"
+            )
         if self.document_store == "s3" and not all(
             (self.s3_endpoint_url, self.s3_bucket)
         ):

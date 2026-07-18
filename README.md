@@ -59,6 +59,12 @@ SPC_NEBIUS_JOB_SECRET_ID=mbsec-...
 
 Run `alembic upgrade head` before starting FastAPI. The MysteryBox secret must expose `SPC_DATABASE_URL`, `SPC_S3_ACCESS_KEY_ID`, `SPC_S3_SECRET_ACCESS_KEY`, and `SPC_NEBIUS_API_KEY`. The job receives those values as secret references; its only per-analysis plaintext input is `SPC_ANALYSIS_ID`.
 
+Optional analysis telemetry uses OTLP/HTTP and is disabled by default. Set
+`SPC_OBSERVABILITY_ENABLED=true`, `SPC_OTEL_EXPORTER_OTLP_ENDPOINT`, and optionally
+`SPC_OTEL_EXPORTER_OTLP_HEADERS`. Traces contain stage/model identifiers, timings,
+token counts, coverage, and outcomes only; paper text, prompts, quotes, raw model
+responses, credentials, and source URLs are never attached.
+
 See [Nebius deployment](docs/nebius.md) and [architecture](docs/architecture.md).
 
 ## Verification
