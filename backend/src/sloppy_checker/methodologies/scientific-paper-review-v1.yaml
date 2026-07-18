@@ -45,8 +45,8 @@ modules:
     label: "Claim–evidence alignment"
     weight: 20
     minimum_content_level: abstract
-    required_sections: [abstract, results, discussion, conclusion]
-    keywords: [conclude, demonstrate, evidence, association, cause, significant, generalize]
+    required_sections: [abstract, methods, results, discussion, conclusion]
+    keywords: [conclude, demonstrate, evidence, association, cause, significant, generalize, eligibility, excluded, treatment-resistant, bipolar]
     items: [claim_strength, results_support, causal_language, generalization, limitations_alignment]
   - key: transparency
     label: "Transparency & reporting"
