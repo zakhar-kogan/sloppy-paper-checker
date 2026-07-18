@@ -1,0 +1,1499 @@
+{
+  "assessed_item_count": 15,
+  "audit_trail": [
+    {
+      "at": "2026-07-18T21:18:39.613844+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": null,
+      "kind": "stage",
+      "label": "Ingesting and fingerprinting",
+      "notes": [],
+      "progress": 8,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T21:18:39.615911+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": null,
+      "kind": "stage",
+      "label": "Classifying paper and routing evidence",
+      "notes": [],
+      "progress": 22,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T21:18:39.631517+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": null,
+      "kind": "stage",
+      "label": "Gathering methodology evidence",
+      "notes": [],
+      "progress": 35,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T21:18:39.632322+00:00",
+      "detail": "Waiting to start.",
+      "evidence_count": 0,
+      "key": "design",
+      "kind": "module",
+      "label": "Study design & risk of bias",
+      "notes": [],
+      "progress": 35,
+      "state": "pending"
+    },
+    {
+      "at": "2026-07-18T21:18:39.632335+00:00",
+      "detail": "Waiting to start.",
+      "evidence_count": 0,
+      "key": "statistics",
+      "kind": "module",
+      "label": "Statistical & computational validity",
+      "notes": [],
+      "progress": 35,
+      "state": "pending"
+    },
+    {
+      "at": "2026-07-18T21:18:39.632339+00:00",
+      "detail": "Waiting to start.",
+      "evidence_count": 0,
+      "key": "claims",
+      "kind": "module",
+      "label": "Claim\u2013evidence alignment",
+      "notes": [],
+      "progress": 35,
+      "state": "pending"
+    },
+    {
+      "at": "2026-07-18T21:18:39.632342+00:00",
+      "detail": "Waiting to start.",
+      "evidence_count": 0,
+      "key": "transparency",
+      "kind": "module",
+      "label": "Transparency & reporting",
+      "notes": [],
+      "progress": 35,
+      "state": "pending"
+    },
+    {
+      "at": "2026-07-18T21:18:39.632344+00:00",
+      "detail": "Waiting to start.",
+      "evidence_count": 0,
+      "key": "disclosures",
+      "kind": "module",
+      "label": "Disclosures & affiliations",
+      "notes": [],
+      "progress": 35,
+      "state": "pending"
+    },
+    {
+      "at": "2026-07-18T21:18:39.633166+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": "design",
+      "kind": "module",
+      "label": "Study design & risk of bias",
+      "notes": [],
+      "progress": 35,
+      "state": "running"
+    },
+    {
+      "at": "2026-07-18T21:18:39.635337+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": "statistics",
+      "kind": "module",
+      "label": "Statistical & computational validity",
+      "notes": [],
+      "progress": 35,
+      "state": "running"
+    },
+    {
+      "at": "2026-07-18T21:18:39.637255+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": "claims",
+      "kind": "module",
+      "label": "Claim\u2013evidence alignment",
+      "notes": [],
+      "progress": 35,
+      "state": "running"
+    },
+    {
+      "at": "2026-07-18T21:18:39.639067+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": "transparency",
+      "kind": "module",
+      "label": "Transparency & reporting",
+      "notes": [],
+      "progress": 35,
+      "state": "running"
+    },
+    {
+      "at": "2026-07-18T21:18:39.640755+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": "disclosures",
+      "kind": "module",
+      "label": "Disclosures & affiliations",
+      "notes": [],
+      "progress": 35,
+      "state": "running"
+    },
+    {
+      "at": "2026-07-18T21:18:45.917577+00:00",
+      "detail": null,
+      "evidence_count": 4,
+      "key": "disclosures",
+      "kind": "module",
+      "label": "Disclosures & affiliations",
+      "notes": [
+        {
+          "evidence_state": "observed",
+          "module_key": "disclosures",
+          "observation": "The study received financial support from two sources: a Department of Medicine Small Grant and the Denver Health Foundation.",
+          "quotes": [
+            "This study was funded for $25,000 through Department of Medicine Small Grant and $25,000 through Denver Health Foundation."
+          ],
+          "rubric_item": "funding_statement"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "disclosures",
+          "observation": "The authors declared no potential conflicts of interest related to the research, authorship, or publication of the article.",
+          "quotes": [
+            "Declaration of Conflicting Interests: The author(s) declared no potential conflicts of interest with respect to the research, authorship, and/or publication of this article."
+          ],
+          "rubric_item": "conflict_statement"
+        },
+        {
+          "evidence_state": "ambiguous",
+          "module_key": "disclosures",
+          "observation": "The funding sources are identified as the Department of Medicine Small Grant and the Denver Health Foundation, but the specific role of the sponsors in the study design, data collection, analysis, or publication is not described.",
+          "quotes": [],
+          "rubric_item": "sponsor_role"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "disclosures",
+          "observation": "The authors are affiliated with multiple institutions, including Denver Health, the University of Colorado School of Medicine, and the Colorado School of Public Health.",
+          "quotes": [
+            "1 Division of Hospital Medicine, Denver Health, Denver, CO, USA",
+            "2 Division of Hospital Medicine, University of Colorado School of Medicine, Aurora, CO, USA"
+          ],
+          "rubric_item": "affiliations"
+        }
+      ],
+      "progress": 42,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T21:18:47.232179+00:00",
+      "detail": null,
+      "evidence_count": 5,
+      "key": "statistics",
+      "kind": "module",
+      "label": "Statistical & computational validity",
+      "notes": [
+        {
+          "evidence_state": "observed",
+          "module_key": "statistics",
+          "observation": "The study used inductive thematic analysis at the semantic level on transcribed interviews and focus groups, with coding conducted by three team members using Atlas.ti software. Disagreements were resolved through discussion until consensus was reached.",
+          "quotes": [
+            "Disagreements in coding were discussed until a consensus was reached.",
+            "A thematic analysis was conducted using an inductive method at the semantic level ( 25 )."
+          ],
+          "rubric_item": "analysis_specification"
+        },
+        {
+          "evidence_state": "not_found",
+          "module_key": "statistics",
+          "observation": "The study is qualitative and does not report effect sizes or uncertainty estimates, as it focuses on thematic analysis rather than quantitative measures.",
+          "quotes": [],
+          "rubric_item": "effect_size_uncertainty"
+        },
+        {
+          "evidence_state": "not_found",
+          "module_key": "statistics",
+          "observation": "The study does not report on missing data, including whether any interview or focus group data were excluded after initial collection or how missingness was handled.",
+          "quotes": [],
+          "rubric_item": "missing_data"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "statistics",
+          "observation": "The study conducted robustness checks through consensus-based coding and independent review by multiple team members, including regular meetings to discuss themes and subthemes.",
+          "quotes": [
+            "Disagreements in coding were discussed until a consensus was reached.",
+            "Consensus across 6 team members (S.N., A.K., K.I., S.S., H.H., and L.M.) was reached through independent review of the interview and focus group data along with regular meetings to discuss identified themes and subthemes."
+          ],
+          "rubric_item": "robustness_checks"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "statistics",
+          "observation": "The authors acknowledge limitations such as potential selection bias due to convenience sampling, exclusion of non-English/Spanish speakers, and the timing of interviews during hospitalization, which may affect the generalizability of findings.",
+          "quotes": [
+            "This study aimed to describe the experiences of patients, caregivers, and health care professionals at a safety-net hospital, and thus the results may not be applicable in other settings.",
+            "Conducting the patient interviews while the patients were still hospitalized may have inhibited patients\u2019 willingness to fully disclose their perceptions regarding their experience."
+          ],
+          "rubric_item": "claim_calibration"
+        }
+      ],
+      "progress": 48,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T21:18:50.818724+00:00",
+      "detail": null,
+      "evidence_count": 5,
+      "key": "claims",
+      "kind": "module",
+      "label": "Claim\u2013evidence alignment",
+      "notes": [
+        {
+          "evidence_state": "observed",
+          "module_key": "claims",
+          "observation": "The paper asserts that there is a disconnect between what patients and clinical staff believe patients need and what hospital policies and environments drive in the care environment, and that certain vulnerable populations may be less inclined to self-advocate. This claim is supported by direct evidence from patient interviews and focus groups.",
+          "quotes": [
+            "We found that there is a disconnect between what patients and clinical staff believe patients need and want and what hospital policies and environments drive in the care environment.",
+            "Certain vulnerable populations may be less inclined to self-advocate regarding their needs, and additional measures may need to be taken to ensure the needs are met."
+          ],
+          "rubric_item": "claim_strength"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "claims",
+          "observation": "The results directly support the claim of a disconnect between perceived patient needs and actual clinical practice, as shown by patient reports of lack of autonomy, poor communication, and unmet expectations, which align with themes from health care professionals' focus groups.",
+          "quotes": [
+            "Patients perceived that the priorities of the hospital (rules, policies, and procedures) were not in sync with patients\u2019 preferences and that the hospital did not consider the patient when scheduling clinical activities such as rounding times, procedures, and blood draws."
+          ],
+          "rubric_item": "results_support"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "claims",
+          "observation": "The paper uses cautious language when discussing causality, attributing the gap between knowledge and practice to potential factors such as burnout, workload, and system-level barriers, without asserting definitive causal relationships.",
+          "quotes": [
+            "Depersonalization and burnout reported by the physicians who participated in our study are findings that have been described in the literature by other researchers and may serve as an explanation for why physicians feel unable to completely meet the needs of patients."
+          ],
+          "rubric_item": "causal_language"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "claims",
+          "observation": "The paper explicitly limits the generalizability of its findings, noting that the study was conducted at a safety-net hospital and that results may not apply to other settings, particularly due to the sample's demographic and linguistic characteristics.",
+          "quotes": [
+            "This study aimed to describe the experiences of patients, caregivers, and health care professionals at a safety-net hospital, and thus the results may not be applicable in other settings."
+          ],
+          "rubric_item": "generalization"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "claims",
+          "observation": "The limitations discussed in the paper are directly aligned with the study's claims and findings, particularly regarding sampling bias, language exclusion, and the timing of data collection, all of which are relevant to the interpretation of the results.",
+          "quotes": [
+            "This study aimed to describe the experiences of patients, caregivers, and health care professionals at a safety-net hospital, and thus the results may not be applicable in other settings.",
+            "Conducting the patient interviews while the patients were still hospitalized may have inhibited patients\u2019 willingness to fully disclose their perceptions regarding their experience. They also would not have experienced the discharge process during that respective hospitalization"
+          ],
+          "rubric_item": "limitations_alignment"
+        }
+      ],
+      "progress": 55,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T21:18:51.069347+00:00",
+      "detail": null,
+      "evidence_count": 5,
+      "key": "transparency",
+      "kind": "module",
+      "label": "Transparency & reporting",
+      "notes": [
+        {
+          "evidence_state": "not_found",
+          "module_key": "transparency",
+          "observation": "The study was conducted from October 2015 to August 2018, with interviews and focus groups occurring between March 2016 and July 2017. However, no registration information (e.g., clinical trial registry, pre-registration statement) is provided in the text.",
+          "quotes": [],
+          "rubric_item": "registration"
+        },
+        {
+          "evidence_state": "ambiguous",
+          "module_key": "transparency",
+          "observation": "Ethical approval and informed consent procedures are described, including consent obtained by investigators, use of written consent, and procedures to protect privacy. However, the specific ethics board or institutional review board (IRB) approval is not explicitly stated.",
+          "quotes": [],
+          "rubric_item": "ethics"
+        },
+        {
+          "evidence_state": "not_found",
+          "module_key": "transparency",
+          "observation": "The study describes the use of Atlas.ti software for coding and provides details on the coding process, including team-based coding and consensus-building. However, no public data or code repository is mentioned.",
+          "quotes": [],
+          "rubric_item": "data_code"
+        },
+        {
+          "evidence_state": "ambiguous",
+          "module_key": "transparency",
+          "observation": "The paper reports on study design, setting, participants, data collection, analysis, results, and discussion. It includes demographic tables, illustrative quotations, and a conceptual framework. However, key details such as the full interview guide, coding scheme, or detailed analysis steps are not included in the main text and are only referenced in supplementary materials.",
+          "quotes": [],
+          "rubric_item": "reporting_completeness"
+        },
+        {
+          "evidence_state": "not_found",
+          "module_key": "transparency",
+          "observation": "The study describes the use of semi-structured interviews, thematic analysis, and software (Atlas.ti), but does not provide sufficient detail to allow independent replication, such as the full coding framework, interview guide, or analysis protocols. The supplementary materials are referenced but not accessible in the provided text.",
+          "quotes": [],
+          "rubric_item": "reproducibility"
+        }
+      ],
+      "progress": 61,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T21:18:52.307500+00:00",
+      "detail": null,
+      "evidence_count": 5,
+      "key": "design",
+      "kind": "module",
+      "label": "Study design & risk of bias",
+      "notes": [
+        {
+          "evidence_state": "observed",
+          "module_key": "design",
+          "observation": "The study aimed to explore concepts identified by hospitalized patients as being important to them during hospitalization, explore concepts believed by physicians, nurses, and administrators to be important to patients, and identify gaps and similarities between patient and health care professional perceptions and expectations.",
+          "quotes": [
+            "Accordingly, we aimed to (1) explore concepts identified by hospitalized patients as being important to them during hospitalization, (2) explore concepts believed by physicians, nurses, and administrators to be important to patients during hospitalization, and (3) identify gaps a"
+          ],
+          "rubric_item": "study_question_design"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "design",
+          "observation": "Eligible patients were adult English- or Spanish-speaking patients on an inpatient medical service, identified daily using a screening tool built within the electronic health record. Exclusion criteria included patients who lacked decisional capacity, had hearing or speech impediments, were on hospice/comfort care, pregnant, or prisoners.",
+          "quotes": [
+            "Eligible patients were adult English- or Spanish-speaking patients on an inpatient medical service, identified daily using a screening tool built within the electronic health record.",
+            "Patients or health care professionals who refused to participate, patients who lacked decisional capacity as determined by their primary care team, patients with hearing or speech impediments that precluded regular conversation, patients on hospice/comfort care, pregnant patients"
+          ],
+          "rubric_item": "sampling_eligibility"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "design",
+          "observation": "Semi-structured interviews and focus groups used open-ended questions derived from HCAHPS survey domains and literature reviews. Data were collected via audio recording, de-identification, professional translation, and transcription. Thematic analysis was conducted using an inductive method at the semantic level with consensus coding by multiple team members.",
+          "quotes": [
+            "Semi-structured interviews with patients and family members present used open-ended questions to explore key attributes of an ideal experience during hospitalization.",
+            "Transcribed interviews and focus groups were coded by 3 study team members (A.K., H.H., and L.M.) using Atlas.ti software (version 7.5.6, Scientific Software Development GmbH). Disagreements in coding were discussed until a consensus was reached."
+          ],
+          "rubric_item": "measurement_quality"
+        },
+        {
+          "evidence_state": "not_found",
+          "module_key": "design",
+          "observation": "The study did not include a comparison group or control condition. The analysis focused on identifying themes from patient interviews and focus groups with health care professionals, with no mention of a comparator group or control condition.",
+          "quotes": [],
+          "rubric_item": "comparators_controls"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "design",
+          "observation": "The study acknowledges potential threats to validity, including selection bias due to convenience sampling of health care professionals, participation bias among patients, exclusion of non-English and non-Spanish speakers, and the possibility that interviews conducted during hospitalization may have inhibited full disclosure. Additionally, the fact that interviews were conducted by physicians could have influenced participant disclosures, though this was mitigated by not wearing white coats.",
+          "quotes": [
+            "Due to using a convenience sample for the focus groups, there is also a potential for selection bias among the health care professionals included in the study.",
+            "Conducting the patient interviews while the patients were still hospitalized may have inhibited patients\u2019 willingness to fully disclose their perceptions regarding their experience."
+          ],
+          "rubric_item": "threats_to_validity"
+        }
+      ],
+      "progress": 68,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T21:18:52.309525+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": null,
+      "kind": "stage",
+      "label": "Checking current-paper scholarly context",
+      "notes": [],
+      "progress": 72,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T21:18:52.825379+00:00",
+      "detail": "Single bounded reviewer attempt; maximum 6,144 completion tokens.",
+      "evidence_count": 0,
+      "key": null,
+      "kind": "stage",
+      "label": "Generating final assessment",
+      "notes": [],
+      "progress": 84,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T21:19:09.550463+00:00",
+      "detail": "Checking methodology coverage and exact-quote grounding.",
+      "evidence_count": 0,
+      "key": null,
+      "kind": "stage",
+      "label": "Validating reviewer response",
+      "notes": [],
+      "progress": 90,
+      "state": "running"
+    },
+    {
+      "at": "2026-07-18T21:19:09.559479+00:00",
+      "progress": 96,
+      "stage": "Scored"
+    }
+  ],
+  "banners": [],
+  "completed_at": "2026-07-18T21:19:09.559517Z",
+  "composite_score": 100.0,
+  "confidence_components": {
+    "assessment_coverage": 0.627,
+    "evidence_module_coverage": 1.0,
+    "quote_grounding_rate": 1.0,
+    "source_quality": 1.0
+  },
+  "confidence_score": 86.9,
+  "content_level": "full_text",
+  "context": {
+    "author_conflict_signals": [],
+    "corrections": [],
+    "expression_of_concern": false,
+    "metric_notes": [],
+    "record_sources": [],
+    "retracted": false,
+    "venue_signals": []
+  },
+  "coverage": {
+    "available": 0.625,
+    "context": 0.75,
+    "full_review": 0.625,
+    "limitations": [
+      "Low full-review coverage makes the Review score provisional."
+    ],
+    "overall": 0.625,
+    "paper": 0.625,
+    "provisional": true
+  },
+  "dimensions": [
+    {
+      "assessed_items": 4,
+      "key": "design",
+      "label": "Study design & risk of bias",
+      "score": 100.0,
+      "total_items": 5,
+      "weight": 30.0
+    },
+    {
+      "assessed_items": 3,
+      "key": "statistics",
+      "label": "Statistical & computational validity",
+      "score": 100.0,
+      "total_items": 5,
+      "weight": 25.0
+    },
+    {
+      "assessed_items": 5,
+      "key": "claims",
+      "label": "Claim\u2013evidence alignment",
+      "score": 100.0,
+      "total_items": 5,
+      "weight": 20.0
+    },
+    {
+      "assessed_items": 0,
+      "key": "transparency",
+      "label": "Transparency & reporting",
+      "score": 0.0,
+      "total_items": 5,
+      "weight": 20.0
+    },
+    {
+      "assessed_items": 3,
+      "key": "disclosures",
+      "label": "Disclosures & affiliations",
+      "score": 100.0,
+      "total_items": 4,
+      "weight": 5.0
+    }
+  ],
+  "evidence_notes": [
+    {
+      "evidence_state": "observed",
+      "module_key": "design",
+      "observation": "The study aimed to explore concepts identified by hospitalized patients as being important to them during hospitalization, explore concepts believed by physicians, nurses, and administrators to be important to patients, and identify gaps and similarities between patient and health care professional perceptions and expectations.",
+      "quotes": [
+        "Accordingly, we aimed to (1) explore concepts identified by hospitalized patients as being important to them during hospitalization, (2) explore concepts believed by physicians, nurses, and administrators to be important to patients during hospitalization, and (3) identify gaps a"
+      ],
+      "rubric_item": "study_question_design"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "design",
+      "observation": "Eligible patients were adult English- or Spanish-speaking patients on an inpatient medical service, identified daily using a screening tool built within the electronic health record. Exclusion criteria included patients who lacked decisional capacity, had hearing or speech impediments, were on hospice/comfort care, pregnant, or prisoners.",
+      "quotes": [
+        "Eligible patients were adult English- or Spanish-speaking patients on an inpatient medical service, identified daily using a screening tool built within the electronic health record.",
+        "Patients or health care professionals who refused to participate, patients who lacked decisional capacity as determined by their primary care team, patients with hearing or speech impediments that precluded regular conversation, patients on hospice/comfort care, pregnant patients"
+      ],
+      "rubric_item": "sampling_eligibility"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "design",
+      "observation": "Semi-structured interviews and focus groups used open-ended questions derived from HCAHPS survey domains and literature reviews. Data were collected via audio recording, de-identification, professional translation, and transcription. Thematic analysis was conducted using an inductive method at the semantic level with consensus coding by multiple team members.",
+      "quotes": [
+        "Semi-structured interviews with patients and family members present used open-ended questions to explore key attributes of an ideal experience during hospitalization.",
+        "Transcribed interviews and focus groups were coded by 3 study team members (A.K., H.H., and L.M.) using Atlas.ti software (version 7.5.6, Scientific Software Development GmbH). Disagreements in coding were discussed until a consensus was reached."
+      ],
+      "rubric_item": "measurement_quality"
+    },
+    {
+      "evidence_state": "not_found",
+      "module_key": "design",
+      "observation": "The study did not include a comparison group or control condition. The analysis focused on identifying themes from patient interviews and focus groups with health care professionals, with no mention of a comparator group or control condition.",
+      "quotes": [],
+      "rubric_item": "comparators_controls"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "design",
+      "observation": "The study acknowledges potential threats to validity, including selection bias due to convenience sampling of health care professionals, participation bias among patients, exclusion of non-English and non-Spanish speakers, and the possibility that interviews conducted during hospitalization may have inhibited full disclosure. Additionally, the fact that interviews were conducted by physicians could have influenced participant disclosures, though this was mitigated by not wearing white coats.",
+      "quotes": [
+        "Due to using a convenience sample for the focus groups, there is also a potential for selection bias among the health care professionals included in the study.",
+        "Conducting the patient interviews while the patients were still hospitalized may have inhibited patients\u2019 willingness to fully disclose their perceptions regarding their experience."
+      ],
+      "rubric_item": "threats_to_validity"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "statistics",
+      "observation": "The study used inductive thematic analysis at the semantic level on transcribed interviews and focus groups, with coding conducted by three team members using Atlas.ti software. Disagreements were resolved through discussion until consensus was reached.",
+      "quotes": [
+        "Disagreements in coding were discussed until a consensus was reached.",
+        "A thematic analysis was conducted using an inductive method at the semantic level ( 25 )."
+      ],
+      "rubric_item": "analysis_specification"
+    },
+    {
+      "evidence_state": "not_found",
+      "module_key": "statistics",
+      "observation": "The study is qualitative and does not report effect sizes or uncertainty estimates, as it focuses on thematic analysis rather than quantitative measures.",
+      "quotes": [],
+      "rubric_item": "effect_size_uncertainty"
+    },
+    {
+      "evidence_state": "not_found",
+      "module_key": "statistics",
+      "observation": "The study does not report on missing data, including whether any interview or focus group data were excluded after initial collection or how missingness was handled.",
+      "quotes": [],
+      "rubric_item": "missing_data"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "statistics",
+      "observation": "The study conducted robustness checks through consensus-based coding and independent review by multiple team members, including regular meetings to discuss themes and subthemes.",
+      "quotes": [
+        "Disagreements in coding were discussed until a consensus was reached.",
+        "Consensus across 6 team members (S.N., A.K., K.I., S.S., H.H., and L.M.) was reached through independent review of the interview and focus group data along with regular meetings to discuss identified themes and subthemes."
+      ],
+      "rubric_item": "robustness_checks"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "statistics",
+      "observation": "The authors acknowledge limitations such as potential selection bias due to convenience sampling, exclusion of non-English/Spanish speakers, and the timing of interviews during hospitalization, which may affect the generalizability of findings.",
+      "quotes": [
+        "This study aimed to describe the experiences of patients, caregivers, and health care professionals at a safety-net hospital, and thus the results may not be applicable in other settings.",
+        "Conducting the patient interviews while the patients were still hospitalized may have inhibited patients\u2019 willingness to fully disclose their perceptions regarding their experience."
+      ],
+      "rubric_item": "claim_calibration"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "claims",
+      "observation": "The paper asserts that there is a disconnect between what patients and clinical staff believe patients need and what hospital policies and environments drive in the care environment, and that certain vulnerable populations may be less inclined to self-advocate. This claim is supported by direct evidence from patient interviews and focus groups.",
+      "quotes": [
+        "We found that there is a disconnect between what patients and clinical staff believe patients need and want and what hospital policies and environments drive in the care environment.",
+        "Certain vulnerable populations may be less inclined to self-advocate regarding their needs, and additional measures may need to be taken to ensure the needs are met."
+      ],
+      "rubric_item": "claim_strength"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "claims",
+      "observation": "The results directly support the claim of a disconnect between perceived patient needs and actual clinical practice, as shown by patient reports of lack of autonomy, poor communication, and unmet expectations, which align with themes from health care professionals' focus groups.",
+      "quotes": [
+        "Patients perceived that the priorities of the hospital (rules, policies, and procedures) were not in sync with patients\u2019 preferences and that the hospital did not consider the patient when scheduling clinical activities such as rounding times, procedures, and blood draws."
+      ],
+      "rubric_item": "results_support"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "claims",
+      "observation": "The paper uses cautious language when discussing causality, attributing the gap between knowledge and practice to potential factors such as burnout, workload, and system-level barriers, without asserting definitive causal relationships.",
+      "quotes": [
+        "Depersonalization and burnout reported by the physicians who participated in our study are findings that have been described in the literature by other researchers and may serve as an explanation for why physicians feel unable to completely meet the needs of patients."
+      ],
+      "rubric_item": "causal_language"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "claims",
+      "observation": "The paper explicitly limits the generalizability of its findings, noting that the study was conducted at a safety-net hospital and that results may not apply to other settings, particularly due to the sample's demographic and linguistic characteristics.",
+      "quotes": [
+        "This study aimed to describe the experiences of patients, caregivers, and health care professionals at a safety-net hospital, and thus the results may not be applicable in other settings."
+      ],
+      "rubric_item": "generalization"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "claims",
+      "observation": "The limitations discussed in the paper are directly aligned with the study's claims and findings, particularly regarding sampling bias, language exclusion, and the timing of data collection, all of which are relevant to the interpretation of the results.",
+      "quotes": [
+        "This study aimed to describe the experiences of patients, caregivers, and health care professionals at a safety-net hospital, and thus the results may not be applicable in other settings.",
+        "Conducting the patient interviews while the patients were still hospitalized may have inhibited patients\u2019 willingness to fully disclose their perceptions regarding their experience. They also would not have experienced the discharge process during that respective hospitalization"
+      ],
+      "rubric_item": "limitations_alignment"
+    },
+    {
+      "evidence_state": "not_found",
+      "module_key": "transparency",
+      "observation": "The study was conducted from October 2015 to August 2018, with interviews and focus groups occurring between March 2016 and July 2017. However, no registration information (e.g., clinical trial registry, pre-registration statement) is provided in the text.",
+      "quotes": [],
+      "rubric_item": "registration"
+    },
+    {
+      "evidence_state": "ambiguous",
+      "module_key": "transparency",
+      "observation": "Ethical approval and informed consent procedures are described, including consent obtained by investigators, use of written consent, and procedures to protect privacy. However, the specific ethics board or institutional review board (IRB) approval is not explicitly stated.",
+      "quotes": [],
+      "rubric_item": "ethics"
+    },
+    {
+      "evidence_state": "not_found",
+      "module_key": "transparency",
+      "observation": "The study describes the use of Atlas.ti software for coding and provides details on the coding process, including team-based coding and consensus-building. However, no public data or code repository is mentioned.",
+      "quotes": [],
+      "rubric_item": "data_code"
+    },
+    {
+      "evidence_state": "ambiguous",
+      "module_key": "transparency",
+      "observation": "The paper reports on study design, setting, participants, data collection, analysis, results, and discussion. It includes demographic tables, illustrative quotations, and a conceptual framework. However, key details such as the full interview guide, coding scheme, or detailed analysis steps are not included in the main text and are only referenced in supplementary materials.",
+      "quotes": [],
+      "rubric_item": "reporting_completeness"
+    },
+    {
+      "evidence_state": "not_found",
+      "module_key": "transparency",
+      "observation": "The study describes the use of semi-structured interviews, thematic analysis, and software (Atlas.ti), but does not provide sufficient detail to allow independent replication, such as the full coding framework, interview guide, or analysis protocols. The supplementary materials are referenced but not accessible in the provided text.",
+      "quotes": [],
+      "rubric_item": "reproducibility"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "disclosures",
+      "observation": "The study received financial support from two sources: a Department of Medicine Small Grant and the Denver Health Foundation.",
+      "quotes": [
+        "This study was funded for $25,000 through Department of Medicine Small Grant and $25,000 through Denver Health Foundation."
+      ],
+      "rubric_item": "funding_statement"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "disclosures",
+      "observation": "The authors declared no potential conflicts of interest related to the research, authorship, or publication of the article.",
+      "quotes": [
+        "Declaration of Conflicting Interests: The author(s) declared no potential conflicts of interest with respect to the research, authorship, and/or publication of this article."
+      ],
+      "rubric_item": "conflict_statement"
+    },
+    {
+      "evidence_state": "ambiguous",
+      "module_key": "disclosures",
+      "observation": "The funding sources are identified as the Department of Medicine Small Grant and the Denver Health Foundation, but the specific role of the sponsors in the study design, data collection, analysis, or publication is not described.",
+      "quotes": [],
+      "rubric_item": "sponsor_role"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "disclosures",
+      "observation": "The authors are affiliated with multiple institutions, including Denver Health, the University of Colorado School of Medicine, and the Colorado School of Public Health.",
+      "quotes": [
+        "1 Division of Hospital Medicine, Denver Health, Denver, CO, USA",
+        "2 Division of Hospital Medicine, University of Colorado School of Medicine, Aurora, CO, USA"
+      ],
+      "rubric_item": "affiliations"
+    }
+  ],
+  "evidence_verification_rate": 1.0,
+  "execution_warnings": [
+    "PDF \u00b7 Unpaywall \u00b7 publishedVersion could not be used; analysis used JATS \u00b7 PMC \u00b7 publishedVersion instead."
+  ],
+  "failed_evidence_modules": [],
+  "findings": [
+    {
+      "affected_conclusions": [],
+      "category": "design",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The study clearly states its aims: to explore concepts important to hospitalized patients, concepts believed by health care professionals to be important to patients, and to identify gaps between these perceptions (span-2d51d1b792f71601). The research questions are well-defined and aligned with the qualitative design.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "aeb4599265af",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 3720,
+          "page": null,
+          "paragraph": null,
+          "quote": "Accordingly, we aimed to (1) explore concepts identified by hospitalized patients as being important to them during hospitalization, (2) explore concepts believed by physicians, nurses, and administrators to be important to patients during hospitalization, and (3) identify gaps and similarities between patient and health care professional perceptions and expectations.",
+          "section": "Introduction",
+          "start": 3350
+        }
+      ],
+      "rubric_item": "study_question_design",
+      "severity": "info",
+      "title": "Study Question Design"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "design",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "Eligibility criteria for patients are explicitly described, including age, language (English or Spanish), inpatient status, and use of an electronic health record screening tool. Exclusion criteria are also specified, such as lack of decisional capacity, hearing/speech impediments, hospice care, pregnancy, and incarceration (span-70eda48720bfabae, span-b5590b4deb8b6f7c).",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "74d7bc19d7ea",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 5434,
+          "page": null,
+          "paragraph": null,
+          "quote": "Eligible patients were adult English- or Spanish-speaking patients on an inpatient medical service, identified daily using a screening tool built within the electronic health record.",
+          "section": "Setting and Participants",
+          "start": 5252
+        },
+        {
+          "bbox": null,
+          "end": 5991,
+          "page": null,
+          "paragraph": null,
+          "quote": "Patients or health care professionals who refused to participate, patients who lacked decisional capacity as determined by their primary care team, patients with hearing or speech impediments that precluded regular conversation, patients on hospice/comfort care, pregnant patients, and prisoners were excluded.",
+          "section": "Setting and Participants",
+          "start": 5681
+        }
+      ],
+      "rubric_item": "sampling_eligibility",
+      "severity": "info",
+      "title": "Sampling Eligibility"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "design",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "Data collection methods are well-documented: semi-structured interviews with open-ended questions, audio recording, professional transcription and translation, and use of Atlas.ti for coding. Thematic analysis was conducted inductively at the semantic level, with coding performed by three team members and consensus achieved on disagreements (span-fdcb6af5f339e088, span-89a24af48374b3a1, span-b740d8636839c991).",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "c403fa2d80e2",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 7002,
+          "page": null,
+          "paragraph": null,
+          "quote": "Semi-structured interviews with patients and family members present used open-ended questions to explore key attributes of an ideal experience during hospitalization.",
+          "section": "Interview Guide",
+          "start": 6836
+        },
+        {
+          "bbox": null,
+          "end": 9001,
+          "page": null,
+          "paragraph": null,
+          "quote": "Transcribed interviews and focus groups were coded by 3 study team members (A.K., H.H., and L.M.) using Atlas.ti software (version 7.5.6, Scientific Software Development GmbH). Disagreements in coding were discussed until a consensus was reached.",
+          "section": "Analysis",
+          "start": 8755
+        },
+        {
+          "bbox": null,
+          "end": 9091,
+          "page": null,
+          "paragraph": null,
+          "quote": "A thematic analysis was conducted using an inductive method at the semantic level ( 25 ).",
+          "section": "Analysis",
+          "start": 9002
+        }
+      ],
+      "rubric_item": "measurement_quality",
+      "severity": "info",
+      "title": "Measurement Quality"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "design",
+      "confidence": 0.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The verified evidence ledger for this item is empty. The study is qualitative and exploratory in nature, comparing patient and health care professional perspectives thematically rather than using formal comparators or control groups. No evidence was provided regarding structured comparison methods or control conditions.",
+      "external_sources": [],
+      "grade": "not_assessed",
+      "id": "ba65176c746a",
+      "limitations": [],
+      "paper_spans": [],
+      "rubric_item": "comparators_controls",
+      "severity": "info",
+      "title": "Comparators Controls"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "design",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The study acknowledges several potential threats to validity, including selection bias due to convenience sampling of health care professionals, potential inhibition of patient disclosure due to being interviewed during hospitalization, and possible influence of physician interviewers despite mitigation efforts (not wearing white coats) (span-f119b4a49b446cca, span-67f5dd63fb6f0b32, span-855e5762b41767db). These limitations are explicitly discussed.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "0a20879eff0e",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 25809,
+          "page": null,
+          "paragraph": null,
+          "quote": "Due to using a convenience sample for the focus groups, there is also a potential for selection bias among the health care professionals included in the study.",
+          "section": "Discussion",
+          "start": 25650
+        },
+        {
+          "bbox": null,
+          "end": 26384,
+          "page": null,
+          "paragraph": null,
+          "quote": "Conducting the patient interviews while the patients were still hospitalized may have inhibited patients\u2019 willingness to fully disclose their perceptions regarding their experience.",
+          "section": "Discussion",
+          "start": 26203
+        },
+        {
+          "bbox": null,
+          "end": 26855,
+          "page": null,
+          "paragraph": null,
+          "quote": "Finally, interviews and focus groups were conducted by physicians, which could have influenced participant disclosures. However, to mitigate this potential issue, neither interviewers nor observers wore a white physician\u2019s coat during interviews with patients or focus groups.",
+          "section": "Discussion",
+          "start": 26579
+        }
+      ],
+      "rubric_item": "threats_to_validity",
+      "severity": "info",
+      "title": "Threats To Validity"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "statistics",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The analytical approach is clearly specified: inductive thematic analysis at the semantic level using Atlas.ti, with coding conducted by three team members and resolution of disagreements through discussion until consensus (span-17289f7f2f7f2348, span-d891024032386a17).",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "d5617992430e",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 9001,
+          "page": null,
+          "paragraph": null,
+          "quote": "Disagreements in coding were discussed until a consensus was reached.",
+          "section": "Analysis",
+          "start": 8932
+        },
+        {
+          "bbox": null,
+          "end": 9091,
+          "page": null,
+          "paragraph": null,
+          "quote": "A thematic analysis was conducted using an inductive method at the semantic level ( 25 ).",
+          "section": "Analysis",
+          "start": 9002
+        }
+      ],
+      "rubric_item": "analysis_specification",
+      "severity": "info",
+      "title": "Analysis Specification"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "statistics",
+      "confidence": 0.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The verified evidence ledger for this item is empty. As a qualitative study, the research does not report effect sizes or statistical uncertainty. No evidence was provided related to quantification of effects or their precision.",
+      "external_sources": [],
+      "grade": "not_assessed",
+      "id": "98eee37c7763",
+      "limitations": [],
+      "paper_spans": [],
+      "rubric_item": "effect_size_uncertainty",
+      "severity": "info",
+      "title": "Effect Size Uncertainty"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "statistics",
+      "confidence": 0.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The verified evidence ledger for this item is empty. The study does not report on missing data, but as a qualitative interview-based study, this may not be applicable. No evidence was provided regarding handling or reporting of incomplete data.",
+      "external_sources": [],
+      "grade": "not_assessed",
+      "id": "5bb361523c5b",
+      "limitations": [],
+      "paper_spans": [],
+      "rubric_item": "missing_data",
+      "severity": "info",
+      "title": "Missing Data"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "statistics",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "Robustness was ensured through consensus coding by three team members and independent review by six team members, with regular meetings to discuss themes and subthemes until agreement was reached (span-37def792cb80188c, span-0cbc8c6e86927a82).",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "0c8ce5df8de5",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 9001,
+          "page": null,
+          "paragraph": null,
+          "quote": "Disagreements in coding were discussed until a consensus was reached.",
+          "section": "Analysis",
+          "start": 8932
+        },
+        {
+          "bbox": null,
+          "end": 9313,
+          "page": null,
+          "paragraph": null,
+          "quote": "Consensus across 6 team members (S.N., A.K., K.I., S.S., H.H., and L.M.) was reached through independent review of the interview and focus group data along with regular meetings to discuss identified themes and subthemes.",
+          "section": "Analysis",
+          "start": 9092
+        }
+      ],
+      "rubric_item": "robustness_checks",
+      "severity": "info",
+      "title": "Robustness Checks"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "statistics",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The authors appropriately calibrate their claims, noting that findings may not be generalizable beyond the safety-net hospital setting and acknowledging potential biases in data collection (e.g., timing of interviews) (span-e92f98341dfe1143, span-bafbd8ed93c1bbce).",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "5897bfc5344d",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 25486,
+          "page": null,
+          "paragraph": null,
+          "quote": "This study aimed to describe the experiences of patients, caregivers, and health care professionals at a safety-net hospital, and thus the results may not be applicable in other settings.",
+          "section": "Discussion",
+          "start": 25299
+        },
+        {
+          "bbox": null,
+          "end": 26384,
+          "page": null,
+          "paragraph": null,
+          "quote": "Conducting the patient interviews while the patients were still hospitalized may have inhibited patients\u2019 willingness to fully disclose their perceptions regarding their experience.",
+          "section": "Discussion",
+          "start": 26203
+        }
+      ],
+      "rubric_item": "claim_calibration",
+      "severity": "info",
+      "title": "Claim Calibration"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "claims",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The claims made\u2014such as a disconnect between patient and staff perceptions and challenges for vulnerable populations\u2014are directly supported by interview data and are consistent with the study\u2019s qualitative findings (span-b185267e50862283, span-18fe0fa4dbc1d80e).",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "1d655bd7fb95",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 28094,
+          "page": null,
+          "paragraph": null,
+          "quote": "We found that there is a disconnect between what patients and clinical staff believe patients need and want and what hospital policies and environments drive in the care environment.",
+          "section": "Conclusions",
+          "start": 27912
+        },
+        {
+          "bbox": null,
+          "end": 28260,
+          "page": null,
+          "paragraph": null,
+          "quote": "Certain vulnerable populations may be less inclined to self-advocate regarding their needs, and additional measures may need to be taken to ensure the needs are met.",
+          "section": "Conclusions",
+          "start": 28095
+        }
+      ],
+      "rubric_item": "claim_strength",
+      "severity": "info",
+      "title": "Claim Strength"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "claims",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The results directly support the claims, with patient quotes indicating misalignment between hospital policies and patient preferences, such as lack of autonomy in scheduling, which aligns with the stated disconnect (span-55eb0b012c060949).",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "73fac2b298c2",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 11147,
+          "page": null,
+          "paragraph": null,
+          "quote": "Patients perceived that the priorities of the hospital (rules, policies, and procedures) were not in sync with patients\u2019 preferences and that the hospital did not consider the patient when scheduling clinical activities such as rounding times, procedures, and blood draws.",
+          "section": "Hospital policies and procedures affect patient perceptions of autonomy and may contradict patient preferences",
+          "start": 10875
+        }
+      ],
+      "rubric_item": "results_support",
+      "severity": "info",
+      "title": "Results Support"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "claims",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The paper uses cautious, non-causal language, referring to findings 'that may serve as an explanation' rather than asserting direct causation, and contextualizes physician behavior within systemic factors like burnout (span-81b5c619a757c4d2).",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "18773ff8e67b",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 23044,
+          "page": null,
+          "paragraph": null,
+          "quote": "Depersonalization and burnout reported by the physicians who participated in our study are findings that have been described in the literature by other researchers and may serve as an explanation for why physicians feel unable to completely meet the needs of patients.",
+          "section": "Discussion",
+          "start": 22776
+        }
+      ],
+      "rubric_item": "causal_language",
+      "severity": "info",
+      "title": "Causal Language"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "claims",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The authors explicitly limit generalizability, stating the study describes experiences at a safety-net hospital and that results may not apply elsewhere (span-d9b37d24dc4920a8). This cautious interpretation aligns with the study design.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "c4ab4fc87dc7",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 25486,
+          "page": null,
+          "paragraph": null,
+          "quote": "This study aimed to describe the experiences of patients, caregivers, and health care professionals at a safety-net hospital, and thus the results may not be applicable in other settings.",
+          "section": "Discussion",
+          "start": 25299
+        }
+      ],
+      "rubric_item": "generalization",
+      "severity": "info",
+      "title": "Generalization"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "claims",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The limitations discussed\u2014such as potential inhibition of disclosure due to in-hospital interviews and lack of generalizability\u2014are directly relevant to the study\u2019s claims and methods (span-446f3695e345d2b3, span-ce1c6368f1a17344).",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "929e81976c18",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 25486,
+          "page": null,
+          "paragraph": null,
+          "quote": "This study aimed to describe the experiences of patients, caregivers, and health care professionals at a safety-net hospital, and thus the results may not be applicable in other settings.",
+          "section": "Discussion",
+          "start": 25299
+        },
+        {
+          "bbox": null,
+          "end": 26578,
+          "page": null,
+          "paragraph": null,
+          "quote": "Conducting the patient interviews while the patients were still hospitalized may have inhibited patients\u2019 willingness to fully disclose their perceptions regarding their experience. They also would not have experienced the discharge process during that respective hospitalization and thus the needs around the discharge and transition process are not addressed in this study.",
+          "section": "Discussion",
+          "start": 26203
+        }
+      ],
+      "rubric_item": "limitations_alignment",
+      "severity": "info",
+      "title": "Limitations Alignment"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "transparency",
+      "confidence": 0.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The verified evidence ledger for this item is empty. No mention of study registration (e.g., in a clinical trials registry or qualitative research repository) was found in the provided evidence.",
+      "external_sources": [],
+      "grade": "not_assessed",
+      "id": "019411af601d",
+      "limitations": [],
+      "paper_spans": [],
+      "rubric_item": "registration",
+      "severity": "info",
+      "title": "Registration"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "transparency",
+      "confidence": 0.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The verified evidence ledger for this item is empty. No evidence was provided regarding IRB approval, ethical review, or informed consent procedures.",
+      "external_sources": [],
+      "grade": "not_assessed",
+      "id": "e88129dc3999",
+      "limitations": [],
+      "paper_spans": [],
+      "rubric_item": "ethics",
+      "severity": "info",
+      "title": "Ethics"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "transparency",
+      "confidence": 0.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The verified evidence ledger for this item is empty. No statement was found regarding availability of data or code, nor any repository links or access conditions.",
+      "external_sources": [],
+      "grade": "not_assessed",
+      "id": "c014a0e5ac4b",
+      "limitations": [],
+      "paper_spans": [],
+      "rubric_item": "data_code",
+      "severity": "info",
+      "title": "Data Code"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "transparency",
+      "confidence": 0.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The verified evidence ledger for this item is empty. No evidence was provided regarding adherence to reporting guidelines (e.g., COREQ, SRQR), though the study appears to report key methodological elements.",
+      "external_sources": [],
+      "grade": "not_assessed",
+      "id": "0dcdc7c43d12",
+      "limitations": [],
+      "paper_spans": [],
+      "rubric_item": "reporting_completeness",
+      "severity": "info",
+      "title": "Reporting Completeness"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "transparency",
+      "confidence": 0.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The verified evidence ledger for this item is empty. No information was provided about steps taken to ensure reproducibility beyond analytical transparency, such as data sharing, protocol availability, or code access.",
+      "external_sources": [],
+      "grade": "not_assessed",
+      "id": "1c6882f79821",
+      "limitations": [],
+      "paper_spans": [],
+      "rubric_item": "reproducibility",
+      "severity": "info",
+      "title": "Reproducibility"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "disclosures",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "A clear funding statement is provided, indicating support from the Department of Medicine Small Grant and the Denver Health Foundation, totaling $50,000 (span-76fbce05593a2fe5).",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "46b512bed4af",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 28725,
+          "page": null,
+          "paragraph": null,
+          "quote": "This study was funded for $25,000 through Department of Medicine Small Grant and $25,000 through Denver Health Foundation.",
+          "section": "Conflicts of interest",
+          "start": 28603
+        }
+      ],
+      "rubric_item": "funding_statement",
+      "severity": "info",
+      "title": "Funding Statement"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "disclosures",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The authors explicitly declare no potential conflicts of interest with respect to the research, authorship, or publication (span-fed7fad1b6cb4418).",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "c8a1dda9ed8e",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 28459,
+          "page": null,
+          "paragraph": null,
+          "quote": "Declaration of Conflicting Interests: The author(s) declared no potential conflicts of interest with respect to the research, authorship, and/or publication of this article.",
+          "section": "Conflicts of interest",
+          "start": 28286
+        }
+      ],
+      "rubric_item": "conflict_statement",
+      "severity": "info",
+      "title": "Conflict Statement"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "disclosures",
+      "confidence": 0.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The verified evidence ledger for this item is empty. No information was provided about the role of funders or sponsors in the study design, conduct, or reporting.",
+      "external_sources": [],
+      "grade": "not_assessed",
+      "id": "679579b2f58b",
+      "limitations": [],
+      "paper_spans": [],
+      "rubric_item": "sponsor_role",
+      "severity": "info",
+      "title": "Sponsor Role"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "disclosures",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "Author affiliations are clearly stated, including institutional and departmental affiliations across multiple academic and clinical institutions (span-cf62b63b8055d8d2, span-6dc59f2dfa6077ff, span-78461320e5942256, span-708357f7f558d7ab).",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "e5c6eaec3031",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 1637,
+          "page": null,
+          "paragraph": null,
+          "quote": "1 Division of Hospital Medicine, Denver Health, Denver, CO, USA",
+          "section": "Affiliations",
+          "start": 1574
+        },
+        {
+          "bbox": null,
+          "end": 1730,
+          "page": null,
+          "paragraph": null,
+          "quote": "2 Division of Hospital Medicine, University of Colorado School of Medicine, Aurora, CO, USA",
+          "section": "Affiliations",
+          "start": 1639
+        },
+        {
+          "bbox": null,
+          "end": 1816,
+          "page": null,
+          "paragraph": null,
+          "quote": "3 Community and Behavioral Health, Colorado School of Public Health, Aurora, CO, USA",
+          "section": "Affiliations",
+          "start": 1732
+        },
+        {
+          "bbox": null,
+          "end": 1898,
+          "page": null,
+          "paragraph": null,
+          "quote": "4 Division of General Internal Medicine, University of Colorado, Aurora, CO, USA",
+          "section": "Affiliations",
+          "start": 1818
+        }
+      ],
+      "rubric_item": "affiliations",
+      "severity": "info",
+      "title": "Affiliations"
+    }
+  ],
+  "id": "b7060aba-7470-4762-bed4-e247333add65",
+  "identity": {
+    "arxiv_id": null,
+    "authors": [
+      "Sansrita Nepal",
+      "Angela Keniston",
+      "Kimberly A Indovina",
+      "Maria G Frank",
+      "Sarah A Stella",
+      "Itziar Quinzanos-Alonso",
+      "Lauren McBeth",
+      "Susan L Moore",
+      "Marisha Burden"
+    ],
+    "doi": "10.1177/2374373520942403",
+    "fingerprint": "35a0daccbad2cb97415e016dd06acb02070fe3c7da4408c7fa7a8936c85d21d1",
+    "journal": "Journal of Patient Experience",
+    "pmcid": "PMC7786759",
+    "pmid": "33457641",
+    "published_at": "2020",
+    "title": "What Do Patients Want? A Qualitative Analysis of Patient, Provider, and Administrative Perceptions and Expectations About Patients\u2019 Hospital Stays",
+    "updated_at": null,
+    "versions": [
+      "publishedVersion",
+      "submittedVersion"
+    ]
+  },
+  "language": "en",
+  "limitations": [
+    "The Review score summarizes assessed methodology items; it is not the probability that the conclusions are true.",
+    "No cited-paper full texts were retrieved or analyzed.",
+    "English is validated first; other languages are experimental.",
+    "Supplementary files were linked by the article, but their file contents were not parsed.",
+    "PDF \u00b7 Unpaywall \u00b7 publishedVersion could not be used; analysis used JATS \u00b7 PMC \u00b7 publishedVersion instead.",
+    "Source candidate 55183147e2494dde could not be prepared during release preflight.",
+    "Low full-review coverage makes the Review score provisional.",
+    "PDF \u00b7 Unpaywall \u00b7 publishedVersion could not be used; analysis used JATS \u00b7 PMC \u00b7 publishedVersion instead."
+  ],
+  "methodology_hash": "66b93ef58957399335661945dbad5a3e6e38a565ffc1cfd42b62dc31eca72965",
+  "methodology_version": "1.3",
+  "missing_item_ids": [],
+  "module_statuses": [
+    {
+      "assessed_items": 4,
+      "expected_items": 5,
+      "key": "design",
+      "label": "Study design & risk of bias",
+      "limitation": null,
+      "state": "completed"
+    },
+    {
+      "assessed_items": 3,
+      "expected_items": 5,
+      "key": "statistics",
+      "label": "Statistical & computational validity",
+      "limitation": null,
+      "state": "completed"
+    },
+    {
+      "assessed_items": 5,
+      "expected_items": 5,
+      "key": "claims",
+      "label": "Claim\u2013evidence alignment",
+      "limitation": null,
+      "state": "completed"
+    },
+    {
+      "assessed_items": 0,
+      "expected_items": 5,
+      "key": "transparency",
+      "label": "Transparency & reporting",
+      "limitation": null,
+      "state": "completed"
+    },
+    {
+      "assessed_items": 3,
+      "expected_items": 4,
+      "key": "disclosures",
+      "label": "Disclosures & affiliations",
+      "limitation": null,
+      "state": "completed"
+    }
+  ],
+  "paper_sha256": "70fd1609dc497e022075e5760e56559e8c22319eaf08812119caebd85175be34",
+  "parser_name": "pmc-jats",
+  "parser_version": "1.2",
+  "profile": "general_empirical",
+  "provider_profile": "token_factory",
+  "provider_protocol": "openai-compatible",
+  "repaired_output": false,
+  "review_score": 100.0,
+  "reviewer_model": "Qwen/Qwen3-235B-A22B-Instruct-2507",
+  "schema_version": "1.3",
+  "scoring_version": "1.3",
+  "source_format": "jats",
+  "summary": [
+    "No evidence-grounded methodological concern was accepted in the assessed items.",
+    "The final review assessed 15 of 24 methodology items."
+  ],
+  "token_usage": {
+    "input_tokens": 26386,
+    "output_tokens": 6661,
+    "total_tokens": 33047
+  },
+  "uncapped_score": 100.0,
+  "worker_model": "Qwen/Qwen3-30B-A3B-Instruct-2507"
+}

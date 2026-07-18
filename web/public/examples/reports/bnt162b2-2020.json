@@ -1,0 +1,1574 @@
+{
+  "assessed_item_count": 22,
+  "audit_trail": [
+    {
+      "at": "2026-07-18T21:17:21.386222+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": null,
+      "kind": "stage",
+      "label": "Ingesting and fingerprinting",
+      "notes": [],
+      "progress": 8,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T21:17:21.390456+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": null,
+      "kind": "stage",
+      "label": "Classifying paper and routing evidence",
+      "notes": [],
+      "progress": 22,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T21:17:21.416842+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": null,
+      "kind": "stage",
+      "label": "Gathering methodology evidence",
+      "notes": [],
+      "progress": 35,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T21:17:21.420644+00:00",
+      "detail": "Waiting to start.",
+      "evidence_count": 0,
+      "key": "design",
+      "kind": "module",
+      "label": "Study design & risk of bias",
+      "notes": [],
+      "progress": 35,
+      "state": "pending"
+    },
+    {
+      "at": "2026-07-18T21:17:21.420669+00:00",
+      "detail": "Waiting to start.",
+      "evidence_count": 0,
+      "key": "statistics",
+      "kind": "module",
+      "label": "Statistical & computational validity",
+      "notes": [],
+      "progress": 35,
+      "state": "pending"
+    },
+    {
+      "at": "2026-07-18T21:17:21.420674+00:00",
+      "detail": "Waiting to start.",
+      "evidence_count": 0,
+      "key": "claims",
+      "kind": "module",
+      "label": "Claim\u2013evidence alignment",
+      "notes": [],
+      "progress": 35,
+      "state": "pending"
+    },
+    {
+      "at": "2026-07-18T21:17:21.420677+00:00",
+      "detail": "Waiting to start.",
+      "evidence_count": 0,
+      "key": "transparency",
+      "kind": "module",
+      "label": "Transparency & reporting",
+      "notes": [],
+      "progress": 35,
+      "state": "pending"
+    },
+    {
+      "at": "2026-07-18T21:17:21.420680+00:00",
+      "detail": "Waiting to start.",
+      "evidence_count": 0,
+      "key": "disclosures",
+      "kind": "module",
+      "label": "Disclosures & affiliations",
+      "notes": [],
+      "progress": 35,
+      "state": "pending"
+    },
+    {
+      "at": "2026-07-18T21:17:21.422646+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": "design",
+      "kind": "module",
+      "label": "Study design & risk of bias",
+      "notes": [],
+      "progress": 35,
+      "state": "running"
+    },
+    {
+      "at": "2026-07-18T21:17:22.005971+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": "statistics",
+      "kind": "module",
+      "label": "Statistical & computational validity",
+      "notes": [],
+      "progress": 35,
+      "state": "running"
+    },
+    {
+      "at": "2026-07-18T21:17:22.026036+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": "claims",
+      "kind": "module",
+      "label": "Claim\u2013evidence alignment",
+      "notes": [],
+      "progress": 35,
+      "state": "running"
+    },
+    {
+      "at": "2026-07-18T21:17:22.031779+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": "transparency",
+      "kind": "module",
+      "label": "Transparency & reporting",
+      "notes": [],
+      "progress": 35,
+      "state": "running"
+    },
+    {
+      "at": "2026-07-18T21:17:22.058545+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": "disclosures",
+      "kind": "module",
+      "label": "Disclosures & affiliations",
+      "notes": [],
+      "progress": 35,
+      "state": "running"
+    },
+    {
+      "at": "2026-07-18T21:17:31.789346+00:00",
+      "detail": null,
+      "evidence_count": 4,
+      "key": "disclosures",
+      "kind": "module",
+      "label": "Disclosures & affiliations",
+      "notes": [
+        {
+          "evidence_state": "observed",
+          "module_key": "disclosures",
+          "observation": "The trial was funded by BioNTech and Pfizer.",
+          "quotes": [
+            "Funded by BioNTech and Pfizer; ClinicalTrials.gov number, NCT04368728 ."
+          ],
+          "rubric_item": "funding_statement"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "disclosures",
+          "observation": "Disclosure forms provided by the authors are available with the full text of this article at NEJM.org.",
+          "quotes": [
+            "Disclosure forms provided by the authors are available with the full text of this article at NEJM.org."
+          ],
+          "rubric_item": "conflict_statement"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "disclosures",
+          "observation": "BioNTech was the sponsor of the trial, manufactured the BNT162b2 clinical trial material, and contributed to the interpretation of the data and the writing of the manuscript.",
+          "quotes": [
+            "BioNTech was the sponsor of the trial, manufactured the BNT162b2 clinical trial material, and contributed to the interpretation of the data and the writing of the manuscript."
+          ],
+          "rubric_item": "sponsor_role"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "disclosures",
+          "observation": "Affiliations include institutions from multiple countries, including Argentina, Brazil, Germany, Turkey, South Africa, the United Kingdom, and the United States, with researchers affiliated with Pfizer, BioNTech, and various academic and research institutions.",
+          "quotes": [
+            "From Fundacion INFANT (F.P.P.) and iTrials-Hospital Militar Central (G.P.M.), Buenos Aires; State University of New York, Upstate Medical University, Syracuse (S.J.T.), and Vaccine Research and Development, Pfizer, Pearl River (J.A., A.G., K.A.S., K.K., W.V.K., D.C., P.R.D., K.U."
+          ],
+          "rubric_item": "affiliations"
+        }
+      ],
+      "progress": 42,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T21:17:32.083437+00:00",
+      "detail": null,
+      "evidence_count": 5,
+      "key": "transparency",
+      "kind": "module",
+      "label": "Transparency & reporting",
+      "notes": [
+        {
+          "evidence_state": "observed",
+          "module_key": "transparency",
+          "observation": "The trial was registered with ClinicalTrials.gov under number NCT04368728.",
+          "quotes": [
+            "Funded by BioNTech and Pfizer; ClinicalTrials.gov number, NCT04368728 ."
+          ],
+          "rubric_item": "registration"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "transparency",
+          "observation": "All participants provided informed consent, and the trial was conducted in accordance with ethical standards, including oversight by an independent data and safety monitoring board.",
+          "quotes": [
+            "All the trial data were available to all the authors, who vouch for its accuracy and completeness and for adherence of the trial to the protocol, which is available with the full text of this article at NEJM.org.",
+            "An independent data and safety monitoring board reviewed efficacy and unblinded safety data."
+          ],
+          "rubric_item": "ethics"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "transparency",
+          "observation": "The protocol and full data are available at NEJM.org, and the supplementary appendix includes a complete list of investigators and additional details.",
+          "quotes": [
+            "which is available with the full text of this article at NEJM.org.",
+            "A complete list of investigators in the C4591001 Clinical Trial Group is provided in the Supplementary Appendix , available at NEJM.org."
+          ],
+          "rubric_item": "data_code"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "transparency",
+          "observation": "The paper reports on primary and secondary endpoints, including efficacy and safety outcomes, subgroup analyses, and statistical methods, with detailed definitions and data sources.",
+          "quotes": [
+            "The first primary end point was the efficacy of BNT162b2 against confirmed Covid-19 with onset at least 7 days after the second dose in participants who had been without serologic or virologic evidence of SARS-CoV-2 infection up to 7 days after the second dose; the second primary",
+            "Major secondary end points included the efficacy of BNT162b2 against severe Covid-19. Severe Covid-19 is defined by the FDA as confirmed Covid-19 with one of the following additional features: clinical signs at rest that are indicative of severe systemic illness; respiratory fail"
+          ],
+          "rubric_item": "reporting_completeness"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "transparency",
+          "observation": "The statistical methods are described in detail, including the use of a Bayesian beta-binomial model and specific criteria for efficacy and safety analysis.",
+          "quotes": [
+            "The 95.0% credible interval for vaccine efficacy and the probability of vaccine efficacy greater than 30% were calculated with the use of a Bayesian beta-binomial model.",
+            "The final analysis uses a success boundary of 98.6% for probability of vaccine efficacy greater than 30% to compensate for the interim analysis and to control the overall type 1 error rate at 2.5%."
+          ],
+          "rubric_item": "reproducibility"
+        }
+      ],
+      "progress": 48,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T21:17:33.094520+00:00",
+      "detail": null,
+      "evidence_count": 5,
+      "key": "statistics",
+      "kind": "module",
+      "label": "Statistical & computational validity",
+      "notes": [
+        {
+          "evidence_state": "observed",
+          "module_key": "statistics",
+          "observation": "The analysis of the first primary efficacy end point included participants who received the vaccine or placebo as randomly assigned, had no evidence of infection within 7 days after the second dose, and had no major protocol deviations.",
+          "quotes": [
+            "Analysis of the first primary efficacy end point included participants who received the vaccine or placebo as randomly assigned, had no evidence of infection within 7 days after the second dose, and had no major protocol deviations (the population that could be evaluated)."
+          ],
+          "rubric_item": "intention_to_treat"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "statistics",
+          "observation": "With approximately 19,000 participants per group in the subset of participants with a median follow-up time of 2 months after the second dose, the study has more than 83% probability of detecting at least one adverse event, if the true incidence is 0.01%, but it is not large enough to detect less common adverse events reliably.",
+          "quotes": [
+            "With approximately 19,000 participants per group in the subset of participants with a median follow-up time of 2 months after the second dose, the study has more than 83% probability of detecting at least one adverse event, if the true incidence is 0.01%, but it is not large enou"
+          ],
+          "rubric_item": "power"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "statistics",
+          "observation": "Vaccine efficacy was estimated by 100\u00d7(1\u2212IRR), where IRR is the calculated ratio of confirmed cases of Covid-19 illness per 1000 person-years of follow-up in the active vaccine group to the corresponding illness rate in the placebo group. The 95.0% credible interval for vaccine efficacy and the probability of vaccine efficacy greater than 30% were calculated with the use of a Bayesian beta-binomial model.",
+          "quotes": [
+            "The 95.0% credible interval for vaccine efficacy and the probability of vaccine efficacy greater than 30% were calculated with the use of a Bayesian beta-binomial model."
+          ],
+          "rubric_item": "effect_size_interval"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "statistics",
+          "observation": "Moreover, primary and secondary efficacy end points are evaluated sequentially to control the familywise type 1 error rate at 2.5%.",
+          "quotes": [
+            "Moreover, primary and secondary efficacy end points are evaluated sequentially to control the familywise type 1 error rate at 2.5%."
+          ],
+          "rubric_item": "multiplicity"
+        },
+        {
+          "evidence_state": "ambiguous",
+          "module_key": "statistics",
+          "observation": "The study was not designed to assess the efficacy of a single-dose regimen. Nevertheless, in the interval between the first and second doses, the observed vaccine efficacy against Covid-19 was 52%, and in the first 7 days after dose 2, it was 91%, reaching full efficacy against disease with onset at least 7 days after dose 2.",
+          "quotes": [],
+          "rubric_item": "missing_data"
+        }
+      ],
+      "progress": 55,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T21:17:33.559387+00:00",
+      "detail": null,
+      "evidence_count": 5,
+      "key": "design",
+      "kind": "module",
+      "label": "Study design & risk of bias",
+      "notes": [
+        {
+          "evidence_state": "observed",
+          "module_key": "design",
+          "observation": "Participants were randomly assigned in a 1:1 ratio to receive either BNT162b2 or placebo using an interactive Web-based system.",
+          "quotes": [
+            "With the use of an interactive Web-based system, participants in the trial were randomly assigned in a 1:1 ratio to receive 30 \u03bcg of BNT162b2 (0.3 ml volume per dose) or saline placebo."
+          ],
+          "rubric_item": "randomization_process"
+        },
+        {
+          "evidence_state": "ambiguous",
+          "module_key": "design",
+          "observation": "The method of randomization used an interactive Web-based system, which implies allocation concealment, though no explicit description of concealment is provided.",
+          "quotes": [],
+          "rubric_item": "allocation_concealment"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "design",
+          "observation": "The analysis of the first primary efficacy end point included participants who had no major protocol deviations and were randomly assigned. The number of participants evaluated for efficacy was 36,523 for those without prior infection and 40,137 with or without prior infection.",
+          "quotes": [
+            "Analysis of the first primary efficacy end point included participants who received the vaccine or placebo as randomly assigned, had no evidence of infection within 7 days after the second dose, and had no major protocol deviations (the population that could be evaluated)."
+          ],
+          "rubric_item": "deviations"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "design",
+          "observation": "The primary efficacy end point was efficacy against confirmed Covid-19 with onset at least 7 days after the second dose, defined by FDA criteria including symptoms and positive nucleic acid amplification testing. Safety outcomes included solicited and unsolicited adverse events, with specific definitions provided.",
+          "quotes": [
+            "The first primary end point was the efficacy of BNT162b2 against confirmed Covid-19 with onset at least 7 days after the second dose in participants who had been without serologic or virologic evidence of SARS-CoV-2 infection up to 7 days after the second dose;",
+            "Confirmed Covid-19 was defined according to the Food and Drug Administration (FDA) criteria as the presence of at least one of the following symptoms: fever, new or increased cough, new or increased shortness of breath, chills, new or increased muscle pain, new loss of taste or s"
+          ],
+          "rubric_item": "outcome_measurement"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "design",
+          "observation": "The main safety subset included 37,706 participants with a median of at least 2 months of follow-up after the second dose. The modified intention-to-treat (mITT) efficacy population included 43,355 persons, with 100 participants aged 12 to 15 years contributing to person-time but no cases.",
+          "quotes": [
+            "At the data cut-off date of October 9, a total of 37,706 participants had a median of at least 2 months of safety data available after the second dose and contributed to the main safety data set.",
+            "The modified intention-to-treat (mITT) efficacy population includes all age groups 12 years of age or older (43,355 persons; 100 participants who were 12 to 15 years of age contributed to person-time years but included no cases)."
+          ],
+          "rubric_item": "attrition"
+        }
+      ],
+      "progress": 61,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T21:17:33.870129+00:00",
+      "detail": null,
+      "evidence_count": 5,
+      "key": "claims",
+      "kind": "module",
+      "label": "Claim\u2013evidence alignment",
+      "notes": [
+        {
+          "evidence_state": "observed",
+          "module_key": "claims",
+          "observation": "The paper claims strong efficacy, stating that BNT162b2 was 95% effective in preventing Covid-19 and that the results met prespecified success criteria with more than a 99.99% probability of true vaccine efficacy greater than 30%.",
+          "quotes": [
+            "BNT162b2 was 95% effective in preventing Covid-19 (95% credible interval, 90.3 to 97.6).",
+            "The vaccine met both primary efficacy end points, with more than a 99.99% probability of a true vaccine efficacy greater than 30%."
+          ],
+          "rubric_item": "claim_strength"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "claims",
+          "observation": "The results support the claim of 95% efficacy, with 8 cases in the vaccine group and 162 in the placebo group among those without prior infection, yielding a 95.0% vaccine efficacy with a 95% confidence interval of 90.3 to 97.6.",
+          "quotes": [
+            "Among participants with and those without evidence of prior SARS CoV-2 infection, 9 cases of Covid-19 at least 7 days after the second dose were observed among vaccine recipients and 169 among placebo recipients, corresponding to 94.6% vaccine efficacy (95% CI, 89.9 to 97.3)."
+          ],
+          "rubric_item": "results_support"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "claims",
+          "observation": "The paper uses causal language by stating that the vaccine conferred 95% protection against Covid-19, implying a direct causal effect of the vaccine on reducing disease incidence.",
+          "quotes": [
+            "A two-dose regimen of BNT162b2 conferred 95% protection against Covid-19 in persons 16 years of age or older.",
+            "The vaccine met both primary efficacy end points, with more than a 99.99% probability of a true vaccine efficacy greater than 30%."
+          ],
+          "rubric_item": "causal_language"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "claims",
+          "observation": "The paper acknowledges limitations in generalization, noting that the study did not address efficacy in younger adolescents, children, pregnant women, or immunocompromised individuals, and that data on long-term protection and rare adverse events remain incomplete.",
+          "quotes": [
+            "This report does not address the prevention of Covid-19 in other populations, such as younger adolescents, children, and pregnant women."
+          ],
+          "rubric_item": "generalization"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "claims",
+          "observation": "The paper aligns its limitations with the scope of the claims, explicitly stating that the study did not assess asymptomatic infection, long-term safety beyond 2 months, or efficacy in populations not included in the trial, and that follow-up was limited due to ethical constraints.",
+          "quotes": [
+            "These data do not address whether vaccination prevents asymptomatic infection; a serologic end point that can detect a history of infection regardless of whether symptoms were present (SARS-CoV-2 N-binding antibody) will be reported later.",
+            "Although the study was designed to follow participants for safety and efficacy for 2 years after the second dose, given the high vaccine efficacy, ethical and practical barriers prevent following placebo recipients for 2 years without offering active immunization, once the vaccin"
+          ],
+          "rubric_item": "limitations_alignment"
+        }
+      ],
+      "progress": 68,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T21:17:33.872613+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": null,
+      "kind": "stage",
+      "label": "Checking current-paper scholarly context",
+      "notes": [],
+      "progress": 72,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T21:17:34.399849+00:00",
+      "detail": "Single bounded reviewer attempt; maximum 6,144 completion tokens.",
+      "evidence_count": 0,
+      "key": null,
+      "kind": "stage",
+      "label": "Generating final assessment",
+      "notes": [],
+      "progress": 84,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T21:18:01.320590+00:00",
+      "detail": "Checking methodology coverage and exact-quote grounding.",
+      "evidence_count": 0,
+      "key": null,
+      "kind": "stage",
+      "label": "Validating reviewer response",
+      "notes": [],
+      "progress": 90,
+      "state": "running"
+    },
+    {
+      "at": "2026-07-18T21:18:01.325387+00:00",
+      "progress": 96,
+      "stage": "Scored"
+    }
+  ],
+  "banners": [],
+  "completed_at": "2026-07-18T21:18:01.325407Z",
+  "composite_score": 96.8,
+  "confidence_components": {
+    "assessment_coverage": 0.89,
+    "evidence_module_coverage": 1.0,
+    "quote_grounding_rate": 1.0,
+    "source_quality": 1.0
+  },
+  "confidence_score": 96.2,
+  "content_level": "full_text",
+  "context": {
+    "author_conflict_signals": [],
+    "corrections": [],
+    "expression_of_concern": false,
+    "metric_notes": [],
+    "record_sources": [],
+    "retracted": false,
+    "venue_signals": []
+  },
+  "coverage": {
+    "available": 0.917,
+    "context": 1.0,
+    "full_review": 0.917,
+    "limitations": [],
+    "overall": 0.917,
+    "paper": 0.917,
+    "provisional": false
+  },
+  "dimensions": [
+    {
+      "assessed_items": 4,
+      "key": "design",
+      "label": "Study design & risk of bias",
+      "score": 100.0,
+      "total_items": 5,
+      "weight": 30.0
+    },
+    {
+      "assessed_items": 4,
+      "key": "statistics",
+      "label": "Statistical & computational validity",
+      "score": 87.5,
+      "total_items": 5,
+      "weight": 25.0
+    },
+    {
+      "assessed_items": 5,
+      "key": "claims",
+      "label": "Claim\u2013evidence alignment",
+      "score": 100.0,
+      "total_items": 5,
+      "weight": 20.0
+    },
+    {
+      "assessed_items": 5,
+      "key": "transparency",
+      "label": "Transparency & reporting",
+      "score": 100.0,
+      "total_items": 5,
+      "weight": 20.0
+    },
+    {
+      "assessed_items": 4,
+      "key": "disclosures",
+      "label": "Disclosures & affiliations",
+      "score": 93.8,
+      "total_items": 4,
+      "weight": 5.0
+    }
+  ],
+  "evidence_notes": [
+    {
+      "evidence_state": "observed",
+      "module_key": "design",
+      "observation": "Participants were randomly assigned in a 1:1 ratio to receive either BNT162b2 or placebo using an interactive Web-based system.",
+      "quotes": [
+        "With the use of an interactive Web-based system, participants in the trial were randomly assigned in a 1:1 ratio to receive 30 \u03bcg of BNT162b2 (0.3 ml volume per dose) or saline placebo."
+      ],
+      "rubric_item": "randomization_process"
+    },
+    {
+      "evidence_state": "ambiguous",
+      "module_key": "design",
+      "observation": "The method of randomization used an interactive Web-based system, which implies allocation concealment, though no explicit description of concealment is provided.",
+      "quotes": [],
+      "rubric_item": "allocation_concealment"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "design",
+      "observation": "The analysis of the first primary efficacy end point included participants who had no major protocol deviations and were randomly assigned. The number of participants evaluated for efficacy was 36,523 for those without prior infection and 40,137 with or without prior infection.",
+      "quotes": [
+        "Analysis of the first primary efficacy end point included participants who received the vaccine or placebo as randomly assigned, had no evidence of infection within 7 days after the second dose, and had no major protocol deviations (the population that could be evaluated)."
+      ],
+      "rubric_item": "deviations"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "design",
+      "observation": "The primary efficacy end point was efficacy against confirmed Covid-19 with onset at least 7 days after the second dose, defined by FDA criteria including symptoms and positive nucleic acid amplification testing. Safety outcomes included solicited and unsolicited adverse events, with specific definitions provided.",
+      "quotes": [
+        "The first primary end point was the efficacy of BNT162b2 against confirmed Covid-19 with onset at least 7 days after the second dose in participants who had been without serologic or virologic evidence of SARS-CoV-2 infection up to 7 days after the second dose;",
+        "Confirmed Covid-19 was defined according to the Food and Drug Administration (FDA) criteria as the presence of at least one of the following symptoms: fever, new or increased cough, new or increased shortness of breath, chills, new or increased muscle pain, new loss of taste or s"
+      ],
+      "rubric_item": "outcome_measurement"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "design",
+      "observation": "The main safety subset included 37,706 participants with a median of at least 2 months of follow-up after the second dose. The modified intention-to-treat (mITT) efficacy population included 43,355 persons, with 100 participants aged 12 to 15 years contributing to person-time but no cases.",
+      "quotes": [
+        "At the data cut-off date of October 9, a total of 37,706 participants had a median of at least 2 months of safety data available after the second dose and contributed to the main safety data set.",
+        "The modified intention-to-treat (mITT) efficacy population includes all age groups 12 years of age or older (43,355 persons; 100 participants who were 12 to 15 years of age contributed to person-time years but included no cases)."
+      ],
+      "rubric_item": "attrition"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "statistics",
+      "observation": "The analysis of the first primary efficacy end point included participants who received the vaccine or placebo as randomly assigned, had no evidence of infection within 7 days after the second dose, and had no major protocol deviations.",
+      "quotes": [
+        "Analysis of the first primary efficacy end point included participants who received the vaccine or placebo as randomly assigned, had no evidence of infection within 7 days after the second dose, and had no major protocol deviations (the population that could be evaluated)."
+      ],
+      "rubric_item": "intention_to_treat"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "statistics",
+      "observation": "With approximately 19,000 participants per group in the subset of participants with a median follow-up time of 2 months after the second dose, the study has more than 83% probability of detecting at least one adverse event, if the true incidence is 0.01%, but it is not large enough to detect less common adverse events reliably.",
+      "quotes": [
+        "With approximately 19,000 participants per group in the subset of participants with a median follow-up time of 2 months after the second dose, the study has more than 83% probability of detecting at least one adverse event, if the true incidence is 0.01%, but it is not large enou"
+      ],
+      "rubric_item": "power"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "statistics",
+      "observation": "Vaccine efficacy was estimated by 100\u00d7(1\u2212IRR), where IRR is the calculated ratio of confirmed cases of Covid-19 illness per 1000 person-years of follow-up in the active vaccine group to the corresponding illness rate in the placebo group. The 95.0% credible interval for vaccine efficacy and the probability of vaccine efficacy greater than 30% were calculated with the use of a Bayesian beta-binomial model.",
+      "quotes": [
+        "The 95.0% credible interval for vaccine efficacy and the probability of vaccine efficacy greater than 30% were calculated with the use of a Bayesian beta-binomial model."
+      ],
+      "rubric_item": "effect_size_interval"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "statistics",
+      "observation": "Moreover, primary and secondary efficacy end points are evaluated sequentially to control the familywise type 1 error rate at 2.5%.",
+      "quotes": [
+        "Moreover, primary and secondary efficacy end points are evaluated sequentially to control the familywise type 1 error rate at 2.5%."
+      ],
+      "rubric_item": "multiplicity"
+    },
+    {
+      "evidence_state": "ambiguous",
+      "module_key": "statistics",
+      "observation": "The study was not designed to assess the efficacy of a single-dose regimen. Nevertheless, in the interval between the first and second doses, the observed vaccine efficacy against Covid-19 was 52%, and in the first 7 days after dose 2, it was 91%, reaching full efficacy against disease with onset at least 7 days after dose 2.",
+      "quotes": [],
+      "rubric_item": "missing_data"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "claims",
+      "observation": "The paper claims strong efficacy, stating that BNT162b2 was 95% effective in preventing Covid-19 and that the results met prespecified success criteria with more than a 99.99% probability of true vaccine efficacy greater than 30%.",
+      "quotes": [
+        "BNT162b2 was 95% effective in preventing Covid-19 (95% credible interval, 90.3 to 97.6).",
+        "The vaccine met both primary efficacy end points, with more than a 99.99% probability of a true vaccine efficacy greater than 30%."
+      ],
+      "rubric_item": "claim_strength"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "claims",
+      "observation": "The results support the claim of 95% efficacy, with 8 cases in the vaccine group and 162 in the placebo group among those without prior infection, yielding a 95.0% vaccine efficacy with a 95% confidence interval of 90.3 to 97.6.",
+      "quotes": [
+        "Among participants with and those without evidence of prior SARS CoV-2 infection, 9 cases of Covid-19 at least 7 days after the second dose were observed among vaccine recipients and 169 among placebo recipients, corresponding to 94.6% vaccine efficacy (95% CI, 89.9 to 97.3)."
+      ],
+      "rubric_item": "results_support"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "claims",
+      "observation": "The paper uses causal language by stating that the vaccine conferred 95% protection against Covid-19, implying a direct causal effect of the vaccine on reducing disease incidence.",
+      "quotes": [
+        "A two-dose regimen of BNT162b2 conferred 95% protection against Covid-19 in persons 16 years of age or older.",
+        "The vaccine met both primary efficacy end points, with more than a 99.99% probability of a true vaccine efficacy greater than 30%."
+      ],
+      "rubric_item": "causal_language"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "claims",
+      "observation": "The paper acknowledges limitations in generalization, noting that the study did not address efficacy in younger adolescents, children, pregnant women, or immunocompromised individuals, and that data on long-term protection and rare adverse events remain incomplete.",
+      "quotes": [
+        "This report does not address the prevention of Covid-19 in other populations, such as younger adolescents, children, and pregnant women."
+      ],
+      "rubric_item": "generalization"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "claims",
+      "observation": "The paper aligns its limitations with the scope of the claims, explicitly stating that the study did not assess asymptomatic infection, long-term safety beyond 2 months, or efficacy in populations not included in the trial, and that follow-up was limited due to ethical constraints.",
+      "quotes": [
+        "These data do not address whether vaccination prevents asymptomatic infection; a serologic end point that can detect a history of infection regardless of whether symptoms were present (SARS-CoV-2 N-binding antibody) will be reported later.",
+        "Although the study was designed to follow participants for safety and efficacy for 2 years after the second dose, given the high vaccine efficacy, ethical and practical barriers prevent following placebo recipients for 2 years without offering active immunization, once the vaccin"
+      ],
+      "rubric_item": "limitations_alignment"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "transparency",
+      "observation": "The trial was registered with ClinicalTrials.gov under number NCT04368728.",
+      "quotes": [
+        "Funded by BioNTech and Pfizer; ClinicalTrials.gov number, NCT04368728 ."
+      ],
+      "rubric_item": "registration"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "transparency",
+      "observation": "All participants provided informed consent, and the trial was conducted in accordance with ethical standards, including oversight by an independent data and safety monitoring board.",
+      "quotes": [
+        "All the trial data were available to all the authors, who vouch for its accuracy and completeness and for adherence of the trial to the protocol, which is available with the full text of this article at NEJM.org.",
+        "An independent data and safety monitoring board reviewed efficacy and unblinded safety data."
+      ],
+      "rubric_item": "ethics"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "transparency",
+      "observation": "The protocol and full data are available at NEJM.org, and the supplementary appendix includes a complete list of investigators and additional details.",
+      "quotes": [
+        "which is available with the full text of this article at NEJM.org.",
+        "A complete list of investigators in the C4591001 Clinical Trial Group is provided in the Supplementary Appendix , available at NEJM.org."
+      ],
+      "rubric_item": "data_code"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "transparency",
+      "observation": "The paper reports on primary and secondary endpoints, including efficacy and safety outcomes, subgroup analyses, and statistical methods, with detailed definitions and data sources.",
+      "quotes": [
+        "The first primary end point was the efficacy of BNT162b2 against confirmed Covid-19 with onset at least 7 days after the second dose in participants who had been without serologic or virologic evidence of SARS-CoV-2 infection up to 7 days after the second dose; the second primary",
+        "Major secondary end points included the efficacy of BNT162b2 against severe Covid-19. Severe Covid-19 is defined by the FDA as confirmed Covid-19 with one of the following additional features: clinical signs at rest that are indicative of severe systemic illness; respiratory fail"
+      ],
+      "rubric_item": "reporting_completeness"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "transparency",
+      "observation": "The statistical methods are described in detail, including the use of a Bayesian beta-binomial model and specific criteria for efficacy and safety analysis.",
+      "quotes": [
+        "The 95.0% credible interval for vaccine efficacy and the probability of vaccine efficacy greater than 30% were calculated with the use of a Bayesian beta-binomial model.",
+        "The final analysis uses a success boundary of 98.6% for probability of vaccine efficacy greater than 30% to compensate for the interim analysis and to control the overall type 1 error rate at 2.5%."
+      ],
+      "rubric_item": "reproducibility"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "disclosures",
+      "observation": "The trial was funded by BioNTech and Pfizer.",
+      "quotes": [
+        "Funded by BioNTech and Pfizer; ClinicalTrials.gov number, NCT04368728 ."
+      ],
+      "rubric_item": "funding_statement"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "disclosures",
+      "observation": "Disclosure forms provided by the authors are available with the full text of this article at NEJM.org.",
+      "quotes": [
+        "Disclosure forms provided by the authors are available with the full text of this article at NEJM.org."
+      ],
+      "rubric_item": "conflict_statement"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "disclosures",
+      "observation": "BioNTech was the sponsor of the trial, manufactured the BNT162b2 clinical trial material, and contributed to the interpretation of the data and the writing of the manuscript.",
+      "quotes": [
+        "BioNTech was the sponsor of the trial, manufactured the BNT162b2 clinical trial material, and contributed to the interpretation of the data and the writing of the manuscript."
+      ],
+      "rubric_item": "sponsor_role"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "disclosures",
+      "observation": "Affiliations include institutions from multiple countries, including Argentina, Brazil, Germany, Turkey, South Africa, the United Kingdom, and the United States, with researchers affiliated with Pfizer, BioNTech, and various academic and research institutions.",
+      "quotes": [
+        "From Fundacion INFANT (F.P.P.) and iTrials-Hospital Militar Central (G.P.M.), Buenos Aires; State University of New York, Upstate Medical University, Syracuse (S.J.T.), and Vaccine Research and Development, Pfizer, Pearl River (J.A., A.G., K.A.S., K.K., W.V.K., D.C., P.R.D., K.U."
+      ],
+      "rubric_item": "affiliations"
+    }
+  ],
+  "evidence_verification_rate": 1.0,
+  "execution_warnings": [],
+  "failed_evidence_modules": [],
+  "findings": [
+    {
+      "affected_conclusions": [],
+      "category": "design",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The paper states that participants were randomly assigned in a 1:1 ratio using an interactive Web-based system, which constitutes a clear and appropriate randomization method. (Evidence ID: span-8020fa484fdd1cf0)",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "9999b8836acc",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 5226,
+          "page": null,
+          "paragraph": null,
+          "quote": "With the use of an interactive Web-based system, participants in the trial were randomly assigned in a 1:1 ratio to receive 30 \u03bcg of BNT162b2 (0.3 ml volume per dose) or saline placebo.",
+          "section": "Trial Procedures",
+          "start": 5041
+        }
+      ],
+      "rubric_item": "randomization_process",
+      "severity": "info",
+      "title": "Randomization Process"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "design",
+      "confidence": 0.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "No evidence was found in the verified evidence ledger regarding allocation concealment. The use of an interactive Web-based system may imply concealment, but without explicit description, this cannot be confirmed. (Evidence: not_found)",
+      "external_sources": [],
+      "grade": "not_assessed",
+      "id": "6a6b1584d711",
+      "limitations": [],
+      "paper_spans": [],
+      "rubric_item": "allocation_concealment",
+      "severity": "info",
+      "title": "Allocation Concealment"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "design",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The paper defines the evaluable population as those without major protocol deviations and explicitly excludes such participants from the primary efficacy analysis, indicating appropriate handling of deviations. (Evidence ID: span-21bb2c19fda0ea67)",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "bc060ac02bdf",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 10244,
+          "page": null,
+          "paragraph": null,
+          "quote": "Analysis of the first primary efficacy end point included participants who received the vaccine or placebo as randomly assigned, had no evidence of infection within 7 days after the second dose, and had no major protocol deviations (the population that could be evaluated).",
+          "section": "Statistical Analysis",
+          "start": 9971
+        }
+      ],
+      "rubric_item": "deviations",
+      "severity": "info",
+      "title": "Deviations"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "design",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The primary outcome is clearly defined as efficacy against confirmed Covid-19 with onset at least 7 days after the second dose, using FDA criteria including specific symptoms and nucleic acid testing. Safety outcomes are also well-defined. (Evidence IDs: span-1767fc81e3eb48d3, span-6107b46a2289759e)",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "4f9bcc1c4e43",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 7186,
+          "page": null,
+          "paragraph": null,
+          "quote": "The first primary end point was the efficacy of BNT162b2 against confirmed Covid-19 with onset at least 7 days after the second dose in participants who had been without serologic or virologic evidence of SARS-CoV-2 infection up to 7 days after the second dose;",
+          "section": "Efficacy",
+          "start": 6925
+        },
+        {
+          "bbox": null,
+          "end": 7923,
+          "page": null,
+          "paragraph": null,
+          "quote": "Confirmed Covid-19 was defined according to the Food and Drug Administration (FDA) criteria as the presence of at least one of the following symptoms: fever, new or increased cough, new or increased shortness of breath, chills, new or increased muscle pain, new loss of taste or smell, sore throat, diarrhea, or vomiting, combined with a respiratory specimen obtained during the symptomatic period or within 4 days before or after it that was positive for SARS-CoV-2 by nucleic acid amplification\u2013based testing, either at the central laboratory or at a local testing facility (using a protocol-defined acceptable test).",
+          "section": "Efficacy",
+          "start": 7304
+        }
+      ],
+      "rubric_item": "outcome_measurement",
+      "severity": "info",
+      "title": "Outcome Measurement"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "design",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The paper reports the number of participants in the safety and efficacy analyses (37,706 and 43,355, respectively), with details on follow-up duration, indicating transparent reporting of participant flow. (Evidence IDs: span-49b36b25af18e720, span-f59d1723a69521ba)",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "e22d171569cc",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 11741,
+          "page": null,
+          "paragraph": null,
+          "quote": "At the data cut-off date of October 9, a total of 37,706 participants had a median of at least 2 months of safety data available after the second dose and contributed to the main safety data set.",
+          "section": "Participants",
+          "start": 11546
+        },
+        {
+          "bbox": null,
+          "end": 9164,
+          "page": null,
+          "paragraph": null,
+          "quote": "The modified intention-to-treat (mITT) efficacy population includes all age groups 12 years of age or older (43,355 persons; 100 participants who were 12 to 15 years of age contributed to person-time years but included no cases).",
+          "section": "Efficacy",
+          "start": 8935
+        }
+      ],
+      "rubric_item": "attrition",
+      "severity": "info",
+      "title": "Attrition"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "statistics",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The analysis is based on a modified intention-to-treat (mITT) population excluding those with major protocol deviations and evidence of infection before 7 days post-dose, which deviates from a full ITT approach. However, this is common in vaccine trials and justified. (Evidence ID: span-602f77124dfa1c03)",
+      "external_sources": [],
+      "grade": "minor_concern",
+      "id": "24f898110d02",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 10244,
+          "page": null,
+          "paragraph": null,
+          "quote": "Analysis of the first primary efficacy end point included participants who received the vaccine or placebo as randomly assigned, had no evidence of infection within 7 days after the second dose, and had no major protocol deviations (the population that could be evaluated).",
+          "section": "Statistical Analysis",
+          "start": 9971
+        }
+      ],
+      "rubric_item": "intention_to_treat",
+      "severity": "minor",
+      "title": "Intention To Treat"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "statistics",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The paper states the study has over 83% power to detect rare adverse events at 0.01% incidence but acknowledges it is not large enough to reliably detect less common adverse events. This indicates limited power for some safety outcomes. (Evidence ID: span-d9ada6bfdfde067d)",
+      "external_sources": [],
+      "grade": "minor_concern",
+      "id": "9526aa49418f",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 21601,
+          "page": null,
+          "paragraph": null,
+          "quote": "With approximately 19,000 participants per group in the subset of participants with a median follow-up time of 2 months after the second dose, the study has more than 83% probability of detecting at least one adverse event, if the true incidence is 0.01%, but it is not large enough to detect less common adverse events reliably.",
+          "section": "Discussion",
+          "start": 21272
+        }
+      ],
+      "rubric_item": "power",
+      "severity": "minor",
+      "title": "Power"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "statistics",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The paper reports vaccine efficacy with a 95% credible interval using a Bayesian beta-binomial model, providing a clear effect size and precision estimate. (Evidence ID: span-cc296448da600e07)",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "77247b0a0e36",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 10653,
+          "page": null,
+          "paragraph": null,
+          "quote": "The 95.0% credible interval for vaccine efficacy and the probability of vaccine efficacy greater than 30% were calculated with the use of a Bayesian beta-binomial model.",
+          "section": "Statistical Analysis",
+          "start": 10484
+        }
+      ],
+      "rubric_item": "effect_size_interval",
+      "severity": "info",
+      "title": "Effect Size Interval"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "statistics",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The paper explicitly states that primary and secondary efficacy endpoints are evaluated sequentially to control the familywise type 1 error rate at 2.5%, indicating appropriate adjustment for multiple comparisons. (Evidence ID: span-99298c5892c25eef)",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "5c3a533c47ef",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 10983,
+          "page": null,
+          "paragraph": null,
+          "quote": "Moreover, primary and secondary efficacy end points are evaluated sequentially to control the familywise type 1 error rate at 2.5%.",
+          "section": "Statistical Analysis",
+          "start": 10852
+        }
+      ],
+      "rubric_item": "multiplicity",
+      "severity": "info",
+      "title": "Multiplicity"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "statistics",
+      "confidence": 0.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "No evidence was found regarding the extent or handling of missing data. The paper does not describe missingness in outcomes or methods for addressing it. (Evidence: not_found)",
+      "external_sources": [],
+      "grade": "not_assessed",
+      "id": "5bb361523c5b",
+      "limitations": [],
+      "paper_spans": [],
+      "rubric_item": "missing_data",
+      "severity": "info",
+      "title": "Missing Data"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "claims",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The paper makes strong claims about efficacy (95% effectiveness, >99.99% probability of >30% efficacy), which are clearly stated and consistent with the reported results. (Evidence IDs: span-758b3df9b37b2c6b, span-88452725ec04f343)",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "1d655bd7fb95",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 1481,
+          "page": null,
+          "paragraph": null,
+          "quote": "BNT162b2 was 95% effective in preventing Covid-19 (95% credible interval, 90.3 to 97.6).",
+          "section": "Abstract",
+          "start": 1393
+        },
+        {
+          "bbox": null,
+          "end": 18440,
+          "page": null,
+          "paragraph": null,
+          "quote": "The vaccine met both primary efficacy end points, with more than a 99.99% probability of a true vaccine efficacy greater than 30%.",
+          "section": "Discussion",
+          "start": 18310
+        }
+      ],
+      "rubric_item": "claim_strength",
+      "severity": "info",
+      "title": "Claim Strength"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "claims",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The reported results (9 cases in vaccine group vs. 169 in placebo) directly support the claim of 94.6\u201395% efficacy with tight confidence intervals. (Evidence ID: span-6e162aa1115f752d)",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "73fac2b298c2",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 17206,
+          "page": null,
+          "paragraph": null,
+          "quote": "Among participants with and those without evidence of prior SARS CoV-2 infection, 9 cases of Covid-19 at least 7 days after the second dose were observed among vaccine recipients and 169 among placebo recipients, corresponding to 94.6% vaccine efficacy (95% CI, 89.9 to 97.3).",
+          "section": "Efficacy",
+          "start": 16930
+        }
+      ],
+      "rubric_item": "results_support",
+      "severity": "info",
+      "title": "Results Support"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "claims",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The paper uses causal language (e.g., 'conferred 95% protection'), which is appropriate given the randomized design and strong evidence. (Evidence IDs: span-8d587d86dd623c68, span-59833904a76607d6)",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "18773ff8e67b",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 2139,
+          "page": null,
+          "paragraph": null,
+          "quote": "A two-dose regimen of BNT162b2 conferred 95% protection against Covid-19 in persons 16 years of age or older.",
+          "section": "Abstract",
+          "start": 2030
+        },
+        {
+          "bbox": null,
+          "end": 18440,
+          "page": null,
+          "paragraph": null,
+          "quote": "The vaccine met both primary efficacy end points, with more than a 99.99% probability of a true vaccine efficacy greater than 30%.",
+          "section": "Discussion",
+          "start": 18310
+        }
+      ],
+      "rubric_item": "causal_language",
+      "severity": "info",
+      "title": "Causal Language"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "claims",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The paper explicitly limits generalization to populations not studied (e.g., children, pregnant women), acknowledging boundaries of inference. (Evidence ID: span-bbc68a286d00c074)",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "c4ab4fc87dc7",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 23089,
+          "page": null,
+          "paragraph": null,
+          "quote": "This report does not address the prevention of Covid-19 in other populations, such as younger adolescents, children, and pregnant women.",
+          "section": "Discussion",
+          "start": 22953
+        }
+      ],
+      "rubric_item": "generalization",
+      "severity": "info",
+      "title": "Generalization"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "claims",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The paper acknowledges key limitations (e.g., inability to assess asymptomatic infection, limited long-term follow-up due to ethical constraints) and aligns them with the scope of claims. (Evidence IDs: span-45321ac3999f0c43, span-25638e452894ae2a)",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "929e81976c18",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 22753,
+          "page": null,
+          "paragraph": null,
+          "quote": "These data do not address whether vaccination prevents asymptomatic infection; a serologic end point that can detect a history of infection regardless of whether symptoms were present (SARS-CoV-2 N-binding antibody) will be reported later.",
+          "section": "Discussion",
+          "start": 22514
+        },
+        {
+          "bbox": null,
+          "end": 22310,
+          "page": null,
+          "paragraph": null,
+          "quote": "Although the study was designed to follow participants for safety and efficacy for 2 years after the second dose, given the high vaccine efficacy, ethical and practical barriers prevent following placebo recipients for 2 years without offering active immunization, once the vaccine is approved by regulators and recommended by public health authorities.",
+          "section": "Discussion",
+          "start": 21957
+        }
+      ],
+      "rubric_item": "limitations_alignment",
+      "severity": "info",
+      "title": "Limitations Alignment"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "transparency",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The trial is registered with ClinicalTrials.gov (NCT04368728), as stated in the paper. (Evidence ID: span-232e679272bea4c6)",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "019411af601d",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 2290,
+          "page": null,
+          "paragraph": null,
+          "quote": "Funded by BioNTech and Pfizer; ClinicalTrials.gov number, NCT04368728 .",
+          "section": "Abstract",
+          "start": 2219
+        }
+      ],
+      "rubric_item": "registration",
+      "severity": "info",
+      "title": "Registration"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "transparency",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The paper confirms ethical oversight by an independent data and safety monitoring board and states that all authors vouch for adherence to the protocol and ethical standards. (Evidence IDs: span-1f802d6e06287d8b, span-5212fef94ed55124)",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "e88129dc3999",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 4927,
+          "page": null,
+          "paragraph": null,
+          "quote": "All the trial data were available to all the authors, who vouch for its accuracy and completeness and for adherence of the trial to the protocol, which is available with the full text of this article at NEJM.org.",
+          "section": "Trial Objectives, Participants and Oversight",
+          "start": 4715
+        },
+        {
+          "bbox": null,
+          "end": 5020,
+          "page": null,
+          "paragraph": null,
+          "quote": "An independent data and safety monitoring board reviewed efficacy and unblinded safety data.",
+          "section": "Trial Objectives, Participants and Oversight",
+          "start": 4928
+        }
+      ],
+      "rubric_item": "ethics",
+      "severity": "info",
+      "title": "Ethics"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "transparency",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The protocol and supplementary appendix, including investigator lists and additional data, are available at NEJM.org, supporting data transparency. (Evidence IDs: span-87e1e1386b91150c, span-2511012c6155ec1e)",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "c014a0e5ac4b",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 4927,
+          "page": null,
+          "paragraph": null,
+          "quote": "which is available with the full text of this article at NEJM.org.",
+          "section": "Trial Objectives, Participants and Oversight",
+          "start": 4861
+        },
+        {
+          "bbox": null,
+          "end": 3730,
+          "page": null,
+          "paragraph": null,
+          "quote": "A complete list of investigators in the C4591001 Clinical Trial Group is provided in the Supplementary Appendix , available at NEJM.org.",
+          "section": "Author notes and conflicts",
+          "start": 3594
+        }
+      ],
+      "rubric_item": "data_code",
+      "severity": "info",
+      "title": "Data Code"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "transparency",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The paper reports primary and secondary endpoints, definitions, statistical methods, and subgroup analyses in detail, consistent with high reporting standards. (Evidence IDs: span-c13993fb2373578d, span-53dd2454ecce1cbf)",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "0dcdc7c43d12",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 7303,
+          "page": null,
+          "paragraph": null,
+          "quote": "The first primary end point was the efficacy of BNT162b2 against confirmed Covid-19 with onset at least 7 days after the second dose in participants who had been without serologic or virologic evidence of SARS-CoV-2 infection up to 7 days after the second dose; the second primary end point was efficacy in participants with and participants without evidence of prior infection.",
+          "section": "Efficacy",
+          "start": 6925
+        },
+        {
+          "bbox": null,
+          "end": 8336,
+          "page": null,
+          "paragraph": null,
+          "quote": "Major secondary end points included the efficacy of BNT162b2 against severe Covid-19. Severe Covid-19 is defined by the FDA as confirmed Covid-19 with one of the following additional features: clinical signs at rest that are indicative of severe systemic illness; respiratory failure; evidence of shock; significant acute renal, hepatic, or neurologic dysfunction; admission to an intensive care unit; or death.",
+          "section": "Efficacy",
+          "start": 7925
+        }
+      ],
+      "rubric_item": "reporting_completeness",
+      "severity": "info",
+      "title": "Reporting Completeness"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "transparency",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "Statistical methods are described in detail, including the Bayesian model and error rate control, enabling replication of analyses. (Evidence IDs: span-bdbc08dc8cd89483, span-4c29a190e2d1b0c7)",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "1c6882f79821",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 10653,
+          "page": null,
+          "paragraph": null,
+          "quote": "The 95.0% credible interval for vaccine efficacy and the probability of vaccine efficacy greater than 30% were calculated with the use of a Bayesian beta-binomial model.",
+          "section": "Statistical Analysis",
+          "start": 10484
+        },
+        {
+          "bbox": null,
+          "end": 10851,
+          "page": null,
+          "paragraph": null,
+          "quote": "The final analysis uses a success boundary of 98.6% for probability of vaccine efficacy greater than 30% to compensate for the interim analysis and to control the overall type 1 error rate at 2.5%.",
+          "section": "Statistical Analysis",
+          "start": 10654
+        }
+      ],
+      "rubric_item": "reproducibility",
+      "severity": "info",
+      "title": "Reproducibility"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "disclosures",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The paper clearly states that the trial was funded by BioNTech and Pfizer. (Evidence ID: span-a5d6364d1a9af063)",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "46b512bed4af",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 2290,
+          "page": null,
+          "paragraph": null,
+          "quote": "Funded by BioNTech and Pfizer; ClinicalTrials.gov number, NCT04368728 .",
+          "section": "Abstract",
+          "start": 2219
+        }
+      ],
+      "rubric_item": "funding_statement",
+      "severity": "info",
+      "title": "Funding Statement"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "disclosures",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "Disclosure forms are available at NEJM.org, providing transparency about potential conflicts of interest. (Evidence ID: span-3654798788bb9633)",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "c8a1dda9ed8e",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 27317,
+          "page": null,
+          "paragraph": null,
+          "quote": "Disclosure forms provided by the authors are available with the full text of this article at NEJM.org.",
+          "section": "Conflicts of interest",
+          "start": 27215
+        }
+      ],
+      "rubric_item": "conflict_statement",
+      "severity": "info",
+      "title": "Conflict Statement"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "disclosures",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "BioNTech, the sponsor, contributed to data interpretation and manuscript writing, which may introduce bias, though this is disclosed. (Evidence ID: span-197a879fc25b1096)",
+      "external_sources": [],
+      "grade": "minor_concern",
+      "id": "679579b2f58b",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 4714,
+          "page": null,
+          "paragraph": null,
+          "quote": "BioNTech was the sponsor of the trial, manufactured the BNT162b2 clinical trial material, and contributed to the interpretation of the data and the writing of the manuscript.",
+          "section": "Trial Objectives, Participants and Oversight",
+          "start": 4540
+        }
+      ],
+      "rubric_item": "sponsor_role",
+      "severity": "minor",
+      "title": "Sponsor Role"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "disclosures",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "Affiliations are clearly listed, including academic institutions and industry sponsors (Pfizer, BioNTech), providing full transparency. (Evidence ID: span-8616de7e4dc7d950)",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "e5c6eaec3031",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 3493,
+          "page": null,
+          "paragraph": null,
+          "quote": "From Fundacion INFANT (F.P.P.) and iTrials-Hospital Militar Central (G.P.M.), Buenos Aires; State University of New York, Upstate Medical University, Syracuse (S.J.T.), and Vaccine Research and Development, Pfizer, Pearl River (J.A., A.G., K.A.S., K.K., W.V.K., D.C., P.R.D., K.U.J., W.C.G.) \u2014 both in New York; Vaccine Research and Development, Pfizer, Hurley, United Kingdom (N.K., S.L., R.B.); Vaccine Research and Development (J.L.P., P.L.) and Worldwide Safety, Safety Surveillance and Risk Management (S.M.), Pfizer, Collegeville, PA; Associa\u00e7\u00e3o Obras Sociais Irm\u00e3 Dulce and Oswaldo Cruz Foundation, Bahia (E.D.M.), and Centro Paulista de Investiga\u00e7\u00e3o Clinica, S\u00e3o Paulo (C.Z.) \u2014 both in Brazil; Global Product Development, Pfizer, Peapack, NJ (S.R.); Cincinnati Children\u2019s Hospital, Cincinnati (R.W.F.); Johns Hopkins Bloomberg School of Public Health, Baltimore (L.L.H.); BioNTech, Mainz (\u00d6T., U.\u015e.), and Medizentrum Essen Borbeck, Essen (A.S.) \u2014 both in Germany; Tiervlei Trial Centre, Karl Bremer Hospital, Cape Town, South Africa (H.N.); Hacettepe University, Ankara, Turkey (S.\u00dc.); and Worldwide Safety, Safety Surveillance and Risk Management, Pfizer, Groton, CT (D.B.T.).",
+          "section": "Affiliations",
+          "start": 2308
+        }
+      ],
+      "rubric_item": "affiliations",
+      "severity": "info",
+      "title": "Affiliations"
+    }
+  ],
+  "id": "0792bcd8-8e5c-4180-977f-d3198712e3f7",
+  "identity": {
+    "arxiv_id": null,
+    "authors": [
+      "Fernando P. Polack",
+      "Stephen J. Thomas",
+      "Nicholas Kitchin",
+      "Judith Absalon",
+      "Alejandra Gurtman",
+      "Stephen Lockhart",
+      "John L. Perez",
+      "Gonzalo P\u00e9rez Marc",
+      "Edson D. Moreira",
+      "Cristiano Zerbini",
+      "Ruth Bailey",
+      "Kena A. Swanson",
+      "Satrajit Roychoudhury",
+      "Kenneth Koury",
+      "Ping Li",
+      "Warren V. Kalina",
+      "David Cooper",
+      "Robert W. Frenck",
+      "Laura L. Hammitt",
+      "\u00d6zlem T\u00fcreci",
+      "Haylene Nell",
+      "Axel Schaefer",
+      "Serhat \u00dcnal",
+      "Dina B. Tresnan",
+      "Susan Mather",
+      "Philip R. Dormitzer",
+      "U\u011fur \u015eahin",
+      "Kathrin U. Jansen",
+      "William C. Gruber"
+    ],
+    "doi": "10.1056/nejmoa2034577",
+    "fingerprint": "c19a567aaf82348f2c8440d465381f7157258083c94a7afffd1e1bdfede79c4a",
+    "journal": "New England Journal of Medicine",
+    "pmcid": "PMC7745181",
+    "pmid": "33301246",
+    "published_at": "2020",
+    "title": "Safety and Efficacy of the BNT162b2 mRNA Covid-19 Vaccine",
+    "updated_at": null,
+    "versions": [
+      "submittedVersion"
+    ]
+  },
+  "language": "en",
+  "limitations": [
+    "The Review score summarizes assessed methodology items; it is not the probability that the conclusions are true.",
+    "No cited-paper full texts were retrieved or analyzed.",
+    "English is validated first; other languages are experimental.",
+    "Supplementary files were linked by the article, but their file contents were not parsed."
+  ],
+  "methodology_hash": "66b93ef58957399335661945dbad5a3e6e38a565ffc1cfd42b62dc31eca72965",
+  "methodology_version": "1.3",
+  "missing_item_ids": [],
+  "module_statuses": [
+    {
+      "assessed_items": 4,
+      "expected_items": 5,
+      "key": "design",
+      "label": "Study design & risk of bias",
+      "limitation": null,
+      "state": "completed"
+    },
+    {
+      "assessed_items": 4,
+      "expected_items": 5,
+      "key": "statistics",
+      "label": "Statistical & computational validity",
+      "limitation": null,
+      "state": "completed"
+    },
+    {
+      "assessed_items": 5,
+      "expected_items": 5,
+      "key": "claims",
+      "label": "Claim\u2013evidence alignment",
+      "limitation": null,
+      "state": "completed"
+    },
+    {
+      "assessed_items": 5,
+      "expected_items": 5,
+      "key": "transparency",
+      "label": "Transparency & reporting",
+      "limitation": null,
+      "state": "completed"
+    },
+    {
+      "assessed_items": 4,
+      "expected_items": 4,
+      "key": "disclosures",
+      "label": "Disclosures & affiliations",
+      "limitation": null,
+      "state": "completed"
+    }
+  ],
+  "paper_sha256": "8d22870a0476837329871977ab249f2bf59705bc8081e874f20b861b87b27caa",
+  "parser_name": "pmc-jats",
+  "parser_version": "1.2",
+  "profile": "randomized_experiment",
+  "provider_profile": "token_factory",
+  "provider_protocol": "openai-compatible",
+  "repaired_output": false,
+  "review_score": 96.8,
+  "reviewer_model": "Qwen/Qwen3-235B-A22B-Instruct-2507",
+  "schema_version": "1.3",
+  "scoring_version": "1.3",
+  "source_format": "jats",
+  "summary": [
+    "Sponsor Role. BioNTech, the sponsor, contributed to data interpretation and manuscript writing, which may introduce bias, though this is disclosed. (Evidence ID: span-197a879fc25b1096)",
+    "Intention To Treat. The analysis is based on a modified intention-to-treat (mITT) population excluding those with major protocol deviations and evidence of infection before 7 days post-dose, which deviates from a full ITT approach. However, this is common in vaccine trials and justified. (Evidence\u2026",
+    "Power. The paper states the study has over 83% power to detect rare adverse events at 0.01% incidence but acknowledges it is not large enough to reliably detect less common adverse events. This indicates limited power for some safety outcomes. (Evidence ID: span-d9ada6bfdfde067d)",
+    "The final review assessed 22 of 24 methodology items."
+  ],
+  "token_usage": {
+    "input_tokens": 34678,
+    "output_tokens": 7174,
+    "total_tokens": 41852
+  },
+  "uncapped_score": 96.8,
+  "worker_model": "Qwen/Qwen3-30B-A3B-Instruct-2507"
+}

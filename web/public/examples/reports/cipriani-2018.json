@@ -1,0 +1,1603 @@
+{
+  "assessed_item_count": 19,
+  "audit_trail": [
+    {
+      "at": "2026-07-18T17:02:11.376334+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": null,
+      "kind": "stage",
+      "label": "Ingesting and fingerprinting",
+      "notes": [],
+      "progress": 8,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T17:02:11.379392+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": null,
+      "kind": "stage",
+      "label": "Classifying paper and routing evidence",
+      "notes": [],
+      "progress": 22,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T17:02:11.397807+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": null,
+      "kind": "stage",
+      "label": "Gathering methodology evidence",
+      "notes": [],
+      "progress": 35,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T17:02:11.399534+00:00",
+      "detail": "Waiting to start.",
+      "evidence_count": 0,
+      "key": "design",
+      "kind": "module",
+      "label": "Study design & risk of bias",
+      "notes": [],
+      "progress": 35,
+      "state": "pending"
+    },
+    {
+      "at": "2026-07-18T17:02:11.399556+00:00",
+      "detail": "Waiting to start.",
+      "evidence_count": 0,
+      "key": "statistics",
+      "kind": "module",
+      "label": "Statistical & computational validity",
+      "notes": [],
+      "progress": 35,
+      "state": "pending"
+    },
+    {
+      "at": "2026-07-18T17:02:11.399561+00:00",
+      "detail": "Waiting to start.",
+      "evidence_count": 0,
+      "key": "claims",
+      "kind": "module",
+      "label": "Claim\u2013evidence alignment",
+      "notes": [],
+      "progress": 35,
+      "state": "pending"
+    },
+    {
+      "at": "2026-07-18T17:02:11.399565+00:00",
+      "detail": "Waiting to start.",
+      "evidence_count": 0,
+      "key": "transparency",
+      "kind": "module",
+      "label": "Transparency & reporting",
+      "notes": [],
+      "progress": 35,
+      "state": "pending"
+    },
+    {
+      "at": "2026-07-18T17:02:11.399568+00:00",
+      "detail": "Waiting to start.",
+      "evidence_count": 0,
+      "key": "disclosures",
+      "kind": "module",
+      "label": "Disclosures & affiliations",
+      "notes": [],
+      "progress": 35,
+      "state": "pending"
+    },
+    {
+      "at": "2026-07-18T17:02:11.422227+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": "design",
+      "kind": "module",
+      "label": "Study design & risk of bias",
+      "notes": [],
+      "progress": 35,
+      "state": "running"
+    },
+    {
+      "at": "2026-07-18T17:02:11.797351+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": "statistics",
+      "kind": "module",
+      "label": "Statistical & computational validity",
+      "notes": [],
+      "progress": 35,
+      "state": "running"
+    },
+    {
+      "at": "2026-07-18T17:02:11.806811+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": "claims",
+      "kind": "module",
+      "label": "Claim\u2013evidence alignment",
+      "notes": [],
+      "progress": 35,
+      "state": "running"
+    },
+    {
+      "at": "2026-07-18T17:02:11.816070+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": "transparency",
+      "kind": "module",
+      "label": "Transparency & reporting",
+      "notes": [],
+      "progress": 35,
+      "state": "running"
+    },
+    {
+      "at": "2026-07-18T17:02:11.819585+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": "disclosures",
+      "kind": "module",
+      "label": "Disclosures & affiliations",
+      "notes": [],
+      "progress": 35,
+      "state": "running"
+    },
+    {
+      "at": "2026-07-18T17:02:21.679462+00:00",
+      "detail": null,
+      "evidence_count": 5,
+      "key": "design",
+      "kind": "module",
+      "label": "Study design & risk of bias",
+      "notes": [
+        {
+          "evidence_state": "observed",
+          "module_key": "design",
+          "observation": "The full protocol of this network meta-analysis has been published.",
+          "quotes": [
+            "The full protocol of this network meta-analysis has been published. 8"
+          ],
+          "rubric_item": "protocol"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "design",
+          "observation": "The search strategy included multiple electronic databases, trial registries, regulatory agency websites, and pharmaceutical company websites, with no language restrictions.",
+          "quotes": [
+            "We searched Cochrane Central Register of Controlled Trials, CINAHL, Embase, LILACS database, MEDLINE, MEDLINE In-Process, PsycINFO, the websites of regulatory agencies, and international registers for published and unpublished, double-blind, randomised controlled trials from thei",
+            "We contacted all the pharmaceutical companies marketing antidepressants and asked for supplemental unpublished information about both premarketing and post-marketing studies, with a specific focus on second-generation antidepressants."
+          ],
+          "rubric_item": "search_coverage"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "design",
+          "observation": "For studies published more than once (ie, duplicates), only the report with the most informative and complete data was included.",
+          "quotes": [
+            "For studies published more than once (ie, duplicates), we included only the report with the most informative and complete data."
+          ],
+          "rubric_item": "duplicate_selection"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "design",
+          "observation": "The studies' risk of bias was assessed in accordance with the Cochrane Handbook for Systematic Reviews of Interventions, and any discrepancies in assessment were resolved by consensus and arbitration by a panel of investigators.",
+          "quotes": [
+            "Any discrepancies were resolved by consensus and arbitration by a panel of investigators within the review team (ACi, TAF, LZA, EHT, and JRG)."
+          ],
+          "rubric_item": "risk_of_bias_process"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "design",
+          "observation": "The study excluded quasi-randomised trials, trials with 20% or more participants with bipolar disorder, psychotic depression, or treatment-resistant depression, and trials involving patients with serious concomitant medical illness.",
+          "quotes": [
+            "We excluded quasi-randomised trials and trials that were incomplete or included 20% or more of participants with bipolar disorder, psychotic depression, or treatment-resistant depression; or patients with a serious concomitant medical illness."
+          ],
+          "rubric_item": "excluded_studies"
+        }
+      ],
+      "progress": 42,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T17:02:23.139629+00:00",
+      "detail": null,
+      "evidence_count": 5,
+      "key": "claims",
+      "kind": "module",
+      "label": "Claim\u2013evidence alignment",
+      "notes": [
+        {
+          "evidence_state": "ambiguous",
+          "module_key": "claims",
+          "observation": "The paper asserts that all antidepressants were more efficacious than placebo, but acknowledges that the certainty of evidence for most comparisons was moderate to very low, and that differences between drugs were modest.",
+          "quotes": [],
+          "rubric_item": "claim_strength"
+        },
+        {
+          "evidence_state": "ambiguous",
+          "module_key": "claims",
+          "observation": "The results are supported by a large dataset of 522 double-blind trials, but the authors note that the certainty of evidence is low to very low for many comparisons, and that effect sizes are modest.",
+          "quotes": [],
+          "rubric_item": "results_support"
+        },
+        {
+          "evidence_state": "ambiguous",
+          "module_key": "claims",
+          "observation": "The paper uses comparative language (e.g., 'more effective', 'better tolerability') but does not claim direct causation between drug use and outcomes, instead framing findings as relative treatment effects.",
+          "quotes": [],
+          "rubric_item": "causal_language"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "claims",
+          "observation": "The paper explicitly limits generalization to adults with acute major depressive disorder and excludes patients with psychotic or treatment-resistant depression, which restricts applicability to broader populations.",
+          "quotes": [
+            "We did not cover important clinical issues that might inform treatment decision making in routine clinical practice (eg, specific adverse events, withdrawal symptoms, or combination with non-pharmacological treatments).",
+            "Patients recruited in randomised trials tend to be highly selected and we also excluded patients with psychotic or treatment-resistant depression, which might limit the applicability of the results to these clinical subgroups"
+          ],
+          "rubric_item": "generalization"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "claims",
+          "observation": "The paper acknowledges multiple limitations, including low certainty of evidence, risk of bias in many trials, incomplete reporting, and the inability to assess long-term effects or next-step treatment after failure.",
+          "quotes": [
+            "Our information unfortunately cannot guide next-step choices after failure of such a first step (ie, they do not apply to treatment-resistant depression), for which well performed trials are scarce."
+          ],
+          "rubric_item": "limitations_alignment"
+        }
+      ],
+      "progress": 48,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T17:02:23.349714+00:00",
+      "detail": null,
+      "evidence_count": 5,
+      "key": "transparency",
+      "kind": "module",
+      "label": "Transparency & reporting",
+      "notes": [
+        {
+          "evidence_state": "observed",
+          "module_key": "transparency",
+          "observation": "The study is registered with PROSPERO, number CRD42012002291.",
+          "quotes": [
+            "This study is registered with PROSPERO, number CRD42012002291."
+          ],
+          "rubric_item": "registration"
+        },
+        {
+          "evidence_state": "not_found",
+          "module_key": "transparency",
+          "observation": "The study involved human participants and used data from clinical trials, but no explicit mention of ethics approval or informed consent is provided in the supplied text.",
+          "quotes": [],
+          "rubric_item": "ethics"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "transparency",
+          "observation": "The full dataset will be made freely available online in Mendeley Data, and the statistical codes for analyses are provided in the appendix.",
+          "quotes": [
+            "With the publication of this Article, the full dataset will be freely available online in Mendeley Data, a secure online repository for research data, which allows archiving of any file type and assigns a permanent and unique digital object identifier (DOI) so that the files can"
+          ],
+          "rubric_item": "data_code"
+        },
+        {
+          "evidence_state": "ambiguous",
+          "module_key": "transparency",
+          "observation": "The paper reports on study registration, data sources, selection criteria, outcomes, statistical methods, sensitivity analyses, and data sharing. However, it does not explicitly report on the full protocol's content or provide a detailed description of the data extraction process beyond a general statement.",
+          "quotes": [],
+          "rubric_item": "reporting_completeness"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "transparency",
+          "observation": "The study provides detailed information on statistical models, software used, and code availability, which supports reproducibility. The analyses were also duplicated using an alternative R package.",
+          "quotes": [
+            "Network meta-analyses of the primary outcomes were duplicated using the netmeta 0.9-6 package in R (version 3.4.0)."
+          ],
+          "rubric_item": "reproducibility"
+        }
+      ],
+      "progress": 55,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T17:02:23.377000+00:00",
+      "detail": null,
+      "evidence_count": 4,
+      "key": "disclosures",
+      "kind": "module",
+      "label": "Disclosures & affiliations",
+      "notes": [
+        {
+          "evidence_state": "observed",
+          "module_key": "disclosures",
+          "observation": "The study was funded by the National Institute for Health Research (NIHR) Oxford Health Biomedical Research Centre and the Japan Society for the Promotion of Science.",
+          "quotes": [
+            "This study was funded by the National Institute for Health Research (NIHR) Oxford Health Biomedical Research Centre (BRC-1215-20005) and the Japan Society for the Promotion of Science (17K19808).",
+            "National Institute for Health Research Oxford Health Biomedical Research Centre and the Japan Society for the Promotion of Science."
+          ],
+          "rubric_item": "funding_statement"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "disclosures",
+          "observation": "Several authors declared competing interests related to pharmaceutical companies, while others declared no competing interests.",
+          "quotes": [
+            "ACi is supported by the National Institute for Health Research (NIHR) Oxford Cognitive Health Clinical Research Facility.",
+            "TAF has received lecture fees from Eli Lilly, Janssen, Meiji, Mitsubishi-Tanabe, Merck Sharp & Dohme, and Pfizer; consultancy fees from Takeda Science Foundation; and research support from Mochida and Mitsubishi-Tanabe."
+          ],
+          "rubric_item": "conflict_statement"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "disclosures",
+          "observation": "The funding source had no role in study design, data collection, data analysis, data interpretation, writing of the report, or in the decision to submit for publication.",
+          "quotes": [
+            "The funder of this study had no role in study design, data collection, data analysis, data interpretation, writing of the report, or in the decision to submit for publication.",
+            "ACi, TAF, GS, ACh, LZA, and YO had full access to all the data, and ACi was responsible for the decision to submit for publication."
+          ],
+          "rubric_item": "sponsor_role"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "disclosures",
+          "observation": "Multiple institutional affiliations are listed for the authors, including departments from universities and research centers in the UK, Japan, Switzerland, France, Germany, the Netherlands, and the USA.",
+          "quotes": [
+            "a Department of Psychiatry, University of Oxford, Oxford, UK",
+            "b Oxford Health NHS Foundation Trust, Warneford Hospital, Oxford, UK"
+          ],
+          "rubric_item": "affiliations"
+        }
+      ],
+      "progress": 61,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T17:02:25.908065+00:00",
+      "detail": null,
+      "evidence_count": 5,
+      "key": "statistics",
+      "kind": "module",
+      "label": "Statistical & computational validity",
+      "notes": [
+        {
+          "evidence_state": "observed",
+          "module_key": "statistics",
+          "observation": "We estimated summary odds ratios (ORs) for dichotomous outcomes and standardised mean differences (SMD, Cohen's d) for continuous outcomes using pairwise and network meta-analysis. In network meta-analysis, we used group-level data; the binomial likelihood was used for dichotomous outcomes and the normal likelihood for continuous outcomes. The study effect sizes were then synthesised using a random-effects network meta-analysis model.",
+          "quotes": [
+            "The study effect sizes were then synthesised using a random-effects network meta-analysis model."
+          ],
+          "rubric_item": "effect_model"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "statistics",
+          "observation": "The median heterogeneity variances were estimated at 0\u00b7044 (95% CrI 0\u00b7028\u20130\u00b7063) for response and 0\u00b7040 (0\u00b7023\u20130\u00b7062) for dropout, suggesting moderate-to-low heterogeneity. Subgroup meta-regression analyses revealed that the use of placebo in trials was the strongest explanation of heterogeneity and inconsistency in those evaluated. Exclusion of placebo-controlled trials resulted in a 24% relative reduction in heterogeneity variance for response and 45% for dropout.",
+          "quotes": [
+            "The median heterogeneity variances were estimated at 0\u00b7044 (95% CrI 0\u00b7028\u20130\u00b7063) for response and 0\u00b7040 (0\u00b7023\u20130\u00b7062) for dropout, suggesting moderate-to-low heterogeneity.",
+            "Exclusion of placebo-controlled trials resulted in a 24% relative reduction in heterogeneity variance for response and 45% for dropout."
+          ],
+          "rubric_item": "heterogeneity"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "statistics",
+          "observation": "In the absence of information or supplemental data from the authors, response rate was calculated according to a validated imputation method.",
+          "quotes": [
+            "In the absence of information or supplemental data from the authors, response rate was calculated according to a validated imputation method."
+          ],
+          "rubric_item": "response_imputation"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "statistics",
+          "observation": "We used comparison-adjusted funnel plots to investigate whether results in imprecise trials differ from those in more precise trials. The comparison-adjusted funnel plots did not suggest that small studies gave different results from larger studies either among placebo-controlled trials or head-to-head comparison trials.",
+          "quotes": [
+            "We used comparison-adjusted funnel plots to investigate whether results in imprecise trials differ from those in more precise trials."
+          ],
+          "rubric_item": "publication_bias"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "statistics",
+          "observation": "We evaluated whether treatment effects for the two primary outcomes were robust in subgroup analyses and network meta-regression using study year, sponsorship, depressive severity at baseline, dosing schedule, study precision (ie, small study effect), and novelty effect. The sensitivity of our conclusions was evaluated by analysing the dataset with the following restrictions: studies with reported response rate, studies using accepted doses in all groups, studies with unpublished data, multi-cen",
+          "quotes": [
+            "The sensitivity of our conclusions was evaluated by analysing the dataset with the following restrictions: studies with reported response rate, studies using accepted doses in all groups, studies with unpublished data, multi-centre studies, and head-to-head studies."
+          ],
+          "rubric_item": "sensitivity_analysis"
+        }
+      ],
+      "progress": 68,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T17:02:25.916116+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": null,
+      "kind": "stage",
+      "label": "Checking current-paper scholarly context",
+      "notes": [],
+      "progress": 72,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T17:02:26.425914+00:00",
+      "detail": "Single bounded reviewer attempt; maximum 6,144 completion tokens.",
+      "evidence_count": 0,
+      "key": null,
+      "kind": "stage",
+      "label": "Generating final assessment",
+      "notes": [],
+      "progress": 84,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T17:03:04.688370+00:00",
+      "detail": "Checking methodology coverage and exact-quote grounding.",
+      "evidence_count": 0,
+      "key": null,
+      "kind": "stage",
+      "label": "Validating reviewer response",
+      "notes": [],
+      "progress": 90,
+      "state": "running"
+    },
+    {
+      "at": "2026-07-18T17:03:04.695825+00:00",
+      "progress": 96,
+      "stage": "Scored"
+    }
+  ],
+  "banners": [],
+  "completed_at": "2026-07-18T17:03:04.695853Z",
+  "composite_score": 90.3,
+  "confidence_components": {
+    "assessment_coverage": 0.8,
+    "evidence_module_coverage": 1.0,
+    "quote_grounding_rate": 1.0,
+    "source_quality": 1.0
+  },
+  "confidence_score": 93.0,
+  "content_level": "full_text",
+  "context": {
+    "author_conflict_signals": [],
+    "corrections": [],
+    "expression_of_concern": false,
+    "metric_notes": [],
+    "record_sources": [],
+    "retracted": false,
+    "venue_signals": []
+  },
+  "coverage": {
+    "available": 0.792,
+    "context": 1.0,
+    "full_review": 0.792,
+    "limitations": [],
+    "overall": 0.792,
+    "paper": 0.792,
+    "provisional": false
+  },
+  "dimensions": [
+    {
+      "assessed_items": 5,
+      "key": "design",
+      "label": "Study design & risk of bias",
+      "score": 87.0,
+      "total_items": 5,
+      "weight": 30.0
+    },
+    {
+      "assessed_items": 5,
+      "key": "statistics",
+      "label": "Statistical & computational validity",
+      "score": 95.0,
+      "total_items": 5,
+      "weight": 25.0
+    },
+    {
+      "assessed_items": 2,
+      "key": "claims",
+      "label": "Claim\u2013evidence alignment",
+      "score": 67.5,
+      "total_items": 5,
+      "weight": 20.0
+    },
+    {
+      "assessed_items": 3,
+      "key": "transparency",
+      "label": "Transparency & reporting",
+      "score": 100.0,
+      "total_items": 5,
+      "weight": 20.0
+    },
+    {
+      "assessed_items": 4,
+      "key": "disclosures",
+      "label": "Disclosures & affiliations",
+      "score": 100.0,
+      "total_items": 4,
+      "weight": 5.0
+    }
+  ],
+  "evidence_notes": [
+    {
+      "evidence_state": "observed",
+      "module_key": "design",
+      "observation": "The full protocol of this network meta-analysis has been published.",
+      "quotes": [
+        "The full protocol of this network meta-analysis has been published. 8"
+      ],
+      "rubric_item": "protocol"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "design",
+      "observation": "The search strategy included multiple electronic databases, trial registries, regulatory agency websites, and pharmaceutical company websites, with no language restrictions.",
+      "quotes": [
+        "We searched Cochrane Central Register of Controlled Trials, CINAHL, Embase, LILACS database, MEDLINE, MEDLINE In-Process, PsycINFO, the websites of regulatory agencies, and international registers for published and unpublished, double-blind, randomised controlled trials from thei",
+        "We contacted all the pharmaceutical companies marketing antidepressants and asked for supplemental unpublished information about both premarketing and post-marketing studies, with a specific focus on second-generation antidepressants."
+      ],
+      "rubric_item": "search_coverage"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "design",
+      "observation": "For studies published more than once (ie, duplicates), only the report with the most informative and complete data was included.",
+      "quotes": [
+        "For studies published more than once (ie, duplicates), we included only the report with the most informative and complete data."
+      ],
+      "rubric_item": "duplicate_selection"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "design",
+      "observation": "The studies' risk of bias was assessed in accordance with the Cochrane Handbook for Systematic Reviews of Interventions, and any discrepancies in assessment were resolved by consensus and arbitration by a panel of investigators.",
+      "quotes": [
+        "Any discrepancies were resolved by consensus and arbitration by a panel of investigators within the review team (ACi, TAF, LZA, EHT, and JRG)."
+      ],
+      "rubric_item": "risk_of_bias_process"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "design",
+      "observation": "The study excluded quasi-randomised trials, trials with 20% or more participants with bipolar disorder, psychotic depression, or treatment-resistant depression, and trials involving patients with serious concomitant medical illness.",
+      "quotes": [
+        "We excluded quasi-randomised trials and trials that were incomplete or included 20% or more of participants with bipolar disorder, psychotic depression, or treatment-resistant depression; or patients with a serious concomitant medical illness."
+      ],
+      "rubric_item": "excluded_studies"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "statistics",
+      "observation": "We estimated summary odds ratios (ORs) for dichotomous outcomes and standardised mean differences (SMD, Cohen's d) for continuous outcomes using pairwise and network meta-analysis. In network meta-analysis, we used group-level data; the binomial likelihood was used for dichotomous outcomes and the normal likelihood for continuous outcomes. The study effect sizes were then synthesised using a random-effects network meta-analysis model.",
+      "quotes": [
+        "The study effect sizes were then synthesised using a random-effects network meta-analysis model."
+      ],
+      "rubric_item": "effect_model"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "statistics",
+      "observation": "The median heterogeneity variances were estimated at 0\u00b7044 (95% CrI 0\u00b7028\u20130\u00b7063) for response and 0\u00b7040 (0\u00b7023\u20130\u00b7062) for dropout, suggesting moderate-to-low heterogeneity. Subgroup meta-regression analyses revealed that the use of placebo in trials was the strongest explanation of heterogeneity and inconsistency in those evaluated. Exclusion of placebo-controlled trials resulted in a 24% relative reduction in heterogeneity variance for response and 45% for dropout.",
+      "quotes": [
+        "The median heterogeneity variances were estimated at 0\u00b7044 (95% CrI 0\u00b7028\u20130\u00b7063) for response and 0\u00b7040 (0\u00b7023\u20130\u00b7062) for dropout, suggesting moderate-to-low heterogeneity.",
+        "Exclusion of placebo-controlled trials resulted in a 24% relative reduction in heterogeneity variance for response and 45% for dropout."
+      ],
+      "rubric_item": "heterogeneity"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "statistics",
+      "observation": "In the absence of information or supplemental data from the authors, response rate was calculated according to a validated imputation method.",
+      "quotes": [
+        "In the absence of information or supplemental data from the authors, response rate was calculated according to a validated imputation method."
+      ],
+      "rubric_item": "response_imputation"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "statistics",
+      "observation": "We used comparison-adjusted funnel plots to investigate whether results in imprecise trials differ from those in more precise trials. The comparison-adjusted funnel plots did not suggest that small studies gave different results from larger studies either among placebo-controlled trials or head-to-head comparison trials.",
+      "quotes": [
+        "We used comparison-adjusted funnel plots to investigate whether results in imprecise trials differ from those in more precise trials."
+      ],
+      "rubric_item": "publication_bias"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "statistics",
+      "observation": "We evaluated whether treatment effects for the two primary outcomes were robust in subgroup analyses and network meta-regression using study year, sponsorship, depressive severity at baseline, dosing schedule, study precision (ie, small study effect), and novelty effect. The sensitivity of our conclusions was evaluated by analysing the dataset with the following restrictions: studies with reported response rate, studies using accepted doses in all groups, studies with unpublished data, multi-cen",
+      "quotes": [
+        "The sensitivity of our conclusions was evaluated by analysing the dataset with the following restrictions: studies with reported response rate, studies using accepted doses in all groups, studies with unpublished data, multi-centre studies, and head-to-head studies."
+      ],
+      "rubric_item": "sensitivity_analysis"
+    },
+    {
+      "evidence_state": "ambiguous",
+      "module_key": "claims",
+      "observation": "The paper asserts that all antidepressants were more efficacious than placebo, but acknowledges that the certainty of evidence for most comparisons was moderate to very low, and that differences between drugs were modest.",
+      "quotes": [],
+      "rubric_item": "claim_strength"
+    },
+    {
+      "evidence_state": "ambiguous",
+      "module_key": "claims",
+      "observation": "The results are supported by a large dataset of 522 double-blind trials, but the authors note that the certainty of evidence is low to very low for many comparisons, and that effect sizes are modest.",
+      "quotes": [],
+      "rubric_item": "results_support"
+    },
+    {
+      "evidence_state": "ambiguous",
+      "module_key": "claims",
+      "observation": "The paper uses comparative language (e.g., 'more effective', 'better tolerability') but does not claim direct causation between drug use and outcomes, instead framing findings as relative treatment effects.",
+      "quotes": [],
+      "rubric_item": "causal_language"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "claims",
+      "observation": "The paper explicitly limits generalization to adults with acute major depressive disorder and excludes patients with psychotic or treatment-resistant depression, which restricts applicability to broader populations.",
+      "quotes": [
+        "We did not cover important clinical issues that might inform treatment decision making in routine clinical practice (eg, specific adverse events, withdrawal symptoms, or combination with non-pharmacological treatments).",
+        "Patients recruited in randomised trials tend to be highly selected and we also excluded patients with psychotic or treatment-resistant depression, which might limit the applicability of the results to these clinical subgroups"
+      ],
+      "rubric_item": "generalization"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "claims",
+      "observation": "The paper acknowledges multiple limitations, including low certainty of evidence, risk of bias in many trials, incomplete reporting, and the inability to assess long-term effects or next-step treatment after failure.",
+      "quotes": [
+        "Our information unfortunately cannot guide next-step choices after failure of such a first step (ie, they do not apply to treatment-resistant depression), for which well performed trials are scarce."
+      ],
+      "rubric_item": "limitations_alignment"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "transparency",
+      "observation": "The study is registered with PROSPERO, number CRD42012002291.",
+      "quotes": [
+        "This study is registered with PROSPERO, number CRD42012002291."
+      ],
+      "rubric_item": "registration"
+    },
+    {
+      "evidence_state": "not_found",
+      "module_key": "transparency",
+      "observation": "The study involved human participants and used data from clinical trials, but no explicit mention of ethics approval or informed consent is provided in the supplied text.",
+      "quotes": [],
+      "rubric_item": "ethics"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "transparency",
+      "observation": "The full dataset will be made freely available online in Mendeley Data, and the statistical codes for analyses are provided in the appendix.",
+      "quotes": [
+        "With the publication of this Article, the full dataset will be freely available online in Mendeley Data, a secure online repository for research data, which allows archiving of any file type and assigns a permanent and unique digital object identifier (DOI) so that the files can"
+      ],
+      "rubric_item": "data_code"
+    },
+    {
+      "evidence_state": "ambiguous",
+      "module_key": "transparency",
+      "observation": "The paper reports on study registration, data sources, selection criteria, outcomes, statistical methods, sensitivity analyses, and data sharing. However, it does not explicitly report on the full protocol's content or provide a detailed description of the data extraction process beyond a general statement.",
+      "quotes": [],
+      "rubric_item": "reporting_completeness"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "transparency",
+      "observation": "The study provides detailed information on statistical models, software used, and code availability, which supports reproducibility. The analyses were also duplicated using an alternative R package.",
+      "quotes": [
+        "Network meta-analyses of the primary outcomes were duplicated using the netmeta 0.9-6 package in R (version 3.4.0)."
+      ],
+      "rubric_item": "reproducibility"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "disclosures",
+      "observation": "The study was funded by the National Institute for Health Research (NIHR) Oxford Health Biomedical Research Centre and the Japan Society for the Promotion of Science.",
+      "quotes": [
+        "This study was funded by the National Institute for Health Research (NIHR) Oxford Health Biomedical Research Centre (BRC-1215-20005) and the Japan Society for the Promotion of Science (17K19808).",
+        "National Institute for Health Research Oxford Health Biomedical Research Centre and the Japan Society for the Promotion of Science."
+      ],
+      "rubric_item": "funding_statement"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "disclosures",
+      "observation": "Several authors declared competing interests related to pharmaceutical companies, while others declared no competing interests.",
+      "quotes": [
+        "ACi is supported by the National Institute for Health Research (NIHR) Oxford Cognitive Health Clinical Research Facility.",
+        "TAF has received lecture fees from Eli Lilly, Janssen, Meiji, Mitsubishi-Tanabe, Merck Sharp & Dohme, and Pfizer; consultancy fees from Takeda Science Foundation; and research support from Mochida and Mitsubishi-Tanabe."
+      ],
+      "rubric_item": "conflict_statement"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "disclosures",
+      "observation": "The funding source had no role in study design, data collection, data analysis, data interpretation, writing of the report, or in the decision to submit for publication.",
+      "quotes": [
+        "The funder of this study had no role in study design, data collection, data analysis, data interpretation, writing of the report, or in the decision to submit for publication.",
+        "ACi, TAF, GS, ACh, LZA, and YO had full access to all the data, and ACi was responsible for the decision to submit for publication."
+      ],
+      "rubric_item": "sponsor_role"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "disclosures",
+      "observation": "Multiple institutional affiliations are listed for the authors, including departments from universities and research centers in the UK, Japan, Switzerland, France, Germany, the Netherlands, and the USA.",
+      "quotes": [
+        "a Department of Psychiatry, University of Oxford, Oxford, UK",
+        "b Oxford Health NHS Foundation Trust, Warneford Hospital, Oxford, UK"
+      ],
+      "rubric_item": "affiliations"
+    }
+  ],
+  "evidence_verification_rate": 1.0,
+  "execution_warnings": [
+    "PDF \u00b7 Unpaywall \u00b7 publishedVersion could not be used; analysis used JATS \u00b7 PMC \u00b7 publishedVersion instead."
+  ],
+  "failed_evidence_modules": [],
+  "findings": [
+    {
+      "affected_conclusions": [],
+      "category": "design",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The full protocol of the network meta-analysis has been published, which supports adherence to transparent and pre-specified methodology. This meets expectations for protocol availability in systematic reviews.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "aedfbafac607",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 11528,
+          "page": null,
+          "paragraph": null,
+          "quote": "The full protocol of this network meta-analysis has been published. 8",
+          "section": "Search strategy and selection criteria",
+          "start": 11459
+        }
+      ],
+      "rubric_item": "protocol",
+      "severity": "info",
+      "title": "Protocol: no concern"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "design",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The search strategy included multiple electronic databases (Cochrane CENTRAL, CINAHL, Embase, LILACS, MEDLINE, PsycINFO), regulatory agency websites, international trial registries, and direct contact with pharmaceutical companies for unpublished data, with no language restrictions. This comprehensive approach supports broad and inclusive study identification.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "2f9b1957cb2f",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 1333,
+          "page": null,
+          "paragraph": null,
+          "quote": "We searched Cochrane Central Register of Controlled Trials, CINAHL, Embase, LILACS database, MEDLINE, MEDLINE In-Process, PsycINFO, the websites of regulatory agencies, and international registers for published and unpublished, double-blind, randomised controlled trials from their inception to Jan 8, 2016.",
+          "section": "Abstract",
+          "start": 1026
+        },
+        {
+          "bbox": null,
+          "end": 10893,
+          "page": null,
+          "paragraph": null,
+          "quote": "We contacted all the pharmaceutical companies marketing antidepressants and asked for supplemental unpublished information about both premarketing and post-marketing studies, with a specific focus on second-generation antidepressants.",
+          "section": "Search strategy and selection criteria",
+          "start": 10659
+        }
+      ],
+      "rubric_item": "search_coverage",
+      "severity": "info",
+      "title": "Search Coverage: no concern"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "design",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The paper explicitly states that for duplicate publications, only the report with the most informative and complete data was included, which aligns with best practices for handling overlapping study reports.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "66d340b402e9",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 13133,
+          "page": null,
+          "paragraph": null,
+          "quote": "For studies published more than once (ie, duplicates), we included only the report with the most informative and complete data.",
+          "section": "Data analysis",
+          "start": 13006
+        }
+      ],
+      "rubric_item": "duplicate_selection",
+      "severity": "info",
+      "title": "Duplicate Selection: no concern"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "design",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "Risk of bias was assessed in accordance with the Cochrane Handbook, and discrepancies were resolved by consensus and arbitration by a panel of investigators, indicating a rigorous and systematic approach to bias evaluation.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "39e1807f75a5",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 11457,
+          "page": null,
+          "paragraph": null,
+          "quote": "Any discrepancies were resolved by consensus and arbitration by a panel of investigators within the review team (ACi, TAF, LZA, EHT, and JRG).",
+          "section": "Search strategy and selection criteria",
+          "start": 11315
+        }
+      ],
+      "rubric_item": "risk_of_bias_process",
+      "severity": "info",
+      "title": "Risk Of Bias Process: no concern"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "design",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The study excluded trials with 20% or more participants with bipolar disorder, psychotic depression, or treatment-resistant depression, which are clinically relevant populations. This exclusion limits generalizability, particularly for treatment-resistant cases, and constitutes a material limitation despite transparent reporting.",
+      "external_sources": [],
+      "grade": "major_concern",
+      "id": "a8e8635ae6bd",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 1816,
+          "page": null,
+          "paragraph": null,
+          "quote": "We excluded quasi-randomised trials and trials that were incomplete or included 20% or more of participants with bipolar disorder, psychotic depression, or treatment-resistant depression; or patients with a serious concomitant medical illness.",
+          "section": "Abstract",
+          "start": 1573
+        }
+      ],
+      "rubric_item": "excluded_studies",
+      "severity": "major",
+      "title": "Excluded Studies: major concern"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "statistics",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The study used a random-effects network meta-analysis model with appropriate effect size metrics (ORs for dichotomous outcomes, SMDs for continuous outcomes), which is methodologically sound and standard for this type of analysis.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "0810f8f79c13",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 13656,
+          "page": null,
+          "paragraph": null,
+          "quote": "The study effect sizes were then synthesised using a random-effects network meta-analysis model.",
+          "section": "Data analysis",
+          "start": 13560
+        }
+      ],
+      "rubric_item": "effect_model",
+      "severity": "info",
+      "title": "Effect Model: no concern"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "statistics",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "Heterogeneity was quantitatively assessed and reported (median variances of 0.044 for response and 0.040 for dropout), interpreted as moderate-to-low. Subgroup analyses identified placebo use as a key contributor, and exclusion of placebo-controlled trials reduced heterogeneity, indicating thoughtful exploration of sources.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "c6eff76d03cf",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 22629,
+          "page": null,
+          "paragraph": null,
+          "quote": "The median heterogeneity variances were estimated at 0\u00b7044 (95% CrI 0\u00b7028\u20130\u00b7063) for response and 0\u00b7040 (0\u00b7023\u20130\u00b7062) for dropout, suggesting moderate-to-low heterogeneity.",
+          "section": "Results",
+          "start": 22457
+        },
+        {
+          "bbox": null,
+          "end": 22927,
+          "page": null,
+          "paragraph": null,
+          "quote": "Exclusion of placebo-controlled trials resulted in a 24% relative reduction in heterogeneity variance for response and 45% for dropout.",
+          "section": "Results",
+          "start": 22792
+        }
+      ],
+      "rubric_item": "heterogeneity",
+      "severity": "info",
+      "title": "Heterogeneity: no concern"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "statistics",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "Response rates were imputed using a validated method when data were missing. While the method is described as validated, the extent of imputation is not quantified. However, given that imputation was necessary and a standard approach was used, this warrants only minor concern unless a large proportion of data were imputed\u2014information not provided here.",
+      "external_sources": [],
+      "grade": "minor_concern",
+      "id": "3dbc24a0160f",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 12479,
+          "page": null,
+          "paragraph": null,
+          "quote": "In the absence of information or supplemental data from the authors, response rate was calculated according to a validated imputation method.",
+          "section": "Outcomes",
+          "start": 12338
+        }
+      ],
+      "rubric_item": "response_imputation",
+      "severity": "minor",
+      "title": "Response Imputation: minor concern"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "statistics",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "Comparison-adjusted funnel plots were used to assess publication bias, and no evidence of small-study effects was found in either placebo-controlled or head-to-head trials, supporting low risk of publication bias.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "e0b4dcb6df6a",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 15833,
+          "page": null,
+          "paragraph": null,
+          "quote": "We used comparison-adjusted funnel plots to investigate whether results in imprecise trials differ from those in more precise trials.",
+          "section": "Data analysis",
+          "start": 15700
+        }
+      ],
+      "rubric_item": "publication_bias",
+      "severity": "info",
+      "title": "Publication Bias: no concern"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "statistics",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "Sensitivity analyses were conducted by restricting the dataset to studies with reported response rates, accepted doses, unpublished data, multicenter studies, and head-to-head studies. Additional subgroup and meta-regression analyses evaluated robustness across multiple dimensions, demonstrating thoroughness.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "6f443c2b752a",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 15699,
+          "page": null,
+          "paragraph": null,
+          "quote": "The sensitivity of our conclusions was evaluated by analysing the dataset with the following restrictions: studies with reported response rate, studies using accepted doses in all groups, studies with unpublished data, multi-centre studies, and head-to-head studies.",
+          "section": "Data analysis",
+          "start": 15433
+        }
+      ],
+      "rubric_item": "sensitivity_analysis",
+      "severity": "info",
+      "title": "Sensitivity Analysis: no concern"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "claims",
+      "confidence": 0.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "No evidence was provided in the verified ledger for claim strength. Assessment cannot be performed without observed content related to the strength or definitiveness of claims made in the paper.",
+      "external_sources": [],
+      "grade": "not_assessed",
+      "id": "1d655bd7fb95",
+      "limitations": [],
+      "paper_spans": [],
+      "rubric_item": "claim_strength",
+      "severity": "info",
+      "title": "Claim Strength: not assessed"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "claims",
+      "confidence": 0.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "No evidence was provided in the verified ledger regarding whether claims are supported by results. This item cannot be assessed without direct linkage between reported findings and interpretive statements.",
+      "external_sources": [],
+      "grade": "not_assessed",
+      "id": "73fac2b298c2",
+      "limitations": [],
+      "paper_spans": [],
+      "rubric_item": "results_support",
+      "severity": "info",
+      "title": "Results Support: not assessed"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "claims",
+      "confidence": 0.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "No evidence was provided in the verified ledger to evaluate the use of causal language. Without observed claims or interpretations, this item cannot be assessed.",
+      "external_sources": [],
+      "grade": "not_assessed",
+      "id": "18773ff8e67b",
+      "limitations": [],
+      "paper_spans": [],
+      "rubric_item": "causal_language",
+      "severity": "info",
+      "title": "Causal Language: not assessed"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "claims",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The paper explicitly acknowledges limited applicability to patients with psychotic or treatment-resistant depression and notes that trial participants are highly selected, which restricts generalizability to real-world clinical populations. These exclusions represent important clinical subgroups, warranting major concern despite transparency.",
+      "external_sources": [],
+      "grade": "major_concern",
+      "id": "c4ab4fc87dc7",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 35579,
+          "page": null,
+          "paragraph": null,
+          "quote": "We did not cover important clinical issues that might inform treatment decision making in routine clinical practice (eg, specific adverse events, withdrawal symptoms, or combination with non-pharmacological treatments).",
+          "section": "Discussion",
+          "start": 35360
+        },
+        {
+          "bbox": null,
+          "end": 35270,
+          "page": null,
+          "paragraph": null,
+          "quote": "Patients recruited in randomised trials tend to be highly selected and we also excluded patients with psychotic or treatment-resistant depression, which might limit the applicability of the results to these clinical subgroups",
+          "section": "Discussion",
+          "start": 35045
+        }
+      ],
+      "rubric_item": "generalization",
+      "severity": "major",
+      "title": "Generalization: major concern"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "claims",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The paper acknowledges key limitations including low certainty of evidence, risk of bias in included trials, incomplete reporting, and lack of data on long-term outcomes or treatment-resistant depression. These limitations are directly aligned with methodological and generalizability concerns raised elsewhere.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "929e81976c18",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 36377,
+          "page": null,
+          "paragraph": null,
+          "quote": "Our information unfortunately cannot guide next-step choices after failure of such a first step (ie, they do not apply to treatment-resistant depression), for which well performed trials are scarce.",
+          "section": "Discussion",
+          "start": 36179
+        }
+      ],
+      "rubric_item": "limitations_alignment",
+      "severity": "info",
+      "title": "Limitations Alignment: no concern"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "transparency",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The study is registered with PROSPERO (CRD42012002291), which supports prospective planning and transparency in conduct.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "019411af601d",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 2427,
+          "page": null,
+          "paragraph": null,
+          "quote": "This study is registered with PROSPERO, number CRD42012002291.",
+          "section": "Abstract",
+          "start": 2365
+        }
+      ],
+      "rubric_item": "registration",
+      "severity": "info",
+      "title": "Registration: no concern"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "transparency",
+      "confidence": 0.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "No evidence was found in the verified ledger regarding ethics approval or ethical considerations. As this is a systematic review of published trials, ethics may not be required, but absence of statement prevents assessment.",
+      "external_sources": [],
+      "grade": "not_assessed",
+      "id": "e88129dc3999",
+      "limitations": [],
+      "paper_spans": [],
+      "rubric_item": "ethics",
+      "severity": "info",
+      "title": "Ethics: not assessed"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "transparency",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The full dataset will be freely available in Mendeley Data with a DOI, and statistical code is provided in the appendix, supporting data transparency and reuse.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "c014a0e5ac4b",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 17330,
+          "page": null,
+          "paragraph": null,
+          "quote": "With the publication of this Article, the full dataset will be freely available online in Mendeley Data, a secure online repository for research data, which allows archiving of any file type and assigns a permanent and unique digital object identifier (DOI) so that the files can be easily referenced ( DOI:10.17632/83rthbp8ys.2 ).",
+          "section": "Data sharing",
+          "start": 16999
+        }
+      ],
+      "rubric_item": "data_code",
+      "severity": "info",
+      "title": "Data Code: no concern"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "transparency",
+      "confidence": 0.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "No evidence was provided in the verified ledger to assess overall reporting completeness against PRISMA or other standards. This item cannot be evaluated without direct audit of reporting elements.",
+      "external_sources": [],
+      "grade": "not_assessed",
+      "id": "0dcdc7c43d12",
+      "limitations": [],
+      "paper_spans": [],
+      "rubric_item": "reporting_completeness",
+      "severity": "info",
+      "title": "Reporting Completeness: not assessed"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "transparency",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The analyses were duplicated using the netmeta package in R, and detailed information on models and software (R version 3.4.0) is provided, supporting computational reproducibility.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "1c6882f79821",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 16729,
+          "page": null,
+          "paragraph": null,
+          "quote": "Network meta-analyses of the primary outcomes were duplicated using the netmeta 0.9-6 package in R (version 3.4.0).",
+          "section": "Data analysis",
+          "start": 16614
+        }
+      ],
+      "rubric_item": "reproducibility",
+      "severity": "info",
+      "title": "Reproducibility: no concern"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "disclosures",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "A clear funding statement is provided, identifying the National Institute for Health Research and the Japan Society for the Promotion of Science as funders.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "46b512bed4af",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 38766,
+          "page": null,
+          "paragraph": null,
+          "quote": "This study was funded by the National Institute for Health Research (NIHR) Oxford Health Biomedical Research Centre (BRC-1215-20005) and the Japan Society for the Promotion of Science (17K19808).",
+          "section": "Acknowledgments",
+          "start": 38571
+        },
+        {
+          "bbox": null,
+          "end": 4537,
+          "page": null,
+          "paragraph": null,
+          "quote": "National Institute for Health Research Oxford Health Biomedical Research Centre and the Japan Society for the Promotion of Science.",
+          "section": "Abstract",
+          "start": 4406
+        }
+      ],
+      "rubric_item": "funding_statement",
+      "severity": "info",
+      "title": "Funding Statement: no concern"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "disclosures",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "Multiple authors disclosed competing interests with pharmaceutical companies, and others declared no competing interests. The disclosures are detailed and transparent, meeting expectations for conflict of interest reporting.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "c8a1dda9ed8e",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 39925,
+          "page": null,
+          "paragraph": null,
+          "quote": "ACi is supported by the National Institute for Health Research (NIHR) Oxford Cognitive Health Clinical Research Facility.",
+          "section": "Acknowledgments",
+          "start": 39804
+        },
+        {
+          "bbox": null,
+          "end": 40145,
+          "page": null,
+          "paragraph": null,
+          "quote": "TAF has received lecture fees from Eli Lilly, Janssen, Meiji, Mitsubishi-Tanabe, Merck Sharp & Dohme, and Pfizer; consultancy fees from Takeda Science Foundation; and research support from Mochida and Mitsubishi-Tanabe.",
+          "section": "Acknowledgments",
+          "start": 39926
+        },
+        {
+          "bbox": null,
+          "end": 40376,
+          "page": null,
+          "paragraph": null,
+          "quote": "SL has received honoraria for consulting from LB Pharma, Lundbeck, Otsuka, TEVA, Geodon Richter, Recordati, LTS Lohmann, and Boehringer Ingelheim; and for lectures from Janssen, Lilly, Lundbeck, Otsuka, SanofiAventis, and Servier.",
+          "section": "Acknowledgments",
+          "start": 40146
+        },
+        {
+          "bbox": null,
+          "end": 40428,
+          "page": null,
+          "paragraph": null,
+          "quote": "NT has received lecture fees from Otsuka and Meiji.",
+          "section": "Acknowledgments",
+          "start": 40377
+        },
+        {
+          "bbox": null,
+          "end": 40473,
+          "page": null,
+          "paragraph": null,
+          "quote": "YH has received lecture fees from Yoshitomi.",
+          "section": "Acknowledgments",
+          "start": 40429
+        },
+        {
+          "bbox": null,
+          "end": 40509,
+          "page": null,
+          "paragraph": null,
+          "quote": "JRG is an NIHR Senior Investigator.",
+          "section": "Acknowledgments",
+          "start": 40474
+        },
+        {
+          "bbox": null,
+          "end": 40559,
+          "page": null,
+          "paragraph": null,
+          "quote": "All other authors declare no competing interests.",
+          "section": "Acknowledgments",
+          "start": 40510
+        }
+      ],
+      "rubric_item": "conflict_statement",
+      "severity": "info",
+      "title": "Conflict Statement: no concern"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "disclosures",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The funding source had no role in study design, data collection, analysis, interpretation, or publication decisions. Full data access and submission authority were retained by the authors, minimizing risk of sponsor influence.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "679579b2f58b",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 17536,
+          "page": null,
+          "paragraph": null,
+          "quote": "The funder of this study had no role in study design, data collection, data analysis, data interpretation, writing of the report, or in the decision to submit for publication.",
+          "section": "Role of the funding source",
+          "start": 17361
+        },
+        {
+          "bbox": null,
+          "end": 17668,
+          "page": null,
+          "paragraph": null,
+          "quote": "ACi, TAF, GS, ACh, LZA, and YO had full access to all the data, and ACi was responsible for the decision to submit for publication.",
+          "section": "Role of the funding source",
+          "start": 17537
+        }
+      ],
+      "rubric_item": "sponsor_role",
+      "severity": "info",
+      "title": "Sponsor Role: no concern"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "disclosures",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "Institutional affiliations are clearly listed for all authors, spanning multiple countries and academic/research institutions, supporting transparency in authorship context.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "e5c6eaec3031",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 4614,
+          "page": null,
+          "paragraph": null,
+          "quote": "a Department of Psychiatry, University of Oxford, Oxford, UK",
+          "section": "Affiliations",
+          "start": 4554
+        },
+        {
+          "bbox": null,
+          "end": 4684,
+          "page": null,
+          "paragraph": null,
+          "quote": "b Oxford Health NHS Foundation Trust, Warneford Hospital, Oxford, UK",
+          "section": "Affiliations",
+          "start": 4616
+        },
+        {
+          "bbox": null,
+          "end": 4784,
+          "page": null,
+          "paragraph": null,
+          "quote": "c Oxford Centre for Human Brain Activity, Department of Psychiatry, Warneford Hospital, Oxford, UK",
+          "section": "Affiliations",
+          "start": 4686
+        },
+        {
+          "bbox": null,
+          "end": 4925,
+          "page": null,
+          "paragraph": null,
+          "quote": "d Department of Health Promotion and Human Behavior, Kyoto University Graduate School of Medicine and School of Public Health, Kyoto, Japan",
+          "section": "Affiliations",
+          "start": 4786
+        },
+        {
+          "bbox": null,
+          "end": 5011,
+          "page": null,
+          "paragraph": null,
+          "quote": "e Institute of Social and Preventive Medicine, University of Bern, Bern, Switzerland",
+          "section": "Affiliations",
+          "start": 4927
+        },
+        {
+          "bbox": null,
+          "end": 5076,
+          "page": null,
+          "paragraph": null,
+          "quote": "f School of Medicine, Paris Descartes University, Paris, France",
+          "section": "Affiliations",
+          "start": 5013
+        },
+        {
+          "bbox": null,
+          "end": 5189,
+          "page": null,
+          "paragraph": null,
+          "quote": "g INSERM, UMR1153 Epidemiology and Statistics, Sorbonne Paris Cit\u00e9 Research Center, METHODS Team, Paris, France",
+          "section": "Affiliations",
+          "start": 5078
+        },
+        {
+          "bbox": null,
+          "end": 5223,
+          "page": null,
+          "paragraph": null,
+          "quote": "h Cochrane France, Paris, France",
+          "section": "Affiliations",
+          "start": 5191
+        }
+      ],
+      "rubric_item": "affiliations",
+      "severity": "info",
+      "title": "Affiliations: no concern"
+    }
+  ],
+  "id": "abe0c3bb-9f82-4c9a-84f5-9917f23107db",
+  "identity": {
+    "arxiv_id": null,
+    "authors": [
+      "Andrea Cipriani",
+      "Toshi A Furukawa",
+      "Georgia Salanti",
+      "Anna Chaimani",
+      "Lauren Z Atkinson",
+      "Yusuke Ogawa",
+      "Stefan Leucht",
+      "Henricus G Ruhe",
+      "Erick H Turner",
+      "Julian P T Higgins",
+      "Matthias Egger",
+      "Nozomi Takeshima",
+      "Yu Hayasaka",
+      "Hissei Imai",
+      "Kiyomi Shinohara",
+      "Aran Tajika",
+      "John P A Ioannidis",
+      "John R Geddes"
+    ],
+    "doi": "10.1016/s0140-6736(17)32802-7",
+    "fingerprint": "edb1e1d41df7e9b2f0c7980653fdeafc2ba2eac5e8ea1efdf690967510f1830d",
+    "journal": "The Lancet",
+    "pmcid": "PMC5889788",
+    "pmid": "29477251",
+    "published_at": "2018",
+    "title": "Comparative efficacy and acceptability of 21 antidepressant drugs for the acute treatment of adults with major depressive disorder: a systematic review and network meta-analysis",
+    "updated_at": null,
+    "versions": [
+      "publishedVersion",
+      "submittedVersion"
+    ]
+  },
+  "language": "en",
+  "limitations": [
+    "The Review score summarizes assessed methodology items; it is not the probability that the conclusions are true.",
+    "No cited-paper full texts were retrieved or analyzed.",
+    "English is validated first; other languages are experimental.",
+    "Supplementary files were linked by the article, but their file contents were not parsed.",
+    "PDF \u00b7 Unpaywall \u00b7 publishedVersion could not be used; analysis used JATS \u00b7 PMC \u00b7 publishedVersion instead.",
+    "PDF \u00b7 Unpaywall \u00b7 publishedVersion could not be used; analysis used JATS \u00b7 PMC \u00b7 publishedVersion instead."
+  ],
+  "methodology_hash": "66b93ef58957399335661945dbad5a3e6e38a565ffc1cfd42b62dc31eca72965",
+  "methodology_version": "1.3",
+  "missing_item_ids": [],
+  "module_statuses": [
+    {
+      "assessed_items": 5,
+      "expected_items": 5,
+      "key": "design",
+      "label": "Study design & risk of bias",
+      "limitation": null,
+      "state": "completed"
+    },
+    {
+      "assessed_items": 5,
+      "expected_items": 5,
+      "key": "statistics",
+      "label": "Statistical & computational validity",
+      "limitation": null,
+      "state": "completed"
+    },
+    {
+      "assessed_items": 2,
+      "expected_items": 5,
+      "key": "claims",
+      "label": "Claim\u2013evidence alignment",
+      "limitation": null,
+      "state": "completed"
+    },
+    {
+      "assessed_items": 3,
+      "expected_items": 5,
+      "key": "transparency",
+      "label": "Transparency & reporting",
+      "limitation": null,
+      "state": "completed"
+    },
+    {
+      "assessed_items": 4,
+      "expected_items": 4,
+      "key": "disclosures",
+      "label": "Disclosures & affiliations",
+      "limitation": null,
+      "state": "completed"
+    }
+  ],
+  "paper_sha256": "1130b0f71feb35e3fd93c9a88e69d901c4581355e1bf3beda256792e02dbfb16",
+  "parser_name": "pmc-jats",
+  "parser_version": "1.1",
+  "profile": "systematic_review_meta_analysis",
+  "provider_profile": "token_factory",
+  "provider_protocol": "openai-compatible",
+  "repaired_output": false,
+  "review_score": 90.3,
+  "reviewer_model": "Qwen/Qwen3-235B-A22B-Instruct-2507",
+  "schema_version": "1.3",
+  "scoring_version": "1.3",
+  "source_format": "jats",
+  "summary": [
+    "Generalization: major concern. The paper explicitly acknowledges limited applicability to patients with psychotic or treatment-resistant depression and notes that trial participants are highly selected, which restricts generalizability to real-world clinical populations. These exclusions represent important cl",
+    "Excluded Studies: major concern. The study excluded trials with 20% or more participants with bipolar disorder, psychotic depression, or treatment-resistant depression, which are clinically relevant populations. This exclusion limits generalizability, particularly for treatment-resistant cases, and constitutes a",
+    "Response Imputation: minor concern. Response rates were imputed using a validated method when data were missing. While the method is described as validated, the extent of imputation is not quantified. However, given that imputation was necessary and a standard approach was used, this warrants only minor concern unl",
+    "The final review assessed 19 of 24 methodology items."
+  ],
+  "token_usage": {
+    "input_tokens": 43587,
+    "output_tokens": 6663,
+    "total_tokens": 50250
+  },
+  "uncapped_score": 90.3,
+  "worker_model": "Qwen/Qwen3-30B-A3B-Instruct-2507"
+}

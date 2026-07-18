@@ -1,0 +1,16 @@
+{
+  "audited_at": "2026-07-18T21:20:17.254984Z",
+  "case_id": "opensafely-2020",
+  "displayed_quotations_checked": 39,
+  "identity_verified": true,
+  "quotation_mismatch_count": 0,
+  "quotation_mismatches": [],
+  "schema_version": "1.0",
+  "secret_scan": "passed",
+  "source_kind": "pdf",
+  "source_verified": true,
+  "warnings": [
+    "Worker evidence extraction was unavailable for: disclosures; those items had no module evidence for final adjudication."
+  ],
+  "warnings_reviewed": true
+}

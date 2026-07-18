@@ -1,0 +1,14 @@
+{
+  "audited_at": "2026-07-18T21:38:32.219021Z",
+  "case_id": "context-reproducibility-2016",
+  "displayed_quotations_checked": 8,
+  "identity_verified": true,
+  "quotation_mismatch_count": 0,
+  "quotation_mismatches": [],
+  "schema_version": "1.0",
+  "secret_scan": "passed",
+  "source_kind": "abstract",
+  "source_verified": true,
+  "warnings": [],
+  "warnings_reviewed": true
+}

@@ -1,0 +1,1492 @@
+{
+  "assessed_item_count": 17,
+  "audit_trail": [
+    {
+      "at": "2026-07-18T16:45:52.449558+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": null,
+      "kind": "stage",
+      "label": "Ingesting and fingerprinting",
+      "notes": [],
+      "progress": 8,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T16:45:52.456371+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": null,
+      "kind": "stage",
+      "label": "Classifying paper and routing evidence",
+      "notes": [],
+      "progress": 22,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T16:45:52.482241+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": null,
+      "kind": "stage",
+      "label": "Gathering methodology evidence",
+      "notes": [],
+      "progress": 35,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T16:45:52.488493+00:00",
+      "detail": "Waiting to start.",
+      "evidence_count": 0,
+      "key": "design",
+      "kind": "module",
+      "label": "Study design & risk of bias",
+      "notes": [],
+      "progress": 35,
+      "state": "pending"
+    },
+    {
+      "at": "2026-07-18T16:45:52.488569+00:00",
+      "detail": "Waiting to start.",
+      "evidence_count": 0,
+      "key": "statistics",
+      "kind": "module",
+      "label": "Statistical & computational validity",
+      "notes": [],
+      "progress": 35,
+      "state": "pending"
+    },
+    {
+      "at": "2026-07-18T16:45:52.488582+00:00",
+      "detail": "Waiting to start.",
+      "evidence_count": 0,
+      "key": "claims",
+      "kind": "module",
+      "label": "Claim\u2013evidence alignment",
+      "notes": [],
+      "progress": 35,
+      "state": "pending"
+    },
+    {
+      "at": "2026-07-18T16:45:52.488591+00:00",
+      "detail": "Waiting to start.",
+      "evidence_count": 0,
+      "key": "transparency",
+      "kind": "module",
+      "label": "Transparency & reporting",
+      "notes": [],
+      "progress": 35,
+      "state": "pending"
+    },
+    {
+      "at": "2026-07-18T16:45:52.488631+00:00",
+      "detail": "Waiting to start.",
+      "evidence_count": 0,
+      "key": "disclosures",
+      "kind": "module",
+      "label": "Disclosures & affiliations",
+      "notes": [],
+      "progress": 35,
+      "state": "pending"
+    },
+    {
+      "at": "2026-07-18T16:45:52.492928+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": "design",
+      "kind": "module",
+      "label": "Study design & risk of bias",
+      "notes": [],
+      "progress": 35,
+      "state": "running"
+    },
+    {
+      "at": "2026-07-18T16:45:52.782131+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": "statistics",
+      "kind": "module",
+      "label": "Statistical & computational validity",
+      "notes": [],
+      "progress": 35,
+      "state": "running"
+    },
+    {
+      "at": "2026-07-18T16:45:52.790259+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": "claims",
+      "kind": "module",
+      "label": "Claim\u2013evidence alignment",
+      "notes": [],
+      "progress": 35,
+      "state": "running"
+    },
+    {
+      "at": "2026-07-18T16:45:52.797065+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": "transparency",
+      "kind": "module",
+      "label": "Transparency & reporting",
+      "notes": [],
+      "progress": 35,
+      "state": "running"
+    },
+    {
+      "at": "2026-07-18T16:45:52.800808+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": "disclosures",
+      "kind": "module",
+      "label": "Disclosures & affiliations",
+      "notes": [],
+      "progress": 35,
+      "state": "running"
+    },
+    {
+      "at": "2026-07-18T16:46:00.317427+00:00",
+      "detail": null,
+      "evidence_count": 5,
+      "key": "transparency",
+      "kind": "module",
+      "label": "Transparency & reporting",
+      "notes": [
+        {
+          "evidence_state": "observed",
+          "module_key": "transparency",
+          "observation": "The trial is registered on clinicaltrials.gov with identifier NCT04019197.",
+          "quotes": [
+            "This randomised, double-blind, placebo-controlled phase IIb clinical trial was conducted at a single US site ( clinicaltrials.gov : NCT04019197 ).",
+            "The study was registered on clinicaltrials.gov ( NCT04019197 )."
+          ],
+          "rubric_item": "registration"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "transparency",
+          "observation": "The study was approved by an Institutional Review Board (IRB), and participants provided written informed consent.",
+          "quotes": [
+            "Institutional Review Board IORG000040 approved the study.",
+            "All participants signed a written informed consent."
+          ],
+          "rubric_item": "ethics"
+        },
+        {
+          "evidence_state": "not_found",
+          "module_key": "transparency",
+          "observation": "The paper states that statistical analyses were performed using Stata 18.0 and R 4.3.0, but does not provide access to raw data or code.",
+          "quotes": [],
+          "rubric_item": "data_code"
+        },
+        {
+          "evidence_state": "ambiguous",
+          "module_key": "transparency",
+          "observation": "The paper reports primary and secondary outcomes, statistical methods, adverse events, and baseline characteristics. However, it does not report the full protocol or detailed data collection procedures beyond what is summarized.",
+          "quotes": [],
+          "rubric_item": "reporting_completeness"
+        },
+        {
+          "evidence_state": "not_found",
+          "module_key": "transparency",
+          "observation": "The paper describes statistical methods and software used, but does not provide code or data access. The protocol is referenced but not included in the main text.",
+          "quotes": [],
+          "rubric_item": "reproducibility"
+        }
+      ],
+      "progress": 42,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T16:46:00.354296+00:00",
+      "detail": null,
+      "evidence_count": 4,
+      "key": "disclosures",
+      "kind": "module",
+      "label": "Disclosures & affiliations",
+      "notes": [
+        {
+          "evidence_state": "observed",
+          "module_key": "disclosures",
+          "observation": "The paper acknowledges funding from the National Institutes of Health (R01DK121619 to GAM and ARE) and the Clinical and Translational Science Collaborative (CTSC) of Northern Ohio (UM1TR004528 to GAM), which is funded by the National Institutes of Health, National Center for Advancing Translational Sciences.",
+          "quotes": [
+            "This work was also made possible through funding support of the National Institutes of Health (R01DK121619 to GAM and ARE) and from the Clinical and Translational Science Collaborative (CTSC) of Northern Ohio (UM1TR004528 to GAM) which is funded by the National Institutes of Heal"
+          ],
+          "rubric_item": "funding_statement"
+        },
+        {
+          "evidence_state": "not_found",
+          "module_key": "disclosures",
+          "observation": "No explicit conflict of interest statement is provided in the text.",
+          "quotes": [],
+          "rubric_item": "conflict_statement"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "disclosures",
+          "observation": "The funding source (National Institutes of Health) had no role in study design, data collection, data analysis, data interpretation, or writing of the report.",
+          "quotes": [
+            "The funding source had no role in study design, data collection, data analysis, data interpretation, or writing of the report."
+          ],
+          "rubric_item": "sponsor_role"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "disclosures",
+          "observation": "Affiliations include multiple institutions: Medical University of South Carolina, Case Western Reserve University, University Hospitals Cleveland Medical Center, and others, with corresponding authors and contributors listed.",
+          "quotes": [
+            "Departments of Pediatrics and Medicine, Divisions of Infectious Diseases, Medical University of South Carolina, Charleston, South Carolina, USA (Prof AR Eckard MD); Department of Population and Quantitative Health Sciences, Case Western Reserve University, Cleveland, Ohio, USA (Q"
+          ],
+          "rubric_item": "affiliations"
+        }
+      ],
+      "progress": 48,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T16:46:00.675299+00:00",
+      "detail": null,
+      "evidence_count": 5,
+      "key": "statistics",
+      "kind": "module",
+      "label": "Statistical & computational validity",
+      "notes": [
+        {
+          "evidence_state": "observed",
+          "module_key": "statistics",
+          "observation": "Analyses were performed using intention-to-treat principles based on randomised treatment assignment including all available data.",
+          "quotes": [
+            "Analyses were performed using intention-to-treat principles based on randomised treatment assignment including all available data."
+          ],
+          "rubric_item": "intention_to_treat"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "statistics",
+          "observation": "Conservatively assuming a mean difference of \u221234\u00b733 cm\u00b2 in abdominal VAT change between groups at 32 weeks, 43 participants per arm in a repeated measures design with two longitudinal measurements achieves >90% power. Sample size was inflated to 52 per arm to account for a conservative 20% loss-to-follow-up/missing data.",
+          "quotes": [
+            "Conservatively assuming a mean difference of \u221234\u00b733 cm 2 in abdominal VAT change between groups at 32 weeks, 43 participants per arm in a repeated measures design with two longitudinal measurements achieves >90% power. Sample size was inflated to 52 per arm to account for a conse"
+          ],
+          "rubric_item": "power"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "statistics",
+          "observation": "The primary outcome of interest, abdominal visceral AT, showed an estimated % change of \u221230\u00b76% (\u03b2: \u221230\u00b782 cm\u00b2; 95% CI: \u221250\u00b713, \u221211\u00b751).",
+          "quotes": [
+            "abdominal visceral AT [\u03b2 (95% CI); estimated % change: \u221230\u00b782 cm 2 (\u221250\u00b713, \u221211\u00b751); \u221230\u00b76%]."
+          ],
+          "rubric_item": "effect_size_interval"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "statistics",
+          "observation": "Benjamini-Hochberg procedure was used to adjust for multiple testing in all analyses; given the phase II nature of our trial, we selected a false discovery rate of 0\u00b720 for correction of p values.",
+          "quotes": [
+            "Benjamini-Hochberg procedure was used to adjust for multiple testing in all analyses; given the phase II nature of our trial, we selected a false discovery rate of 0\u00b720 for correction of p values."
+          ],
+          "rubric_item": "multiplicity"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "statistics",
+          "observation": "Missing data were random; thus, no adjustments were made for missingness in analyses.",
+          "quotes": [
+            "Missing data were random; thus, no adjustments were made for missingness in analyses."
+          ],
+          "rubric_item": "missing_data"
+        }
+      ],
+      "progress": 55,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T16:46:02.544996+00:00",
+      "detail": null,
+      "evidence_count": 5,
+      "key": "design",
+      "kind": "module",
+      "label": "Study design & risk of bias",
+      "notes": [
+        {
+          "evidence_state": "ambiguous",
+          "module_key": "design",
+          "observation": "The worker returned an observation, but its quote did not match the normalized paper exactly.",
+          "quotes": [],
+          "rubric_item": "randomization_process"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "design",
+          "observation": "The randomization sequence was held in a locked, secured location by the investigational pharmacy, and key personnel, staff, participants, and providers were masked to treatment assignment.",
+          "quotes": [
+            "Key personnel, study staff, participants, and participants\u2019 medical providers were masked to treatment assignment.",
+            "To preserve masking, investigational pharmacy assigned participants their treatment allocation at entry and dispensed all doses of semaglutide or matching placebo (saline) in identical-appearing, pre-filled syringes without any recognizable markings."
+          ],
+          "rubric_item": "allocation_concealment"
+        },
+        {
+          "evidence_state": "ambiguous",
+          "module_key": "design",
+          "observation": "Eight participants in each group prematurely withdrew from the study prior to the 32-week primary endpoint. The study did not report on protocol deviations or reasons for withdrawal beyond premature discontinuation.",
+          "quotes": [],
+          "rubric_item": "deviations"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "design",
+          "observation": "Primary outcomes were measured using DXA and non-contrast helical CT at weeks 0 and 32. Fat mass and density were assessed using standardized protocols, with a single radiologist masked to treatment assignment.",
+          "quotes": [
+            "Body composition was assessed using whole-body dual-energy x-ray absorptiometry (DXA) and non-contrast helical computed tomography (CT) of chest and abdomen at weeks 0 and 32, as previously described.",
+            "Measurements were read by a single radiologist (KAG) masked to treatment assignment and clinical information."
+          ],
+          "rubric_item": "outcome_measurement"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "design",
+          "observation": "Eight participants in each group withdrew prematurely, resulting in a 14.8% dropout rate. The study reported that missing data were random and no adjustments were made for missingness.",
+          "quotes": [
+            "Eight participants in each group prematurely withdrew from the study prior to the 32-week primary endpoint.",
+            "Missing data were random; thus, no adjustments were made for missingness in analyses."
+          ],
+          "rubric_item": "attrition"
+        }
+      ],
+      "progress": 61,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T16:46:04.634151+00:00",
+      "detail": null,
+      "evidence_count": 5,
+      "key": "claims",
+      "kind": "module",
+      "label": "Claim\u2013evidence alignment",
+      "notes": [
+        {
+          "evidence_state": "observed",
+          "module_key": "claims",
+          "observation": "The paper makes strong claims about the efficacy of semaglutide in treating HIV-associated lipohypertrophy, particularly highlighting substantial reductions in abdominal visceral and subcutaneous fat, liver fat, and improvements in metabolic markers.",
+          "quotes": [
+            "Notably, there were considerable reductions in all primary outcome measures, including TBF, trunk/abdominal fat (in both visceral and subcutaneous abdominal compartments), limb fat, and pericardial fat.",
+            "The estimated proportion of VAT loss was ~2\u00b77x greater than SAT loss with an estimated reduction in VAT of ~30%."
+          ],
+          "rubric_item": "claim_strength"
+        },
+        {
+          "evidence_state": "ambiguous",
+          "module_key": "claims",
+          "observation": "The worker returned an observation, but its quote did not match the normalized paper exactly.",
+          "quotes": [],
+          "rubric_item": "results_support"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "claims",
+          "observation": "The paper uses causal language to attribute observed changes to semaglutide treatment, consistent with the randomized trial design.",
+          "quotes": [
+            "Statistically significant treatment effects were seen for liver density (i.e., increased, suggestive of decreased liver fat).",
+            "The estimated proportion of VAT loss was ~2\u00b77x greater than SAT loss with an estimated reduction in VAT of ~30%."
+          ],
+          "rubric_item": "causal_language"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "claims",
+          "observation": "The paper acknowledges limitations that restrict generalizability, including small sample size, short duration, single-site enrollment, and exclusion of people with diabetes or severe lipoatrophy.",
+          "quotes": [
+            "Roughly two-thirds of weight loss in our study was attributed to fat decreases. While fat loss carries beneficial effects for PWH considered overweight or obese, for some, there are potentially negative consequences to consider. Specifically, there are considerable numbers of PWH",
+            "We excluded people with severe lipoatrophy and observed limb fat losses nearly proportional to TBF."
+          ],
+          "rubric_item": "generalization"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "claims",
+          "observation": "The limitations discussed in the paper align with the study's design and findings, including sample size, duration, single-site enrollment, and methodological constraints.",
+          "quotes": [
+            "Additional study limitations are worth mentioning. For example, we utilized density to measure fat quality which may fail to assess more subtle effects on adipocytes such as changes in macrophage infiltration or browning, as seen in other studies.",
+            "We also did not measure muscle strength or physical function, which would have aided in this investigation."
+          ],
+          "rubric_item": "limitations_alignment"
+        }
+      ],
+      "progress": 68,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T16:46:04.636742+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": null,
+      "kind": "stage",
+      "label": "Checking current-paper scholarly context",
+      "notes": [],
+      "progress": 72,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T16:46:05.166657+00:00",
+      "detail": "Single bounded reviewer attempt; maximum 6,144 completion tokens.",
+      "evidence_count": 0,
+      "key": null,
+      "kind": "stage",
+      "label": "Generating final assessment",
+      "notes": [],
+      "progress": 84,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T16:46:17.111586+00:00",
+      "detail": "Checking methodology coverage and exact-quote grounding.",
+      "evidence_count": 0,
+      "key": null,
+      "kind": "stage",
+      "label": "Validating reviewer response",
+      "notes": [],
+      "progress": 90,
+      "state": "running"
+    },
+    {
+      "at": "2026-07-18T16:46:17.114853+00:00",
+      "progress": 96,
+      "stage": "Scored"
+    }
+  ],
+  "banners": [],
+  "completed_at": "2026-07-18T16:46:17.114871Z",
+  "composite_score": 90.5,
+  "confidence_components": {
+    "assessment_coverage": 0.708,
+    "evidence_module_coverage": 1.0,
+    "quote_grounding_rate": 0.895,
+    "source_quality": 1.0
+  },
+  "confidence_score": 87.2,
+  "content_level": "full_text",
+  "context": {
+    "author_conflict_signals": [],
+    "corrections": [],
+    "expression_of_concern": false,
+    "metric_notes": [],
+    "record_sources": [],
+    "retracted": false,
+    "venue_signals": []
+  },
+  "coverage": {
+    "available": 0.708,
+    "context": 0.75,
+    "full_review": 0.708,
+    "limitations": [],
+    "overall": 0.708,
+    "paper": 0.708,
+    "provisional": false
+  },
+  "dimensions": [
+    {
+      "assessed_items": 3,
+      "key": "design",
+      "label": "Study design & risk of bias",
+      "score": 75.0,
+      "total_items": 5,
+      "weight": 30.0
+    },
+    {
+      "assessed_items": 5,
+      "key": "statistics",
+      "label": "Statistical & computational validity",
+      "score": 95.0,
+      "total_items": 5,
+      "weight": 25.0
+    },
+    {
+      "assessed_items": 4,
+      "key": "claims",
+      "label": "Claim\u2013evidence alignment",
+      "score": 93.8,
+      "total_items": 5,
+      "weight": 20.0
+    },
+    {
+      "assessed_items": 2,
+      "key": "transparency",
+      "label": "Transparency & reporting",
+      "score": 100.0,
+      "total_items": 5,
+      "weight": 20.0
+    },
+    {
+      "assessed_items": 3,
+      "key": "disclosures",
+      "label": "Disclosures & affiliations",
+      "score": 100.0,
+      "total_items": 4,
+      "weight": 5.0
+    }
+  ],
+  "evidence_notes": [
+    {
+      "evidence_state": "ambiguous",
+      "module_key": "design",
+      "observation": "The worker returned an observation, but its quote did not match the normalized paper exactly.",
+      "quotes": [],
+      "rubric_item": "randomization_process"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "design",
+      "observation": "The randomization sequence was held in a locked, secured location by the investigational pharmacy, and key personnel, staff, participants, and providers were masked to treatment assignment.",
+      "quotes": [
+        "Key personnel, study staff, participants, and participants\u2019 medical providers were masked to treatment assignment.",
+        "To preserve masking, investigational pharmacy assigned participants their treatment allocation at entry and dispensed all doses of semaglutide or matching placebo (saline) in identical-appearing, pre-filled syringes without any recognizable markings."
+      ],
+      "rubric_item": "allocation_concealment"
+    },
+    {
+      "evidence_state": "ambiguous",
+      "module_key": "design",
+      "observation": "Eight participants in each group prematurely withdrew from the study prior to the 32-week primary endpoint. The study did not report on protocol deviations or reasons for withdrawal beyond premature discontinuation.",
+      "quotes": [],
+      "rubric_item": "deviations"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "design",
+      "observation": "Primary outcomes were measured using DXA and non-contrast helical CT at weeks 0 and 32. Fat mass and density were assessed using standardized protocols, with a single radiologist masked to treatment assignment.",
+      "quotes": [
+        "Body composition was assessed using whole-body dual-energy x-ray absorptiometry (DXA) and non-contrast helical computed tomography (CT) of chest and abdomen at weeks 0 and 32, as previously described.",
+        "Measurements were read by a single radiologist (KAG) masked to treatment assignment and clinical information."
+      ],
+      "rubric_item": "outcome_measurement"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "design",
+      "observation": "Eight participants in each group withdrew prematurely, resulting in a 14.8% dropout rate. The study reported that missing data were random and no adjustments were made for missingness.",
+      "quotes": [
+        "Eight participants in each group prematurely withdrew from the study prior to the 32-week primary endpoint.",
+        "Missing data were random; thus, no adjustments were made for missingness in analyses."
+      ],
+      "rubric_item": "attrition"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "statistics",
+      "observation": "Analyses were performed using intention-to-treat principles based on randomised treatment assignment including all available data.",
+      "quotes": [
+        "Analyses were performed using intention-to-treat principles based on randomised treatment assignment including all available data."
+      ],
+      "rubric_item": "intention_to_treat"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "statistics",
+      "observation": "Conservatively assuming a mean difference of \u221234\u00b733 cm\u00b2 in abdominal VAT change between groups at 32 weeks, 43 participants per arm in a repeated measures design with two longitudinal measurements achieves >90% power. Sample size was inflated to 52 per arm to account for a conservative 20% loss-to-follow-up/missing data.",
+      "quotes": [
+        "Conservatively assuming a mean difference of \u221234\u00b733 cm 2 in abdominal VAT change between groups at 32 weeks, 43 participants per arm in a repeated measures design with two longitudinal measurements achieves >90% power. Sample size was inflated to 52 per arm to account for a conse"
+      ],
+      "rubric_item": "power"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "statistics",
+      "observation": "The primary outcome of interest, abdominal visceral AT, showed an estimated % change of \u221230\u00b76% (\u03b2: \u221230\u00b782 cm\u00b2; 95% CI: \u221250\u00b713, \u221211\u00b751).",
+      "quotes": [
+        "abdominal visceral AT [\u03b2 (95% CI); estimated % change: \u221230\u00b782 cm 2 (\u221250\u00b713, \u221211\u00b751); \u221230\u00b76%]."
+      ],
+      "rubric_item": "effect_size_interval"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "statistics",
+      "observation": "Benjamini-Hochberg procedure was used to adjust for multiple testing in all analyses; given the phase II nature of our trial, we selected a false discovery rate of 0\u00b720 for correction of p values.",
+      "quotes": [
+        "Benjamini-Hochberg procedure was used to adjust for multiple testing in all analyses; given the phase II nature of our trial, we selected a false discovery rate of 0\u00b720 for correction of p values."
+      ],
+      "rubric_item": "multiplicity"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "statistics",
+      "observation": "Missing data were random; thus, no adjustments were made for missingness in analyses.",
+      "quotes": [
+        "Missing data were random; thus, no adjustments were made for missingness in analyses."
+      ],
+      "rubric_item": "missing_data"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "claims",
+      "observation": "The paper makes strong claims about the efficacy of semaglutide in treating HIV-associated lipohypertrophy, particularly highlighting substantial reductions in abdominal visceral and subcutaneous fat, liver fat, and improvements in metabolic markers.",
+      "quotes": [
+        "Notably, there were considerable reductions in all primary outcome measures, including TBF, trunk/abdominal fat (in both visceral and subcutaneous abdominal compartments), limb fat, and pericardial fat.",
+        "The estimated proportion of VAT loss was ~2\u00b77x greater than SAT loss with an estimated reduction in VAT of ~30%."
+      ],
+      "rubric_item": "claim_strength"
+    },
+    {
+      "evidence_state": "ambiguous",
+      "module_key": "claims",
+      "observation": "The worker returned an observation, but its quote did not match the normalized paper exactly.",
+      "quotes": [],
+      "rubric_item": "results_support"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "claims",
+      "observation": "The paper uses causal language to attribute observed changes to semaglutide treatment, consistent with the randomized trial design.",
+      "quotes": [
+        "Statistically significant treatment effects were seen for liver density (i.e., increased, suggestive of decreased liver fat).",
+        "The estimated proportion of VAT loss was ~2\u00b77x greater than SAT loss with an estimated reduction in VAT of ~30%."
+      ],
+      "rubric_item": "causal_language"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "claims",
+      "observation": "The paper acknowledges limitations that restrict generalizability, including small sample size, short duration, single-site enrollment, and exclusion of people with diabetes or severe lipoatrophy.",
+      "quotes": [
+        "Roughly two-thirds of weight loss in our study was attributed to fat decreases. While fat loss carries beneficial effects for PWH considered overweight or obese, for some, there are potentially negative consequences to consider. Specifically, there are considerable numbers of PWH",
+        "We excluded people with severe lipoatrophy and observed limb fat losses nearly proportional to TBF."
+      ],
+      "rubric_item": "generalization"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "claims",
+      "observation": "The limitations discussed in the paper align with the study's design and findings, including sample size, duration, single-site enrollment, and methodological constraints.",
+      "quotes": [
+        "Additional study limitations are worth mentioning. For example, we utilized density to measure fat quality which may fail to assess more subtle effects on adipocytes such as changes in macrophage infiltration or browning, as seen in other studies.",
+        "We also did not measure muscle strength or physical function, which would have aided in this investigation."
+      ],
+      "rubric_item": "limitations_alignment"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "transparency",
+      "observation": "The trial is registered on clinicaltrials.gov with identifier NCT04019197.",
+      "quotes": [
+        "This randomised, double-blind, placebo-controlled phase IIb clinical trial was conducted at a single US site ( clinicaltrials.gov : NCT04019197 ).",
+        "The study was registered on clinicaltrials.gov ( NCT04019197 )."
+      ],
+      "rubric_item": "registration"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "transparency",
+      "observation": "The study was approved by an Institutional Review Board (IRB), and participants provided written informed consent.",
+      "quotes": [
+        "Institutional Review Board IORG000040 approved the study.",
+        "All participants signed a written informed consent."
+      ],
+      "rubric_item": "ethics"
+    },
+    {
+      "evidence_state": "not_found",
+      "module_key": "transparency",
+      "observation": "The paper states that statistical analyses were performed using Stata 18.0 and R 4.3.0, but does not provide access to raw data or code.",
+      "quotes": [],
+      "rubric_item": "data_code"
+    },
+    {
+      "evidence_state": "ambiguous",
+      "module_key": "transparency",
+      "observation": "The paper reports primary and secondary outcomes, statistical methods, adverse events, and baseline characteristics. However, it does not report the full protocol or detailed data collection procedures beyond what is summarized.",
+      "quotes": [],
+      "rubric_item": "reporting_completeness"
+    },
+    {
+      "evidence_state": "not_found",
+      "module_key": "transparency",
+      "observation": "The paper describes statistical methods and software used, but does not provide code or data access. The protocol is referenced but not included in the main text.",
+      "quotes": [],
+      "rubric_item": "reproducibility"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "disclosures",
+      "observation": "The paper acknowledges funding from the National Institutes of Health (R01DK121619 to GAM and ARE) and the Clinical and Translational Science Collaborative (CTSC) of Northern Ohio (UM1TR004528 to GAM), which is funded by the National Institutes of Health, National Center for Advancing Translational Sciences.",
+      "quotes": [
+        "This work was also made possible through funding support of the National Institutes of Health (R01DK121619 to GAM and ARE) and from the Clinical and Translational Science Collaborative (CTSC) of Northern Ohio (UM1TR004528 to GAM) which is funded by the National Institutes of Heal"
+      ],
+      "rubric_item": "funding_statement"
+    },
+    {
+      "evidence_state": "not_found",
+      "module_key": "disclosures",
+      "observation": "No explicit conflict of interest statement is provided in the text.",
+      "quotes": [],
+      "rubric_item": "conflict_statement"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "disclosures",
+      "observation": "The funding source (National Institutes of Health) had no role in study design, data collection, data analysis, data interpretation, or writing of the report.",
+      "quotes": [
+        "The funding source had no role in study design, data collection, data analysis, data interpretation, or writing of the report."
+      ],
+      "rubric_item": "sponsor_role"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "disclosures",
+      "observation": "Affiliations include multiple institutions: Medical University of South Carolina, Case Western Reserve University, University Hospitals Cleveland Medical Center, and others, with corresponding authors and contributors listed.",
+      "quotes": [
+        "Departments of Pediatrics and Medicine, Divisions of Infectious Diseases, Medical University of South Carolina, Charleston, South Carolina, USA (Prof AR Eckard MD); Department of Population and Quantitative Health Sciences, Case Western Reserve University, Cleveland, Ohio, USA (Q"
+      ],
+      "rubric_item": "affiliations"
+    }
+  ],
+  "evidence_verification_rate": 0.895,
+  "execution_warnings": [
+    "2 attempted judgments cited no permitted verified evidence and were excluded from scoring."
+  ],
+  "failed_evidence_modules": [],
+  "findings": [
+    {
+      "affected_conclusions": [],
+      "category": "design",
+      "confidence": 0.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "No verified evidence was provided that describes the method of randomization (e.g., computer-generated sequence, random number table). The evidence list is empty for this item.",
+      "external_sources": [],
+      "grade": "not_assessed",
+      "id": "9999b8836acc",
+      "limitations": [],
+      "paper_spans": [],
+      "rubric_item": "randomization_process",
+      "severity": "info",
+      "title": "Randomization Process: not assessed"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "design",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "Allocation concealment is partially addressed: the investigational pharmacy held the randomization sequence in a secured location and dispensed identical-appearing syringes, which supports concealment. However, there is no explicit description of how the sequence was generated or whether the pharmacy was independent of the investigators, limiting full confidence in concealment.",
+      "external_sources": [],
+      "grade": "minor_concern",
+      "id": "6a6b1584d711",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 9840,
+          "page": null,
+          "paragraph": null,
+          "quote": "Key personnel, study staff, participants, and participants\u2019 medical providers were masked to treatment assignment.",
+          "section": "Randomisation and masking",
+          "start": 9726
+        },
+        {
+          "bbox": null,
+          "end": 10091,
+          "page": null,
+          "paragraph": null,
+          "quote": "To preserve masking, investigational pharmacy assigned participants their treatment allocation at entry and dispensed all doses of semaglutide or matching placebo (saline) in identical-appearing, pre-filled syringes without any recognizable markings.",
+          "section": "Randomisation and masking",
+          "start": 9841
+        }
+      ],
+      "rubric_item": "allocation_concealment",
+      "severity": "minor",
+      "title": "Allocation Concealment: minor concern"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "design",
+      "confidence": 0.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "No verified evidence was provided regarding deviations from the intended intervention or protocol. The evidence list is empty for this item.",
+      "external_sources": [],
+      "grade": "not_assessed",
+      "id": "bc060ac02bdf",
+      "limitations": [],
+      "paper_spans": [],
+      "rubric_item": "deviations",
+      "severity": "info",
+      "title": "Deviations: not assessed"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "design",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "Outcome assessors were masked (a single radiologist masked to treatment), and standardized methods (DXA, CT) were used. However, the use of a single radiologist introduces potential bias due to lack of inter-rater reliability assessment, though masking mitigates some risk.",
+      "external_sources": [],
+      "grade": "minor_concern",
+      "id": "4f9bcc1c4e43",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 13130,
+          "page": null,
+          "paragraph": null,
+          "quote": "Body composition was assessed using whole-body dual-energy x-ray absorptiometry (DXA) and non-contrast helical computed tomography (CT) of chest and abdomen at weeks 0 and 32, as previously described.",
+          "section": "Procedures",
+          "start": 12930
+        },
+        {
+          "bbox": null,
+          "end": 13243,
+          "page": null,
+          "paragraph": null,
+          "quote": "Measurements were read by a single radiologist (KAG) masked to treatment assignment and clinical information.",
+          "section": "Procedures",
+          "start": 13134
+        }
+      ],
+      "rubric_item": "outcome_measurement",
+      "severity": "minor",
+      "title": "Outcome Measurement: minor concern"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "design",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The study reports 8 dropouts per group (14.8% attrition) and states that missing data were random, with no adjustments made. While attrition is reported, the justification for assuming randomness without sensitivity analyses (e.g., MNAR models) introduces a minor concern for bias.",
+      "external_sources": [],
+      "grade": "minor_concern",
+      "id": "e22d171569cc",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 22057,
+          "page": null,
+          "paragraph": null,
+          "quote": "Eight participants in each group prematurely withdrew from the study prior to the 32-week primary endpoint.",
+          "section": "Results",
+          "start": 21950
+        },
+        {
+          "bbox": null,
+          "end": 21454,
+          "page": null,
+          "paragraph": null,
+          "quote": "Missing data were random; thus, no adjustments were made for missingness in analyses.",
+          "section": "Statistical analyses",
+          "start": 21369
+        }
+      ],
+      "rubric_item": "attrition",
+      "severity": "minor",
+      "title": "Attrition: minor concern"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "statistics",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The paper explicitly states that analyses followed intention-to-treat principles based on randomized assignment and included all available data, meeting the criterion for no concern.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "24f898110d02",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 18672,
+          "page": null,
+          "paragraph": null,
+          "quote": "Analyses were performed using intention-to-treat principles based on randomised treatment assignment including all available data.",
+          "section": "Statistical analyses",
+          "start": 18542
+        }
+      ],
+      "rubric_item": "intention_to_treat",
+      "severity": "info",
+      "title": "Intention To Treat: no concern"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "statistics",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The study reports a power calculation justifying the sample size (>90% power to detect a mean difference in VAT change), with inflation to account for 20% loss-to-follow-up, indicating adequate planning for statistical power.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "9526aa49418f",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 18403,
+          "page": null,
+          "paragraph": null,
+          "quote": "Conservatively assuming a mean difference of \u221234\u00b733 cm 2 in abdominal VAT change between groups at 32 weeks, 43 participants per arm in a repeated measures design with two longitudinal measurements achieves >90% power. Sample size was inflated to 52 per arm to account for a conservative 20% loss-to-follow-up/missing data.",
+          "section": "Statistical analyses",
+          "start": 18080
+        }
+      ],
+      "rubric_item": "power",
+      "severity": "info",
+      "title": "Power: no concern"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "statistics",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The paper reports effect sizes with 95% confidence intervals (e.g., \u03b2 = \u221230.82 cm\u00b2, 95% CI: \u221250.13, \u221211.51), fulfilling the requirement for effect size and precision reporting.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "77247b0a0e36",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 2017,
+          "page": null,
+          "paragraph": null,
+          "quote": "abdominal visceral AT [\u03b2 (95% CI); estimated % change: \u221230\u00b782 cm 2 (\u221250\u00b713, \u221211\u00b751); \u221230\u00b76%].",
+          "section": "Abstract",
+          "start": 1924
+        }
+      ],
+      "rubric_item": "effect_size_interval",
+      "severity": "info",
+      "title": "Effect Size Interval: no concern"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "statistics",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The Benjamini-Hochberg procedure was used to adjust for multiple testing with a false discovery rate of 0.20, which is appropriate for a phase II trial and addresses multiplicity concerns.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "5c3a533c47ef",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 21368,
+          "page": null,
+          "paragraph": null,
+          "quote": "Benjamini-Hochberg procedure was used to adjust for multiple testing in all analyses; given the phase II nature of our trial, we selected a false discovery rate of 0\u00b720 for correction of p values.",
+          "section": "Statistical analyses",
+          "start": 21172
+        }
+      ],
+      "rubric_item": "multiplicity",
+      "severity": "info",
+      "title": "Multiplicity: no concern"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "statistics",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The paper states that missing data were random and no adjustments were made. However, without reporting the method used to assess randomness (e.g., Little\u2019s test) or conducting sensitivity analyses, there is a minor concern about handling of missing data.",
+      "external_sources": [],
+      "grade": "minor_concern",
+      "id": "5bb361523c5b",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 21454,
+          "page": null,
+          "paragraph": null,
+          "quote": "Missing data were random; thus, no adjustments were made for missingness in analyses.",
+          "section": "Statistical analyses",
+          "start": 21369
+        }
+      ],
+      "rubric_item": "missing_data",
+      "severity": "minor",
+      "title": "Missing Data: minor concern"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "claims",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The paper makes strong claims about semaglutide\u2019s efficacy, supported by statistically significant and clinically meaningful results across multiple fat compartments, consistent with the reported findings.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "1d655bd7fb95",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 27488,
+          "page": null,
+          "paragraph": null,
+          "quote": "Notably, there were considerable reductions in all primary outcome measures, including TBF, trunk/abdominal fat (in both visceral and subcutaneous abdominal compartments), limb fat, and pericardial fat.",
+          "section": "Discussion",
+          "start": 27286
+        },
+        {
+          "bbox": null,
+          "end": 29273,
+          "page": null,
+          "paragraph": null,
+          "quote": "The estimated proportion of VAT loss was ~2\u00b77x greater than SAT loss with an estimated reduction in VAT of ~30%.",
+          "section": "Discussion",
+          "start": 29161
+        }
+      ],
+      "rubric_item": "claim_strength",
+      "severity": "info",
+      "title": "Claim Strength: no concern"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "claims",
+      "confidence": 0.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "No verified evidence was provided to evaluate whether the results directly support the claims made. The evidence list is empty for this item.",
+      "external_sources": [],
+      "grade": "not_assessed",
+      "id": "73fac2b298c2",
+      "limitations": [],
+      "paper_spans": [],
+      "rubric_item": "results_support",
+      "severity": "info",
+      "title": "Results Support: not assessed"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "claims",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The paper uses causal language (e.g., 'treatment effects') appropriately, which is justified by the randomized controlled trial design, supporting valid causal interpretation.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "18773ff8e67b",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 24961,
+          "page": null,
+          "paragraph": null,
+          "quote": "Statistically significant treatment effects were seen for liver density (i.e., increased, suggestive of decreased liver fat).",
+          "section": "Results",
+          "start": 24836
+        },
+        {
+          "bbox": null,
+          "end": 29273,
+          "page": null,
+          "paragraph": null,
+          "quote": "The estimated proportion of VAT loss was ~2\u00b77x greater than SAT loss with an estimated reduction in VAT of ~30%.",
+          "section": "Discussion",
+          "start": 29161
+        }
+      ],
+      "rubric_item": "causal_language",
+      "severity": "info",
+      "title": "Causal Language: no concern"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "claims",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The paper acknowledges limitations to generalizability (small sample, single site, exclusion of diabetes and severe lipoatrophy), but still makes broad claims about effects in people with HIV, introducing minor concern about overgeneralization.",
+      "external_sources": [],
+      "grade": "minor_concern",
+      "id": "c4ab4fc87dc7",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 34592,
+          "page": null,
+          "paragraph": null,
+          "quote": "Roughly two-thirds of weight loss in our study was attributed to fat decreases. While fat loss carries beneficial effects for PWH considered overweight or obese, for some, there are potentially negative consequences to consider. Specifically, there are considerable numbers of PWH with lipoatrophy, most often apparent in their faces and limbs.",
+          "section": "Discussion",
+          "start": 34248
+        },
+        {
+          "bbox": null,
+          "end": 34823,
+          "page": null,
+          "paragraph": null,
+          "quote": "We excluded people with severe lipoatrophy and observed limb fat losses nearly proportional to TBF.",
+          "section": "Discussion",
+          "start": 34724
+        }
+      ],
+      "rubric_item": "generalization",
+      "severity": "minor",
+      "title": "Generalization: minor concern"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "claims",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The limitations discussed (e.g., use of density for fat quality, lack of muscle function measures) are directly relevant to the study\u2019s methods and findings, showing strong alignment.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "929e81976c18",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 35381,
+          "page": null,
+          "paragraph": null,
+          "quote": "Additional study limitations are worth mentioning. For example, we utilized density to measure fat quality which may fail to assess more subtle effects on adipocytes such as changes in macrophage infiltration or browning, as seen in other studies.",
+          "section": "Discussion",
+          "start": 35134
+        },
+        {
+          "bbox": null,
+          "end": 31572,
+          "page": null,
+          "paragraph": null,
+          "quote": "We also did not measure muscle strength or physical function, which would have aided in this investigation.",
+          "section": "Discussion",
+          "start": 31465
+        }
+      ],
+      "rubric_item": "limitations_alignment",
+      "severity": "info",
+      "title": "Limitations Alignment: no concern"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "transparency",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The trial is prospectively registered on ClinicalTrials.gov (NCT04019197), fulfilling transparency and reporting standards.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "019411af601d",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 1059,
+          "page": null,
+          "paragraph": null,
+          "quote": "This randomised, double-blind, placebo-controlled phase IIb clinical trial was conducted at a single US site ( clinicaltrials.gov : NCT04019197 ).",
+          "section": "Abstract",
+          "start": 913
+        },
+        {
+          "bbox": null,
+          "end": 21597,
+          "page": null,
+          "paragraph": null,
+          "quote": "The study was registered on clinicaltrials.gov ( NCT04019197 ).",
+          "section": "Statistical analyses",
+          "start": 21534
+        }
+      ],
+      "rubric_item": "registration",
+      "severity": "info",
+      "title": "Registration: no concern"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "transparency",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The study was approved by an Institutional Review Board and participants provided written informed consent, meeting ethical standards.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "e88129dc3999",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 8256,
+          "page": null,
+          "paragraph": null,
+          "quote": "Institutional Review Board IORG000040 approved the study.",
+          "section": "Study design",
+          "start": 8199
+        },
+        {
+          "bbox": null,
+          "end": 9406,
+          "page": null,
+          "paragraph": null,
+          "quote": "All participants signed a written informed consent.",
+          "section": "Participants",
+          "start": 9355
+        }
+      ],
+      "rubric_item": "ethics",
+      "severity": "info",
+      "title": "Ethics: no concern"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "transparency",
+      "confidence": 0.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "No statement was provided regarding data availability or code sharing. The absence of information on data or code access raises a major concern for transparency and reproducibility.",
+      "external_sources": [],
+      "grade": "not_assessed",
+      "id": "c014a0e5ac4b",
+      "limitations": [
+        "The final judgment cited no matching observed paper evidence."
+      ],
+      "paper_spans": [],
+      "rubric_item": "data_code",
+      "severity": "info",
+      "title": "Data Code: not assessed"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "transparency",
+      "confidence": 0.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "No verified evidence was provided to assess overall reporting completeness (e.g., adherence to CONSORT). The evidence list is empty for this item.",
+      "external_sources": [],
+      "grade": "not_assessed",
+      "id": "0dcdc7c43d12",
+      "limitations": [],
+      "paper_spans": [],
+      "rubric_item": "reporting_completeness",
+      "severity": "info",
+      "title": "Reporting Completeness: not assessed"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "transparency",
+      "confidence": 0.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "No evidence was provided regarding protocol availability, detailed methods, or materials necessary to reproduce the study, making this item not assessable.",
+      "external_sources": [],
+      "grade": "not_assessed",
+      "id": "1c6882f79821",
+      "limitations": [],
+      "paper_spans": [],
+      "rubric_item": "reproducibility",
+      "severity": "info",
+      "title": "Reproducibility: not assessed"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "disclosures",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The paper clearly states funding sources (NIH grants), fulfilling the requirement for a funding statement.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "46b512bed4af",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 37204,
+          "page": null,
+          "paragraph": null,
+          "quote": "This work was also made possible through funding support of the National Institutes of Health (R01DK121619 to GAM and ARE) and from the Clinical and Translational Science Collaborative (CTSC) of Northern Ohio (UM1TR004528 to GAM) which is funded by the National Institutes of Health, National Center for Advancing Translational Sciences.",
+          "section": "Acknowledgments",
+          "start": 36867
+        }
+      ],
+      "rubric_item": "funding_statement",
+      "severity": "info",
+      "title": "Funding Statement: no concern"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "disclosures",
+      "confidence": 0.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "No statement was provided regarding conflicts of interest. The absence of a conflict of interest declaration raises a major concern for transparency.",
+      "external_sources": [],
+      "grade": "not_assessed",
+      "id": "c8a1dda9ed8e",
+      "limitations": [
+        "The final judgment cited no matching observed paper evidence."
+      ],
+      "paper_spans": [],
+      "rubric_item": "conflict_statement",
+      "severity": "info",
+      "title": "Conflict Statement: not assessed"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "disclosures",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The paper explicitly states that the funding source had no role in study design, data collection, analysis, or reporting, supporting independence.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "679579b2f58b",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 21754,
+          "page": null,
+          "paragraph": null,
+          "quote": "The funding source had no role in study design, data collection, data analysis, data interpretation, or writing of the report.",
+          "section": "Role of the funding source",
+          "start": 21628
+        }
+      ],
+      "rubric_item": "sponsor_role",
+      "severity": "info",
+      "title": "Sponsor Role: no concern"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "disclosures",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "Author affiliations are clearly reported, including institutional and departmental details for multiple contributors.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "e5c6eaec3031",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 3463,
+          "page": null,
+          "paragraph": null,
+          "quote": "Departments of Pediatrics and Medicine, Divisions of Infectious Diseases, Medical University of South Carolina, Charleston, South Carolina, USA (Prof AR Eckard MD); Department of Population and Quantitative Health Sciences, Case Western Reserve University, Cleveland, Ohio, USA (Q Wu, Prof A Sattar PhD); Department of Radiology, University Hospitals Cleveland Medical Center, Cleveland, Ohio, USA (K A-G MD); Department of Medicine, Division of Infectious Diseases, University Hospitals Cleveland Medical Center, Cleveland, Ohio, USA (D Labbato BSN, T Foster, AA Fletcher MS, Prof GA McComsey MD); Department of Medicine, Division of Infectious Diseases, Medical University of South Carolina, Charleston, South Carolina, USA (RO Adekunle MD)",
+          "section": "Affiliations",
+          "start": 2721
+        }
+      ],
+      "rubric_item": "affiliations",
+      "severity": "info",
+      "title": "Affiliations: no concern"
+    }
+  ],
+  "id": "d5870076-b77c-45dd-822e-70de2b1e5f0c",
+  "identity": {
+    "arxiv_id": null,
+    "authors": [
+      "Allison Ross Eckard",
+      "Qian Wu",
+      "Abdus Sattar",
+      "Kianoush Ansari-Gilani",
+      "Danielle Labbato",
+      "Theresa Foster",
+      "Aaron A Fletcher",
+      "Ruth O Adekunle",
+      "Grace A McComsey"
+    ],
+    "doi": "10.1016/s2213-8587(24)00150-5",
+    "fingerprint": "5c2a0fbbc17f9cd175497a6c539dc4de5dc4639148439eaa58b57fe7aee2c6f1",
+    "journal": "The Lancet Diabetes &amp; Endocrinology",
+    "pmcid": "PMC11417641",
+    "pmid": "38964353",
+    "published_at": "2024",
+    "title": "Once-weekly semaglutide in people with HIV-associated lipohypertrophy: a randomised, double-blind, placebo-controlled phase 2b single-centre clinical trial",
+    "updated_at": null,
+    "versions": [
+      "submittedVersion"
+    ]
+  },
+  "language": "en",
+  "limitations": [
+    "The Review score summarizes assessed methodology items; it is not the probability that the conclusions are true.",
+    "No cited-paper full texts were retrieved or analyzed.",
+    "English is validated first; other languages are experimental.",
+    "Supplementary files were linked by the article, but their file contents were not parsed.",
+    "2 attempted judgments cited no permitted verified evidence and were excluded from scoring."
+  ],
+  "methodology_hash": "31c043e1cb9d15772f2a8d60cc5605d6c12def628e8eec9aa5d7a6037fc7d964",
+  "methodology_version": "1.3",
+  "missing_item_ids": [],
+  "module_statuses": [
+    {
+      "assessed_items": 3,
+      "expected_items": 5,
+      "key": "design",
+      "label": "Study design & risk of bias",
+      "limitation": null,
+      "state": "completed"
+    },
+    {
+      "assessed_items": 5,
+      "expected_items": 5,
+      "key": "statistics",
+      "label": "Statistical & computational validity",
+      "limitation": null,
+      "state": "completed"
+    },
+    {
+      "assessed_items": 4,
+      "expected_items": 5,
+      "key": "claims",
+      "label": "Claim\u2013evidence alignment",
+      "limitation": null,
+      "state": "completed"
+    },
+    {
+      "assessed_items": 2,
+      "expected_items": 5,
+      "key": "transparency",
+      "label": "Transparency & reporting",
+      "limitation": null,
+      "state": "completed"
+    },
+    {
+      "assessed_items": 3,
+      "expected_items": 4,
+      "key": "disclosures",
+      "label": "Disclosures & affiliations",
+      "limitation": null,
+      "state": "completed"
+    }
+  ],
+  "paper_sha256": "5a77e2616b7ea03d1b0cc7a07330c23b7c7feb906777d82946da14e71df25149",
+  "parser_name": "pmc-jats",
+  "parser_version": "1.1",
+  "profile": "randomized_experiment",
+  "provider_profile": "token_factory",
+  "provider_protocol": "openai-compatible",
+  "repaired_output": false,
+  "review_score": 90.5,
+  "reviewer_model": "Qwen/Qwen3-235B-A22B-Instruct-2507",
+  "schema_version": "1.3",
+  "scoring_version": "1.3",
+  "source_format": "jats",
+  "summary": [
+    "Generalization: minor concern. The paper acknowledges limitations to generalizability (small sample, single site, exclusion of diabetes and severe lipoatrophy), but still makes broad claims about effects in people with HIV, introducing minor concern about overgeneralization.",
+    "Allocation Concealment: minor concern. Allocation concealment is partially addressed: the investigational pharmacy held the randomization sequence in a secured location and dispensed identical-appearing syringes, which supports concealment. However, there is no explicit description of how the sequence was generated or",
+    "Attrition: minor concern. The study reports 8 dropouts per group (14.8% attrition) and states that missing data were random, with no adjustments made. While attrition is reported, the justification for assuming randomness without sensitivity analyses (e.g., MNAR models) introduces a minor concern for bias",
+    "Outcome Measurement: minor concern. Outcome assessors were masked (a single radiologist masked to treatment), and standardized methods (DXA, CT) were used. However, the use of a single radiologist introduces potential bias due to lack of inter-rater reliability assessment, though masking mitigates some risk.",
+    "The final review assessed 17 of 24 methodology items."
+  ],
+  "token_usage": {
+    "input_tokens": 36246,
+    "output_tokens": 6168,
+    "total_tokens": 42414
+  },
+  "uncapped_score": 90.5,
+  "worker_model": "Qwen/Qwen3-30B-A3B-Instruct-2507"
+}

@@ -1,0 +1,893 @@
+{
+  "assessed_item_count": 4,
+  "audit_trail": [
+    {
+      "at": "2026-07-18T21:18:39.508403+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": null,
+      "kind": "stage",
+      "label": "Ingesting and fingerprinting",
+      "notes": [],
+      "progress": 8,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T21:18:39.510186+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": null,
+      "kind": "stage",
+      "label": "Classifying paper and routing evidence",
+      "notes": [],
+      "progress": 22,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T21:18:39.527987+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": null,
+      "kind": "stage",
+      "label": "Gathering methodology evidence",
+      "notes": [],
+      "progress": 35,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T21:18:39.528806+00:00",
+      "detail": "Waiting to start.",
+      "evidence_count": 0,
+      "key": "design",
+      "kind": "module",
+      "label": "Study design & risk of bias",
+      "notes": [],
+      "progress": 35,
+      "state": "pending"
+    },
+    {
+      "at": "2026-07-18T21:18:39.528821+00:00",
+      "detail": "Waiting to start.",
+      "evidence_count": 0,
+      "key": "statistics",
+      "kind": "module",
+      "label": "Statistical & computational validity",
+      "notes": [],
+      "progress": 35,
+      "state": "pending"
+    },
+    {
+      "at": "2026-07-18T21:18:39.528830+00:00",
+      "detail": "Waiting to start.",
+      "evidence_count": 0,
+      "key": "claims",
+      "kind": "module",
+      "label": "Claim\u2013evidence alignment",
+      "notes": [],
+      "progress": 35,
+      "state": "pending"
+    },
+    {
+      "at": "2026-07-18T21:18:39.528839+00:00",
+      "detail": "Waiting to start.",
+      "evidence_count": 0,
+      "key": "transparency",
+      "kind": "module",
+      "label": "Transparency & reporting",
+      "notes": [],
+      "progress": 35,
+      "state": "pending"
+    },
+    {
+      "at": "2026-07-18T21:18:39.528849+00:00",
+      "detail": "Waiting to start.",
+      "evidence_count": 0,
+      "key": "disclosures",
+      "kind": "module",
+      "label": "Disclosures & affiliations",
+      "notes": [],
+      "progress": 35,
+      "state": "pending"
+    },
+    {
+      "at": "2026-07-18T21:18:39.529633+00:00",
+      "detail": "Requires full text content.",
+      "evidence_count": 0,
+      "key": "design",
+      "kind": "module",
+      "label": "Study design & risk of bias",
+      "notes": [],
+      "progress": 42,
+      "state": "skipped"
+    },
+    {
+      "at": "2026-07-18T21:18:39.530341+00:00",
+      "detail": "Requires full text content.",
+      "evidence_count": 0,
+      "key": "statistics",
+      "kind": "module",
+      "label": "Statistical & computational validity",
+      "notes": [],
+      "progress": 48,
+      "state": "skipped"
+    },
+    {
+      "at": "2026-07-18T21:18:39.530821+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": "claims",
+      "kind": "module",
+      "label": "Claim\u2013evidence alignment",
+      "notes": [],
+      "progress": 48,
+      "state": "running"
+    },
+    {
+      "at": "2026-07-18T21:18:39.539661+00:00",
+      "detail": "Requires full text content.",
+      "evidence_count": 0,
+      "key": "transparency",
+      "kind": "module",
+      "label": "Transparency & reporting",
+      "notes": [],
+      "progress": 55,
+      "state": "skipped"
+    },
+    {
+      "at": "2026-07-18T21:18:39.540774+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": "disclosures",
+      "kind": "module",
+      "label": "Disclosures & affiliations",
+      "notes": [],
+      "progress": 55,
+      "state": "running"
+    },
+    {
+      "at": "2026-07-18T21:18:43.386004+00:00",
+      "detail": null,
+      "evidence_count": 4,
+      "key": "disclosures",
+      "kind": "module",
+      "label": "Disclosures & affiliations",
+      "notes": [
+        {
+          "evidence_state": "not_found",
+          "module_key": "disclosures",
+          "observation": "No funding statement is present in the provided text.",
+          "quotes": [],
+          "rubric_item": "funding_statement"
+        },
+        {
+          "evidence_state": "not_found",
+          "module_key": "disclosures",
+          "observation": "No conflict of interest statement is present in the provided text.",
+          "quotes": [],
+          "rubric_item": "conflict_statement"
+        },
+        {
+          "evidence_state": "not_found",
+          "module_key": "disclosures",
+          "observation": "No information about the role of sponsors is present in the provided text.",
+          "quotes": [],
+          "rubric_item": "sponsor_role"
+        },
+        {
+          "evidence_state": "not_found",
+          "module_key": "disclosures",
+          "observation": "The affiliations of the authors are not listed in the provided text.",
+          "quotes": [],
+          "rubric_item": "affiliations"
+        }
+      ],
+      "progress": 61,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T21:18:46.214748+00:00",
+      "detail": null,
+      "evidence_count": 5,
+      "key": "claims",
+      "kind": "module",
+      "label": "Claim\u2013evidence alignment",
+      "notes": [
+        {
+          "evidence_state": "observed",
+          "module_key": "claims",
+          "observation": "The claim is strong in asserting a significant association between contextual sensitivity and replication success, supported by analysis of 100 replication attempts.",
+          "quotes": [
+            "We analyzed 100 replication attempts in psychology and found that the extent to which the research topic was likely to be contextually sensitive (varying in time, culture, or location) was associated with replication success."
+          ],
+          "rubric_item": "claim_strength"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "claims",
+          "observation": "The results support the claim by showing that contextual sensitivity remained a significant predictor of replication success after adjusting for other factors.",
+          "quotes": [
+            "This relationship remained a significant predictor of replication success even after adjusting for characteristics of the original and replication studies that previously had been associated with replication success (e.g., effect size, statistical power)."
+          ],
+          "rubric_item": "results_support"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "claims",
+          "observation": "The paper uses correlational language rather than causal language, avoiding direct claims of causation.",
+          "quotes": [
+            "the extent to which the research topic was likely to be contextually sensitive (varying in time, culture, or location) was associated with replication success"
+          ],
+          "rubric_item": "causal_language"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "claims",
+          "observation": "The study generalizes findings to psychology broadly, but the scope is limited to replication attempts in that field.",
+          "quotes": [
+            "We analyzed 100 replication attempts in psychology and found that the extent to which the research topic was likely to be contextually sensitive (varying in time, culture, or location) was associated with replication success."
+          ],
+          "rubric_item": "generalization"
+        },
+        {
+          "evidence_state": "ambiguous",
+          "module_key": "claims",
+          "observation": "The paper acknowledges limitations related to the scope of the analysis, though specific limitations are not detailed in this excerpt.",
+          "quotes": [],
+          "rubric_item": "limitations_alignment"
+        }
+      ],
+      "progress": 68,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T21:18:46.216303+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": null,
+      "kind": "stage",
+      "label": "Checking current-paper scholarly context",
+      "notes": [],
+      "progress": 72,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T21:18:46.691000+00:00",
+      "detail": "Single bounded reviewer attempt; maximum 6,144 completion tokens.",
+      "evidence_count": 0,
+      "key": null,
+      "kind": "stage",
+      "label": "Generating final assessment",
+      "notes": [],
+      "progress": 84,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T21:18:54.949438+00:00",
+      "detail": "Checking methodology coverage and exact-quote grounding.",
+      "evidence_count": 0,
+      "key": null,
+      "kind": "stage",
+      "label": "Validating reviewer response",
+      "notes": [],
+      "progress": 90,
+      "state": "running"
+    },
+    {
+      "at": "2026-07-18T21:18:54.953785+00:00",
+      "progress": 96,
+      "stage": "Scored"
+    }
+  ],
+  "banners": [],
+  "completed_at": "2026-07-18T21:18:54.953805Z",
+  "composite_score": 93.8,
+  "confidence_components": {
+    "assessment_coverage": 0.64,
+    "evidence_module_coverage": 1.0,
+    "quote_grounding_rate": 1.0,
+    "source_quality": 0.65
+  },
+  "confidence_score": 82.2,
+  "content_level": "abstract",
+  "context": {
+    "author_conflict_signals": [],
+    "corrections": [],
+    "expression_of_concern": false,
+    "metric_notes": [],
+    "record_sources": [],
+    "retracted": false,
+    "venue_signals": []
+  },
+  "coverage": {
+    "available": 0.444,
+    "context": 0.0,
+    "full_review": 0.2,
+    "limitations": [
+      "The analysis used abstract content, not the full paper.",
+      "Low full-review coverage makes the Review score provisional."
+    ],
+    "overall": 0.2,
+    "paper": 0.2,
+    "provisional": true
+  },
+  "dimensions": [
+    {
+      "assessed_items": 0,
+      "key": "design",
+      "label": "Study design & risk of bias",
+      "score": 0.0,
+      "total_items": 3,
+      "weight": 30.0
+    },
+    {
+      "assessed_items": 0,
+      "key": "statistics",
+      "label": "Statistical & computational validity",
+      "score": 0.0,
+      "total_items": 3,
+      "weight": 25.0
+    },
+    {
+      "assessed_items": 4,
+      "key": "claims",
+      "label": "Claim\u2013evidence alignment",
+      "score": 93.8,
+      "total_items": 5,
+      "weight": 20.0
+    },
+    {
+      "assessed_items": 0,
+      "key": "transparency",
+      "label": "Transparency & reporting",
+      "score": 0.0,
+      "total_items": 5,
+      "weight": 20.0
+    },
+    {
+      "assessed_items": 0,
+      "key": "disclosures",
+      "label": "Disclosures & affiliations",
+      "score": 0.0,
+      "total_items": 4,
+      "weight": 5.0
+    }
+  ],
+  "evidence_notes": [
+    {
+      "evidence_state": "observed",
+      "module_key": "claims",
+      "observation": "The claim is strong in asserting a significant association between contextual sensitivity and replication success, supported by analysis of 100 replication attempts.",
+      "quotes": [
+        "We analyzed 100 replication attempts in psychology and found that the extent to which the research topic was likely to be contextually sensitive (varying in time, culture, or location) was associated with replication success."
+      ],
+      "rubric_item": "claim_strength"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "claims",
+      "observation": "The results support the claim by showing that contextual sensitivity remained a significant predictor of replication success after adjusting for other factors.",
+      "quotes": [
+        "This relationship remained a significant predictor of replication success even after adjusting for characteristics of the original and replication studies that previously had been associated with replication success (e.g., effect size, statistical power)."
+      ],
+      "rubric_item": "results_support"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "claims",
+      "observation": "The paper uses correlational language rather than causal language, avoiding direct claims of causation.",
+      "quotes": [
+        "the extent to which the research topic was likely to be contextually sensitive (varying in time, culture, or location) was associated with replication success"
+      ],
+      "rubric_item": "causal_language"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "claims",
+      "observation": "The study generalizes findings to psychology broadly, but the scope is limited to replication attempts in that field.",
+      "quotes": [
+        "We analyzed 100 replication attempts in psychology and found that the extent to which the research topic was likely to be contextually sensitive (varying in time, culture, or location) was associated with replication success."
+      ],
+      "rubric_item": "generalization"
+    },
+    {
+      "evidence_state": "ambiguous",
+      "module_key": "claims",
+      "observation": "The paper acknowledges limitations related to the scope of the analysis, though specific limitations are not detailed in this excerpt.",
+      "quotes": [],
+      "rubric_item": "limitations_alignment"
+    },
+    {
+      "evidence_state": "not_found",
+      "module_key": "disclosures",
+      "observation": "No funding statement is present in the provided text.",
+      "quotes": [],
+      "rubric_item": "funding_statement"
+    },
+    {
+      "evidence_state": "not_found",
+      "module_key": "disclosures",
+      "observation": "No conflict of interest statement is present in the provided text.",
+      "quotes": [],
+      "rubric_item": "conflict_statement"
+    },
+    {
+      "evidence_state": "not_found",
+      "module_key": "disclosures",
+      "observation": "No information about the role of sponsors is present in the provided text.",
+      "quotes": [],
+      "rubric_item": "sponsor_role"
+    },
+    {
+      "evidence_state": "not_found",
+      "module_key": "disclosures",
+      "observation": "The affiliations of the authors are not listed in the provided text.",
+      "quotes": [],
+      "rubric_item": "affiliations"
+    }
+  ],
+  "evidence_verification_rate": 1.0,
+  "execution_warnings": [],
+  "failed_evidence_modules": [],
+  "findings": [
+    {
+      "affected_conclusions": [],
+      "category": "design",
+      "confidence": 0.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "No evidence provided in the verified evidence ledger for this item.",
+      "external_sources": [],
+      "grade": "not_assessed",
+      "id": "0206f8953659",
+      "limitations": [],
+      "paper_spans": [],
+      "rubric_item": "question_clarity",
+      "severity": "info",
+      "title": "Question Clarity"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "design",
+      "confidence": 0.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "No evidence provided in the verified evidence ledger for this item.",
+      "external_sources": [],
+      "grade": "not_assessed",
+      "id": "a3a72c310f2c",
+      "limitations": [],
+      "paper_spans": [],
+      "rubric_item": "argument_structure",
+      "severity": "info",
+      "title": "Argument Structure"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "design",
+      "confidence": 0.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "No evidence provided in the verified evidence ledger for this item.",
+      "external_sources": [],
+      "grade": "not_assessed",
+      "id": "869de229a4b8",
+      "limitations": [],
+      "paper_spans": [],
+      "rubric_item": "source_relevance",
+      "severity": "info",
+      "title": "Source Relevance"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "statistics",
+      "confidence": 0.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "No evidence provided in the verified evidence ledger for this item.",
+      "external_sources": [],
+      "grade": "not_assessed",
+      "id": "4b643a226f1b",
+      "limitations": [],
+      "paper_spans": [],
+      "rubric_item": "quantitative_claims",
+      "severity": "info",
+      "title": "Quantitative Claims"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "statistics",
+      "confidence": 0.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "No evidence provided in the verified evidence ledger for this item.",
+      "external_sources": [],
+      "grade": "not_assessed",
+      "id": "5d06b1d7dfed",
+      "limitations": [],
+      "paper_spans": [],
+      "rubric_item": "uncertainty",
+      "severity": "info",
+      "title": "Uncertainty"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "statistics",
+      "confidence": 0.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "No evidence provided in the verified evidence ledger for this item.",
+      "external_sources": [],
+      "grade": "not_assessed",
+      "id": "5ba80e57493c",
+      "limitations": [],
+      "paper_spans": [],
+      "rubric_item": "internal_consistency",
+      "severity": "info",
+      "title": "Internal Consistency"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "claims",
+      "confidence": 0.65,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The abstract presents a strong claim supported by analysis of 100 replication attempts, indicating a clear and confident assertion about the association between contextual sensitivity and replication success.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "1d655bd7fb95",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 800,
+          "page": null,
+          "paragraph": null,
+          "quote": "We analyzed 100 replication attempts in psychology and found that the extent to which the research topic was likely to be contextually sensitive (varying in time, culture, or location) was associated with replication success.",
+          "section": null,
+          "start": 575
+        }
+      ],
+      "rubric_item": "claim_strength",
+      "severity": "info",
+      "title": "Claim Strength"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "claims",
+      "confidence": 0.65,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The results are robustly presented, with the relationship between contextual sensitivity and replication success remaining significant after adjustment for known confounding factors such as effect size and statistical power.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "73fac2b298c2",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 1056,
+          "page": null,
+          "paragraph": null,
+          "quote": "This relationship remained a significant predictor of replication success even after adjusting for characteristics of the original and replication studies that previously had been associated with replication success (e.g., effect size, statistical power).",
+          "section": null,
+          "start": 801
+        }
+      ],
+      "rubric_item": "results_support",
+      "severity": "info",
+      "title": "Results Support"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "claims",
+      "confidence": 0.65,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The paper appropriately uses associational language ('was associated with') rather than causal language, which aligns with the observational nature of the analysis.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "18773ff8e67b",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 799,
+          "page": null,
+          "paragraph": null,
+          "quote": "the extent to which the research topic was likely to be contextually sensitive (varying in time, culture, or location) was associated with replication success",
+          "section": null,
+          "start": 641
+        }
+      ],
+      "rubric_item": "causal_language",
+      "severity": "info",
+      "title": "Causal Language"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "claims",
+      "confidence": 0.65,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The study generalizes findings to psychology broadly based on 100 replication attempts, which may not fully represent the entire field; however, the scope is reasonably defined within psychological replication studies.",
+      "external_sources": [],
+      "grade": "minor_concern",
+      "id": "c4ab4fc87dc7",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 800,
+          "page": null,
+          "paragraph": null,
+          "quote": "We analyzed 100 replication attempts in psychology and found that the extent to which the research topic was likely to be contextually sensitive (varying in time, culture, or location) was associated with replication success.",
+          "section": null,
+          "start": 575
+        }
+      ],
+      "rubric_item": "generalization",
+      "severity": "minor",
+      "title": "Generalization"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "claims",
+      "confidence": 0.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "No evidence provided in the verified evidence ledger for this item.",
+      "external_sources": [],
+      "grade": "not_assessed",
+      "id": "929e81976c18",
+      "limitations": [],
+      "paper_spans": [],
+      "rubric_item": "limitations_alignment",
+      "severity": "info",
+      "title": "Limitations Alignment"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "transparency",
+      "confidence": 0.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "No evidence provided in the verified evidence ledger for this item.",
+      "external_sources": [],
+      "grade": "not_assessed",
+      "id": "019411af601d",
+      "limitations": [],
+      "paper_spans": [],
+      "rubric_item": "registration",
+      "severity": "info",
+      "title": "Registration"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "transparency",
+      "confidence": 0.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "No evidence provided in the verified evidence ledger for this item.",
+      "external_sources": [],
+      "grade": "not_assessed",
+      "id": "e88129dc3999",
+      "limitations": [],
+      "paper_spans": [],
+      "rubric_item": "ethics",
+      "severity": "info",
+      "title": "Ethics"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "transparency",
+      "confidence": 0.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "No evidence provided in the verified evidence ledger for this item.",
+      "external_sources": [],
+      "grade": "not_assessed",
+      "id": "c014a0e5ac4b",
+      "limitations": [],
+      "paper_spans": [],
+      "rubric_item": "data_code",
+      "severity": "info",
+      "title": "Data Code"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "transparency",
+      "confidence": 0.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "No evidence provided in the verified evidence ledger for this item.",
+      "external_sources": [],
+      "grade": "not_assessed",
+      "id": "0dcdc7c43d12",
+      "limitations": [],
+      "paper_spans": [],
+      "rubric_item": "reporting_completeness",
+      "severity": "info",
+      "title": "Reporting Completeness"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "transparency",
+      "confidence": 0.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "No evidence provided in the verified evidence ledger for this item.",
+      "external_sources": [],
+      "grade": "not_assessed",
+      "id": "1c6882f79821",
+      "limitations": [],
+      "paper_spans": [],
+      "rubric_item": "reproducibility",
+      "severity": "info",
+      "title": "Reproducibility"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "disclosures",
+      "confidence": 0.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "No evidence provided in the verified evidence ledger for this item.",
+      "external_sources": [],
+      "grade": "not_assessed",
+      "id": "46b512bed4af",
+      "limitations": [],
+      "paper_spans": [],
+      "rubric_item": "funding_statement",
+      "severity": "info",
+      "title": "Funding Statement"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "disclosures",
+      "confidence": 0.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "No evidence provided in the verified evidence ledger for this item.",
+      "external_sources": [],
+      "grade": "not_assessed",
+      "id": "c8a1dda9ed8e",
+      "limitations": [],
+      "paper_spans": [],
+      "rubric_item": "conflict_statement",
+      "severity": "info",
+      "title": "Conflict Statement"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "disclosures",
+      "confidence": 0.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "No evidence provided in the verified evidence ledger for this item.",
+      "external_sources": [],
+      "grade": "not_assessed",
+      "id": "679579b2f58b",
+      "limitations": [],
+      "paper_spans": [],
+      "rubric_item": "sponsor_role",
+      "severity": "info",
+      "title": "Sponsor Role"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "disclosures",
+      "confidence": 0.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "No evidence provided in the verified evidence ledger for this item.",
+      "external_sources": [],
+      "grade": "not_assessed",
+      "id": "e5c6eaec3031",
+      "limitations": [],
+      "paper_spans": [],
+      "rubric_item": "affiliations",
+      "severity": "info",
+      "title": "Affiliations"
+    }
+  ],
+  "id": "d25bf8f2-0e29-4e85-98ca-5490f3553f74",
+  "identity": {
+    "arxiv_id": null,
+    "authors": [
+      "Jay J. Van Bavel",
+      "Peter Mende-Siedlecki",
+      "William J. Brady",
+      "Diego A. Reinero"
+    ],
+    "doi": "10.1073/pnas.1521897113",
+    "fingerprint": "9bc0cd2c09efd71f71a407f583325e8c64f97173bd2a68c0a4dbe3d9243e1396",
+    "journal": "Proceedings of the National Academy of Sciences",
+    "pmcid": "PMC4988618",
+    "pmid": "27217556",
+    "published_at": "2016",
+    "title": "Contextual sensitivity in scientific reproducibility",
+    "updated_at": null,
+    "versions": [
+      "publishedVersion"
+    ]
+  },
+  "language": "en",
+  "limitations": [
+    "The Review score summarizes assessed methodology items; it is not the probability that the conclusions are true.",
+    "No cited-paper full texts were retrieved or analyzed.",
+    "English is validated first; other languages are experimental.",
+    "No usable full-text candidate; the example is scoped to available metadata or abstract.",
+    "Source candidate 1d63a9f5bdd513f0 could not be prepared during release preflight.",
+    "Source candidate e060c3fdf5e0c677 could not be prepared during release preflight.",
+    "The analysis used abstract content, not the full paper.",
+    "Low full-review coverage makes the Review score provisional."
+  ],
+  "methodology_hash": "66b93ef58957399335661945dbad5a3e6e38a565ffc1cfd42b62dc31eca72965",
+  "methodology_version": "1.3",
+  "missing_item_ids": [],
+  "module_statuses": [
+    {
+      "assessed_items": 0,
+      "expected_items": 3,
+      "key": "design",
+      "label": "Study design & risk of bias",
+      "limitation": "Requires full_text.",
+      "state": "ineligible_at_content_level"
+    },
+    {
+      "assessed_items": 0,
+      "expected_items": 3,
+      "key": "statistics",
+      "label": "Statistical & computational validity",
+      "limitation": "Requires full_text.",
+      "state": "ineligible_at_content_level"
+    },
+    {
+      "assessed_items": 4,
+      "expected_items": 5,
+      "key": "claims",
+      "label": "Claim\u2013evidence alignment",
+      "limitation": null,
+      "state": "completed"
+    },
+    {
+      "assessed_items": 0,
+      "expected_items": 5,
+      "key": "transparency",
+      "label": "Transparency & reporting",
+      "limitation": "Requires full_text.",
+      "state": "ineligible_at_content_level"
+    },
+    {
+      "assessed_items": 0,
+      "expected_items": 4,
+      "key": "disclosures",
+      "label": "Disclosures & affiliations",
+      "limitation": null,
+      "state": "completed"
+    }
+  ],
+  "paper_sha256": "909736abbec9874078610a628a532ee5b56ee158206e81fd4eb439e6e9347874",
+  "parser_name": "release-metadata",
+  "parser_version": "1.0",
+  "profile": "common_core",
+  "provider_profile": "token_factory",
+  "provider_protocol": "openai-compatible",
+  "repaired_output": false,
+  "review_score": 93.8,
+  "reviewer_model": "Qwen/Qwen3-235B-A22B-Instruct-2507",
+  "schema_version": "1.3",
+  "scoring_version": "1.3",
+  "source_format": "abstract",
+  "summary": [
+    "Generalization. The study generalizes findings to psychology broadly based on 100 replication attempts, which may not fully represent the entire field; however, the scope is reasonably defined within psychological replication studies.",
+    "The final review assessed 4 of 20 methodology items."
+  ],
+  "token_usage": {
+    "input_tokens": 2668,
+    "output_tokens": 1865,
+    "total_tokens": 4533
+  },
+  "uncapped_score": 93.8,
+  "worker_model": "Qwen/Qwen3-30B-A3B-Instruct-2507"
+}

@@ -1,0 +1,1381 @@
+{
+  "assessed_item_count": 15,
+  "audit_trail": [
+    {
+      "at": "2026-07-18T21:18:46.441401+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": null,
+      "kind": "stage",
+      "label": "Ingesting and fingerprinting",
+      "notes": [],
+      "progress": 8,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T21:18:46.443706+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": null,
+      "kind": "stage",
+      "label": "Classifying paper and routing evidence",
+      "notes": [],
+      "progress": 22,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T21:18:46.457898+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": null,
+      "kind": "stage",
+      "label": "Gathering methodology evidence",
+      "notes": [],
+      "progress": 35,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T21:18:46.458704+00:00",
+      "detail": "Waiting to start.",
+      "evidence_count": 0,
+      "key": "design",
+      "kind": "module",
+      "label": "Study design & risk of bias",
+      "notes": [],
+      "progress": 35,
+      "state": "pending"
+    },
+    {
+      "at": "2026-07-18T21:18:46.458714+00:00",
+      "detail": "Waiting to start.",
+      "evidence_count": 0,
+      "key": "statistics",
+      "kind": "module",
+      "label": "Statistical & computational validity",
+      "notes": [],
+      "progress": 35,
+      "state": "pending"
+    },
+    {
+      "at": "2026-07-18T21:18:46.458717+00:00",
+      "detail": "Waiting to start.",
+      "evidence_count": 0,
+      "key": "claims",
+      "kind": "module",
+      "label": "Claim\u2013evidence alignment",
+      "notes": [],
+      "progress": 35,
+      "state": "pending"
+    },
+    {
+      "at": "2026-07-18T21:18:46.458720+00:00",
+      "detail": "Waiting to start.",
+      "evidence_count": 0,
+      "key": "transparency",
+      "kind": "module",
+      "label": "Transparency & reporting",
+      "notes": [],
+      "progress": 35,
+      "state": "pending"
+    },
+    {
+      "at": "2026-07-18T21:18:46.458723+00:00",
+      "detail": "Waiting to start.",
+      "evidence_count": 0,
+      "key": "disclosures",
+      "kind": "module",
+      "label": "Disclosures & affiliations",
+      "notes": [],
+      "progress": 35,
+      "state": "pending"
+    },
+    {
+      "at": "2026-07-18T21:18:46.459561+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": "design",
+      "kind": "module",
+      "label": "Study design & risk of bias",
+      "notes": [],
+      "progress": 35,
+      "state": "running"
+    },
+    {
+      "at": "2026-07-18T21:18:46.466816+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": "statistics",
+      "kind": "module",
+      "label": "Statistical & computational validity",
+      "notes": [],
+      "progress": 35,
+      "state": "running"
+    },
+    {
+      "at": "2026-07-18T21:18:46.473255+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": "claims",
+      "kind": "module",
+      "label": "Claim\u2013evidence alignment",
+      "notes": [],
+      "progress": 35,
+      "state": "running"
+    },
+    {
+      "at": "2026-07-18T21:18:46.479001+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": "transparency",
+      "kind": "module",
+      "label": "Transparency & reporting",
+      "notes": [],
+      "progress": 35,
+      "state": "running"
+    },
+    {
+      "at": "2026-07-18T21:18:46.482622+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": "disclosures",
+      "kind": "module",
+      "label": "Disclosures & affiliations",
+      "notes": [],
+      "progress": 35,
+      "state": "running"
+    },
+    {
+      "at": "2026-07-18T21:18:56.712510+00:00",
+      "detail": null,
+      "evidence_count": 5,
+      "key": "statistics",
+      "kind": "module",
+      "label": "Statistical & computational validity",
+      "notes": [
+        {
+          "evidence_state": "observed",
+          "module_key": "statistics",
+          "observation": "Models were adjusted for age using a four-knot cubic spline for age, except for estimation of age-group hazard ratios.",
+          "quotes": [
+            "Models were adjusted for age using a four-knot cubic spline for age, except for estimation of age-group hazard ratios."
+          ],
+          "rubric_item": "model_specification"
+        },
+        {
+          "evidence_state": "ambiguous",
+          "module_key": "statistics",
+          "observation": "The worker returned an observation, but its quote did not match the normalized paper exactly.",
+          "quotes": [],
+          "rubric_item": "overlap"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "statistics",
+          "observation": "Sensitivity analyses were conducted using complete records only, multiple imputation, earlier administrative censoring at 6 April 2020, and population-calibrated imputation for missing ethnicity.",
+          "quotes": [
+            "Results were similar when missing data were handled using analysis of complete records only, or using multiple imputation (sensitivity analyses; Extended Data Table 2)."
+          ],
+          "rubric_item": "sensitivity_analysis"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "statistics",
+          "observation": "Missing data on ethnicity (26% of patients), obesity, and smoking were handled by assuming non-obese and non-smokers for missing BMI and smoking, and by conducting sensitivity analyses with complete data only and population-calibrated imputation.",
+          "quotes": [
+            "In the primary analysis, those with missing BMI were assumed to be non-obese and those with missing smoking information were assumed to be non-smokers on the assumption that both obesity and smoking would be likely to be recorded if present.",
+            "A sensitivity analysis was run among those with complete BMI and smoking data only."
+          ],
+          "rubric_item": "missing_data"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "statistics",
+          "observation": "Hazard ratios are reported with 95% confidence intervals, and the C-statistic was estimated using random sampling with repeated averaging to account for uncertainty in model discrimination.",
+          "quotes": [
+            "Hazard ratios from the age-and-sex adjusted and fully adjusted models are reported with 95% confidence intervals."
+          ],
+          "rubric_item": "uncertainty"
+        }
+      ],
+      "progress": 42,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T21:18:56.844160+00:00",
+      "detail": null,
+      "evidence_count": 5,
+      "key": "claims",
+      "kind": "module",
+      "label": "Claim\u2013evidence alignment",
+      "notes": [
+        {
+          "evidence_state": "observed",
+          "module_key": "claims",
+          "observation": "The study provides a preliminary picture of how key demographic characteristics and a range of comorbidities\u2014which were a priori selected as being of interest in COVID-19\u2014are jointly associated with poor outcomes.",
+          "quotes": [
+            "Our analyses provide a preliminary picture of how key demographic characteristics and a range of comorbidities\u2014which were a priori selected as being of interest in COVID-19\u2014are jointly associated with poor outcomes."
+          ],
+          "rubric_item": "claim_strength"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "claims",
+          "observation": "The average C-statistic\u2014a measure of the model\u2019s ability to distinguish between patients who experience COVID-19-related deaths and those who do not, ranging from 0 (no ability) to 1 (perfect ability)\u2014was 0.93.",
+          "quotes": [
+            "The average C-statistic\u2014a measure of the model\u2019s ability to distinguish between patients who experience COVID-19-related deaths and those who do not, ranging from 0 (no ability) to 1 (perfect ability)\u2014was 0.93."
+          ],
+          "rubric_item": "results_support"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "claims",
+          "observation": "We caution against interpreting our estimates as causal effects. For example, the fully adjusted smoking hazard ratio does not capture the causal effect of smoking, owing to the inclusion of comorbidities that are likely to mediate any effect of smoking on COVID-19-related death (for example, chronic obstructive pulmonary disease).",
+          "quotes": [
+            "We caution against interpreting our estimates as causal effects. For example, the fully adjusted smoking hazard ratio does not capture the causal effect of smoking, owing to the inclusion of comorbidities that are likely to mediate any effect of smoking on COVID-19-related death"
+          ],
+          "rubric_item": "causal_language"
+        },
+        {
+          "evidence_state": "ambiguous",
+          "module_key": "claims",
+          "observation": "The worker returned an observation, but its quote did not match the normalized paper exactly.",
+          "quotes": [],
+          "rubric_item": "generalization"
+        },
+        {
+          "evidence_state": "ambiguous",
+          "module_key": "claims",
+          "observation": "The worker returned an observation, but its quote did not match the normalized paper exactly.",
+          "quotes": [],
+          "rubric_item": "limitations_alignment"
+        }
+      ],
+      "progress": 48,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T21:18:56.992488+00:00",
+      "detail": null,
+      "evidence_count": 5,
+      "key": "transparency",
+      "kind": "module",
+      "label": "Transparency & reporting",
+      "notes": [
+        {
+          "evidence_state": "not_found",
+          "module_key": "transparency",
+          "observation": "The study does not mention pre-registration of the study protocol in a public registry (e.g., ClinicalTrials.gov, ISRCTN, or similar).",
+          "quotes": [],
+          "rubric_item": "registration"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "transparency",
+          "observation": "The study was approved by the Health Research Authority (REC reference 20/LO/0651) and the London School of Hygiene and Tropical Medicine (LSHTM) ethics board (reference 21863).",
+          "quotes": [
+            "This study was approved by the Health Research Authority (REC reference 20/LO/0651) and by the London School of Hygiene and Tropical Medicine (LSHTM) ethics board (reference 21863).",
+            "In March 2020, the Secretary of State for Health and Social Care used powers under the UK Health Service (Control of Patient Information) Regulations 2002 (COPI) to require organisations to process confidential patient information for the purposes of protecting public health, pro"
+          ],
+          "rubric_item": "ethics"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "transparency",
+          "observation": "All code for data management and analysis is archived online at https://github.com/opensafely/risk-factors-research and shared under an MIT open license.",
+          "quotes": [
+            "All code is shared openly for review and reuse under an MIT open license."
+          ],
+          "rubric_item": "data_code"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "transparency",
+          "observation": "The study provides detailed information on data collection, covariates, statistical analysis, and sensitivity analyses, including model specifications, imputation methods, and handling of missing data.",
+          "quotes": [
+            "For each patient characteristic, a Cox proportional hazards model was fitted, with days in study as the timescale, stratified by geographical area (STP), and adjusted for sex and age modelled using restricted cubic splines.",
+            "A sensitivity analysis was run among those with complete BMI and smoking data only."
+          ],
+          "rubric_item": "reporting_completeness"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "transparency",
+          "observation": "All code is publicly archived and accessible via GitHub, and detailed codelists are available for inspection and reuse at https://codelists.opensafely.org/.",
+          "quotes": [
+            "All clinical and medicines codelists are openly available for inspection and reuse at https://codelists.opensafely.org/."
+          ],
+          "rubric_item": "reproducibility"
+        }
+      ],
+      "progress": 55,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T21:18:58.688619+00:00",
+      "detail": null,
+      "evidence_count": 5,
+      "key": "design",
+      "kind": "module",
+      "label": "Study design & risk of bias",
+      "notes": [
+        {
+          "evidence_state": "observed",
+          "module_key": "design",
+          "observation": "The study population consisted of all adults (males and females 18 years and above) currently registered as active patients in a TPP general practice in England on 1st February 2020. To be included in the study, participants were required to have at least 1 year of prior follow-up in the GP practice to ensure that baseline patient characteristics could be adequately captured, and to have recorded sex, age, and deprivation.",
+          "quotes": [
+            "To be included in the study, participants were required to have at least 1 year of prior follow-up in the GP practice to ensure that baseline patient characteristics could be adequately captured, and to have recorded sex, age, and deprivation."
+          ],
+          "rubric_item": "selection"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "design",
+          "observation": "Exposure to various medical conditions and demographic factors was measured using coded data from primary care records. Codelists for underlying conditions and medicines were compiled from multiple sources, including British National Formulary (BNF) codes, published codelists, and Read Code 2 lists, which were translated into CTV3 with manual curation.",
+          "quotes": [
+            "Information on all covariates was obtained from primary care records by searching TPP SystmOne records for specific coded data."
+          ],
+          "rubric_item": "exposure_measurement"
+        },
+        {
+          "evidence_state": "ambiguous",
+          "module_key": "design",
+          "observation": "The worker returned an observation, but its quote did not match the normalized paper exactly.",
+          "quotes": [],
+          "rubric_item": "confounding"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "design",
+          "observation": "The study used a cohort design with individuals followed from 1st February 2020 until either death (COVID-19-related or non-COVID-19-related) or the study end date of 6th May 2020. The comparison groups were defined by exposure status across demographic and clinical variables, with hazard ratios estimated relative to reference categories.",
+          "quotes": [
+            "Patients were observed from the 1st of February 2020 and were followed until the first of either their death date (whether COVID-19 related or due to other causes) or the study end date, 6th May 2020.",
+            "Hazard ratios from the age-and-sex adjusted and fully adjusted models are reported with 95% confidence intervals."
+          ],
+          "rubric_item": "comparators"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "design",
+          "observation": "The outcome of interest was COVID-19-related death, defined as a COVID-19 ICD-10 code mentioned anywhere on the death certificate, using data from the Office for National Statistics (ONS). Non-COVID-19 deaths were used for censoring.",
+          "quotes": [
+            "ONS data include information on all deaths, including COVID-19-related death (defined as a COVID-19 ICD-10 code mentioned anywhere on the death certificate) and non-COVID-19 death, which was used for censoring."
+          ],
+          "rubric_item": "outcome_measurement"
+        }
+      ],
+      "progress": 61,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T21:19:54.007187+00:00",
+      "detail": "JSONDecodeError: evidence extraction did not complete",
+      "evidence_count": 0,
+      "key": "disclosures",
+      "kind": "module",
+      "label": "Disclosures & affiliations",
+      "notes": [],
+      "progress": 68,
+      "state": "failed"
+    },
+    {
+      "at": "2026-07-18T21:19:54.009933+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": null,
+      "kind": "stage",
+      "label": "Checking current-paper scholarly context",
+      "notes": [],
+      "progress": 72,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T21:19:54.509858+00:00",
+      "detail": "Single bounded reviewer attempt; maximum 6,144 completion tokens.",
+      "evidence_count": 0,
+      "key": null,
+      "kind": "stage",
+      "label": "Generating final assessment",
+      "notes": [],
+      "progress": 84,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T21:20:15.930290+00:00",
+      "detail": "Checking methodology coverage and exact-quote grounding.",
+      "evidence_count": 0,
+      "key": null,
+      "kind": "stage",
+      "label": "Validating reviewer response",
+      "notes": [],
+      "progress": 90,
+      "state": "running"
+    },
+    {
+      "at": "2026-07-18T21:20:15.933367+00:00",
+      "progress": 96,
+      "stage": "Scored"
+    }
+  ],
+  "banners": [],
+  "completed_at": "2026-07-18T21:20:15.933380Z",
+  "composite_score": 98.3,
+  "confidence_components": {
+    "assessment_coverage": 0.72,
+    "evidence_module_coverage": 0.8,
+    "quote_grounding_rate": 1.0,
+    "source_quality": 0.9
+  },
+  "confidence_score": 83.7,
+  "content_level": "full_text",
+  "context": {
+    "author_conflict_signals": [],
+    "corrections": [],
+    "expression_of_concern": false,
+    "metric_notes": [],
+    "record_sources": [],
+    "retracted": false,
+    "venue_signals": []
+  },
+  "coverage": {
+    "available": 0.625,
+    "context": 0.0,
+    "full_review": 0.625,
+    "limitations": [
+      "Low full-review coverage makes the Review score provisional."
+    ],
+    "overall": 0.625,
+    "paper": 0.625,
+    "provisional": true
+  },
+  "dimensions": [
+    {
+      "assessed_items": 4,
+      "key": "design",
+      "label": "Study design & risk of bias",
+      "score": 100.0,
+      "total_items": 5,
+      "weight": 30.0
+    },
+    {
+      "assessed_items": 4,
+      "key": "statistics",
+      "label": "Statistical & computational validity",
+      "score": 93.8,
+      "total_items": 5,
+      "weight": 25.0
+    },
+    {
+      "assessed_items": 3,
+      "key": "claims",
+      "label": "Claim\u2013evidence alignment",
+      "score": 100.0,
+      "total_items": 5,
+      "weight": 20.0
+    },
+    {
+      "assessed_items": 4,
+      "key": "transparency",
+      "label": "Transparency & reporting",
+      "score": 100.0,
+      "total_items": 5,
+      "weight": 20.0
+    },
+    {
+      "assessed_items": 0,
+      "key": "disclosures",
+      "label": "Disclosures & affiliations",
+      "score": 0.0,
+      "total_items": 4,
+      "weight": 5.0
+    }
+  ],
+  "evidence_notes": [
+    {
+      "evidence_state": "observed",
+      "module_key": "design",
+      "observation": "The study population consisted of all adults (males and females 18 years and above) currently registered as active patients in a TPP general practice in England on 1st February 2020. To be included in the study, participants were required to have at least 1 year of prior follow-up in the GP practice to ensure that baseline patient characteristics could be adequately captured, and to have recorded sex, age, and deprivation.",
+      "quotes": [
+        "To be included in the study, participants were required to have at least 1 year of prior follow-up in the GP practice to ensure that baseline patient characteristics could be adequately captured, and to have recorded sex, age, and deprivation."
+      ],
+      "rubric_item": "selection"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "design",
+      "observation": "Exposure to various medical conditions and demographic factors was measured using coded data from primary care records. Codelists for underlying conditions and medicines were compiled from multiple sources, including British National Formulary (BNF) codes, published codelists, and Read Code 2 lists, which were translated into CTV3 with manual curation.",
+      "quotes": [
+        "Information on all covariates was obtained from primary care records by searching TPP SystmOne records for specific coded data."
+      ],
+      "rubric_item": "exposure_measurement"
+    },
+    {
+      "evidence_state": "ambiguous",
+      "module_key": "design",
+      "observation": "The worker returned an observation, but its quote did not match the normalized paper exactly.",
+      "quotes": [],
+      "rubric_item": "confounding"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "design",
+      "observation": "The study used a cohort design with individuals followed from 1st February 2020 until either death (COVID-19-related or non-COVID-19-related) or the study end date of 6th May 2020. The comparison groups were defined by exposure status across demographic and clinical variables, with hazard ratios estimated relative to reference categories.",
+      "quotes": [
+        "Patients were observed from the 1st of February 2020 and were followed until the first of either their death date (whether COVID-19 related or due to other causes) or the study end date, 6th May 2020.",
+        "Hazard ratios from the age-and-sex adjusted and fully adjusted models are reported with 95% confidence intervals."
+      ],
+      "rubric_item": "comparators"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "design",
+      "observation": "The outcome of interest was COVID-19-related death, defined as a COVID-19 ICD-10 code mentioned anywhere on the death certificate, using data from the Office for National Statistics (ONS). Non-COVID-19 deaths were used for censoring.",
+      "quotes": [
+        "ONS data include information on all deaths, including COVID-19-related death (defined as a COVID-19 ICD-10 code mentioned anywhere on the death certificate) and non-COVID-19 death, which was used for censoring."
+      ],
+      "rubric_item": "outcome_measurement"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "statistics",
+      "observation": "Models were adjusted for age using a four-knot cubic spline for age, except for estimation of age-group hazard ratios.",
+      "quotes": [
+        "Models were adjusted for age using a four-knot cubic spline for age, except for estimation of age-group hazard ratios."
+      ],
+      "rubric_item": "model_specification"
+    },
+    {
+      "evidence_state": "ambiguous",
+      "module_key": "statistics",
+      "observation": "The worker returned an observation, but its quote did not match the normalized paper exactly.",
+      "quotes": [],
+      "rubric_item": "overlap"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "statistics",
+      "observation": "Sensitivity analyses were conducted using complete records only, multiple imputation, earlier administrative censoring at 6 April 2020, and population-calibrated imputation for missing ethnicity.",
+      "quotes": [
+        "Results were similar when missing data were handled using analysis of complete records only, or using multiple imputation (sensitivity analyses; Extended Data Table 2)."
+      ],
+      "rubric_item": "sensitivity_analysis"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "statistics",
+      "observation": "Missing data on ethnicity (26% of patients), obesity, and smoking were handled by assuming non-obese and non-smokers for missing BMI and smoking, and by conducting sensitivity analyses with complete data only and population-calibrated imputation.",
+      "quotes": [
+        "In the primary analysis, those with missing BMI were assumed to be non-obese and those with missing smoking information were assumed to be non-smokers on the assumption that both obesity and smoking would be likely to be recorded if present.",
+        "A sensitivity analysis was run among those with complete BMI and smoking data only."
+      ],
+      "rubric_item": "missing_data"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "statistics",
+      "observation": "Hazard ratios are reported with 95% confidence intervals, and the C-statistic was estimated using random sampling with repeated averaging to account for uncertainty in model discrimination.",
+      "quotes": [
+        "Hazard ratios from the age-and-sex adjusted and fully adjusted models are reported with 95% confidence intervals."
+      ],
+      "rubric_item": "uncertainty"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "claims",
+      "observation": "The study provides a preliminary picture of how key demographic characteristics and a range of comorbidities\u2014which were a priori selected as being of interest in COVID-19\u2014are jointly associated with poor outcomes.",
+      "quotes": [
+        "Our analyses provide a preliminary picture of how key demographic characteristics and a range of comorbidities\u2014which were a priori selected as being of interest in COVID-19\u2014are jointly associated with poor outcomes."
+      ],
+      "rubric_item": "claim_strength"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "claims",
+      "observation": "The average C-statistic\u2014a measure of the model\u2019s ability to distinguish between patients who experience COVID-19-related deaths and those who do not, ranging from 0 (no ability) to 1 (perfect ability)\u2014was 0.93.",
+      "quotes": [
+        "The average C-statistic\u2014a measure of the model\u2019s ability to distinguish between patients who experience COVID-19-related deaths and those who do not, ranging from 0 (no ability) to 1 (perfect ability)\u2014was 0.93."
+      ],
+      "rubric_item": "results_support"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "claims",
+      "observation": "We caution against interpreting our estimates as causal effects. For example, the fully adjusted smoking hazard ratio does not capture the causal effect of smoking, owing to the inclusion of comorbidities that are likely to mediate any effect of smoking on COVID-19-related death (for example, chronic obstructive pulmonary disease).",
+      "quotes": [
+        "We caution against interpreting our estimates as causal effects. For example, the fully adjusted smoking hazard ratio does not capture the causal effect of smoking, owing to the inclusion of comorbidities that are likely to mediate any effect of smoking on COVID-19-related death"
+      ],
+      "rubric_item": "causal_language"
+    },
+    {
+      "evidence_state": "ambiguous",
+      "module_key": "claims",
+      "observation": "The worker returned an observation, but its quote did not match the normalized paper exactly.",
+      "quotes": [],
+      "rubric_item": "generalization"
+    },
+    {
+      "evidence_state": "ambiguous",
+      "module_key": "claims",
+      "observation": "The worker returned an observation, but its quote did not match the normalized paper exactly.",
+      "quotes": [],
+      "rubric_item": "limitations_alignment"
+    },
+    {
+      "evidence_state": "not_found",
+      "module_key": "transparency",
+      "observation": "The study does not mention pre-registration of the study protocol in a public registry (e.g., ClinicalTrials.gov, ISRCTN, or similar).",
+      "quotes": [],
+      "rubric_item": "registration"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "transparency",
+      "observation": "The study was approved by the Health Research Authority (REC reference 20/LO/0651) and the London School of Hygiene and Tropical Medicine (LSHTM) ethics board (reference 21863).",
+      "quotes": [
+        "This study was approved by the Health Research Authority (REC reference 20/LO/0651) and by the London School of Hygiene and Tropical Medicine (LSHTM) ethics board (reference 21863).",
+        "In March 2020, the Secretary of State for Health and Social Care used powers under the UK Health Service (Control of Patient Information) Regulations 2002 (COPI) to require organisations to process confidential patient information for the purposes of protecting public health, pro"
+      ],
+      "rubric_item": "ethics"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "transparency",
+      "observation": "All code for data management and analysis is archived online at https://github.com/opensafely/risk-factors-research and shared under an MIT open license.",
+      "quotes": [
+        "All code is shared openly for review and reuse under an MIT open license."
+      ],
+      "rubric_item": "data_code"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "transparency",
+      "observation": "The study provides detailed information on data collection, covariates, statistical analysis, and sensitivity analyses, including model specifications, imputation methods, and handling of missing data.",
+      "quotes": [
+        "For each patient characteristic, a Cox proportional hazards model was fitted, with days in study as the timescale, stratified by geographical area (STP), and adjusted for sex and age modelled using restricted cubic splines.",
+        "A sensitivity analysis was run among those with complete BMI and smoking data only."
+      ],
+      "rubric_item": "reporting_completeness"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "transparency",
+      "observation": "All code is publicly archived and accessible via GitHub, and detailed codelists are available for inspection and reuse at https://codelists.opensafely.org/.",
+      "quotes": [
+        "All clinical and medicines codelists are openly available for inspection and reuse at https://codelists.opensafely.org/."
+      ],
+      "rubric_item": "reproducibility"
+    }
+  ],
+  "evidence_verification_rate": 1.0,
+  "execution_warnings": [
+    "Worker evidence extraction was unavailable for: disclosures; those items had no module evidence for final adjudication."
+  ],
+  "failed_evidence_modules": [
+    "disclosures"
+  ],
+  "findings": [
+    {
+      "affected_conclusions": [],
+      "category": "design",
+      "confidence": 0.9,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The study clearly defines inclusion criteria, requiring participants to be adults registered in TPP general practices in England on 1st February 2020, with at least one year of prior follow-up and recorded sex, age, and deprivation. This ensures adequate capture of baseline characteristics (evidence_id: span-3adb402a0439c31d).",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "c755cc162a75",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 72866,
+          "page": 16,
+          "paragraph": null,
+          "quote": "To be included in the study, participants were required to have at least 1 year of prior follow-up in the GP practice to ensure that baseline patient characteristics could be adequately captured, and to have recorded sex, age, and deprivation.",
+          "section": null,
+          "start": 72623
+        }
+      ],
+      "rubric_item": "selection",
+      "severity": "info",
+      "title": "Selection"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "design",
+      "confidence": 0.9,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "Exposure data were obtained from primary care records using coded data (e.g., Read Codes, CTV3, BNF) with codelists compiled from established sources and manually curated. This supports reliable and transparent measurement of exposures (evidence_id: span-1ec561d454d128dc).",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "5fe40f0b75f2",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 46864,
+          "page": 9,
+          "paragraph": null,
+          "quote": "Information on all covariates was obtained from primary care records by searching TPP SystmOne records for specific coded data.",
+          "section": null,
+          "start": 46737
+        }
+      ],
+      "rubric_item": "exposure_measurement",
+      "severity": "info",
+      "title": "Exposure Measurement"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "design",
+      "confidence": 0.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "No verified evidence was provided regarding the identification or adjustment for confounding variables beyond age and sex. While model adjustment is mentioned, specific details on confounder selection or justification are absent from the verified evidence ledger.",
+      "external_sources": [],
+      "grade": "not_assessed",
+      "id": "21e31ce45ae2",
+      "limitations": [],
+      "paper_spans": [],
+      "rubric_item": "confounding",
+      "severity": "info",
+      "title": "Confounding"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "design",
+      "confidence": 0.9,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The study uses a cohort design with follow-up from 1st February 2020 until death or 6th May 2020. Comparisons are made across exposure groups using hazard ratios with reference categories, and both age-and-sex adjusted and fully adjusted models are reported (evidence_ids: span-025748bcbacd106d, span-63d488ee3e5d445a).",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "a8a7b1c9b558",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 72606,
+          "page": 16,
+          "paragraph": null,
+          "quote": "Patients were observed from the 1st of February 2020 and were followed until the first of either their death date (whether COVID-19 related or due to other causes) or the study end date, 6th May 2020.",
+          "section": null,
+          "start": 72406
+        },
+        {
+          "bbox": null,
+          "end": 49050,
+          "page": 9,
+          "paragraph": null,
+          "quote": "Hazard ratios from the age-and-sex adjusted and fully adjusted models are reported with 95% confidence intervals.",
+          "section": null,
+          "start": 48937
+        }
+      ],
+      "rubric_item": "comparators",
+      "severity": "info",
+      "title": "Comparators"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "design",
+      "confidence": 0.9,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The primary outcome\u2014COVID-19-related death\u2014is clearly defined using ONS data with ICD-10 codes for COVID-19 anywhere on the death certificate. Non-COVID-19 deaths were used for censoring, supporting accurate outcome ascertainment (evidence_id: span-7ff7510f5d57c998).",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "4f9bcc1c4e43",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 38550,
+          "page": 8,
+          "paragraph": null,
+          "quote": "ONS data include information on all deaths, including COVID-19-related death (defined as a COVID-19 ICD-10 code mentioned anywhere on the death certificate) and non-COVID-19 death, which was used for censoring.",
+          "section": null,
+          "start": 38340
+        }
+      ],
+      "rubric_item": "outcome_measurement",
+      "severity": "info",
+      "title": "Outcome Measurement"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "statistics",
+      "confidence": 0.9,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The statistical models are well-specified, using Cox proportional hazards models with days in study as the timescale, stratified by geographical area and adjusted for sex and age via restricted cubic splines (evidence_id: span-59574bee5060ca8e).",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "d79af20743a7",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 23883,
+          "page": 5,
+          "paragraph": null,
+          "quote": "Models were adjusted for age using a four-knot cubic spline for age, except for estimation of age-group hazard ratios.",
+          "section": null,
+          "start": 23765
+        }
+      ],
+      "rubric_item": "model_specification",
+      "severity": "info",
+      "title": "Model Specification"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "statistics",
+      "confidence": 0.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "No verified evidence was provided regarding assessment of overlap or balance in covariate distributions across exposure groups, such as standardized mean differences or visual diagnostics.",
+      "external_sources": [],
+      "grade": "not_assessed",
+      "id": "f5bd4b4054d2",
+      "limitations": [],
+      "paper_spans": [],
+      "rubric_item": "overlap",
+      "severity": "info",
+      "title": "Overlap"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "statistics",
+      "confidence": 0.9,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "Multiple sensitivity analyses were conducted, including complete-case analysis, multiple imputation, earlier censoring, and population-calibrated imputation for missing ethnicity, demonstrating robustness of findings to analytical choices (evidence_id: span-4aa9c94323279574).",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "6f443c2b752a",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 15757,
+          "page": 4,
+          "paragraph": null,
+          "quote": "Results were similar when missing data were handled using analysis of complete records only, or using multiple imputation (sensitivity analyses; Extended Data Table 2).",
+          "section": null,
+          "start": 15589
+        }
+      ],
+      "rubric_item": "sensitivity_analysis",
+      "severity": "info",
+      "title": "Sensitivity Analysis"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "statistics",
+      "confidence": 0.9,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "Missing data on BMI and smoking were handled by assuming missing = non-obese and missing = non-smoker, which may introduce bias if the assumption is incorrect. However, sensitivity analyses using complete records and imputation methods were conducted, mitigating but not eliminating concern (evidence_ids: span-91f597d727216d3c, span-dd63793b116dd7c0, span-0ab539624fc41c42).",
+      "external_sources": [],
+      "grade": "minor_concern",
+      "id": "5bb361523c5b",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 49404,
+          "page": 9,
+          "paragraph": null,
+          "quote": "In the primary analysis, those with missing BMI were assumed to be non-obese and those with missing smoking information were assumed to be non-smokers on the assumption that both obesity and smoking would be likely to be recorded if present.",
+          "section": null,
+          "start": 49163
+        },
+        {
+          "bbox": null,
+          "end": 49488,
+          "page": 9,
+          "paragraph": null,
+          "quote": "A sensitivity analysis was run among those with complete BMI and smoking data only.",
+          "section": null,
+          "start": 49405
+        },
+        {
+          "bbox": null,
+          "end": 50095,
+          "page": 9,
+          "paragraph": null,
+          "quote": "We conducted an additional sensitivity analysis using a population-calibrated imputation approach to handle missing ethnicity",
+          "section": null,
+          "start": 49970
+        }
+      ],
+      "rubric_item": "missing_data",
+      "severity": "minor",
+      "title": "Missing Data"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "statistics",
+      "confidence": 0.9,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "Uncertainty is appropriately quantified with 95% confidence intervals for hazard ratios, and the C-statistic was estimated using repeated random sampling to account for variability in model performance (evidence_id: span-831f967a454e402f).",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "5d06b1d7dfed",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 49050,
+          "page": 9,
+          "paragraph": null,
+          "quote": "Hazard ratios from the age-and-sex adjusted and fully adjusted models are reported with 95% confidence intervals.",
+          "section": null,
+          "start": 48937
+        }
+      ],
+      "rubric_item": "uncertainty",
+      "severity": "info",
+      "title": "Uncertainty"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "claims",
+      "confidence": 0.9,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The authors describe their findings as providing a 'preliminary picture' of associations, which aligns with the observational design and avoids overstatement (evidence_id: span-7cb598d35ae29584).",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "1d655bd7fb95",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 17400,
+          "page": 4,
+          "paragraph": null,
+          "quote": "Our analyses provide a preliminary picture of how key demographic characteristics and a range of comorbidities\u2014which were a priori selected as being of interest in COVID-19\u2014are jointly associated with poor outcomes.",
+          "section": null,
+          "start": 17185
+        }
+      ],
+      "rubric_item": "claim_strength",
+      "severity": "info",
+      "title": "Claim Strength"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "claims",
+      "confidence": 0.9,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The C-statistic of 0.93 indicates strong model discrimination, supporting the robustness of the results in distinguishing those who died from COVID-19 versus those who did not (evidence_id: span-909af1b60a03fa30).",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "73fac2b298c2",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 15588,
+          "page": 4,
+          "paragraph": null,
+          "quote": "The average C-statistic\u2014a measure of the model\u2019s ability to distinguish between patients who experience COVID-19-related deaths and those who do not, ranging from 0 (no ability) to 1 (perfect ability)\u2014was 0.93.",
+          "section": null,
+          "start": 15378
+        }
+      ],
+      "rubric_item": "results_support",
+      "severity": "info",
+      "title": "Results Support"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "claims",
+      "confidence": 0.9,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The authors explicitly caution against interpreting estimates as causal, noting that comorbidities may mediate effects (e.g., for smoking), thus avoiding inappropriate causal claims (evidence_id: span-0b60a72a6ff816bb).",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "18773ff8e67b",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 17818,
+          "page": 4,
+          "paragraph": null,
+          "quote": "We caution against interpreting our estimates as causal effects. For example, the fully adjusted smoking hazard ratio does not capture the causal effect of smoking, owing to the inclusion of comorbidities that are likely to mediate any effect of smoking on COVID-19-related death (for example, chronic obstructive pulmonary disease).",
+          "section": null,
+          "start": 17485
+        }
+      ],
+      "rubric_item": "causal_language",
+      "severity": "info",
+      "title": "Causal Language"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "claims",
+      "confidence": 0.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "No verified evidence was provided regarding discussion of the generalizability of findings to other populations or settings.",
+      "external_sources": [],
+      "grade": "not_assessed",
+      "id": "c4ab4fc87dc7",
+      "limitations": [],
+      "paper_spans": [],
+      "rubric_item": "generalization",
+      "severity": "info",
+      "title": "Generalization"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "claims",
+      "confidence": 0.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "No verified evidence was provided regarding a discussion of study limitations or their alignment with observed results or methodological choices.",
+      "external_sources": [],
+      "grade": "not_assessed",
+      "id": "929e81976c18",
+      "limitations": [],
+      "paper_spans": [],
+      "rubric_item": "limitations_alignment",
+      "severity": "info",
+      "title": "Limitations Alignment"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "transparency",
+      "confidence": 0.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "No verified evidence was provided regarding study registration in a public trial registry or pre-specification of methods.",
+      "external_sources": [],
+      "grade": "not_assessed",
+      "id": "019411af601d",
+      "limitations": [],
+      "paper_spans": [],
+      "rubric_item": "registration",
+      "severity": "info",
+      "title": "Registration"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "transparency",
+      "confidence": 0.9,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The study was approved by the Health Research Authority (REC reference 20/LO/0651) and the LSHTM ethics board (reference 21863), and relied on legal processing under COPI regulations, ensuring ethical oversight (evidence_ids: span-60afa314ad96d1ba, span-ddfece50c743eebc).",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "e88129dc3999",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 53033,
+          "page": 9,
+          "paragraph": null,
+          "quote": "This study was approved by the Health Research Authority (REC reference 20/LO/0651) and by the London School of Hygiene and Tropical Medicine (LSHTM) ethics board (reference 21863).",
+          "section": null,
+          "start": 52852
+        },
+        {
+          "bbox": null,
+          "end": 74822,
+          "page": 17,
+          "paragraph": null,
+          "quote": "In March 2020, the Secretary of State for Health and Social Care used powers under the UK Health Service (Control of Patient Information) Regulations 2002 (COPI) to require organisations to process confidential patient information for the purposes of protecting public health, providing healthcare services to the public and monitoring and managing the COVID-19 outbreak and incidents of exposure.",
+          "section": null,
+          "start": 74425
+        }
+      ],
+      "rubric_item": "ethics",
+      "severity": "info",
+      "title": "Ethics"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "transparency",
+      "confidence": 0.9,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "All analysis code is shared openly under an MIT license via GitHub, supporting transparency and reuse (evidence_id: span-58bd66f2a5072404).",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "c014a0e5ac4b",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 54575,
+          "page": 10,
+          "paragraph": null,
+          "quote": "All code is shared openly for review and reuse under an MIT open license.",
+          "section": null,
+          "start": 54502
+        }
+      ],
+      "rubric_item": "data_code",
+      "severity": "info",
+      "title": "Data Code"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "transparency",
+      "confidence": 0.9,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The study provides detailed reporting of model specifications, covariates, and sensitivity analyses, including handling of missing data and imputation methods, supporting comprehensive understanding (evidence_ids: span-16d7d7f75b6c80d9, span-02c4af02549edad3).",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "0dcdc7c43d12",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 48571,
+          "page": 9,
+          "paragraph": null,
+          "quote": "For each patient characteristic, a Cox proportional hazards model was fitted, with days in study as the timescale, stratified by geographical area (STP), and adjusted for sex and age modelled using restricted cubic splines.",
+          "section": null,
+          "start": 48348
+        },
+        {
+          "bbox": null,
+          "end": 49488,
+          "page": 9,
+          "paragraph": null,
+          "quote": "A sensitivity analysis was run among those with complete BMI and smoking data only.",
+          "section": null,
+          "start": 49405
+        }
+      ],
+      "rubric_item": "reporting_completeness",
+      "severity": "info",
+      "title": "Reporting Completeness"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "transparency",
+      "confidence": 0.9,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "All codelists and analysis code are publicly available at https://codelists.opensafely.org/ and GitHub, enabling full reproducibility of the study methods (evidence_id: span-a4859141577d801b).",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "1c6882f79821",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 54816,
+          "page": 10,
+          "paragraph": null,
+          "quote": "All clinical and medicines codelists are openly available for inspection and reuse at https://codelists.opensafely.org/.",
+          "section": null,
+          "start": 54696
+        }
+      ],
+      "rubric_item": "reproducibility",
+      "severity": "info",
+      "title": "Reproducibility"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "disclosures",
+      "confidence": 0.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "No verified evidence was provided regarding funding sources or financial support for the study.",
+      "external_sources": [],
+      "grade": "not_assessed",
+      "id": "46b512bed4af",
+      "limitations": [],
+      "paper_spans": [],
+      "rubric_item": "funding_statement",
+      "severity": "info",
+      "title": "Funding Statement"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "disclosures",
+      "confidence": 0.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "No verified evidence was provided regarding conflicts of interest or competing interests disclosures.",
+      "external_sources": [],
+      "grade": "not_assessed",
+      "id": "c8a1dda9ed8e",
+      "limitations": [],
+      "paper_spans": [],
+      "rubric_item": "conflict_statement",
+      "severity": "info",
+      "title": "Conflict Statement"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "disclosures",
+      "confidence": 0.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "No verified evidence was provided regarding the role of any sponsor or funder in the study design, conduct, or reporting.",
+      "external_sources": [],
+      "grade": "not_assessed",
+      "id": "679579b2f58b",
+      "limitations": [],
+      "paper_spans": [],
+      "rubric_item": "sponsor_role",
+      "severity": "info",
+      "title": "Sponsor Role"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "disclosures",
+      "confidence": 0.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "No verified evidence was provided regarding author affiliations or institutional roles.",
+      "external_sources": [],
+      "grade": "not_assessed",
+      "id": "e5c6eaec3031",
+      "limitations": [],
+      "paper_spans": [],
+      "rubric_item": "affiliations",
+      "severity": "info",
+      "title": "Affiliations"
+    }
+  ],
+  "id": "9c9043ef-cc07-4de4-a36d-77a33677b3e9",
+  "identity": {
+    "arxiv_id": null,
+    "authors": [
+      "Elizabeth J. Williamson",
+      "Alex J. Walker",
+      "Krishnan Bhaskaran",
+      "Seb Bacon",
+      "Chris Bates",
+      "Caroline E. Morton",
+      "Helen J. Curtis",
+      "Amir Mehrkar",
+      "David Evans",
+      "Peter Inglesby",
+      "Jonathan Cockburn",
+      "Helen I. McDonald",
+      "Brian MacKenna",
+      "Laurie Tomlinson",
+      "Ian J. Douglas",
+      "Christopher T. Rentsch",
+      "Rohini Mathur",
+      "Angel Y. S. Wong",
+      "Richard Grieve",
+      "David Harrison",
+      "Harriet Forbes",
+      "Anna Schultze",
+      "Richard Croker",
+      "John Parry",
+      "Frank Hester",
+      "Sam Harper",
+      "Rafael Perera",
+      "Stephen J. W. Evans",
+      "Liam Smeeth",
+      "Ben Goldacre"
+    ],
+    "doi": "10.1038/s41586-020-2521-4",
+    "fingerprint": "583a9df0c2d253fd5899c48d95d6c6d0a4d95977e17541c4a46d87ee61aedc7e",
+    "journal": "Nature",
+    "pmcid": "PMC7611074",
+    "pmid": "32640463",
+    "published_at": "2020",
+    "title": "Factors associated with COVID-19-related death using OpenSAFELY",
+    "updated_at": null,
+    "versions": [
+      "publishedVersion",
+      "submittedVersion"
+    ]
+  },
+  "language": "en",
+  "limitations": [
+    "The Review score summarizes assessed methodology items; it is not the probability that the conclusions are true.",
+    "No cited-paper full texts were retrieved or analyzed.",
+    "English is validated first; other languages are experimental.",
+    "Generated locally with the release-only Node PDF.js normalizer.",
+    "Low full-review coverage makes the Review score provisional.",
+    "Worker evidence extraction was unavailable for: disclosures; those items had no module evidence for final adjudication."
+  ],
+  "methodology_hash": "66b93ef58957399335661945dbad5a3e6e38a565ffc1cfd42b62dc31eca72965",
+  "methodology_version": "1.3",
+  "missing_item_ids": [],
+  "module_statuses": [
+    {
+      "assessed_items": 4,
+      "expected_items": 5,
+      "key": "design",
+      "label": "Study design & risk of bias",
+      "limitation": null,
+      "state": "completed"
+    },
+    {
+      "assessed_items": 4,
+      "expected_items": 5,
+      "key": "statistics",
+      "label": "Statistical & computational validity",
+      "limitation": null,
+      "state": "completed"
+    },
+    {
+      "assessed_items": 3,
+      "expected_items": 5,
+      "key": "claims",
+      "label": "Claim\u2013evidence alignment",
+      "limitation": null,
+      "state": "completed"
+    },
+    {
+      "assessed_items": 4,
+      "expected_items": 5,
+      "key": "transparency",
+      "label": "Transparency & reporting",
+      "limitation": null,
+      "state": "completed"
+    },
+    {
+      "assessed_items": 0,
+      "expected_items": 4,
+      "key": "disclosures",
+      "label": "Disclosures & affiliations",
+      "limitation": null,
+      "state": "completed"
+    }
+  ],
+  "paper_sha256": "ca8fb1c080d67dab1155ec41bf22294f43e8a65e889b592dbcfb46bc6d6bfeae",
+  "parser_name": "pdf.js-node",
+  "parser_version": "5.7.284",
+  "profile": "observational_study",
+  "provider_profile": "token_factory",
+  "provider_protocol": "openai-compatible",
+  "repaired_output": false,
+  "review_score": 98.3,
+  "reviewer_model": "Qwen/Qwen3-235B-A22B-Instruct-2507",
+  "schema_version": "1.3",
+  "scoring_version": "1.3",
+  "source_format": "pdf",
+  "summary": [
+    "Missing Data. Missing data on BMI and smoking were handled by assuming missing = non-obese and missing = non-smoker, which may introduce bias if the assumption is incorrect. However, sensitivity analyses using complete records and imputation methods were conducted, mitigating but not\u2026",
+    "The final review assessed 15 of 24 methodology items."
+  ],
+  "token_usage": {
+    "input_tokens": 36164,
+    "output_tokens": 5872,
+    "total_tokens": 42036
+  },
+  "uncapped_score": 98.3,
+  "worker_model": "Qwen/Qwen3-30B-A3B-Instruct-2507"
+}

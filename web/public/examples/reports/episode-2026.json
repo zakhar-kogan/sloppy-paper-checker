@@ -1,0 +1,1557 @@
+{
+  "assessed_item_count": 20,
+  "audit_trail": [
+    {
+      "at": "2026-07-18T17:11:15.781723+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": null,
+      "kind": "stage",
+      "label": "Ingesting and fingerprinting",
+      "notes": [],
+      "progress": 8,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T17:11:15.799823+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": null,
+      "kind": "stage",
+      "label": "Classifying paper and routing evidence",
+      "notes": [],
+      "progress": 22,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T17:11:15.944785+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": null,
+      "kind": "stage",
+      "label": "Gathering methodology evidence",
+      "notes": [],
+      "progress": 35,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T17:11:15.959587+00:00",
+      "detail": "Waiting to start.",
+      "evidence_count": 0,
+      "key": "design",
+      "kind": "module",
+      "label": "Study design & risk of bias",
+      "notes": [],
+      "progress": 35,
+      "state": "pending"
+    },
+    {
+      "at": "2026-07-18T17:11:15.959673+00:00",
+      "detail": "Waiting to start.",
+      "evidence_count": 0,
+      "key": "statistics",
+      "kind": "module",
+      "label": "Statistical & computational validity",
+      "notes": [],
+      "progress": 35,
+      "state": "pending"
+    },
+    {
+      "at": "2026-07-18T17:11:15.959689+00:00",
+      "detail": "Waiting to start.",
+      "evidence_count": 0,
+      "key": "claims",
+      "kind": "module",
+      "label": "Claim\u2013evidence alignment",
+      "notes": [],
+      "progress": 35,
+      "state": "pending"
+    },
+    {
+      "at": "2026-07-18T17:11:15.959699+00:00",
+      "detail": "Waiting to start.",
+      "evidence_count": 0,
+      "key": "transparency",
+      "kind": "module",
+      "label": "Transparency & reporting",
+      "notes": [],
+      "progress": 35,
+      "state": "pending"
+    },
+    {
+      "at": "2026-07-18T17:11:15.959865+00:00",
+      "detail": "Waiting to start.",
+      "evidence_count": 0,
+      "key": "disclosures",
+      "kind": "module",
+      "label": "Disclosures & affiliations",
+      "notes": [],
+      "progress": 35,
+      "state": "pending"
+    },
+    {
+      "at": "2026-07-18T17:11:15.975582+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": "design",
+      "kind": "module",
+      "label": "Study design & risk of bias",
+      "notes": [],
+      "progress": 35,
+      "state": "running"
+    },
+    {
+      "at": "2026-07-18T17:11:16.301137+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": "statistics",
+      "kind": "module",
+      "label": "Statistical & computational validity",
+      "notes": [],
+      "progress": 35,
+      "state": "running"
+    },
+    {
+      "at": "2026-07-18T17:11:16.310110+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": "claims",
+      "kind": "module",
+      "label": "Claim\u2013evidence alignment",
+      "notes": [],
+      "progress": 35,
+      "state": "running"
+    },
+    {
+      "at": "2026-07-18T17:11:16.318307+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": "transparency",
+      "kind": "module",
+      "label": "Transparency & reporting",
+      "notes": [],
+      "progress": 35,
+      "state": "running"
+    },
+    {
+      "at": "2026-07-18T17:11:16.322031+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": "disclosures",
+      "kind": "module",
+      "label": "Disclosures & affiliations",
+      "notes": [],
+      "progress": 35,
+      "state": "running"
+    },
+    {
+      "at": "2026-07-18T17:11:23.017430+00:00",
+      "detail": null,
+      "evidence_count": 5,
+      "key": "transparency",
+      "kind": "module",
+      "label": "Transparency & reporting",
+      "notes": [
+        {
+          "evidence_state": "observed",
+          "module_key": "transparency",
+          "observation": "The trial protocol and statistical analysis plan are available in Supplement 1 and Supplement 2, respectively.",
+          "quotes": [
+            "The trial protocol and statistical analysis plan are available in Supplement 1 and Supplement 2 , respectively."
+          ],
+          "rubric_item": "registration"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "transparency",
+          "observation": "The trial was approved by the Ethics Committees of the Medical Faculty Mannheim, University of Heidelberg, Heidelberg, Germany, and the state of Berlin, and the Federal Institute for Drugs and Medical Devices.",
+          "quotes": [
+            "The trial was approved by the Ethics Committees of the Medical Faculty Mannheim, University of Heidelberg, Heidelberg, Germany, and the state of Berlin, and the Federal Institute for Drugs and Medical Devices."
+          ],
+          "rubric_item": "ethics"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "transparency",
+          "observation": "A data sharing statement is provided in Supplement 4.",
+          "quotes": [
+            "Supplement 4. Data Sharing Statement."
+          ],
+          "rubric_item": "data_code"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "transparency",
+          "observation": "The study followed the CONSORT reporting guidelines.",
+          "quotes": [
+            "This study followed the Consolidated Standards of Reporting Trials ( CONSORT ) reporting guidelines."
+          ],
+          "rubric_item": "reporting_completeness"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "transparency",
+          "observation": "Statistical analyses were performed using R, version 4.4, and SAS, version 9.4.",
+          "quotes": [
+            "Statistical analyses were performed from April 2024 to November 2025 using R, version 4.4 (R Project for Statistical Computing), and SAS, version 9.4 (SAS Institute)."
+          ],
+          "rubric_item": "reproducibility"
+        }
+      ],
+      "progress": 42,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T17:11:25.875212+00:00",
+      "detail": null,
+      "evidence_count": 5,
+      "key": "design",
+      "kind": "module",
+      "label": "Study design & risk of bias",
+      "notes": [
+        {
+          "evidence_state": "observed",
+          "module_key": "design",
+          "observation": "Randomization used center-stratified permuted blocks via an online tool managed independently. Each center contributed 50% of participants.",
+          "quotes": [
+            "Randomization used center-stratified permuted blocks via an online tool managed independently. Each center contributed 50% of participants."
+          ],
+          "rubric_item": "randomization_process"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "design",
+          "observation": "All personnel (including therapists and raters) and patients remained blinded to allocation until trial completion.",
+          "quotes": [
+            "All personnel (including therapists and raters) and patients remained blinded to allocation until trial completion."
+          ],
+          "rubric_item": "allocation_concealment"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "design",
+          "observation": "Premature terminations are summarized in eTable 5 in Supplement 3. By week 12, 10 participants (7%) had reinitiated antidepressant medication, and 4 (3%) withdrew due to lack of efficacy and/or need for additional interventions.",
+          "quotes": [
+            "By week 12, 10 participants (7%) had reinitiated antidepressant medication, and 4 (3%) withdrew due to lack of efficacy and/or need for additional interventions."
+          ],
+          "rubric_item": "deviations"
+        },
+        {
+          "evidence_state": "ambiguous",
+          "module_key": "design",
+          "observation": "The worker returned an observation, but its quote did not match the normalized paper exactly.",
+          "quotes": [],
+          "rubric_item": "outcome_measurement"
+        },
+        {
+          "evidence_state": "ambiguous",
+          "module_key": "design",
+          "observation": "The worker returned an observation, but its quote did not match the normalized paper exactly.",
+          "quotes": [],
+          "rubric_item": "attrition"
+        }
+      ],
+      "progress": 48,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T17:11:26.622541+00:00",
+      "detail": null,
+      "evidence_count": 5,
+      "key": "statistics",
+      "kind": "module",
+      "label": "Statistical & computational validity",
+      "notes": [
+        {
+          "evidence_state": "ambiguous",
+          "module_key": "statistics",
+          "observation": "The worker returned an observation, but its quote did not match the normalized paper exactly.",
+          "quotes": [],
+          "rubric_item": "intention_to_treat"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "statistics",
+          "observation": "The study was powered (80%) to detect a 40% difference in HAMD17 response between psilocybin, 25 mg, and nicotinamide at week 6, assuming response rates of 50%, 20%, and 10% for psilocybin, 25 mg; psilocybin, 5 mg; and nicotinamide, respectively.",
+          "quotes": [
+            "The study was powered (80%) to detect a 40% difference in HAMD17 response between psilocybin, 25 mg, and nicotinamide at week 6, assuming response rates of 50%, 20%, and 10% for psilocybin, 25 mg; psilocybin, 5 mg; and nicotinamide, respectively."
+          ],
+          "rubric_item": "power"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "statistics",
+          "observation": "The 95% confidence interval for the adjusted odds ratio comparing psilocybin, 25 mg, vs nicotinamide was 0.53\u20136.23.",
+          "quotes": [
+            "psilocybin, 25 mg vs nicotinamide: adjusted odds ratio [OR], 1.73; 95% CI, 0.53-6.23; P = .19, derived from confirmatory testing; 1-sided \u03b1 P = .03"
+          ],
+          "rubric_item": "effect_size_interval"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "statistics",
+          "observation": "Confirmatory tests were conducted sequentially, as per the predefined fixed-order procedure, at a 1-sided significance level of \u03b1 = .03, reflecting directed hypotheses of superiority.",
+          "quotes": [
+            "Confirmatory tests were conducted sequentially, as per the predefined fixed-order procedure, at a 1-sided significance level of \u03b1 = .03, reflecting directed hypotheses of superiority."
+          ],
+          "rubric_item": "multiplicity"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "statistics",
+          "observation": "In the nicotinamide group, in total 44 participants received a second IMP administration, 2 with major time deviations as an intercurrent event (and, therefore, not included in the while-receiving-treatment population for the second treatment phase).",
+          "quotes": [
+            "In the nicotinamide group, in total 44 participants received a second IMP administration, 2 with major time deviations as an intercurrent event (and, therefore, not included in the while-receiving-treatment population for the second treatment phase)."
+          ],
+          "rubric_item": "missing_data"
+        }
+      ],
+      "progress": 55,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T17:11:27.801154+00:00",
+      "detail": null,
+      "evidence_count": 5,
+      "key": "claims",
+      "kind": "module",
+      "label": "Claim\u2013evidence alignment",
+      "notes": [
+        {
+          "evidence_state": "observed",
+          "module_key": "claims",
+          "observation": "The paper presents a nuanced claim that psilocybin, 25 mg, with adjunct psychotherapy may exert clinically meaningful antidepressant effects in TRD, despite a negative primary outcome.",
+          "quotes": [
+            "Although the primary end point was negative, secondary outcomes suggest that psilocybin, 25 mg, with adjunct psychotherapy may exert clinically meaningful antidepressant effects in TRD."
+          ],
+          "rubric_item": "claim_strength"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "claims",
+          "observation": "The results support the claim of clinically meaningful effects through secondary outcomes showing significant mean changes in HAMD17 and BDI-II scores, though not the primary binary response outcome.",
+          "quotes": [
+            "Analyses of key secondary end points (mean changes from baseline on HAMD17 and BDI-II) provided exploratory evidence of a clinically meaningful effect of psilocybin, 25 mg.",
+            "The HAMD17 linear mixed model for treatment phase 1 revealed evidence for an effect of psilocybin, 25 mg vs nicotinamide at week 6 (estimated mean difference, \u22124.60; 95% CI, \u22127.01 to \u22122.18; P <.001)"
+          ],
+          "rubric_item": "results_support"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "claims",
+          "observation": "The paper uses cautious language, avoiding definitive causal claims, and frames findings as suggestive or exploratory, particularly given the trial's inconclusive nature.",
+          "quotes": [
+            "Although results suggest potential efficacy, the divergence between primary and secondary outcomes renders the findings inconclusive and calls for cautious interpretation and replication."
+          ],
+          "rubric_item": "causal_language"
+        },
+        {
+          "evidence_state": "ambiguous",
+          "module_key": "claims",
+          "observation": "The worker returned an observation, but its quote did not match the normalized paper exactly.",
+          "quotes": [],
+          "rubric_item": "generalization"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "claims",
+          "observation": "The paper explicitly aligns its limitations with the interpretation of results, including functional unblinding, power issues, and sample characteristics, which affect the strength of claims.",
+          "quotes": [
+            "Key trial limitations include functional unblinding, an unexplained (small) center effect, and overestimation of the treatment effect in power calculation, which likely reduced power to detect a difference on the primary end point."
+          ],
+          "rubric_item": "limitations_alignment"
+        }
+      ],
+      "progress": 61,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T17:11:29.311639+00:00",
+      "detail": null,
+      "evidence_count": 4,
+      "key": "disclosures",
+      "kind": "module",
+      "label": "Disclosures & affiliations",
+      "notes": [
+        {
+          "evidence_state": "observed",
+          "module_key": "disclosures",
+          "observation": "The study was supported by grants from the Federal Ministry of Education and Research (BMBF) and the German Center for Mental Health (DZPG).",
+          "quotes": [
+            "Funding/Support: This work was supported by grant 01EN2006 A/B from the Federal Ministry of Education and Research (BMBF) . Open access publication of the manuscript was supported by the German Center for Mental Health (DZPG) .",
+            "[Funding]\nFederal Ministry of Education and Research (BMBF)\n\nGerman Center for Mental Health (DZPG)"
+          ],
+          "rubric_item": "funding_statement"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "disclosures",
+          "observation": "Several authors disclosed financial relationships with companies involved in psychedelic research or related industries, including psilocybin development, pharmaceutical firms, and affiliated organizations.",
+          "quotes": [
+            "Conflict of Interest Disclosures: Dr Betzler reported receiving personal fees from Takeda Pharmaceutical Company and Medice Arzneimittel P\u00fctter GmbH & Co outside the submitted work. Ms Brand reported receiving board member fees from S\u00c4PT Switzerland and mentorship fees from MIND",
+            "Dr Gr\u00fcnder reported receiving grants from Beckley Psytech, Boehringer Ingelheim, and MindMed; personal fees from AbbVie, Beckley Psytech, Boehringer Ingelheim, Bristol Myers Squibb, Institute for Quality and Efficiency in Health Care, Johnson & Johnson, Lundbeck, MindMed, Otsuka,"
+          ],
+          "rubric_item": "conflict_statement"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "disclosures",
+          "observation": "The Central Institute of Mental Health, Mannheim, Germany, served as the sponsor of the trial, responsible for study initiation, oversight, and coordination.",
+          "quotes": [
+            "[Study Design and Oversight]\nThis phase 2b, triple-blind (investigator, participant, and rater blinded), active placebo-controlled, 4-arm, investigator-initiated RCT was sponsored by the Central Institute of Mental Health, Mannheim, Germany, and conducted at 2 German university h",
+            "Obtained funding: Mertens, H. Jungaberle, Stroehle, Wolff, Gr\u00fcnder."
+          ],
+          "rubric_item": "sponsor_role"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "disclosures",
+          "observation": "Authors are affiliated with multiple academic, clinical, and research institutions across Germany, including university medical centers, psychiatric departments, and specialized research facilities.",
+          "quotes": [
+            "1 Department of Molecular Neuroimaging, Central Institute of Mental Health, Medical Faculty Mannheim, Heidelberg University, Mannheim, Germany",
+            "2 German Center for Mental Health, partner site Mannheim-Heidelberg-Ulm, Mannheim, Germany"
+          ],
+          "rubric_item": "affiliations"
+        }
+      ],
+      "progress": 68,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T17:11:29.326447+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": null,
+      "kind": "stage",
+      "label": "Checking current-paper scholarly context",
+      "notes": [],
+      "progress": 72,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T17:11:29.873118+00:00",
+      "detail": "Single bounded reviewer attempt; maximum 6,144 completion tokens.",
+      "evidence_count": 0,
+      "key": null,
+      "kind": "stage",
+      "label": "Generating final assessment",
+      "notes": [],
+      "progress": 84,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T17:12:22.305959+00:00",
+      "detail": "Checking methodology coverage and exact-quote grounding.",
+      "evidence_count": 0,
+      "key": null,
+      "kind": "stage",
+      "label": "Validating reviewer response",
+      "notes": [],
+      "progress": 90,
+      "state": "running"
+    },
+    {
+      "at": "2026-07-18T17:12:22.341824+00:00",
+      "progress": 96,
+      "stage": "Scored"
+    }
+  ],
+  "banners": [],
+  "completed_at": "2026-07-18T17:12:22.341855Z",
+  "composite_score": 96.5,
+  "confidence_components": {
+    "assessment_coverage": 0.79,
+    "evidence_module_coverage": 1.0,
+    "quote_grounding_rate": 1.0,
+    "source_quality": 1.0
+  },
+  "confidence_score": 92.7,
+  "content_level": "full_text",
+  "context": {
+    "author_conflict_signals": [],
+    "corrections": [],
+    "expression_of_concern": false,
+    "metric_notes": [],
+    "record_sources": [],
+    "retracted": false,
+    "venue_signals": []
+  },
+  "coverage": {
+    "available": 0.833,
+    "context": 1.0,
+    "full_review": 0.833,
+    "limitations": [],
+    "overall": 0.833,
+    "paper": 0.833,
+    "provisional": false
+  },
+  "dimensions": [
+    {
+      "assessed_items": 3,
+      "key": "design",
+      "label": "Study design & risk of bias",
+      "score": 91.7,
+      "total_items": 5,
+      "weight": 30.0
+    },
+    {
+      "assessed_items": 4,
+      "key": "statistics",
+      "label": "Statistical & computational validity",
+      "score": 93.8,
+      "total_items": 5,
+      "weight": 25.0
+    },
+    {
+      "assessed_items": 4,
+      "key": "claims",
+      "label": "Claim\u2013evidence alignment",
+      "score": 100.0,
+      "total_items": 5,
+      "weight": 20.0
+    },
+    {
+      "assessed_items": 5,
+      "key": "transparency",
+      "label": "Transparency & reporting",
+      "score": 100.0,
+      "total_items": 5,
+      "weight": 20.0
+    },
+    {
+      "assessed_items": 4,
+      "key": "disclosures",
+      "label": "Disclosures & affiliations",
+      "score": 100.0,
+      "total_items": 4,
+      "weight": 5.0
+    }
+  ],
+  "evidence_notes": [
+    {
+      "evidence_state": "observed",
+      "module_key": "design",
+      "observation": "Randomization used center-stratified permuted blocks via an online tool managed independently. Each center contributed 50% of participants.",
+      "quotes": [
+        "Randomization used center-stratified permuted blocks via an online tool managed independently. Each center contributed 50% of participants."
+      ],
+      "rubric_item": "randomization_process"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "design",
+      "observation": "All personnel (including therapists and raters) and patients remained blinded to allocation until trial completion.",
+      "quotes": [
+        "All personnel (including therapists and raters) and patients remained blinded to allocation until trial completion."
+      ],
+      "rubric_item": "allocation_concealment"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "design",
+      "observation": "Premature terminations are summarized in eTable 5 in Supplement 3. By week 12, 10 participants (7%) had reinitiated antidepressant medication, and 4 (3%) withdrew due to lack of efficacy and/or need for additional interventions.",
+      "quotes": [
+        "By week 12, 10 participants (7%) had reinitiated antidepressant medication, and 4 (3%) withdrew due to lack of efficacy and/or need for additional interventions."
+      ],
+      "rubric_item": "deviations"
+    },
+    {
+      "evidence_state": "ambiguous",
+      "module_key": "design",
+      "observation": "The worker returned an observation, but its quote did not match the normalized paper exactly.",
+      "quotes": [],
+      "rubric_item": "outcome_measurement"
+    },
+    {
+      "evidence_state": "ambiguous",
+      "module_key": "design",
+      "observation": "The worker returned an observation, but its quote did not match the normalized paper exactly.",
+      "quotes": [],
+      "rubric_item": "attrition"
+    },
+    {
+      "evidence_state": "ambiguous",
+      "module_key": "statistics",
+      "observation": "The worker returned an observation, but its quote did not match the normalized paper exactly.",
+      "quotes": [],
+      "rubric_item": "intention_to_treat"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "statistics",
+      "observation": "The study was powered (80%) to detect a 40% difference in HAMD17 response between psilocybin, 25 mg, and nicotinamide at week 6, assuming response rates of 50%, 20%, and 10% for psilocybin, 25 mg; psilocybin, 5 mg; and nicotinamide, respectively.",
+      "quotes": [
+        "The study was powered (80%) to detect a 40% difference in HAMD17 response between psilocybin, 25 mg, and nicotinamide at week 6, assuming response rates of 50%, 20%, and 10% for psilocybin, 25 mg; psilocybin, 5 mg; and nicotinamide, respectively."
+      ],
+      "rubric_item": "power"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "statistics",
+      "observation": "The 95% confidence interval for the adjusted odds ratio comparing psilocybin, 25 mg, vs nicotinamide was 0.53\u20136.23.",
+      "quotes": [
+        "psilocybin, 25 mg vs nicotinamide: adjusted odds ratio [OR], 1.73; 95% CI, 0.53-6.23; P = .19, derived from confirmatory testing; 1-sided \u03b1 P = .03"
+      ],
+      "rubric_item": "effect_size_interval"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "statistics",
+      "observation": "Confirmatory tests were conducted sequentially, as per the predefined fixed-order procedure, at a 1-sided significance level of \u03b1 = .03, reflecting directed hypotheses of superiority.",
+      "quotes": [
+        "Confirmatory tests were conducted sequentially, as per the predefined fixed-order procedure, at a 1-sided significance level of \u03b1 = .03, reflecting directed hypotheses of superiority."
+      ],
+      "rubric_item": "multiplicity"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "statistics",
+      "observation": "In the nicotinamide group, in total 44 participants received a second IMP administration, 2 with major time deviations as an intercurrent event (and, therefore, not included in the while-receiving-treatment population for the second treatment phase).",
+      "quotes": [
+        "In the nicotinamide group, in total 44 participants received a second IMP administration, 2 with major time deviations as an intercurrent event (and, therefore, not included in the while-receiving-treatment population for the second treatment phase)."
+      ],
+      "rubric_item": "missing_data"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "claims",
+      "observation": "The paper presents a nuanced claim that psilocybin, 25 mg, with adjunct psychotherapy may exert clinically meaningful antidepressant effects in TRD, despite a negative primary outcome.",
+      "quotes": [
+        "Although the primary end point was negative, secondary outcomes suggest that psilocybin, 25 mg, with adjunct psychotherapy may exert clinically meaningful antidepressant effects in TRD."
+      ],
+      "rubric_item": "claim_strength"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "claims",
+      "observation": "The results support the claim of clinically meaningful effects through secondary outcomes showing significant mean changes in HAMD17 and BDI-II scores, though not the primary binary response outcome.",
+      "quotes": [
+        "Analyses of key secondary end points (mean changes from baseline on HAMD17 and BDI-II) provided exploratory evidence of a clinically meaningful effect of psilocybin, 25 mg.",
+        "The HAMD17 linear mixed model for treatment phase 1 revealed evidence for an effect of psilocybin, 25 mg vs nicotinamide at week 6 (estimated mean difference, \u22124.60; 95% CI, \u22127.01 to \u22122.18; P <.001)"
+      ],
+      "rubric_item": "results_support"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "claims",
+      "observation": "The paper uses cautious language, avoiding definitive causal claims, and frames findings as suggestive or exploratory, particularly given the trial's inconclusive nature.",
+      "quotes": [
+        "Although results suggest potential efficacy, the divergence between primary and secondary outcomes renders the findings inconclusive and calls for cautious interpretation and replication."
+      ],
+      "rubric_item": "causal_language"
+    },
+    {
+      "evidence_state": "ambiguous",
+      "module_key": "claims",
+      "observation": "The worker returned an observation, but its quote did not match the normalized paper exactly.",
+      "quotes": [],
+      "rubric_item": "generalization"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "claims",
+      "observation": "The paper explicitly aligns its limitations with the interpretation of results, including functional unblinding, power issues, and sample characteristics, which affect the strength of claims.",
+      "quotes": [
+        "Key trial limitations include functional unblinding, an unexplained (small) center effect, and overestimation of the treatment effect in power calculation, which likely reduced power to detect a difference on the primary end point."
+      ],
+      "rubric_item": "limitations_alignment"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "transparency",
+      "observation": "The trial protocol and statistical analysis plan are available in Supplement 1 and Supplement 2, respectively.",
+      "quotes": [
+        "The trial protocol and statistical analysis plan are available in Supplement 1 and Supplement 2 , respectively."
+      ],
+      "rubric_item": "registration"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "transparency",
+      "observation": "The trial was approved by the Ethics Committees of the Medical Faculty Mannheim, University of Heidelberg, Heidelberg, Germany, and the state of Berlin, and the Federal Institute for Drugs and Medical Devices.",
+      "quotes": [
+        "The trial was approved by the Ethics Committees of the Medical Faculty Mannheim, University of Heidelberg, Heidelberg, Germany, and the state of Berlin, and the Federal Institute for Drugs and Medical Devices."
+      ],
+      "rubric_item": "ethics"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "transparency",
+      "observation": "A data sharing statement is provided in Supplement 4.",
+      "quotes": [
+        "Supplement 4. Data Sharing Statement."
+      ],
+      "rubric_item": "data_code"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "transparency",
+      "observation": "The study followed the CONSORT reporting guidelines.",
+      "quotes": [
+        "This study followed the Consolidated Standards of Reporting Trials ( CONSORT ) reporting guidelines."
+      ],
+      "rubric_item": "reporting_completeness"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "transparency",
+      "observation": "Statistical analyses were performed using R, version 4.4, and SAS, version 9.4.",
+      "quotes": [
+        "Statistical analyses were performed from April 2024 to November 2025 using R, version 4.4 (R Project for Statistical Computing), and SAS, version 9.4 (SAS Institute)."
+      ],
+      "rubric_item": "reproducibility"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "disclosures",
+      "observation": "The study was supported by grants from the Federal Ministry of Education and Research (BMBF) and the German Center for Mental Health (DZPG).",
+      "quotes": [
+        "Funding/Support: This work was supported by grant 01EN2006 A/B from the Federal Ministry of Education and Research (BMBF) . Open access publication of the manuscript was supported by the German Center for Mental Health (DZPG) .",
+        "[Funding]\nFederal Ministry of Education and Research (BMBF)\n\nGerman Center for Mental Health (DZPG)"
+      ],
+      "rubric_item": "funding_statement"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "disclosures",
+      "observation": "Several authors disclosed financial relationships with companies involved in psychedelic research or related industries, including psilocybin development, pharmaceutical firms, and affiliated organizations.",
+      "quotes": [
+        "Conflict of Interest Disclosures: Dr Betzler reported receiving personal fees from Takeda Pharmaceutical Company and Medice Arzneimittel P\u00fctter GmbH & Co outside the submitted work. Ms Brand reported receiving board member fees from S\u00c4PT Switzerland and mentorship fees from MIND",
+        "Dr Gr\u00fcnder reported receiving grants from Beckley Psytech, Boehringer Ingelheim, and MindMed; personal fees from AbbVie, Beckley Psytech, Boehringer Ingelheim, Bristol Myers Squibb, Institute for Quality and Efficiency in Health Care, Johnson & Johnson, Lundbeck, MindMed, Otsuka,"
+      ],
+      "rubric_item": "conflict_statement"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "disclosures",
+      "observation": "The Central Institute of Mental Health, Mannheim, Germany, served as the sponsor of the trial, responsible for study initiation, oversight, and coordination.",
+      "quotes": [
+        "[Study Design and Oversight]\nThis phase 2b, triple-blind (investigator, participant, and rater blinded), active placebo-controlled, 4-arm, investigator-initiated RCT was sponsored by the Central Institute of Mental Health, Mannheim, Germany, and conducted at 2 German university h",
+        "Obtained funding: Mertens, H. Jungaberle, Stroehle, Wolff, Gr\u00fcnder."
+      ],
+      "rubric_item": "sponsor_role"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "disclosures",
+      "observation": "Authors are affiliated with multiple academic, clinical, and research institutions across Germany, including university medical centers, psychiatric departments, and specialized research facilities.",
+      "quotes": [
+        "1 Department of Molecular Neuroimaging, Central Institute of Mental Health, Medical Faculty Mannheim, Heidelberg University, Mannheim, Germany",
+        "2 German Center for Mental Health, partner site Mannheim-Heidelberg-Ulm, Mannheim, Germany"
+      ],
+      "rubric_item": "affiliations"
+    }
+  ],
+  "evidence_verification_rate": 1.0,
+  "execution_warnings": [
+    "PDF \u00b7 Unpaywall \u00b7 publishedVersion could not be used; analysis used JATS \u00b7 PMC \u00b7 publishedVersion instead."
+  ],
+  "failed_evidence_modules": [],
+  "findings": [
+    {
+      "affected_conclusions": [],
+      "category": "design",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The randomization process is clearly described using center-stratified permuted blocks via an online tool managed independently, ensuring proper randomization. Evidence ID: span-b680e8737f14e203.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "9999b8836acc",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 15712,
+          "page": null,
+          "paragraph": null,
+          "quote": "Randomization used center-stratified permuted blocks via an online tool managed independently. Each center contributed 50% of participants.",
+          "section": "Study Procedures",
+          "start": 15573
+        }
+      ],
+      "rubric_item": "randomization_process",
+      "severity": "info",
+      "title": "Randomization Process: no concern"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "design",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "Allocation was concealed from all personnel (including therapists and raters) and patients until trial completion, supporting effective blinding and allocation concealment. Evidence ID: span-01ca08956f055e42.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "6a6b1584d711",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 15828,
+          "page": null,
+          "paragraph": null,
+          "quote": "All personnel (including therapists and raters) and patients remained blinded to allocation until trial completion.",
+          "section": "Study Procedures",
+          "start": 15713
+        }
+      ],
+      "rubric_item": "allocation_concealment",
+      "severity": "info",
+      "title": "Allocation Concealment: no concern"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "design",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "Deviations are partially reported: 10 participants (7%) reinitiated antidepressants and 4 (3%) withdrew due to lack of efficacy. However, the impact of these deviations on the analysis is not fully detailed. Evidence ID: span-61e4517c553b23e9.",
+      "external_sources": [],
+      "grade": "minor_concern",
+      "id": "bc060ac02bdf",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 22284,
+          "page": null,
+          "paragraph": null,
+          "quote": "By week 12, 10 participants (7%) had reinitiated antidepressant medication, and 4 (3%) withdrew due to lack of efficacy and/or need for additional interventions.",
+          "section": "Participants",
+          "start": 22123
+        }
+      ],
+      "rubric_item": "deviations",
+      "severity": "minor",
+      "title": "Deviations: minor concern"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "design",
+      "confidence": 0.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "No verified evidence was provided regarding how outcomes were measured, including instruments, timing, or assessor training. Therefore, this item cannot be assessed.",
+      "external_sources": [],
+      "grade": "not_assessed",
+      "id": "4f9bcc1c4e43",
+      "limitations": [],
+      "paper_spans": [],
+      "rubric_item": "outcome_measurement",
+      "severity": "info",
+      "title": "Outcome Measurement: not assessed"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "design",
+      "confidence": 0.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "No verified evidence was provided on participant flow, reasons for dropout, or completeness of follow-up data. Therefore, this item cannot be assessed.",
+      "external_sources": [],
+      "grade": "not_assessed",
+      "id": "e22d171569cc",
+      "limitations": [],
+      "paper_spans": [],
+      "rubric_item": "attrition",
+      "severity": "info",
+      "title": "Attrition: not assessed"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "statistics",
+      "confidence": 0.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "No verified evidence was provided regarding whether the analysis followed an intention-to-treat principle, including how randomized participants were accounted for in analyses. Therefore, this item cannot be assessed.",
+      "external_sources": [],
+      "grade": "not_assessed",
+      "id": "24f898110d02",
+      "limitations": [],
+      "paper_spans": [],
+      "rubric_item": "intention_to_treat",
+      "severity": "info",
+      "title": "Intention To Treat: not assessed"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "statistics",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The study explicitly states it was powered at 80% to detect a 40% difference in HAMD17 response between psilocybin (25 mg) and nicotinamide, with assumed response rates provided. Evidence ID: span-7220bbf5a92ba5ed.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "9526aa49418f",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 19243,
+          "page": null,
+          "paragraph": null,
+          "quote": "The study was powered (80%) to detect a 40% difference in HAMD17 response between psilocybin, 25 mg, and nicotinamide at week 6, assuming response rates of 50%, 20%, and 10% for psilocybin, 25 mg; psilocybin, 5 mg; and nicotinamide, respectively.",
+          "section": "Statistical Analysis",
+          "start": 18997
+        }
+      ],
+      "rubric_item": "power",
+      "severity": "info",
+      "title": "Power: no concern"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "statistics",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The 95% confidence interval for the adjusted odds ratio (psilocybin 25 mg vs nicotinamide) is reported as 0.53\u20136.23, providing a clear effect size interval. Evidence ID: span-c8ad5c7707baf2e5.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "77247b0a0e36",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 23391,
+          "page": null,
+          "paragraph": null,
+          "quote": "psilocybin, 25 mg vs nicotinamide: adjusted odds ratio [OR], 1.73; 95% CI, 0.53-6.23; P = .19, derived from confirmatory testing; 1-sided \u03b1 P = .03",
+          "section": "Efficacy",
+          "start": 23244
+        }
+      ],
+      "rubric_item": "effect_size_interval",
+      "severity": "info",
+      "title": "Effect Size Interval: no concern"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "statistics",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The confirmatory tests were conducted sequentially using a predefined fixed-order procedure with a 1-sided \u03b1 = .03, addressing multiplicity. Evidence ID: span-33ae9dade96330a3.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "5c3a533c47ef",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 20829,
+          "page": null,
+          "paragraph": null,
+          "quote": "Confirmatory tests were conducted sequentially, as per the predefined fixed-order procedure, at a 1-sided significance level of \u03b1 = .03, reflecting directed hypotheses of superiority.",
+          "section": "Statistical Analysis",
+          "start": 20646
+        }
+      ],
+      "rubric_item": "multiplicity",
+      "severity": "info",
+      "title": "Multiplicity: no concern"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "statistics",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "Some missing data are noted (e.g., 2 participants excluded due to major time deviations), but there is no comprehensive description of missing data patterns or methods used to handle them (e.g., imputation). Evidence ID: span-c7ae1f88e56d6cd3.",
+      "external_sources": [],
+      "grade": "minor_concern",
+      "id": "5bb361523c5b",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 41566,
+          "page": null,
+          "paragraph": null,
+          "quote": "In the nicotinamide group, in total 44 participants received a second IMP administration, 2 with major time deviations as an intercurrent event (and, therefore, not included in the while-receiving-treatment population for the second treatment phase).",
+          "section": "Figure and table captions",
+          "start": 41316
+        }
+      ],
+      "rubric_item": "missing_data",
+      "severity": "minor",
+      "title": "Missing Data: minor concern"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "claims",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The claim is appropriately cautious, acknowledging the negative primary endpoint while suggesting potential effects based on secondary outcomes. Evidence ID: span-2d49bc16cb52f832.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "1d655bd7fb95",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 1164,
+          "page": null,
+          "paragraph": null,
+          "quote": "Although the primary end point was negative, secondary outcomes suggest that psilocybin, 25 mg, with adjunct psychotherapy may exert clinically meaningful antidepressant effects in TRD.",
+          "section": "Abstract",
+          "start": 979
+        }
+      ],
+      "rubric_item": "claim_strength",
+      "severity": "info",
+      "title": "Claim Strength: no concern"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "claims",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The claim is supported by secondary outcomes showing significant mean changes in HAMD17 and BDI-II scores, despite the nonsignificant primary outcome. Evidence IDs: span-ff8d840105a348ee, span-f7ca8ad328d846d2.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "73fac2b298c2",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 3330,
+          "page": null,
+          "paragraph": null,
+          "quote": "Analyses of key secondary end points (mean changes from baseline on HAMD17 and BDI-II) provided exploratory evidence of a clinically meaningful effect of psilocybin, 25 mg.",
+          "section": "Abstract",
+          "start": 3158
+        },
+        {
+          "bbox": null,
+          "end": 24089,
+          "page": null,
+          "paragraph": null,
+          "quote": "The HAMD17 linear mixed model for treatment phase 1 revealed evidence for an effect of psilocybin, 25 mg vs nicotinamide at week 6 (estimated mean difference, \u22124.60; 95% CI, \u22127.01 to \u22122.18; P <.001)",
+          "section": "Efficacy",
+          "start": 23891
+        }
+      ],
+      "rubric_item": "results_support",
+      "severity": "info",
+      "title": "Results Support: no concern"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "claims",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The paper uses non-definitive, cautious language (e.g., 'suggest potential efficacy', 'inconclusive'), avoiding strong causal claims. Evidence ID: span-14452b927ccc358e.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "18773ff8e67b",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 37810,
+          "page": null,
+          "paragraph": null,
+          "quote": "Although results suggest potential efficacy, the divergence between primary and secondary outcomes renders the findings inconclusive and calls for cautious interpretation and replication.",
+          "section": "Conclusions",
+          "start": 37623
+        }
+      ],
+      "rubric_item": "causal_language",
+      "severity": "info",
+      "title": "Causal Language: no concern"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "claims",
+      "confidence": 0.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "No verified evidence was provided regarding the extent to which findings are generalized beyond the study population or setting. Therefore, this item cannot be assessed.",
+      "external_sources": [],
+      "grade": "not_assessed",
+      "id": "c4ab4fc87dc7",
+      "limitations": [],
+      "paper_spans": [],
+      "rubric_item": "generalization",
+      "severity": "info",
+      "title": "Generalization: not assessed"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "claims",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The paper explicitly discusses limitations such as functional unblinding, center effects, and overestimation in power calculation, and links them to interpretation of results. Evidence ID: span-bf6dbff71e1968b8.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "929e81976c18",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 35881,
+          "page": null,
+          "paragraph": null,
+          "quote": "Key trial limitations include functional unblinding, an unexplained (small) center effect, and overestimation of the treatment effect in power calculation, which likely reduced power to detect a difference on the primary end point.",
+          "section": "Strengths and Limitations",
+          "start": 35650
+        }
+      ],
+      "rubric_item": "limitations_alignment",
+      "severity": "info",
+      "title": "Limitations Alignment: no concern"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "transparency",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The trial protocol and statistical analysis plan are available in Supplements 1 and 2, indicating prospective registration and transparency. Evidence ID: span-ddc9537dc1701d3c.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "019411af601d",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 13225,
+          "page": null,
+          "paragraph": null,
+          "quote": "The trial protocol and statistical analysis plan are available in Supplement 1 and Supplement 2 , respectively.",
+          "section": "Study Design and Oversight",
+          "start": 13114
+        }
+      ],
+      "rubric_item": "registration",
+      "severity": "info",
+      "title": "Registration: no concern"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "transparency",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "Ethical approval was obtained from relevant institutional review boards, including the Ethics Committees of the Medical Faculty Mannheim and the Federal Institute for Drugs and Medical Devices. Evidence ID: span-a34180b7bbae40f6.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "e88129dc3999",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 12957,
+          "page": null,
+          "paragraph": null,
+          "quote": "The trial was approved by the Ethics Committees of the Medical Faculty Mannheim, University of Heidelberg, Heidelberg, Germany, and the state of Berlin, and the Federal Institute for Drugs and Medical Devices.",
+          "section": "Study Design and Oversight",
+          "start": 12748
+        }
+      ],
+      "rubric_item": "ethics",
+      "severity": "info",
+      "title": "Ethics: no concern"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "transparency",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "A data sharing statement is provided in Supplement 4, indicating availability of data. Evidence ID: span-051a957c346b3a65.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "c014a0e5ac4b",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 45323,
+          "page": null,
+          "paragraph": null,
+          "quote": "Supplement 4. Data Sharing Statement.",
+          "section": "Supplementary material",
+          "start": 45286
+        }
+      ],
+      "rubric_item": "data_code",
+      "severity": "info",
+      "title": "Data Code: no concern"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "transparency",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The study explicitly states adherence to CONSORT reporting guidelines, supporting comprehensive reporting. Evidence ID: span-64654db801c9ce2c.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "0dcdc7c43d12",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 13526,
+          "page": null,
+          "paragraph": null,
+          "quote": "This study followed the Consolidated Standards of Reporting Trials ( CONSORT ) reporting guidelines.",
+          "section": "Study Design and Oversight",
+          "start": 13426
+        }
+      ],
+      "rubric_item": "reporting_completeness",
+      "severity": "info",
+      "title": "Reporting Completeness: no concern"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "transparency",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "Statistical analyses were conducted using specified software (R version 4.4 and SAS version 9.4), enhancing reproducibility. Evidence ID: span-1284bfb2c8e35676.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "1c6882f79821",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 21469,
+          "page": null,
+          "paragraph": null,
+          "quote": "Statistical analyses were performed from April 2024 to November 2025 using R, version 4.4 (R Project for Statistical Computing), and SAS, version 9.4 (SAS Institute).",
+          "section": "Statistical Analysis",
+          "start": 21303
+        }
+      ],
+      "rubric_item": "reproducibility",
+      "severity": "info",
+      "title": "Reproducibility: no concern"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "disclosures",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "Funding sources are clearly stated, including support from the Federal Ministry of Education and Research (BMBF) and the German Center for Mental Health (DZPG). Evidence IDs: span-257254d93c973a5d, span-30db25edccb84c2d.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "46b512bed4af",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 9650,
+          "page": null,
+          "paragraph": null,
+          "quote": "Funding/Support: This work was supported by grant 01EN2006 A/B from the Federal Ministry of Education and Research (BMBF) . Open access publication of the manuscript was supported by the German Center for Mental Health (DZPG) .",
+          "section": "Author notes and conflicts",
+          "start": 9423
+        },
+        {
+          "bbox": null,
+          "end": 5285,
+          "page": null,
+          "paragraph": null,
+          "quote": "[Funding]\nFederal Ministry of Education and Research (BMBF)\n\nGerman Center for Mental Health (DZPG)",
+          "section": "Funding",
+          "start": 5186
+        }
+      ],
+      "rubric_item": "funding_statement",
+      "severity": "info",
+      "title": "Funding Statement: no concern"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "disclosures",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "Conflicts of interest are disclosed for multiple authors, including personal fees and grants from pharmaceutical and psychedelic research companies. Evidence IDs: span-fe01a183e93f8675, span-39b8349fc9bdbffa.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "c8a1dda9ed8e",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 7850,
+          "page": null,
+          "paragraph": null,
+          "quote": "Conflict of Interest Disclosures: Dr Betzler reported receiving personal fees from Takeda Pharmaceutical Company and Medice Arzneimittel P\u00fctter GmbH & Co outside the submitted work. Ms Brand reported receiving board member fees from S\u00c4PT Switzerland and mentorship fees from MIND Foundation outside the submitted work. Dr Evens reported receiving compensation for travel expenses from Beckley Psytech outside the submitted work. Dr A. Jungaberle reported receiving study support from Beckley Psytech and MindMed outside the submitted work and being a cofounder and/or shareholder of OVID Health Systems GmbH, OVID Clinic Berlin GmbH, OVID Beteiligungsgesellschaft mbH, OVID Tagesklinik GmbH & Co. KG, Metamorphosis Ecologica GmbH (Berlin, Germany), and MIND Foundation gGmbH (Berlin, Germany).",
+          "section": "Author notes and conflicts",
+          "start": 7057
+        },
+        {
+          "bbox": null,
+          "end": 9385,
+          "page": null,
+          "paragraph": null,
+          "quote": "Dr Gr\u00fcnder reported receiving grants from Beckley Psytech, Boehringer Ingelheim, and MindMed; personal fees from AbbVie, Beckley Psytech, Boehringer Ingelheim, Bristol Myers Squibb, Institute for Quality and Efficiency in Health Care, Johnson & Johnson, Lundbeck, MindMed, Otsuka, Roche, and ROVI; being owner of Mind and Brain Institute GmbH; and being a founder/shareholder of OVID Health Systems GmbH, OVID Clinic Berlin GmbH, OVID Beteiligungsgesellschaft mbH, OVID Tagesklinik GmbH & Co, and MIND Foundation gGmbH outside the submitted work.",
+          "section": "Author notes and conflicts",
+          "start": 8839
+        }
+      ],
+      "rubric_item": "conflict_statement",
+      "severity": "info",
+      "title": "Conflict Statement: no concern"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "disclosures",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The sponsor, Central Institute of Mental Health, Mannheim, is identified as the initiator and coordinator of the trial. Funding was obtained by named investigators. Evidence IDs: span-71e7f4e1c9526803, span-09ece6751cb590eb.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "679579b2f58b",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 12747,
+          "page": null,
+          "paragraph": null,
+          "quote": "[Study Design and Oversight]\nThis phase 2b, triple-blind (investigator, participant, and rater blinded), active placebo-controlled, 4-arm, investigator-initiated RCT was sponsored by the Central Institute of Mental Health, Mannheim, Germany, and conducted at 2 German university hospitals from June 2021 to February 2024.",
+          "section": "Study Design and Oversight",
+          "start": 12426
+        },
+        {
+          "bbox": null,
+          "end": 6791,
+          "page": null,
+          "paragraph": null,
+          "quote": "Obtained funding: Mertens, H. Jungaberle, Stroehle, Wolff, Gr\u00fcnder.",
+          "section": "Author notes and conflicts",
+          "start": 6724
+        }
+      ],
+      "rubric_item": "sponsor_role",
+      "severity": "info",
+      "title": "Sponsor Role: no concern"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "disclosures",
+      "confidence": 1.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "Author affiliations are fully listed, including academic, clinical, and research institutions across Germany. Evidence IDs: span-ceaeb6127c161ef7 through span-87201fa49fa267b0.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "e5c6eaec3031",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 4363,
+          "page": null,
+          "paragraph": null,
+          "quote": "1 Department of Molecular Neuroimaging, Central Institute of Mental Health, Medical Faculty Mannheim, Heidelberg University, Mannheim, Germany",
+          "section": "Affiliations",
+          "start": 4221
+        },
+        {
+          "bbox": null,
+          "end": 4455,
+          "page": null,
+          "paragraph": null,
+          "quote": "2 German Center for Mental Health, partner site Mannheim-Heidelberg-Ulm, Mannheim, Germany",
+          "section": "Affiliations",
+          "start": 4365
+        },
+        {
+          "bbox": null,
+          "end": 4657,
+          "page": null,
+          "paragraph": null,
+          "quote": "3 Charit\u00e9\u2014Universit\u00e4tsmedizin Berlin, Corporate Member of Freie Universit\u00e4t Berlin and Humboldt-Universit\u00e4t zu Berlin, Department of Psychiatry and Psychotherapy, Campus Charit\u00e9 Mitte, Berlin, Germany",
+          "section": "Affiliations",
+          "start": 4457
+        },
+        {
+          "bbox": null,
+          "end": 4738,
+          "page": null,
+          "paragraph": null,
+          "quote": "4 German Center for Mental Health, partner site Berlin-Potsdam, Berlin, Germany",
+          "section": "Affiliations",
+          "start": 4659
+        },
+        {
+          "bbox": null,
+          "end": 4815,
+          "page": null,
+          "paragraph": null,
+          "quote": "5 Department of Psychology, Humboldt-Universit\u00e4t zu Berlin, Berlin, Germany",
+          "section": "Affiliations",
+          "start": 4740
+        },
+        {
+          "bbox": null,
+          "end": 4965,
+          "page": null,
+          "paragraph": null,
+          "quote": "6 Department of Psychiatry and Psychotherapy, Central Institute of Mental Health, Medical Faculty Mannheim, Heidelberg University, Mannheim, Germany",
+          "section": "Affiliations",
+          "start": 4817
+        },
+        {
+          "bbox": null,
+          "end": 5001,
+          "page": null,
+          "paragraph": null,
+          "quote": "7 MIND Foundation, Berlin, Germany",
+          "section": "Affiliations",
+          "start": 4967
+        },
+        {
+          "bbox": null,
+          "end": 5046,
+          "page": null,
+          "paragraph": null,
+          "quote": "8 OVID Health Systems GmbH, Berlin, Germany",
+          "section": "Affiliations",
+          "start": 5003
+        }
+      ],
+      "rubric_item": "affiliations",
+      "severity": "info",
+      "title": "Affiliations: no concern"
+    }
+  ],
+  "id": "6fb4e196-11d7-416f-8c51-c18ac957beaf",
+  "identity": {
+    "arxiv_id": null,
+    "authors": [
+      "Lea J. Mertens",
+      "Michael Koslowski",
+      "Felix Betzler",
+      "Manuela Brand",
+      "Ricarda Evens",
+      "Laura K\u00e4rtner",
+      "Andrea Jungaberle",
+      "Henrik Jungaberle",
+      "Tomislav Maji\u0107",
+      "Christian N. Schmitz",
+      "Andreas Str\u00f6hle",
+      "Dennis Scharf",
+      "Moritz Spangemacher",
+      "Max Wolff",
+      "Zahra Assadi",
+      "Scharif Bahri",
+      "Lilith Becher",
+      "Luca V. F\u00e4rber",
+      "Niklas Kirchen",
+      "Eugenia Kulakova",
+      "Linda Kunz",
+      "Andy Meijer",
+      "Barbara Rohrmoser",
+      "Stefan Wellek",
+      "Moritz M. Berger",
+      "Gerhard Gr\u00fcnder"
+    ],
+    "doi": "10.1001/jamapsychiatry.2026.0132",
+    "fingerprint": "8de3cea1d609d3d2be026c2b5e642731243906ab3dc3f0d2c5a900f2728732eb",
+    "journal": "JAMA Psychiatry",
+    "pmcid": "PMC13000742",
+    "pmid": "41848690",
+    "published_at": "2026",
+    "title": "Efficacy and Safety of Psilocybin in Treatment-Resistant Major Depression",
+    "updated_at": null,
+    "versions": [
+      "publishedVersion",
+      "submittedVersion"
+    ]
+  },
+  "language": "en",
+  "limitations": [
+    "The Review score summarizes assessed methodology items; it is not the probability that the conclusions are true.",
+    "No cited-paper full texts were retrieved or analyzed.",
+    "English is validated first; other languages are experimental.",
+    "Supplementary files were linked by the article, but their file contents were not parsed.",
+    "PDF \u00b7 Unpaywall \u00b7 publishedVersion could not be used; analysis used JATS \u00b7 PMC \u00b7 publishedVersion instead.",
+    "PDF \u00b7 Unpaywall \u00b7 publishedVersion could not be used; analysis used JATS \u00b7 PMC \u00b7 publishedVersion instead."
+  ],
+  "methodology_hash": "66b93ef58957399335661945dbad5a3e6e38a565ffc1cfd42b62dc31eca72965",
+  "methodology_version": "1.3",
+  "missing_item_ids": [],
+  "module_statuses": [
+    {
+      "assessed_items": 3,
+      "expected_items": 5,
+      "key": "design",
+      "label": "Study design & risk of bias",
+      "limitation": null,
+      "state": "completed"
+    },
+    {
+      "assessed_items": 4,
+      "expected_items": 5,
+      "key": "statistics",
+      "label": "Statistical & computational validity",
+      "limitation": null,
+      "state": "completed"
+    },
+    {
+      "assessed_items": 4,
+      "expected_items": 5,
+      "key": "claims",
+      "label": "Claim\u2013evidence alignment",
+      "limitation": null,
+      "state": "completed"
+    },
+    {
+      "assessed_items": 5,
+      "expected_items": 5,
+      "key": "transparency",
+      "label": "Transparency & reporting",
+      "limitation": null,
+      "state": "completed"
+    },
+    {
+      "assessed_items": 4,
+      "expected_items": 4,
+      "key": "disclosures",
+      "label": "Disclosures & affiliations",
+      "limitation": null,
+      "state": "completed"
+    }
+  ],
+  "paper_sha256": "b409e46aaf126fe7ca15d36d22d0dec5780aa266dc6819c7c32cdb24c2c55cda",
+  "parser_name": "pmc-jats",
+  "parser_version": "1.2",
+  "profile": "randomized_experiment",
+  "provider_profile": "token_factory",
+  "provider_protocol": "openai-compatible",
+  "repaired_output": false,
+  "review_score": 96.5,
+  "reviewer_model": "Qwen/Qwen3-235B-A22B-Instruct-2507",
+  "schema_version": "1.3",
+  "scoring_version": "1.3",
+  "source_format": "jats",
+  "summary": [
+    "Deviations: minor concern. Deviations are partially reported: 10 participants (7%) reinitiated antidepressants and 4 (3%) withdrew due to lack of efficacy. However, the impact of these deviations on the analysis is not fully detailed. Evidence ID: span-61e4517c553b23e9.",
+    "Missing Data: minor concern. Some missing data are noted (e.g., 2 participants excluded due to major time deviations), but there is no comprehensive description of missing data patterns or methods used to handle them (e.g., imputation). Evidence ID: span-c7ae1f88e56d6cd3.",
+    "The final review assessed 20 of 24 methodology items."
+  ],
+  "token_usage": {
+    "input_tokens": 42482,
+    "output_tokens": 6497,
+    "total_tokens": 48979
+  },
+  "uncapped_score": 96.5,
+  "worker_model": "Qwen/Qwen3-30B-A3B-Instruct-2507"
+}

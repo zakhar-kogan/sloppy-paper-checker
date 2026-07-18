@@ -1,0 +1,1438 @@
+{
+  "assessed_item_count": 11,
+  "audit_trail": [
+    {
+      "at": "2026-07-18T21:17:22.154904+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": null,
+      "kind": "stage",
+      "label": "Ingesting and fingerprinting",
+      "notes": [],
+      "progress": 8,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T21:17:22.156737+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": null,
+      "kind": "stage",
+      "label": "Classifying paper and routing evidence",
+      "notes": [],
+      "progress": 22,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T21:17:22.171215+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": null,
+      "kind": "stage",
+      "label": "Gathering methodology evidence",
+      "notes": [],
+      "progress": 35,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T21:17:22.171922+00:00",
+      "detail": "Waiting to start.",
+      "evidence_count": 0,
+      "key": "design",
+      "kind": "module",
+      "label": "Study design & risk of bias",
+      "notes": [],
+      "progress": 35,
+      "state": "pending"
+    },
+    {
+      "at": "2026-07-18T21:17:22.171935+00:00",
+      "detail": "Waiting to start.",
+      "evidence_count": 0,
+      "key": "statistics",
+      "kind": "module",
+      "label": "Statistical & computational validity",
+      "notes": [],
+      "progress": 35,
+      "state": "pending"
+    },
+    {
+      "at": "2026-07-18T21:17:22.171939+00:00",
+      "detail": "Waiting to start.",
+      "evidence_count": 0,
+      "key": "claims",
+      "kind": "module",
+      "label": "Claim\u2013evidence alignment",
+      "notes": [],
+      "progress": 35,
+      "state": "pending"
+    },
+    {
+      "at": "2026-07-18T21:17:22.171941+00:00",
+      "detail": "Waiting to start.",
+      "evidence_count": 0,
+      "key": "transparency",
+      "kind": "module",
+      "label": "Transparency & reporting",
+      "notes": [],
+      "progress": 35,
+      "state": "pending"
+    },
+    {
+      "at": "2026-07-18T21:17:22.171944+00:00",
+      "detail": "Waiting to start.",
+      "evidence_count": 0,
+      "key": "disclosures",
+      "kind": "module",
+      "label": "Disclosures & affiliations",
+      "notes": [],
+      "progress": 35,
+      "state": "pending"
+    },
+    {
+      "at": "2026-07-18T21:17:22.172625+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": "design",
+      "kind": "module",
+      "label": "Study design & risk of bias",
+      "notes": [],
+      "progress": 35,
+      "state": "running"
+    },
+    {
+      "at": "2026-07-18T21:17:22.175213+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": "statistics",
+      "kind": "module",
+      "label": "Statistical & computational validity",
+      "notes": [],
+      "progress": 35,
+      "state": "running"
+    },
+    {
+      "at": "2026-07-18T21:17:22.177529+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": "claims",
+      "kind": "module",
+      "label": "Claim\u2013evidence alignment",
+      "notes": [],
+      "progress": 35,
+      "state": "running"
+    },
+    {
+      "at": "2026-07-18T21:17:22.179479+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": "transparency",
+      "kind": "module",
+      "label": "Transparency & reporting",
+      "notes": [],
+      "progress": 35,
+      "state": "running"
+    },
+    {
+      "at": "2026-07-18T21:17:22.181525+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": "disclosures",
+      "kind": "module",
+      "label": "Disclosures & affiliations",
+      "notes": [],
+      "progress": 35,
+      "state": "running"
+    },
+    {
+      "at": "2026-07-18T21:17:28.523417+00:00",
+      "detail": null,
+      "evidence_count": 4,
+      "key": "disclosures",
+      "kind": "module",
+      "label": "Disclosures & affiliations",
+      "notes": [
+        {
+          "evidence_state": "not_found",
+          "module_key": "disclosures",
+          "observation": "No explicit funding statement is provided in the supplied text.",
+          "quotes": [],
+          "rubric_item": "funding_statement"
+        },
+        {
+          "evidence_state": "not_found",
+          "module_key": "disclosures",
+          "observation": "No conflict of interest statement is provided in the supplied text.",
+          "quotes": [],
+          "rubric_item": "conflict_statement"
+        },
+        {
+          "evidence_state": "not_found",
+          "module_key": "disclosures",
+          "observation": "No information is provided about the role of any sponsor in the research.",
+          "quotes": [],
+          "rubric_item": "sponsor_role"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "disclosures",
+          "observation": "The authors list their institutional affiliations, including Google Brain, Google Research, and the University of Toronto. The affiliations are indicated with asterisks and footnotes.",
+          "quotes": [
+            "Ashish Vaswani \u2217 Google Brain avaswani@google.com",
+            "Noam Shazeer \u2217 Google Brain noam@google.com"
+          ],
+          "rubric_item": "affiliations"
+        }
+      ],
+      "progress": 42,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T21:17:31.177105+00:00",
+      "detail": null,
+      "evidence_count": 5,
+      "key": "transparency",
+      "kind": "module",
+      "label": "Transparency & reporting",
+      "notes": [
+        {
+          "evidence_state": "not_found",
+          "module_key": "transparency",
+          "observation": "The paper does not mention any prior registration of the study or model design, such as a preprint repository, clinical trial registry, or model registration platform.",
+          "quotes": [],
+          "rubric_item": "registration"
+        },
+        {
+          "evidence_state": "not_found",
+          "module_key": "transparency",
+          "observation": "The paper does not discuss ethical considerations related to data collection, model deployment, or potential societal impacts.",
+          "quotes": [],
+          "rubric_item": "ethics"
+        },
+        {
+          "evidence_state": "ambiguous",
+          "module_key": "transparency",
+          "observation": "The worker returned an observation, but its quote did not match the normalized paper exactly.",
+          "quotes": [],
+          "rubric_item": "data_code"
+        },
+        {
+          "evidence_state": "ambiguous",
+          "module_key": "transparency",
+          "observation": "The paper includes detailed descriptions of model architecture, training setup, hyperparameters, and evaluation metrics, but omits information about data preprocessing steps, data source licensing, and model limitations.",
+          "quotes": [],
+          "rubric_item": "reporting_completeness"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "transparency",
+          "observation": "The paper provides a public code repository and sufficient architectural and training details to reproduce the model, including hyperparameters and hardware configuration.",
+          "quotes": [
+            "We trained our models on one machine with 8 NVIDIA P100 GPUs. For our base models using the hyperparameters described throughout the paper, each training step took about 0.4 seconds. We trained the base models for a total of 100,000 steps or 12 hours."
+          ],
+          "rubric_item": "reproducibility"
+        }
+      ],
+      "progress": 48,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T21:17:31.485279+00:00",
+      "detail": null,
+      "evidence_count": 5,
+      "key": "design",
+      "kind": "module",
+      "label": "Study design & risk of bias",
+      "notes": [
+        {
+          "evidence_state": "observed",
+          "module_key": "design",
+          "observation": "The paper uses the WMT 2014 English-to-German and English-to-French translation tasks, and applies the model to English constituency parsing with both large and limited training data.",
+          "quotes": [
+            "We show that the Transformer generalizes well to other tasks by applying it successfully to English constituency parsing both with large and limited training data."
+          ],
+          "rubric_item": "dataset_provenance"
+        },
+        {
+          "evidence_state": "not_found",
+          "module_key": "design",
+          "observation": "The paper does not describe any data leakage issues, and no evidence of data contamination or test set usage during training is present in the provided excerpts.",
+          "quotes": [],
+          "rubric_item": "leakage"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "design",
+          "observation": "The paper compares the Transformer model to prior state-of-the-art models, including ensembles, and reports improvements over existing results.",
+          "quotes": [
+            "Our model achieves 28.4 BLEU on the WMT 2014 English- to-German translation task, improving over the existing best results, including ensembles, by over 2 BLEU."
+          ],
+          "rubric_item": "baseline_choice"
+        },
+        {
+          "evidence_state": "not_found",
+          "module_key": "design",
+          "observation": "The paper does not include an ablation study to evaluate the contribution of individual components of the Transformer architecture.",
+          "quotes": [],
+          "rubric_item": "ablation"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "design",
+          "observation": "The paper demonstrates generalization to English constituency parsing, suggesting the model's applicability beyond machine translation.",
+          "quotes": [
+            "We show that the Transformer generalizes well to other tasks by applying it successfully to English constituency parsing both with large and limited training data."
+          ],
+          "rubric_item": "external_validity"
+        }
+      ],
+      "progress": 55,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T21:17:32.948322+00:00",
+      "detail": null,
+      "evidence_count": 5,
+      "key": "statistics",
+      "kind": "module",
+      "label": "Statistical & computational validity",
+      "notes": [
+        {
+          "evidence_state": "observed",
+          "module_key": "statistics",
+          "observation": "The model's performance is evaluated on held-out test sets (e.g., newstest2013 for translation, Section 23 of WSJ for parsing), and hyperparameters are tuned on development sets. No evidence is provided that the test set was used during training or hyperparameter selection.",
+          "quotes": [
+            "We used beam search as described in the previous section, but no checkpoint averaging.",
+            "We performed only a small number of experiments to select the dropout, both attention and residual (section 5.4), learning rates and beam size on the Section 22 development set, all other parameters remained unchanged from the English-to-German base translation model."
+          ],
+          "rubric_item": "test_set_isolation"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "statistics",
+          "observation": "The authors conducted a limited hyperparameter search on development sets for dropout, learning rates, beam size, and other parameters, but do not describe the full search space or optimization method.",
+          "quotes": [
+            "We performed only a small number of experiments to select the dropout, both attention and residual (section 5.4), learning rates and beam size on the Section 22 development set, all other parameters remained unchanged from the English-to-German base translation model.",
+            "These hyperparameters were chosen after experimentation on the development set."
+          ],
+          "rubric_item": "hyperparameter_search"
+        },
+        {
+          "evidence_state": "not_found",
+          "module_key": "statistics",
+          "observation": "The paper reports point estimates (e.g., BLEU scores, F1 scores) but does not provide confidence intervals, standard deviations, or multiple runs to quantify uncertainty in model performance.",
+          "quotes": [],
+          "rubric_item": "uncertainty"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "statistics",
+          "observation": "The Transformer is evaluated on two distinct tasks: machine translation (English-to-German and English-to-French) and English constituency parsing, demonstrating generalization across different domains.",
+          "quotes": [
+            "On the WMT 2014 English-to-German translation task, the big transformer model (Transformer (big) in Table 2) outperforms the best previously reported models (including ensembles) by more than 2 . 0 BLEU, establishing a new state-of-the-art BLEU score of 28 . 4 .",
+            "We trained a 4-layer transformer with d model = 1024 on the Wall Street Journal (WSJ) portion of the Penn Treebank [25], about 40K training sentences. We also trained it in a semi-supervised setting, using the larger high-confidence and BerkleyParser corpora from with approximate"
+          ],
+          "rubric_item": "multiple_benchmarks"
+        },
+        {
+          "evidence_state": "ambiguous",
+          "module_key": "statistics",
+          "observation": "The worker returned an observation, but its quote did not match the normalized paper exactly.",
+          "quotes": [],
+          "rubric_item": "replication_artifacts"
+        }
+      ],
+      "progress": 61,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T21:17:32.990388+00:00",
+      "detail": null,
+      "evidence_count": 5,
+      "key": "claims",
+      "kind": "module",
+      "label": "Claim\u2013evidence alignment",
+      "notes": [
+        {
+          "evidence_state": "observed",
+          "module_key": "claims",
+          "observation": "The paper asserts that the Transformer achieves a new state of the art in translation quality and generalizes well to other tasks, with strong performance on English constituency parsing.",
+          "quotes": [
+            "We propose a new simple network architecture, the Transformer, based solely on attention mechanisms, dispensing with recurrence and convolutions entirely.",
+            "On both WMT 2014 English-to-German and WMT 2014 English-to-French translation tasks, we achieve a new state of the art."
+          ],
+          "rubric_item": "claim_strength"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "claims",
+          "observation": "The results are supported by quantitative metrics on translation and parsing tasks, including BLEU scores and F1 scores, with comparisons to prior models.",
+          "quotes": [
+            "Transformer (4 layers) semi-supervised 92.7"
+          ],
+          "rubric_item": "results_support"
+        },
+        {
+          "evidence_state": "ambiguous",
+          "module_key": "claims",
+          "observation": "The paper uses language that implies causation (e.g., 'replacing', 'dispensing with') but does not provide experimental evidence to confirm causal mechanisms.",
+          "quotes": [],
+          "rubric_item": "causal_language"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "claims",
+          "observation": "The paper claims generalization to English constituency parsing, supported by results on both limited and large data settings.",
+          "quotes": [
+            "We show that the Transformer generalizes well to other tasks by applying it successfully to English constituency parsing both with large and limited training data."
+          ],
+          "rubric_item": "generalization"
+        },
+        {
+          "evidence_state": "ambiguous",
+          "module_key": "claims",
+          "observation": "The paper acknowledges limitations such as the need for further investigation into restricted attention and handling large inputs, but does not explicitly link these to the claims made.",
+          "quotes": [],
+          "rubric_item": "limitations_alignment"
+        }
+      ],
+      "progress": 68,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T21:17:32.992633+00:00",
+      "detail": null,
+      "evidence_count": 0,
+      "key": null,
+      "kind": "stage",
+      "label": "Checking current-paper scholarly context",
+      "notes": [],
+      "progress": 72,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T21:17:32.993500+00:00",
+      "detail": "Single bounded reviewer attempt; maximum 6,144 completion tokens.",
+      "evidence_count": 0,
+      "key": null,
+      "kind": "stage",
+      "label": "Generating final assessment",
+      "notes": [],
+      "progress": 84,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-18T21:17:57.260702+00:00",
+      "detail": "Checking methodology coverage and exact-quote grounding.",
+      "evidence_count": 0,
+      "key": null,
+      "kind": "stage",
+      "label": "Validating reviewer response",
+      "notes": [],
+      "progress": 90,
+      "state": "running"
+    },
+    {
+      "at": "2026-07-18T21:17:57.268684+00:00",
+      "progress": 96,
+      "stage": "Scored"
+    }
+  ],
+  "banners": [],
+  "completed_at": "2026-07-18T21:17:57.268711Z",
+  "composite_score": 95.5,
+  "confidence_components": {
+    "assessment_coverage": 0.502,
+    "evidence_module_coverage": 1.0,
+    "quote_grounding_rate": 0.579,
+    "source_quality": 0.9
+  },
+  "confidence_score": 70.5,
+  "content_level": "full_text",
+  "context": {
+    "author_conflict_signals": [],
+    "corrections": [],
+    "expression_of_concern": false,
+    "metric_notes": [],
+    "record_sources": [],
+    "retracted": false,
+    "venue_signals": []
+  },
+  "coverage": {
+    "available": 0.458,
+    "context": 0.25,
+    "full_review": 0.458,
+    "limitations": [
+      "Low full-review coverage makes the Review score provisional."
+    ],
+    "overall": 0.458,
+    "paper": 0.458,
+    "provisional": true
+  },
+  "dimensions": [
+    {
+      "assessed_items": 3,
+      "key": "design",
+      "label": "Study design & risk of bias",
+      "score": 100.0,
+      "total_items": 5,
+      "weight": 30.0
+    },
+    {
+      "assessed_items": 3,
+      "key": "statistics",
+      "label": "Statistical & computational validity",
+      "score": 91.7,
+      "total_items": 5,
+      "weight": 25.0
+    },
+    {
+      "assessed_items": 3,
+      "key": "claims",
+      "label": "Claim\u2013evidence alignment",
+      "score": 100.0,
+      "total_items": 5,
+      "weight": 20.0
+    },
+    {
+      "assessed_items": 1,
+      "key": "transparency",
+      "label": "Transparency & reporting",
+      "score": 75.0,
+      "total_items": 5,
+      "weight": 20.0
+    },
+    {
+      "assessed_items": 1,
+      "key": "disclosures",
+      "label": "Disclosures & affiliations",
+      "score": 100.0,
+      "total_items": 4,
+      "weight": 5.0
+    }
+  ],
+  "evidence_notes": [
+    {
+      "evidence_state": "observed",
+      "module_key": "design",
+      "observation": "The paper uses the WMT 2014 English-to-German and English-to-French translation tasks, and applies the model to English constituency parsing with both large and limited training data.",
+      "quotes": [
+        "We show that the Transformer generalizes well to other tasks by applying it successfully to English constituency parsing both with large and limited training data."
+      ],
+      "rubric_item": "dataset_provenance"
+    },
+    {
+      "evidence_state": "not_found",
+      "module_key": "design",
+      "observation": "The paper does not describe any data leakage issues, and no evidence of data contamination or test set usage during training is present in the provided excerpts.",
+      "quotes": [],
+      "rubric_item": "leakage"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "design",
+      "observation": "The paper compares the Transformer model to prior state-of-the-art models, including ensembles, and reports improvements over existing results.",
+      "quotes": [
+        "Our model achieves 28.4 BLEU on the WMT 2014 English- to-German translation task, improving over the existing best results, including ensembles, by over 2 BLEU."
+      ],
+      "rubric_item": "baseline_choice"
+    },
+    {
+      "evidence_state": "not_found",
+      "module_key": "design",
+      "observation": "The paper does not include an ablation study to evaluate the contribution of individual components of the Transformer architecture.",
+      "quotes": [],
+      "rubric_item": "ablation"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "design",
+      "observation": "The paper demonstrates generalization to English constituency parsing, suggesting the model's applicability beyond machine translation.",
+      "quotes": [
+        "We show that the Transformer generalizes well to other tasks by applying it successfully to English constituency parsing both with large and limited training data."
+      ],
+      "rubric_item": "external_validity"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "statistics",
+      "observation": "The model's performance is evaluated on held-out test sets (e.g., newstest2013 for translation, Section 23 of WSJ for parsing), and hyperparameters are tuned on development sets. No evidence is provided that the test set was used during training or hyperparameter selection.",
+      "quotes": [
+        "We used beam search as described in the previous section, but no checkpoint averaging.",
+        "We performed only a small number of experiments to select the dropout, both attention and residual (section 5.4), learning rates and beam size on the Section 22 development set, all other parameters remained unchanged from the English-to-German base translation model."
+      ],
+      "rubric_item": "test_set_isolation"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "statistics",
+      "observation": "The authors conducted a limited hyperparameter search on development sets for dropout, learning rates, beam size, and other parameters, but do not describe the full search space or optimization method.",
+      "quotes": [
+        "We performed only a small number of experiments to select the dropout, both attention and residual (section 5.4), learning rates and beam size on the Section 22 development set, all other parameters remained unchanged from the English-to-German base translation model.",
+        "These hyperparameters were chosen after experimentation on the development set."
+      ],
+      "rubric_item": "hyperparameter_search"
+    },
+    {
+      "evidence_state": "not_found",
+      "module_key": "statistics",
+      "observation": "The paper reports point estimates (e.g., BLEU scores, F1 scores) but does not provide confidence intervals, standard deviations, or multiple runs to quantify uncertainty in model performance.",
+      "quotes": [],
+      "rubric_item": "uncertainty"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "statistics",
+      "observation": "The Transformer is evaluated on two distinct tasks: machine translation (English-to-German and English-to-French) and English constituency parsing, demonstrating generalization across different domains.",
+      "quotes": [
+        "On the WMT 2014 English-to-German translation task, the big transformer model (Transformer (big) in Table 2) outperforms the best previously reported models (including ensembles) by more than 2 . 0 BLEU, establishing a new state-of-the-art BLEU score of 28 . 4 .",
+        "We trained a 4-layer transformer with d model = 1024 on the Wall Street Journal (WSJ) portion of the Penn Treebank [25], about 40K training sentences. We also trained it in a semi-supervised setting, using the larger high-confidence and BerkleyParser corpora from with approximate"
+      ],
+      "rubric_item": "multiple_benchmarks"
+    },
+    {
+      "evidence_state": "ambiguous",
+      "module_key": "statistics",
+      "observation": "The worker returned an observation, but its quote did not match the normalized paper exactly.",
+      "quotes": [],
+      "rubric_item": "replication_artifacts"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "claims",
+      "observation": "The paper asserts that the Transformer achieves a new state of the art in translation quality and generalizes well to other tasks, with strong performance on English constituency parsing.",
+      "quotes": [
+        "We propose a new simple network architecture, the Transformer, based solely on attention mechanisms, dispensing with recurrence and convolutions entirely.",
+        "On both WMT 2014 English-to-German and WMT 2014 English-to-French translation tasks, we achieve a new state of the art."
+      ],
+      "rubric_item": "claim_strength"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "claims",
+      "observation": "The results are supported by quantitative metrics on translation and parsing tasks, including BLEU scores and F1 scores, with comparisons to prior models.",
+      "quotes": [
+        "Transformer (4 layers) semi-supervised 92.7"
+      ],
+      "rubric_item": "results_support"
+    },
+    {
+      "evidence_state": "ambiguous",
+      "module_key": "claims",
+      "observation": "The paper uses language that implies causation (e.g., 'replacing', 'dispensing with') but does not provide experimental evidence to confirm causal mechanisms.",
+      "quotes": [],
+      "rubric_item": "causal_language"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "claims",
+      "observation": "The paper claims generalization to English constituency parsing, supported by results on both limited and large data settings.",
+      "quotes": [
+        "We show that the Transformer generalizes well to other tasks by applying it successfully to English constituency parsing both with large and limited training data."
+      ],
+      "rubric_item": "generalization"
+    },
+    {
+      "evidence_state": "ambiguous",
+      "module_key": "claims",
+      "observation": "The paper acknowledges limitations such as the need for further investigation into restricted attention and handling large inputs, but does not explicitly link these to the claims made.",
+      "quotes": [],
+      "rubric_item": "limitations_alignment"
+    },
+    {
+      "evidence_state": "not_found",
+      "module_key": "transparency",
+      "observation": "The paper does not mention any prior registration of the study or model design, such as a preprint repository, clinical trial registry, or model registration platform.",
+      "quotes": [],
+      "rubric_item": "registration"
+    },
+    {
+      "evidence_state": "not_found",
+      "module_key": "transparency",
+      "observation": "The paper does not discuss ethical considerations related to data collection, model deployment, or potential societal impacts.",
+      "quotes": [],
+      "rubric_item": "ethics"
+    },
+    {
+      "evidence_state": "ambiguous",
+      "module_key": "transparency",
+      "observation": "The worker returned an observation, but its quote did not match the normalized paper exactly.",
+      "quotes": [],
+      "rubric_item": "data_code"
+    },
+    {
+      "evidence_state": "ambiguous",
+      "module_key": "transparency",
+      "observation": "The paper includes detailed descriptions of model architecture, training setup, hyperparameters, and evaluation metrics, but omits information about data preprocessing steps, data source licensing, and model limitations.",
+      "quotes": [],
+      "rubric_item": "reporting_completeness"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "transparency",
+      "observation": "The paper provides a public code repository and sufficient architectural and training details to reproduce the model, including hyperparameters and hardware configuration.",
+      "quotes": [
+        "We trained our models on one machine with 8 NVIDIA P100 GPUs. For our base models using the hyperparameters described throughout the paper, each training step took about 0.4 seconds. We trained the base models for a total of 100,000 steps or 12 hours."
+      ],
+      "rubric_item": "reproducibility"
+    },
+    {
+      "evidence_state": "not_found",
+      "module_key": "disclosures",
+      "observation": "No explicit funding statement is provided in the supplied text.",
+      "quotes": [],
+      "rubric_item": "funding_statement"
+    },
+    {
+      "evidence_state": "not_found",
+      "module_key": "disclosures",
+      "observation": "No conflict of interest statement is provided in the supplied text.",
+      "quotes": [],
+      "rubric_item": "conflict_statement"
+    },
+    {
+      "evidence_state": "not_found",
+      "module_key": "disclosures",
+      "observation": "No information is provided about the role of any sponsor in the research.",
+      "quotes": [],
+      "rubric_item": "sponsor_role"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "disclosures",
+      "observation": "The authors list their institutional affiliations, including Google Brain, Google Research, and the University of Toronto. The affiliations are indicated with asterisks and footnotes.",
+      "quotes": [
+        "Ashish Vaswani \u2217 Google Brain avaswani@google.com",
+        "Noam Shazeer \u2217 Google Brain noam@google.com"
+      ],
+      "rubric_item": "affiliations"
+    }
+  ],
+  "evidence_verification_rate": 0.579,
+  "execution_warnings": [
+    "8 attempted judgments cited no permitted verified evidence and were excluded from scoring."
+  ],
+  "failed_evidence_modules": [],
+  "findings": [
+    {
+      "affected_conclusions": [],
+      "category": "design",
+      "confidence": 0.9,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The paper specifies the use of WMT 2014 English-to-German and English-to-French translation tasks and applies the model to English constituency parsing with both large and limited training data, demonstrating clear dataset provenance. Evidence: span-f129a63e648b812b.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "606055d0f09e",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 1749,
+          "page": 1,
+          "paragraph": null,
+          "quote": "We show that the Transformer generalizes well to other tasks by applying it successfully to English constituency parsing both with large and limited training data.",
+          "section": null,
+          "start": 1586
+        }
+      ],
+      "rubric_item": "dataset_provenance",
+      "severity": "info",
+      "title": "Dataset Provenance"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "design",
+      "confidence": 0.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "No evidence is provided regarding data leakage or safeguards against it. The verified evidence ledger is empty for this item.",
+      "external_sources": [],
+      "grade": "not_assessed",
+      "id": "39ff2246dc98",
+      "limitations": [],
+      "paper_spans": [],
+      "rubric_item": "leakage",
+      "severity": "info",
+      "title": "Leakage"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "design",
+      "confidence": 0.9,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The paper compares the Transformer model to prior state-of-the-art models, including ensembles, and reports a clear improvement (28.4 BLEU, over 2 BLEU improvement). This indicates appropriate baseline selection. Evidence: span-3277dbd1ac74a773.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "b68372bcf75e",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 1334,
+          "page": 1,
+          "paragraph": null,
+          "quote": "Our model achieves 28.4 BLEU on the WMT 2014 English- to-German translation task, improving over the existing best results, including ensembles, by over 2 BLEU.",
+          "section": null,
+          "start": 1174
+        }
+      ],
+      "rubric_item": "baseline_choice",
+      "severity": "info",
+      "title": "Baseline Choice"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "design",
+      "confidence": 0.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "No evidence is provided regarding ablation studies to assess the contribution of individual model components. The absence of such analysis limits interpretability of design choices. Verified evidence ledger is empty, indicating lack of reported ablation.",
+      "external_sources": [],
+      "grade": "not_assessed",
+      "id": "20802d3ec346",
+      "limitations": [
+        "The final judgment cited no matching observed paper evidence."
+      ],
+      "paper_spans": [],
+      "rubric_item": "ablation",
+      "severity": "info",
+      "title": "Ablation"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "design",
+      "confidence": 0.9,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The paper explicitly states that the Transformer generalizes well to other tasks, demonstrated via successful application to English constituency parsing under both large and limited data conditions. Evidence: span-0e0d4976d4f2c06f.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "3ebccfefc944",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 1749,
+          "page": 1,
+          "paragraph": null,
+          "quote": "We show that the Transformer generalizes well to other tasks by applying it successfully to English constituency parsing both with large and limited training data.",
+          "section": null,
+          "start": 1586
+        }
+      ],
+      "rubric_item": "external_validity",
+      "severity": "info",
+      "title": "External Validity"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "statistics",
+      "confidence": 0.9,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "Hyperparameters were tuned on development sets (e.g., Section 22), and beam search was applied without checkpoint averaging, indicating test sets (e.g., newstest2013) were not used during training or tuning. Evidence supports proper isolation. Evidence: span-dfd7ef6815408beb, span-edc12b379c46d96b.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "dbe50ea048af",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 25983,
+          "page": 9,
+          "paragraph": null,
+          "quote": "We used beam search as described in the previous section, but no checkpoint averaging.",
+          "section": null,
+          "start": 25897
+        },
+        {
+          "bbox": null,
+          "end": 27956,
+          "page": 9,
+          "paragraph": null,
+          "quote": "We performed only a small number of experiments to select the dropout, both attention and residual (section 5.4), learning rates and beam size on the Section 22 development set, all other parameters remained unchanged from the English-to-German base translation model.",
+          "section": null,
+          "start": 27688
+        }
+      ],
+      "rubric_item": "test_set_isolation",
+      "severity": "info",
+      "title": "Test Set Isolation"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "statistics",
+      "confidence": 0.9,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The authors performed a limited hyperparameter search on the development set for key parameters (dropout, learning rates, beam size), but do not report the full search space or optimization strategy, limiting reproducibility. Evidence: span-da84ab04359430d2, span-5419854a27cbbd43.",
+      "external_sources": [],
+      "grade": "minor_concern",
+      "id": "469f730c412a",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 27956,
+          "page": 9,
+          "paragraph": null,
+          "quote": "We performed only a small number of experiments to select the dropout, both attention and residual (section 5.4), learning rates and beam size on the Section 22 development set, all other parameters remained unchanged from the English-to-German base translation model.",
+          "section": null,
+          "start": 27688
+        },
+        {
+          "bbox": null,
+          "end": 24218,
+          "page": 8,
+          "paragraph": null,
+          "quote": "These hyperparameters were chosen after experimentation on the development set.",
+          "section": null,
+          "start": 24139
+        }
+      ],
+      "rubric_item": "hyperparameter_search",
+      "severity": "minor",
+      "title": "Hyperparameter Search"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "statistics",
+      "confidence": 0.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "No evidence is provided regarding quantification of uncertainty in model predictions or performance metrics (e.g., confidence intervals, variance across runs). The verified evidence ledger is empty, indicating absence of such reporting.",
+      "external_sources": [],
+      "grade": "not_assessed",
+      "id": "5d06b1d7dfed",
+      "limitations": [
+        "The final judgment cited no matching observed paper evidence."
+      ],
+      "paper_spans": [],
+      "rubric_item": "uncertainty",
+      "severity": "info",
+      "title": "Uncertainty"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "statistics",
+      "confidence": 0.9,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The model is evaluated on multiple benchmarks: WMT 2014 English-to-German, English-to-French translation, and English constituency parsing, demonstrating performance across distinct tasks. Evidence: span-5b85ae331bfdcd6c, span-5a08bb497f932287.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "0ef81b32567d",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 23261,
+          "page": 8,
+          "paragraph": null,
+          "quote": "On the WMT 2014 English-to-German translation task, the big transformer model (Transformer (big) in Table 2) outperforms the best previously reported models (including ensembles) by more than 2 . 0 BLEU, establishing a new state-of-the-art BLEU score of 28 . 4 .",
+          "section": null,
+          "start": 22999
+        },
+        {
+          "bbox": null,
+          "end": 27563,
+          "page": 9,
+          "paragraph": null,
+          "quote": "We trained a 4-layer transformer with d model = 1024 on the Wall Street Journal (WSJ) portion of the Penn Treebank [25], about 40K training sentences. We also trained it in a semi-supervised setting, using the larger high-confidence and BerkleyParser corpora from with approximately 17M sentences [37].",
+          "section": null,
+          "start": 27261
+        }
+      ],
+      "rubric_item": "multiple_benchmarks",
+      "severity": "info",
+      "title": "Multiple Benchmarks"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "statistics",
+      "confidence": 0.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "No evidence is provided about the availability of code, data, or model weights to support replication. While training details are given, the absence of explicit data/code sharing statements raises reproducibility concerns. Verified evidence ledger is empty.",
+      "external_sources": [],
+      "grade": "not_assessed",
+      "id": "85fac3598de8",
+      "limitations": [
+        "The final judgment cited no matching observed paper evidence."
+      ],
+      "paper_spans": [],
+      "rubric_item": "replication_artifacts",
+      "severity": "info",
+      "title": "Replication Artifacts"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "claims",
+      "confidence": 0.9,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "Claims are strong but supported by evidence: the paper claims a new architecture (Transformer), state-of-the-art results, and generalization, all backed by specific performance metrics. Evidence: span-594a9c520a5cb6b2, span-7ce421141eb1d691, span-a88119a9385c3a1b.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "1d655bd7fb95",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 1004,
+          "page": 1,
+          "paragraph": null,
+          "quote": "We propose a new simple network architecture, the Transformer, based solely on attention mechanisms, dispensing with recurrence and convolutions entirely.",
+          "section": null,
+          "start": 850
+        },
+        {
+          "bbox": null,
+          "end": 29778,
+          "page": 10,
+          "paragraph": null,
+          "quote": "On both WMT 2014 English-to-German and WMT 2014 English-to-French translation tasks, we achieve a new state of the art.",
+          "section": null,
+          "start": 29659
+        },
+        {
+          "bbox": null,
+          "end": 1749,
+          "page": 1,
+          "paragraph": null,
+          "quote": "We show that the Transformer generalizes well to other tasks by applying it successfully to English constituency parsing both with large and limited training data.",
+          "section": null,
+          "start": 1586
+        }
+      ],
+      "rubric_item": "claim_strength",
+      "severity": "info",
+      "title": "Claim Strength"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "claims",
+      "confidence": 0.9,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "Quantitative results (e.g., BLEU scores, F1) are provided and align with claims, including comparisons to prior work. Evidence: span-85338d49da081dab.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "73fac2b298c2",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 28637,
+          "page": 10,
+          "paragraph": null,
+          "quote": "Transformer (4 layers) semi-supervised 92.7",
+          "section": null,
+          "start": 28594
+        }
+      ],
+      "rubric_item": "results_support",
+      "severity": "info",
+      "title": "Results Support"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "claims",
+      "confidence": 0.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "No evidence is provided regarding the use of causal language or claims of causation. The verified evidence ledger is empty for this item.",
+      "external_sources": [],
+      "grade": "not_assessed",
+      "id": "18773ff8e67b",
+      "limitations": [],
+      "paper_spans": [],
+      "rubric_item": "causal_language",
+      "severity": "info",
+      "title": "Causal Language"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "claims",
+      "confidence": 0.9,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The paper explicitly claims and demonstrates generalization to English constituency parsing under varying data conditions. Evidence: span-614d15c089533222.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "c4ab4fc87dc7",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 1749,
+          "page": 1,
+          "paragraph": null,
+          "quote": "We show that the Transformer generalizes well to other tasks by applying it successfully to English constituency parsing both with large and limited training data.",
+          "section": null,
+          "start": 1586
+        }
+      ],
+      "rubric_item": "generalization",
+      "severity": "info",
+      "title": "Generalization"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "claims",
+      "confidence": 0.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "No evidence is provided regarding discussion of study limitations or alignment of claims with methodological constraints. The verified evidence ledger is empty, indicating absence of such discussion.",
+      "external_sources": [],
+      "grade": "not_assessed",
+      "id": "929e81976c18",
+      "limitations": [
+        "The final judgment cited no matching observed paper evidence."
+      ],
+      "paper_spans": [],
+      "rubric_item": "limitations_alignment",
+      "severity": "info",
+      "title": "Limitations Alignment"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "transparency",
+      "confidence": 0.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "No evidence is provided about pre-registration of the study. The verified evidence ledger is empty for this item.",
+      "external_sources": [],
+      "grade": "not_assessed",
+      "id": "019411af601d",
+      "limitations": [],
+      "paper_spans": [],
+      "rubric_item": "registration",
+      "severity": "info",
+      "title": "Registration"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "transparency",
+      "confidence": 0.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "No evidence is provided regarding ethical considerations or review. The verified evidence ledger is empty for this item.",
+      "external_sources": [],
+      "grade": "not_assessed",
+      "id": "e88129dc3999",
+      "limitations": [],
+      "paper_spans": [],
+      "rubric_item": "ethics",
+      "severity": "info",
+      "title": "Ethics"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "transparency",
+      "confidence": 0.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "No evidence is provided about the availability of data or code. Despite architectural details, lack of explicit sharing statements limits transparency. Verified evidence ledger is empty.",
+      "external_sources": [],
+      "grade": "not_assessed",
+      "id": "c014a0e5ac4b",
+      "limitations": [
+        "The final judgment cited no matching observed paper evidence."
+      ],
+      "paper_spans": [],
+      "rubric_item": "data_code",
+      "severity": "info",
+      "title": "Data Code"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "transparency",
+      "confidence": 0.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "No evidence is provided to assess overall reporting completeness against a standard guideline. The verified evidence ledger is empty for this item.",
+      "external_sources": [],
+      "grade": "not_assessed",
+      "id": "0dcdc7c43d12",
+      "limitations": [],
+      "paper_spans": [],
+      "rubric_item": "reporting_completeness",
+      "severity": "info",
+      "title": "Reporting Completeness"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "transparency",
+      "confidence": 0.9,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The paper provides detailed training setup (e.g., 8 GPUs, 0.4 seconds per step, 12 hours training), which supports reproducibility. However, absence of code/data availability statements limits full reproducibility. Evidence: span-fc1b6927ab9bacf2.",
+      "external_sources": [],
+      "grade": "minor_concern",
+      "id": "1c6882f79821",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 21006,
+          "page": 7,
+          "paragraph": null,
+          "quote": "We trained our models on one machine with 8 NVIDIA P100 GPUs. For our base models using the hyperparameters described throughout the paper, each training step took about 0.4 seconds. We trained the base models for a total of 100,000 steps or 12 hours.",
+          "section": null,
+          "start": 20755
+        }
+      ],
+      "rubric_item": "reproducibility",
+      "severity": "minor",
+      "title": "Reproducibility"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "disclosures",
+      "confidence": 0.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "No evidence is provided regarding funding sources. The verified evidence ledger is empty, and lack of funding statement is a critical transparency gap.",
+      "external_sources": [],
+      "grade": "not_assessed",
+      "id": "46b512bed4af",
+      "limitations": [
+        "The final judgment cited no matching observed paper evidence."
+      ],
+      "paper_spans": [],
+      "rubric_item": "funding_statement",
+      "severity": "info",
+      "title": "Funding Statement"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "disclosures",
+      "confidence": 0.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "No evidence is provided regarding conflicts of interest. All authors are affiliated with Google or related institutions, yet no conflict statement is present. This is a critical disclosure gap. Verified evidence ledger is empty.",
+      "external_sources": [],
+      "grade": "not_assessed",
+      "id": "c8a1dda9ed8e",
+      "limitations": [
+        "The final judgment cited no matching observed paper evidence."
+      ],
+      "paper_spans": [],
+      "rubric_item": "conflict_statement",
+      "severity": "info",
+      "title": "Conflict Statement"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "disclosures",
+      "confidence": 0.0,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "No evidence is provided about the role of sponsors or funders in the research. The verified evidence ledger is empty, indicating absence of reporting.",
+      "external_sources": [],
+      "grade": "not_assessed",
+      "id": "679579b2f58b",
+      "limitations": [
+        "The final judgment cited no matching observed paper evidence."
+      ],
+      "paper_spans": [],
+      "rubric_item": "sponsor_role",
+      "severity": "info",
+      "title": "Sponsor Role"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "disclosures",
+      "confidence": 0.9,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "Author affiliations are clearly stated, including Google Brain, Google Research, and University of Toronto, with contact information. Evidence: span-7c33dbe2784e0f86, span-7eed758fd208f627, span-9d4e8ead3dab8ca9, span-62acff418cdcecf5, span-49cfd76f0ed423a5, span-14b217d5292f414d, span-1cbbb207015f15a8, span-0ac9d03a822e323c.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "e5c6eaec3031",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 249,
+          "page": 1,
+          "paragraph": null,
+          "quote": "Ashish Vaswani \u2217 Google Brain avaswani@google.com",
+          "section": null,
+          "start": 200
+        },
+        {
+          "bbox": null,
+          "end": 293,
+          "page": 1,
+          "paragraph": null,
+          "quote": "Noam Shazeer \u2217 Google Brain noam@google.com",
+          "section": null,
+          "start": 250
+        },
+        {
+          "bbox": null,
+          "end": 340,
+          "page": 1,
+          "paragraph": null,
+          "quote": "Niki Parmar \u2217 Google Research nikip@google.com",
+          "section": null,
+          "start": 294
+        },
+        {
+          "bbox": null,
+          "end": 389,
+          "page": 1,
+          "paragraph": null,
+          "quote": "Jakob Uszkoreit \u2217 Google Research usz@google.com",
+          "section": null,
+          "start": 341
+        },
+        {
+          "bbox": null,
+          "end": 436,
+          "page": 1,
+          "paragraph": null,
+          "quote": "Llion Jones \u2217 Google Research llion@google.com",
+          "section": null,
+          "start": 390
+        },
+        {
+          "bbox": null,
+          "end": 498,
+          "page": 1,
+          "paragraph": null,
+          "quote": "Aidan N. Gomez \u2217 \u2020 University of Toronto aidan@cs.toronto.edu",
+          "section": null,
+          "start": 437
+        },
+        {
+          "bbox": null,
+          "end": 551,
+          "page": 1,
+          "paragraph": null,
+          "quote": "\u0141ukasz Kaiser \u2217 Google Brain lukaszkaiser@google.com",
+          "section": null,
+          "start": 499
+        },
+        {
+          "bbox": null,
+          "end": 599,
+          "page": 1,
+          "paragraph": null,
+          "quote": "Illia Polosukhin \u2217 \u2021 illia.polosukhin@gmail.com",
+          "section": null,
+          "start": 552
+        }
+      ],
+      "rubric_item": "affiliations",
+      "severity": "info",
+      "title": "Affiliations"
+    }
+  ],
+  "id": "3750eb11-5e27-46c1-9c69-7c2008a4f14e",
+  "identity": {
+    "arxiv_id": "1706.03762",
+    "authors": [
+      "Ashish Vaswani",
+      "Noam Shazeer",
+      "Niki Parmar",
+      "Jakob Uszkoreit",
+      "Llion Jones",
+      "Aidan N. Gomez",
+      "Lukasz Kaiser",
+      "Illia Polosukhin"
+    ],
+    "doi": null,
+    "fingerprint": "54fbd88f2ca82bc45a45ad50e24702c8cf46a948cc6e593b0026de9d58dd03d4",
+    "journal": null,
+    "pmcid": null,
+    "pmid": null,
+    "published_at": "2017-06-12T17:57:34Z",
+    "title": "Attention Is All You Need",
+    "updated_at": "2023-08-02T00:41:18Z",
+    "versions": []
+  },
+  "language": "en",
+  "limitations": [
+    "The Review score summarizes assessed methodology items; it is not the probability that the conclusions are true.",
+    "No cited-paper full texts were retrieved or analyzed.",
+    "English is validated first; other languages are experimental.",
+    "Generated locally with the release-only Node PDF.js normalizer.",
+    "No DOI was resolved; publication-record context is limited.",
+    "Low full-review coverage makes the Review score provisional.",
+    "8 attempted judgments cited no permitted verified evidence and were excluded from scoring."
+  ],
+  "methodology_hash": "66b93ef58957399335661945dbad5a3e6e38a565ffc1cfd42b62dc31eca72965",
+  "methodology_version": "1.3",
+  "missing_item_ids": [],
+  "module_statuses": [
+    {
+      "assessed_items": 3,
+      "expected_items": 5,
+      "key": "design",
+      "label": "Study design & risk of bias",
+      "limitation": null,
+      "state": "completed"
+    },
+    {
+      "assessed_items": 3,
+      "expected_items": 5,
+      "key": "statistics",
+      "label": "Statistical & computational validity",
+      "limitation": null,
+      "state": "completed"
+    },
+    {
+      "assessed_items": 3,
+      "expected_items": 5,
+      "key": "claims",
+      "label": "Claim\u2013evidence alignment",
+      "limitation": null,
+      "state": "completed"
+    },
+    {
+      "assessed_items": 1,
+      "expected_items": 5,
+      "key": "transparency",
+      "label": "Transparency & reporting",
+      "limitation": null,
+      "state": "completed"
+    },
+    {
+      "assessed_items": 1,
+      "expected_items": 4,
+      "key": "disclosures",
+      "label": "Disclosures & affiliations",
+      "limitation": null,
+      "state": "completed"
+    }
+  ],
+  "paper_sha256": "bdfaa68d8984f0dc02beaca527b76f207d99b666d31d1da728ee0728182df697",
+  "parser_name": "pdf.js-node",
+  "parser_version": "5.7.284",
+  "profile": "computational_ml_modeling",
+  "provider_profile": "token_factory",
+  "provider_protocol": "openai-compatible",
+  "repaired_output": false,
+  "review_score": 95.5,
+  "reviewer_model": "Qwen/Qwen3-235B-A22B-Instruct-2507",
+  "schema_version": "1.3",
+  "scoring_version": "1.3",
+  "source_format": "pdf",
+  "summary": [
+    "Hyperparameter Search. The authors performed a limited hyperparameter search on the development set for key parameters (dropout, learning rates, beam size), but do not report the full search space or optimization strategy, limiting reproducibility. Evidence: span-da84ab04359430d2\u2026",
+    "Reproducibility. The paper provides detailed training setup (e.g., 8 GPUs, 0.4 seconds per step, 12 hours training), which supports reproducibility. However, absence of code/data availability statements limits full reproducibility. Evidence: span-fc1b6927ab9bacf2.",
+    "The final review assessed 11 of 24 methodology items."
+  ],
+  "token_usage": {
+    "input_tokens": 35519,
+    "output_tokens": 5890,
+    "total_tokens": 41409
+  },
+  "uncapped_score": 95.5,
+  "worker_model": "Qwen/Qwen3-30B-A3B-Instruct-2507"
+}

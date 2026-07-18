@@ -1,0 +1,16 @@
+{
+  "audited_at": "2026-07-18T21:17:07.172696Z",
+  "case_id": "cipriani-2018",
+  "displayed_quotations_checked": 63,
+  "identity_verified": true,
+  "quotation_mismatch_count": 0,
+  "quotation_mismatches": [],
+  "schema_version": "1.0",
+  "secret_scan": "passed",
+  "source_kind": "jats",
+  "source_verified": true,
+  "warnings": [
+    "PDF \u00b7 Unpaywall \u00b7 publishedVersion could not be used; analysis used JATS \u00b7 PMC \u00b7 publishedVersion instead."
+  ],
+  "warnings_reviewed": true
+}

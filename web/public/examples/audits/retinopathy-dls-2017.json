@@ -1,0 +1,14 @@
+{
+  "audited_at": "2026-07-18T21:38:32.391033Z",
+  "case_id": "retinopathy-dls-2017",
+  "displayed_quotations_checked": 0,
+  "identity_verified": true,
+  "quotation_mismatch_count": 0,
+  "quotation_mismatches": [],
+  "schema_version": "1.0",
+  "secret_scan": "passed",
+  "source_kind": "metadata",
+  "source_verified": true,
+  "warnings": [],
+  "warnings_reviewed": true
+}
