@@ -124,6 +124,15 @@ def resolved_sources() -> ResolvedPaper:
                 content_level=ContentLevel.FULL_TEXT,
                 rank=40,
             ),
+            ContentCandidate(
+                id="pmc-html",
+                format=SourceFormat.HTML,
+                url="https://pmc.example/articles/PMC1/",
+                version="publishedVersion",
+                provider="PMC",
+                content_level=ContentLevel.FULL_TEXT,
+                rank=41,
+            ),
         ],
         expires_at=datetime.now(UTC) + timedelta(minutes=15),
     )
@@ -175,7 +184,7 @@ def test_jats_document_persists_validated_fallback_provenance(monkeypatch):
             spans=[{"id": "all", "text": text, "start": 0, "end": len(text)}],
         )
 
-    monkeypatch.setattr(routes_module, "fetch_jats_document", jats_document)
+    monkeypatch.setattr(routes_module, "fetch_pmc_document", jats_document)
     with TestClient(app) as client:
         response = client.post(
             f"/v1/resolutions/{resolution.id}/documents/pmc-jats",
@@ -208,7 +217,7 @@ def test_jats_document_rejects_foreign_fallback_candidate(monkeypatch):
             text=text,
         )
 
-    monkeypatch.setattr(routes_module, "fetch_jats_document", jats_document)
+    monkeypatch.setattr(routes_module, "fetch_pmc_document", jats_document)
     with TestClient(app) as client:
         response = client.post(
             f"/v1/resolutions/{resolution.id}/documents/pmc-jats",
@@ -217,3 +226,39 @@ def test_jats_document_rejects_foreign_fallback_candidate(monkeypatch):
         )
     assert response.status_code == 422
     assert "foreign-source" not in response.text
+
+
+def test_html_document_persists_pmc_fallback_provenance(monkeypatch):
+    resolution = resolved_sources()
+    store_resolution(resolution)
+    text = "Methods\nParticipants were randomly assigned."
+
+    async def html_document(*args, **kwargs):
+        return PaperDocument(
+            identity=resolution.identity,
+            content_level=ContentLevel.FULL_TEXT,
+            source_format=SourceFormat.HTML,
+            sha256=hashlib.sha256(text.encode()).hexdigest(),
+            parser_name="pmc-html",
+            parser_version="test",
+            text=text,
+            spans=[{"id": "all", "text": text, "start": 0, "end": len(text)}],
+        )
+
+    monkeypatch.setattr(routes_module, "fetch_pmc_document", html_document)
+    with TestClient(app) as client:
+        response = client.post(
+            f"/v1/resolutions/{resolution.id}/documents/pmc-html",
+            headers=AUTH,
+            json={"failed_candidate_ids": ["unpaywall-pdf", "pmc-jats"]},
+        )
+    assert response.status_code == 201
+    with SessionLocal() as db:
+        row = db.get(DocumentRow, response.json()["id"])
+        document = get_document_store(get_settings()).get(row.object_key)
+    assert document.extraction_warnings == [
+        "PDF · Unpaywall · publishedVersion could not be used; analysis used "
+        "HTML · PMC · publishedVersion instead.",
+        "JATS · PMC · publishedVersion could not be used; analysis used "
+        "HTML · PMC · publishedVersion instead.",
+    ]

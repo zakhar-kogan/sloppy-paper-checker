@@ -4,6 +4,7 @@ import hashlib
 import re
 from datetime import UTC, datetime, timedelta
 from html import unescape
+from html.parser import HTMLParser
 from urllib.parse import urljoin, urlparse
 from uuid import uuid4
 
@@ -185,6 +186,7 @@ class PaperResolver:
             identity.pmcid = record["pmcid"]
             identity.pmid = str(record.get("pmid") or "") or None
             candidates.append(_candidate(SourceFormat.JATS, "PMC", 25, self._pmc_jats_url(record["pmcid"]), "publishedVersion"))
+            candidates.append(_candidate(SourceFormat.HTML, "PMC", 26, self._pmc_html_url(record["pmcid"]), "publishedVersion"))
         return self._finish(identity, abstract, candidates, provenance, limitations)
 
     async def _resolve_arxiv(self, arxiv_id: str) -> ResolvedPaper:
@@ -214,6 +216,10 @@ class PaperResolver:
         number = pmcid.upper().removeprefix("PMC")
         return f"https://pmc.ncbi.nlm.nih.gov/api/oai/v1/mh/?verb=GetRecord&identifier=oai:pubmedcentral.nih.gov:{number}&metadataPrefix=pmc"
 
+    @staticmethod
+    def _pmc_html_url(pmcid: str) -> str:
+        return f"https://pmc.ncbi.nlm.nih.gov/articles/{pmcid.upper()}/"
+
     async def _resolve_ncbi(self, identifier: str) -> ResolvedPaper:
         now = datetime.now(UTC)
         ids, id_error = await self._json(
@@ -241,7 +247,10 @@ class PaperResolver:
                 abstract = " ".join(" ".join(node.itertext()) for node in root.findall(".//AbstractText")) or None
             except (httpx.HTTPError, ET.ParseError):
                 limitations.append("PubMed metadata unavailable.")
-        candidates = [_candidate(SourceFormat.JATS, "PMC", 25, self._pmc_jats_url(pmcid), "publishedVersion")] if pmcid else []
+        candidates = [
+            _candidate(SourceFormat.JATS, "PMC", 25, self._pmc_jats_url(pmcid), "publishedVersion"),
+            _candidate(SourceFormat.HTML, "PMC", 26, self._pmc_html_url(pmcid), "publishedVersion"),
+        ] if pmcid else []
         return self._finish(identity, abstract, candidates, [ProvenanceRecord(provider="NCBI", available=not id_error, detail=id_error, accessed_at=now)], limitations)
 
     async def _resolve_url(self, url: str) -> ResolvedPaper:
@@ -513,3 +522,130 @@ async def fetch_jats_document(candidate: ContentCandidate, identity: PaperIdenti
         references=references,
         extraction_warnings=extraction_warnings,
     )
+class _PmcArticleParser(HTMLParser):
+    def __init__(self) -> None:
+        super().__init__(convert_charrefs=True)
+        self.article_depth = 0
+        self.current_tag: str | None = None
+        self.current_text: list[str] = []
+        self.section = "Article"
+        self.paragraphs: list[tuple[str, str]] = []
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        if tag == "article":
+            self.article_depth += 1
+        elif self.article_depth and self.current_tag is None and tag in {"h1", "h2", "h3", "p", "li", "figcaption"}:
+            self.current_tag = tag
+            self.current_text = []
+        elif self.article_depth and self.current_tag is not None and tag == "br":
+            self.current_text.append(" ")
+
+    def handle_endtag(self, tag: str) -> None:
+        if tag == "article":
+            self.article_depth -= 1
+            return
+        if not self.article_depth or tag != self.current_tag:
+            return
+        text = " ".join("".join(self.current_text).split())
+        if text:
+            if tag in {"h1", "h2", "h3"}:
+                self.section = text
+            else:
+                self.paragraphs.append((self.section, text))
+        self.current_tag = None
+        self.current_text = []
+
+    def handle_data(self, data: str) -> None:
+        if self.article_depth and self.current_tag is not None:
+            self.current_text.append(data + " ")
+
+
+async def fetch_pmc_html_document(candidate: ContentCandidate, identity: PaperIdentity, settings: AppSettings) -> PaperDocument:
+    if not candidate.url:
+        raise ValueError("PMC HTML candidate has no URL")
+    url = validate_public_url(str(candidate.url))
+    async with httpx.AsyncClient(timeout=settings.upstream_timeout_seconds, follow_redirects=False) as client:
+        response = await client.get(
+            url,
+            headers={
+                "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+                "Accept-Language": "en-US,en;q=0.9",
+                "Sec-Fetch-Dest": "document",
+                "Sec-Fetch-Mode": "navigate",
+                "Sec-Fetch-Site": "none",
+                "User-Agent": "Mozilla/5.0",
+            },
+        )
+        response.raise_for_status()
+    if len(response.content) > settings.max_upload_bytes:
+        raise ValueError("PMC HTML document exceeds the configured size limit")
+    if "html" not in response.headers.get("content-type", "").lower():
+        raise ValueError("PMC response is not HTML")
+    parser = _PmcArticleParser()
+    parser.feed(response.text)
+    parser.close()
+    if not parser.paragraphs:
+        raise ValueError("PMC HTML response did not contain full text")
+    pieces: list[str] = []
+    spans: list[DocumentSpan] = []
+    sections: list[DocumentSection] = []
+    position = 0
+
+    def append_section(title: str, paragraphs: list[str], section_id: str) -> None:
+        nonlocal position
+        cleaned = list(dict.fromkeys(paragraphs))
+        if not cleaned:
+            return
+        section_start = position
+        heading = f"[{title}]\n"
+        pieces.append(heading)
+        position += len(heading)
+        for paragraph_index, paragraph in enumerate(cleaned):
+            start = position
+            pieces.append(paragraph + "\n\n")
+            position += len(paragraph) + 2
+            spans.append(DocumentSpan(
+                id=f"{section_id}-p-{paragraph_index}",
+                text=paragraph,
+                start=start,
+                end=start + len(paragraph),
+                section=title,
+                paragraph=f"{section_id}-p-{paragraph_index}",
+            ))
+        sections.append(DocumentSection(id=section_id, title=title, start=section_start, end=position))
+
+    section_title = parser.paragraphs[0][0]
+    section_paragraphs: list[str] = []
+    section_index = 0
+    for title, paragraph in parser.paragraphs:
+        if title != section_title:
+            append_section(section_title, section_paragraphs, f"pmc-html-{section_index}")
+            section_index += 1
+            section_title = title
+            section_paragraphs = []
+        section_paragraphs.append(paragraph)
+    append_section(section_title, section_paragraphs, f"pmc-html-{section_index}")
+    text = "".join(pieces)
+    if not text.strip():
+        raise ValueError("No analyzable PMC HTML article text was found")
+    return PaperDocument(
+        identity=identity,
+        content_level=ContentLevel.FULL_TEXT,
+        source_format=SourceFormat.HTML,
+        sha256=hashlib.sha256(response.content).hexdigest(),
+        parser_name="pmc-html",
+        parser_version="1.0",
+        text=text,
+        spans=spans,
+        sections=sections,
+    )
+
+
+async def fetch_pmc_document(candidate: ContentCandidate, identity: PaperIdentity, settings: AppSettings) -> PaperDocument:
+    if candidate.provider != "PMC":
+        raise ValueError("This full-text source is not provided by PMC")
+    if candidate.format == SourceFormat.JATS:
+        return await fetch_jats_document(candidate, identity, settings)
+    if candidate.format == SourceFormat.HTML:
+        return await fetch_pmc_html_document(candidate, identity, settings)
+    raise ValueError("This artifact is not PMC full text")

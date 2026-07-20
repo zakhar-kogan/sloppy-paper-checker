@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import type { ContentCandidate, ResolvedPaper } from "./domain";
 import { duration, errorMessage, fallbackWarnings, isResolvableInput, orderedCandidates } from "./intake";
 
-const candidate = (id: string, rank: number, format: "pdf" | "jats", provider: string): ContentCandidate => ({
+const candidate = (id: string, rank: number, format: "pdf" | "jats" | "html", provider: string): ContentCandidate => ({
   id,
   rank,
   format,
@@ -19,6 +19,7 @@ const resolution = {
     candidate("published-pdf", 10, "pdf", "Unpaywall"),
     candidate("accepted-pdf", 20, "pdf", "Unpaywall"),
     candidate("pmc-jats", 40, "jats", "PMC"),
+    candidate("pmc-html", 41, "html", "PMC"),
   ],
 } as ResolvedPaper;
 
@@ -49,6 +50,7 @@ describe("single-action paper intake", () => {
       "accepted-pdf",
       "published-pdf",
       "pmc-jats",
+      "pmc-html",
     ]);
   });
 

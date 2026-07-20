@@ -55,7 +55,7 @@ from sloppy_checker.core.security import (
     require_client_access,
 )
 from sloppy_checker.core.storage import get_document_store
-from sloppy_checker.evidence.resolver import PaperResolver, fetch_bounded_pdf, fetch_jats_document
+from sloppy_checker.evidence.resolver import PaperResolver, fetch_bounded_pdf, fetch_pmc_document
 from sloppy_checker.workflows.analysis import classify_profile, execute_analysis
 
 router = APIRouter(prefix="/v1", dependencies=[Depends(require_client_access)])
@@ -283,7 +283,7 @@ def create_document(
     response_model=DocumentReceipt,
     status_code=201,
 )
-async def create_jats_document(
+async def create_pmc_document(
     resolution_id: UUID,
     candidate_id: str,
     payload: ResolvedDocumentPreparation | None = None,
@@ -293,14 +293,14 @@ async def create_jats_document(
 ) -> DocumentReceipt:
     resolution = _get_resolution(resolution_id, db)
     candidate = _candidate(resolution, candidate_id)
-    if candidate.format.value != "jats":
-        raise HTTPException(409, "This artifact is not JATS")
+    if candidate.provider != "PMC" or candidate.format.value not in {"jats", "html"}:
+        raise HTTPException(409, "This artifact is not PMC full text")
     try:
-        document = await fetch_jats_document(candidate, resolution.identity, settings)
+        document = await fetch_pmc_document(candidate, resolution.identity, settings)
     except (httpx.HTTPError, ValueError) as exc:
         raise HTTPException(
             502,
-            "The selected JATS source could not be retrieved or validated.",
+            "The selected PMC full-text source could not be retrieved or validated.",
             headers={"X-SPC-Error-Code": "source_unavailable"},
         ) from exc
     document.source_url = candidate.url

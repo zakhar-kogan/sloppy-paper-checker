@@ -22,7 +22,11 @@ from sloppy_checker.core.schemas import (
     SourceFormat,
 )
 from sloppy_checker.evidence import resolver as resolver_module
-from sloppy_checker.evidence.resolver import fetch_bounded_pdf, fetch_jats_document
+from sloppy_checker.evidence.resolver import (
+    fetch_bounded_pdf,
+    fetch_jats_document,
+    fetch_pmc_html_document,
+)
 from sloppy_checker.main import app
 from sloppy_checker.workflows.routing import chunk_document, route_chunks
 
@@ -255,6 +259,7 @@ async def test_doi_resolution_prefers_published_jats_to_submitted_pdf():
     assert [candidate.format for candidate in resolved.candidates] == [
         SourceFormat.PDF,
         SourceFormat.JATS,
+        SourceFormat.HTML,
         SourceFormat.PDF,
     ]
     assert resolved.identity.versions == ["publishedVersion", "submittedVersion"]
@@ -283,6 +288,7 @@ async def test_lancet_fixture_preserves_version_license_and_provider_provenance(
         await resolver.close()
     assert resolved.identity.journal == "The Lancet"
     assert [candidate.version for candidate in resolved.candidates] == [
+        "publishedVersion",
         "publishedVersion",
         "publishedVersion",
         "submittedVersion",
@@ -509,6 +515,35 @@ async def test_namespaced_pmc_jats_produces_stable_paragraph_anchors(monkeypatch
     ]
     assert document.parser_version == "1.2"
     assert document.references[0].doi == "10.1234/test.1"
+
+
+@pytest.mark.asyncio
+@respx.mock
+async def test_pmc_html_produces_stable_paragraph_anchors(monkeypatch):
+    monkeypatch.setattr(resolver_module, "validate_public_url", lambda url: url)
+    url = "https://pmc.example/articles/PMC1/"
+    html = b"""<html><body><nav>Ignore this navigation.</nav><article>
+      <h1>Test article</h1><p>Structured abstract text.</p>
+      <h2>Methods</h2><p>Participants were randomly assigned.</p>
+      <p>Funding was disclosed.</p></article></body></html>"""
+    respx.get(url).mock(return_value=Response(200, content=html, headers={"content-type": "text/html"}))
+    candidate = ContentCandidate(
+        id="candidate",
+        format=SourceFormat.HTML,
+        url=url,
+        provider="PMC",
+        content_level=ContentLevel.FULL_TEXT,
+        rank=1,
+    )
+    document = await fetch_pmc_html_document(candidate, PaperIdentity(pmcid="PMC1"), AppSettings())
+    assert document.source_format == SourceFormat.HTML
+    assert document.parser_name == "pmc-html"
+    assert "[Methods]\nParticipants were randomly assigned." in document.text
+    assert "Ignore this navigation." not in document.text
+    assert any(span.paragraph == "pmc-html-1-p-0" for span in document.spans)
+    request = respx.calls.last.request
+    assert request.headers["Sec-Fetch-Dest"] == "document"
+    assert request.headers["Sec-Fetch-Mode"] == "navigate"
 
 
 @pytest.mark.asyncio

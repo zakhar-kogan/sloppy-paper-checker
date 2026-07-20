@@ -61,7 +61,7 @@ export const api = {
   },
   createDocument: (document: PaperDocument) =>
     request<DocumentReceipt>("/v1/documents", { method: "POST", body: JSON.stringify(document) }),
-  createJatsDocument: (resolutionId: string, candidateId: string, failedCandidateIds: string[] = []) =>
+  createPmcDocument: (resolutionId: string, candidateId: string, failedCandidateIds: string[] = []) =>
     request<DocumentReceipt>(`/v1/resolutions/${resolutionId}/documents/${candidateId}`, {
       method: "POST",
       body: JSON.stringify({ failed_candidate_ids: failedCandidateIds }),

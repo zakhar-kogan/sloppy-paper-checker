@@ -883,13 +883,13 @@ export default function App() {
         );
         return api.createDocument(document);
       }
-      if (candidate.format === "jats") {
+      if (candidate.format === "jats" || candidate.format === "html") {
         try {
           const previous = candidates.find((item) => item.id === failedCandidateIds.at(-1));
           setLocalStage(previous
             ? `${sourceLabel(previous)} unavailable; trying ${sourceLabel(candidate)}`
             : `Normalizing ${sourceLabel(candidate)} with stable paragraph anchors`);
-          return await api.createJatsDocument(activeResolution.id, candidate.id, failedCandidateIds);
+          return await api.createPmcDocument(activeResolution.id, candidate.id, failedCandidateIds);
         } catch (caught) {
           if (!(caught instanceof ApiError) || caught.status !== 502) throw caught;
           failedCandidateIds.push(candidate.id);
