@@ -42,6 +42,14 @@ export function findingDisplayTitle(finding: Finding): string {
   return cleaned || titleCase(finding.rubric_item);
 }
 
+export function majorTakeaways(report: AnalysisReport): Finding[] {
+  return sortedFindings(
+    report.findings.filter(
+      (finding) => finding.critic_disposition !== "discarded" && concernGrades.has(finding.grade),
+    ),
+  ).slice(0, 4);
+}
+
 export function moduleStateLabel(state: AssessmentGroup["state"]): string {
   switch (state) {
     case "completed":

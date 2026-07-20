@@ -146,7 +146,12 @@ dd { margin: 6px 0; overflow-wrap: anywhere; }
 .record-banner { border: 1px solid var(--red); border-top: 0; padding: 14px 18px; color: #701b15; background: #f8ded9; font-weight: 700; }
 .takeaways { display: grid; grid-template-columns: 1fr 330px; gap: 60px; padding: 54px 0 70px; }
 .takeaways h2, .section-heading h2 { font: 40px/1.05 Georgia, serif; margin: 7px 0 18px; letter-spacing: -.025em; }
-.takeaways li { margin: 10px 0; line-height: 1.5; }
+.takeaway-list { margin: 0; padding: 0; list-style: none; }
+.takeaways li { margin: 14px 0; line-height: 1.5; }
+.takeaways li strong { margin-right: .25em; }
+.takeaway-grade { display: inline-block; margin: 0 9px 5px 0; padding: 4px 7px; font-size: 9px; font-weight: 900; letter-spacing: .07em; text-transform: uppercase; }
+.takeaway-coverage { margin-top: 24px; padding-top: 14px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; }
+.score-note { margin: 14px 0 0; color: var(--muted); font-size: 11px; line-height: 1.45; }
 .score-card { border: 1px solid var(--ink); padding: 24px; background: var(--paper); align-self: start; box-shadow: 7px 7px 0 var(--blue); }
 .score-label { display: block; font-weight: 800; }
 .score-primary { display: flex; align-items: baseline; gap: 7px; margin-top: 5px; }

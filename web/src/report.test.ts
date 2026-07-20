@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import type { AnalysisReport } from "./domain";
-import { buildAssessmentGroups, coverageStateLabel, findingDisplayTitle, moduleStateLabel } from "./report";
+import { buildAssessmentGroups, coverageStateLabel, findingDisplayTitle, majorTakeaways, moduleStateLabel } from "./report";
 
 type Finding = AnalysisReport["findings"][number];
 type Grade = Finding["grade"];
@@ -102,5 +102,25 @@ describe("grouped report assessment", () => {
     }));
 
     expect(group).toMatchObject({ key: "claims", label: "Claim alignment", state: null, score: 75, hasConcern: true });
+  });
+
+  it("selects at most four accepted concerns for the report takeaways", () => {
+    const findings = [
+      finding("design", "minor", "minor_concern"),
+      finding("design", "clean", "no_concern"),
+      finding("design", "major", "major_concern"),
+      finding("design", "critical", "critical_concern"),
+      finding("design", "gap", "not_assessed"),
+      finding("design", "second_minor", "minor_concern"),
+      finding("design", "fifth_concern", "major_concern"),
+    ];
+    findings[2].critic_disposition = "discarded";
+
+    expect(majorTakeaways(report({ findings })).map((item) => item.rubric_item)).toEqual([
+      "critical",
+      "fifth_concern",
+      "minor",
+      "second_minor",
+    ]);
   });
 });

@@ -13,7 +13,7 @@ import type {
 } from "./domain";
 import { duration, errorMessage, fallbackWarnings, isResolvableInput, orderedCandidates, sourceLabel } from "./intake";
 import { parsePdf } from "./pdf";
-import { buildAssessmentGroups, coverageStateLabel, findingDisplayTitle, moduleStateLabel } from "./report";
+import { buildAssessmentGroups, coverageStateLabel, findingDisplayTitle, majorTakeaways, moduleStateLabel } from "./report";
 import {
   exampleHref,
   exampleIdFromSearch,
@@ -110,11 +110,8 @@ function Header({ onReset }: { onReset: () => void }) {
 function ScopeNote() {
   return (
     <aside class="scope-note">
-      <span class="eyebrow">What this does</span>
-      <p>
-        Reviews the paper you provide against explicit methodology items. It does not retrieve cited papers,
-        establish misconduct, or turn a score into certainty.
-      </p>
+      <span class="eyebrow">Scope</span>
+      <p>Reviews the paper you submit against explicit methodology items, not its cited literature.</p>
     </aside>
   );
 }
@@ -329,6 +326,7 @@ function Report({
   const title = report.identity.title || report.identity.doi || "Paper review";
   const findings = report.findings.filter((finding) => finding.critic_disposition !== "discarded");
   const assessmentGroups = buildAssessmentGroups(report);
+  const takeaways = majorTakeaways(report);
   const hasFinalScore = (report.assessed_item_count ?? 0) > 0;
   const hasEvidenceNotes = (report.evidence_notes?.length ?? 0) > 0;
   const gradeCounts = findings.reduce<Record<string, number>>((counts, finding) => {
@@ -366,16 +364,20 @@ function Report({
       <section class="takeaways">
         <div>
           <span class="eyebrow">Read this first</span>
-          <h2>Scope & major takeaways</h2>
-          <ul>{(report.summary ?? []).map((item) => <li key={item}>{item}</li>)}</ul>
+          <h2>Key findings & review scope</h2>
+          {takeaways.length > 0
+            ? <ul class="takeaway-list">{takeaways.map((finding) => <li key={finding.id}><span class={`takeaway-grade grade-${finding.grade}`}>{words(finding.grade)}</span><strong>{findingDisplayTitle(finding)}.</strong> {finding.explanation}</li>)}</ul>
+            : <p>{hasFinalScore ? "No grounded concerns were identified in the assessed items." : "No methodology items were assessed."}</p>}
+          <p class="takeaway-coverage"><strong>Coverage:</strong> {percent(report.coverage.full_review)} full review · {percent(report.coverage.available)} available content · {report.assessed_item_count ?? findings.filter((item) => item.grade !== "not_assessed").length} items assessed</p>
         </div>
         <div class="score-card">
-          <span class="score-label">Methodology review score</span>
+          <span class="score-label">Review score for assessed items</span>
           <div class="score-primary">
             <strong>{hasFinalScore ? Math.round(report.review_score) : "—"}</strong>
             {hasFinalScore && <span>/100</span>}
           </div>
           <p class={report.coverage.provisional ? "provisional" : "complete-label"}>{!hasFinalScore ? "Not scored" : report.coverage.provisional ? "Provisional score" : "Completed score"}</p>
+          <p class="score-note">Use it to navigate the findings; it does not establish misconduct or scientific truth.</p>
           <dl>
             <div><dt>Grounded concerns</dt><dd>{(gradeCounts.critical_concern ?? 0) + (gradeCounts.major_concern ?? 0) + (gradeCounts.minor_concern ?? 0)}</dd></div>
             <div><dt>No concern</dt><dd>{gradeCounts.no_concern ?? 0}</dd></div>
@@ -653,6 +655,8 @@ export default function App() {
   const [cancelling, setCancelling] = useState(false);
   const [exampleManifest, setExampleManifest] = useState<ExampleManifest | null>(null);
   const [session, setSession] = useState<SessionView | null>(null);
+  const [sessionError, setSessionError] = useState("");
+  const [sessionSlow, setSessionSlow] = useState(false);
   const [publicReports, setPublicReports] = useState<PublicReportSummary[]>([]);
   const [publicLoading, setPublicLoading] = useState(true);
   const [publicError, setPublicError] = useState("");
@@ -661,6 +665,21 @@ export default function App() {
   const queryRef = useRef("");
   const resolutionRequest = useRef<{ value: string; promise: Promise<ResolvedPaper> } | null>(null);
   const viewerUrlRef = useRef("");
+
+  const loadSession = async () => {
+    setSessionError("");
+    setSessionSlow(false);
+    const slowTimer = window.setTimeout(() => setSessionSlow(true), 1500);
+    try {
+      const result = await api.session(AbortSignal.timeout(8000));
+      setSession(result);
+    } catch {
+      setSession(null);
+      setSessionError("The availability check timed out or could not reach the analysis service.");
+    } finally {
+      window.clearTimeout(slowTimer);
+    }
+  };
 
   // Bootstrap once; query parameters select durable live, example, or public report routes.
   useEffect(() => {
@@ -702,7 +721,7 @@ export default function App() {
         setPhase("report");
         return;
       }
-      setSession(await api.session());
+      await loadSession();
       if (analysisId) {
         setPhase("running");
         await pollAnalysis(analysisId);
@@ -722,9 +741,7 @@ export default function App() {
   }, []);
 
   const freshAnalysisAvailable = Boolean(
-    session?.live_analysis_enabled
-    && session.hosted_remaining !== 0
-    && session.hosted_capacity_available,
+    session?.live_analysis_enabled && session.hosted_remaining !== 0,
   );
 
   const retainViewerPdf = (blob: Blob) => {
@@ -907,7 +924,7 @@ export default function App() {
     setPhase("running");
     window.history.replaceState({}, "", `${window.location.pathname}?${new URLSearchParams({ analysis: initial.id })}`);
     await pollAnalysis(initial.id);
-    setSession(await api.session());
+    await loadSession();
   };
 
   const openReusableAnalysis = async () => {
@@ -976,8 +993,8 @@ export default function App() {
           <section class="hero">
             <div>
               <span class="eyebrow">Paper in. Evidence out.</span>
-              <h1>A structured review that shows its work.</h1>
-              <p>Submit one paper. Get content-aware methodology findings, quoted evidence, and explicit gaps—without pretending an abstract is a full-text review.</p>
+              <h1>Check a paper’s methods against the evidence.</h1>
+              <p>Get a criterion-by-criterion assessment with quoted passages, source provenance, and visible coverage gaps.</p>
             </div>
             <ScopeNote />
           </section>
@@ -1079,10 +1096,12 @@ export default function App() {
             {error && <div class="error-box" role="alert">{error}</div>}
             <div class="action-row">
               <div>
-                <span>{!session ? "Connecting to analysis service" : !session.live_analysis_enabled ? "Live analysis paused" : !session.hosted_capacity_available ? "Daily analysis capacity reached" : "Standard review"}</span>
-                <small>{!session?.live_analysis_enabled || session.hosted_capacity_available ? "Full text when available · extracted text is sent to the configured review service · do not submit confidential material" : "Hosted analysis is temporarily unavailable · compatible existing reviews remain accessible"}</small>
+                <span>{sessionError ? "Analysis service unavailable" : !session ? sessionSlow ? "Analysis service is taking longer than expected" : "Checking analysis availability…" : !session.live_analysis_enabled ? "Live analysis paused" : "Standard review"}</span>
+                <small>{sessionError ? `${sessionError} Examples and existing public reports remain available.` : !session ? "Checking whether new analyses are available." : session.live_analysis_enabled ? "Full text when available · extracted text is sent to the configured review service · do not submit confidential material" : "New analyses are paused · compatible existing reviews remain accessible"}</small>
               </div>
-              <button class="analyze-button" type="button" disabled={!canAnalyze || Boolean(reuseMatch)} onClick={() => void analyze()}>{freshAnalysisAvailable ? "Analyze paper" : "Find existing review"} <span>→</span></button>
+              {sessionError
+                ? <button class="analyze-button" type="button" onClick={() => void loadSession()}>Retry connection <span>→</span></button>
+                : <button class="analyze-button" type="button" disabled={!canAnalyze || Boolean(reuseMatch)} onClick={() => void analyze()}>{freshAnalysisAvailable ? "Analyze paper" : "Find existing review"} <span>→</span></button>}
             </div>
           </section>
           <PublicFeed reports={publicReports} loading={publicLoading} error={publicError} />
