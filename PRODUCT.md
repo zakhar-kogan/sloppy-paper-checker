@@ -49,9 +49,9 @@ The methodology, worker prompt, reviewer prompt, parser, scoring version, provid
 
 ## Public-Beta Operations
 
-Hosted inference has a configurable per-browser allowance, a hidden global safety cap, a per-browser concurrency limit, and an operator kill switch. Visitors should see their own availability and a plain temporary-capacity message, never the exact global remaining budget. Existing compatible reports remain usable when new inference is unavailable.
+Hosted inference has a configurable per-browser allowance, a per-browser concurrency limit, and an operator kill switch. Provider-side API-key limits are the spending boundary. Existing compatible reports remain usable when new inference is unavailable.
 
-These controls limit ordinary use; anonymous browser identity is not an abuse-proof billing boundary. Provider-side spending controls and operator monitoring remain the final financial safeguards.
+These application controls limit ordinary use; anonymous browser identity is not an abuse-proof billing boundary.
 
 ## Deployment Direction
 

@@ -3,9 +3,9 @@
 [![CI](https://github.com/zakhar-kogan/sloppy-paper-checker/actions/workflows/ci.yml/badge.svg)](https://github.com/zakhar-kogan/sloppy-paper-checker/actions/workflows/ci.yml)
 [![MIT License](https://img.shields.io/badge/license-MIT-1646e8.svg)](LICENSE)
 
-Sloppy Paper Checker reviews the methodology of scientific papers and shows the evidence behind each assessment. Give it a DOI, PMID, PMCID, arXiv record, scholarly URL, or PDF, and it produces a structured report with quotations, source provenance, coverage gaps, and an auditable score.
+Sloppy Paper Checker reviews a scientific paper against explicit methodology criteria and shows the evidence, provenance, coverage gaps, and limitations behind each assessment. Submit a DOI, PMID, PMCID, arXiv record, scholarly URL, or PDF.
 
-Use the score to navigate the report alongside its evidence, coverage, and limitations.
+The numeric score summarizes assessed items only. Use it to navigate the report, not as proof of scientific truth or misconduct.
 
 [Use the live application](https://papers.teleogenic.com/).
 
@@ -27,13 +27,9 @@ For a representative full-text test, try `10.1016/S0140-6736(17)32802-7`.
 
 ## How it works
 
-The web app parses PDFs with PDF.js. PMC JATS documents are normalized by the FastAPI backend. The resulting text and document structure are stored temporarily while Agno workers and a final reviewer analyze the paper through a configurable OpenAI-compatible API. Nebius Token Factory is the default provider. Progress is saved in the database and displayed by polling, so reports survive page reloads.
+The web app parses PDFs with PDF.js; the backend normalizes PMC JATS documents. The normalized paper is routed in bounded, criterion-specific chunks to evidence workers. A final reviewer grades each applicable criterion against the canonical methodology using verified evidence quotations, not the full normalized paper. Progress is persisted so reports survive reloads.
 
-Local development uses SQLite, filesystem storage, and analysis running in the FastAPI process. The current public deployment uses a small single-host Compose stack with PostgreSQL and inline analysis. The same backend can instead dispatch each analysis to a Nebius Serverless Job backed by managed PostgreSQL and S3-compatible Object Storage; storage and dispatch choices are configured independently.
-
-The static frontend is already CDN-deployable, and the API, storage, and dispatcher boundaries preserve a future move to serverless infrastructure without changing the report contract. Serverless analysis jobs are supported today. Replacing the small stateful FastAPI control plane with a fully scale-to-zero backend would still require different session and persistence adapters and is intentionally not part of the current deployment.
-
-See [Architecture and trust boundaries](docs/architecture.md) for the complete data flow.
+Local development uses SQLite, filesystem storage, and inline analysis. The public deployment uses Caddy, FastAPI, PostgreSQL, and inline analysis; Nebius Serverless Jobs, Managed PostgreSQL, and S3-compatible storage are also supported. See [Architecture and trust boundaries](docs/architecture.md) for the data flow.
 
 ## Data handling
 
@@ -92,7 +88,7 @@ docker compose up --build
 
 This deployment uses inline analysis and a persistent local document volume. For a distributed Nebius deployment using Managed PostgreSQL, Object Storage, MysteryBox, and Serverless Jobs, follow the [Nebius deployment guide](docs/nebius.md).
 
-The live Compose frontend includes both the curated example gallery and live analysis. Public-beta spending is bounded by a configurable per-browser allowance, a server-side global safety cap, one concurrent analysis per browser, and the emergency `SPC_LIVE_ANALYSIS_ENABLED` switch. The current example configuration allows ten hosted analyses per browser in a rolling 24-hour window. Visitors see whether hosted analysis is available, not the global remaining count; compatible existing reports remain accessible when fresh capacity is exhausted.
+The live Compose frontend includes both the curated example gallery and live analysis. Public-beta use is bounded by a configurable per-browser allowance, one concurrent analysis per browser, the emergency `SPC_LIVE_ANALYSIS_ENABLED` switch, and provider-side API-key limits. The current example configuration allows ten hosted analyses per browser in a rolling 24-hour window; compatible existing reports remain accessible when new analysis is unavailable.
 
 Optional OTLP/HTTP tracing is disabled by default. When enabled, its allowlist is limited to operational metadata such as stages, model identifiers, timings, token counts, coverage, and outcomes.
 
@@ -108,6 +104,12 @@ make openapi
 CI runs the repository test suites, checks backend and web linting, builds the web app, and verifies that the committed OpenAPI schema is current. PostgreSQL contract tests also run when `SPC_TEST_POSTGRES_URL` is set.
 
 ## Documentation
+
+The methodology is open, versioned, automated, and under evaluation; it is not a validated scientific appraisal instrument.
+
+- [Methodology definition](backend/src/sloppy_checker/methodologies/scientific-paper-review-v1.yaml)
+- [Worker prompt](backend/src/sloppy_checker/methodologies/prompts/worker-v1.md)
+- [Reviewer prompt](backend/src/sloppy_checker/methodologies/prompts/reviewer-v1.md)
 
 - [Architecture and trust boundaries](docs/architecture.md)
 - [Deployment options and agent runbook](DEPLOYMENT.md)
