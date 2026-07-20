@@ -19,8 +19,6 @@ import {
   exampleIdFromSearch,
   fetchExampleManifest,
   fetchExampleReport,
-  LIVE_ANALYSIS_ENABLED,
-  SHOW_EXAMPLES,
   type ExampleManifest,
 } from "./showcase";
 
@@ -656,9 +654,9 @@ export default function App() {
   const [exampleManifest, setExampleManifest] = useState<ExampleManifest | null>(null);
   const [session, setSession] = useState<SessionView | null>(null);
   const [publicReports, setPublicReports] = useState<PublicReportSummary[]>([]);
-  const [publicLoading, setPublicLoading] = useState(LIVE_ANALYSIS_ENABLED);
+  const [publicLoading, setPublicLoading] = useState(true);
   const [publicError, setPublicError] = useState("");
-  const [exampleLoading, setExampleLoading] = useState(SHOW_EXAMPLES);
+  const [exampleLoading, setExampleLoading] = useState(true);
   const [exampleError, setExampleError] = useState("");
   const queryRef = useRef("");
   const resolutionRequest = useRef<{ value: string; promise: Promise<ResolvedPaper> } | null>(null);
@@ -672,24 +670,20 @@ export default function App() {
       const publicSlug = params.get("public");
       const analysisId = params.get("analysis");
       const paper = params.get("paper");
-      const manifestPromise = SHOW_EXAMPLES
-        ? fetchExampleManifest()
-          .then((manifest) => {
-            setExampleManifest(manifest);
-            return manifest;
-          })
-          .catch((caught) => {
-            setExampleError(errorMessage(caught));
-            return null;
-          })
-          .finally(() => setExampleLoading(false))
-        : Promise.resolve(null);
-      if (LIVE_ANALYSIS_ENABLED) {
-        void api.publicReports()
-          .then((result) => setPublicReports(result.reports))
-          .catch((caught) => setPublicError(errorMessage(caught)))
-          .finally(() => setPublicLoading(false));
-      }
+      const manifestPromise = fetchExampleManifest()
+        .then((manifest) => {
+          setExampleManifest(manifest);
+          return manifest;
+        })
+        .catch((caught) => {
+          setExampleError(errorMessage(caught));
+          return null;
+        })
+        .finally(() => setExampleLoading(false));
+      void api.publicReports()
+        .then((result) => setPublicReports(result.reports))
+        .catch((caught) => setPublicError(errorMessage(caught)))
+        .finally(() => setPublicLoading(false));
       if (exampleId) {
         const manifest = await manifestPromise;
         const example = manifest?.examples.find((item) => item.id === exampleId);
@@ -702,14 +696,10 @@ export default function App() {
         setPhase("report");
         return;
       }
-      if (publicSlug && LIVE_ANALYSIS_ENABLED) {
+      if (publicSlug) {
         setReport(await api.publicReport(publicSlug));
         setReportOrigin("public");
         setPhase("report");
-        return;
-      }
-      if (!LIVE_ANALYSIS_ENABLED) {
-        await manifestPromise;
         return;
       }
       setSession(await api.session());
@@ -746,7 +736,7 @@ export default function App() {
 
 
   const canAnalyze = useMemo(() => {
-    if (!LIVE_ANALYSIS_ENABLED || !session?.live_analysis_enabled) return false;
+    if (!session?.live_analysis_enabled) return false;
     if (mode === "upload") return Boolean(file);
     if (!query.trim()) return false;
     if (!resolution || resolvedQuery !== query.trim()) return true;
@@ -832,7 +822,6 @@ export default function App() {
 
   // The resolver request is deduplicated through resolutionRequest; input changes own this timer.
   useEffect(() => {
-    if (!LIVE_ANALYSIS_ENABLED) return;
     if (mode !== "identifier" || !isResolvableInput(query) || resolvedQuery === query.trim()) return;
     const timer = window.setTimeout(() => { void resolveValue(query).catch(() => undefined); }, 650);
     return () => window.clearTimeout(timer);
@@ -1046,11 +1035,11 @@ export default function App() {
                         setPhase("input");
                       }
                     }}
-                    onBlur={() => { if (LIVE_ANALYSIS_ENABLED && query.trim()) void resolveValue(query).catch(() => undefined); }}
-                    onKeyDown={(event) => { if (LIVE_ANALYSIS_ENABLED && event.key === "Enter" && canAnalyze) void analyze(); }}
+                    onBlur={() => { if (query.trim()) void resolveValue(query).catch(() => undefined); }}
+                    onKeyDown={(event) => { if (event.key === "Enter" && canAnalyze) void analyze(); }}
                     placeholder="10.1038/…  ·  arXiv:…  ·  pubmed.ncbi.nlm.nih.gov/…"
                   />
-                  <small id="identifier-help" aria-live="polite">{!LIVE_ANALYSIS_ENABLED ? "Live source lookup is disabled in this static release." : phase === "resolving" ? "Finding metadata and candidate open full-text sources…" : resolution ? "Metadata resolved. Full-text candidates are verified when analysis starts; unavailable sources fall back automatically." : "Metadata is checked before analysis; full text is retrieved only after you start."}</small>
+                  <small id="identifier-help" aria-live="polite">{phase === "resolving" ? "Finding metadata and candidate open full-text sources…" : resolution ? "Metadata resolved. Full-text candidates are verified when analysis starts; unavailable sources fall back automatically." : "Metadata is checked before analysis; full text is retrieved only after you start."}</small>
                 </label>
               </div>
             ) : (
@@ -1090,17 +1079,17 @@ export default function App() {
             {error && <div class="error-box" role="alert">{error}</div>}
             <div class="action-row">
               <div>
-                <span>{!LIVE_ANALYSIS_ENABLED ? "Static showcase" : !session ? "Connecting to analysis service" : !session.live_analysis_enabled ? "Live analysis paused" : !session.hosted_capacity_available ? "Daily analysis capacity reached" : "Standard review"}</span>
-                <small>{!LIVE_ANALYSIS_ENABLED ? <>This release contains precomputed reports and sends no paper data. <a href="#examples">Browse example reviews</a></> : !session?.live_analysis_enabled || session.hosted_capacity_available ? "Full text when available · extracted text is sent to the configured review service · do not submit confidential material" : "Hosted analysis is temporarily unavailable · compatible existing reviews remain accessible"}</small>
+                <span>{!session ? "Connecting to analysis service" : !session.live_analysis_enabled ? "Live analysis paused" : !session.hosted_capacity_available ? "Daily analysis capacity reached" : "Standard review"}</span>
+                <small>{!session?.live_analysis_enabled || session.hosted_capacity_available ? "Full text when available · extracted text is sent to the configured review service · do not submit confidential material" : "Hosted analysis is temporarily unavailable · compatible existing reviews remain accessible"}</small>
               </div>
               <button class="analyze-button" type="button" disabled={!canAnalyze || Boolean(reuseMatch)} onClick={() => void analyze()}>{freshAnalysisAvailable ? "Analyze paper" : "Find existing review"} <span>→</span></button>
             </div>
           </section>
-          {LIVE_ANALYSIS_ENABLED && <PublicFeed reports={publicReports} loading={publicLoading} error={publicError} />}
-          {SHOW_EXAMPLES && <ExampleGallery manifest={exampleManifest} loading={exampleLoading} error={exampleError} />}
+          <PublicFeed reports={publicReports} loading={publicLoading} error={publicError} />
+          <ExampleGallery manifest={exampleManifest} loading={exampleLoading} error={exampleError} />
         </main>
       )}
-      <footer><span>Sloppy Paper Checker</span><span>{LIVE_ANALYSIS_ENABLED ? "Private reports expire after 24 hours · Public reports expire after 30 days" : "Precomputed examples · No visitor paper data saved"}</span></footer>
+      <footer><span>Sloppy Paper Checker</span><span>Private reports expire after 24 hours · Public reports expire after 30 days</span></footer>
     </div>
   );
 }

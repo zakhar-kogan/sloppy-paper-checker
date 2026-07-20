@@ -1,6 +1,6 @@
 # Precomputed example records
 
-This directory contains the fixed ten-paper showcase used by the GitHub Pages build. These reports are examples of product behavior, not a benchmark or validated accuracy evaluation.
+This directory contains the fixed ten-paper gallery served by the live application. These reports are examples of product behavior, not a benchmark or validated accuracy evaluation.
 
 - `manifest.json` drives the gallery cards and fixes their order.
 - `reports/` contains exact final `AnalysisReport` v1.3 payloads.

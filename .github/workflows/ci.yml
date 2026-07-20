@@ -20,20 +20,6 @@ jobs:
       - run: uv run --project backend --extra dev pytest backend/tests
       - run: uv run --project backend python -m sloppy_checker.export_openapi
       - run: git diff --exit-code openapi.json
-  extension:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with: {node-version: 24, cache: npm, cache-dependency-path: extension/package-lock.json}
-      - run: npm ci
-        working-directory: extension
-      - run: npm test
-        working-directory: extension
-      - run: npm run build
-        working-directory: extension
-      - uses: actions/upload-artifact@v4
-        with: {name: chromium-extension, path: extension/dist}
   web:
     runs-on: ubuntu-latest
     steps:

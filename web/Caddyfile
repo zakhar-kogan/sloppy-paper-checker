@@ -1,0 +1,24 @@
+{$SPC_PUBLIC_HOST:localhost} {
+  encode zstd gzip
+
+  header {
+    X-Content-Type-Options "nosniff"
+    Referrer-Policy "no-referrer"
+    Permissions-Policy "camera=(), microphone=(), geolocation=()"
+    Content-Security-Policy "default-src 'self'; connect-src 'self'; img-src 'self' data:; script-src 'self'; style-src 'self'; worker-src 'self' blob:; frame-src 'self' blob:; object-src 'none'; base-uri 'none'; frame-ancestors 'none'"
+  }
+
+  handle /v1/* {
+    reverse_proxy {$SPC_API_UPSTREAM:api:8787}
+  }
+
+  handle /healthz {
+    reverse_proxy {$SPC_API_UPSTREAM:api:8787}
+  }
+
+  handle {
+    root * /srv
+    try_files {path} /index.html
+    file_server
+  }
+}

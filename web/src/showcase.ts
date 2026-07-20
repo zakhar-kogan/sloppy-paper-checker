@@ -20,8 +20,6 @@ export type ExampleManifest = {
   examples: ExampleManifestEntry[];
 };
 
-export const SHOW_EXAMPLES = import.meta.env.VITE_SHOW_EXAMPLES === "true";
-export const LIVE_ANALYSIS_ENABLED = import.meta.env.VITE_LIVE_ANALYSIS_ENABLED === "true";
 
 export function showcaseAssetUrl(path: string): string {
   return `${import.meta.env.BASE_URL}${path.replace(/^\//, "")}`;

@@ -6,14 +6,9 @@ FastAPI and Serverless Jobs use the same backend image. The API container starts
 
 Nebius Serverless AI Jobs are background workloads and do not expose a public request URL. The FastAPI control plane must therefore run separately. A Serverless AI Endpoint can run the FastAPI container and expose its port, but it is a long-running container over a VM rather than a browser-function or automatic scale-to-zero service.
 
-An HTTPS frontend such as GitHub Pages must call an HTTPS API. Put a TLS-capable domain or proxy in front of the FastAPI endpoint before connecting it to Pages. The browser bundle may contain the public API base URL, never `SPC_API_TOKEN`, model-provider credentials, PostgreSQL credentials, Object Storage keys, a Nebius API key, or an endpoint authentication token.
+The compiled Preact frontend may be served by the included Caddy image or another HTTPS-capable static host. The browser bundle may contain a public API base URL, never `SPC_API_TOKEN`, model-provider credentials, PostgreSQL credentials, Object Storage keys, a Nebius API key, or an endpoint authentication token.
 
-The current anonymous session is an HttpOnly, SameSite=Lax cookie designed for a same-origin deployment. A Pages domain and a Nebius API IP/domain are cross-origin and may also be cross-site. Before deploying that split, choose one of these session designs:
-
-1. Use a custom parent domain for both frontend and API, configure explicit CORS, and retain the HttpOnly cookie.
-2. Replace the guest cookie with a short-lived, API-issued bearer session designed for browser storage and CSRF/XSS tradeoffs.
-
-The custom-domain option preserves the current security model and is preferred.
+The current anonymous session is an HttpOnly, SameSite=Lax cookie designed for a same-origin deployment. Keep the frontend and `/v1/*` API behind one public hostname; the included Caddy configuration does this and preserves the current security model. A cross-site frontend/API split would require a deliberate replacement session design and is not supported by the current deployment.
 
 ## Persistence
 

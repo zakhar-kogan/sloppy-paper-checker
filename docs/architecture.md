@@ -24,7 +24,7 @@ flowchart LR
 
 Each infrastructure concern is configured independently. There is no generic cloud flag: tests can combine a SQL repository, filesystem/S3 document store, and inline/mocked Nebius dispatcher in any supported arrangement.
 
-The live `papers.teleogenic.com` deployment uses Caddy, a static nginx frontend, FastAPI, and PostgreSQL on one host. Analysis runs inline and canonical documents use a persistent local volume. This is the smallest already-operational production topology; the adapter boundaries below allow individual infrastructure concerns to move without changing the public report contract.
+The live `papers.teleogenic.com` deployment uses three long-lived services on one host: Caddy serves the compiled Preact frontend and owns public HTTPS, FastAPI runs the application and inline analysis, and PostgreSQL stores durable state. Canonical documents use a persistent local volume. A one-shot initialization container prepares that volume and exits.
 
 The browser parses local and relayed PDFs; PDF bytes are never posted to the API. PMC JATS is normalized by FastAPI. Only a validated canonical document is stored for analysis. Resolved candidate URLs are represented by opaque IDs cached in SQL with an expiry, so the relay never accepts a caller-supplied destination.
 

@@ -7,7 +7,7 @@ Sloppy Paper Checker reviews the methodology of scientific papers and shows the 
 
 Use the score to navigate the report alongside its evidence, coverage, and limitations.
 
-[Use the live application](https://papers.teleogenic.com/) or [view the static ten-example showcase](https://zakhar-kogan.github.io/sloppy-paper-checker/).
+[Use the live application](https://papers.teleogenic.com/).
 
 ![Example methodology report showing evidence-linked findings, the review score, and coverage diagnostics](docs/assets/report-example.png)
 
@@ -82,23 +82,9 @@ Open `http://127.0.0.1:5173`. The API documentation is available at `http://127.
 
 Model inference is configured with `SPC_PROVIDER_BASE_URL`, `SPC_PROVIDER_API_KEY`, `SPC_PROVIDER_WORKER_MODEL`, and `SPC_PROVIDER_REVIEWER_MODEL`. The defaults target Nebius Token Factory. Existing `SPC_NEBIUS_API_KEY` and `SPC_TOKEN_FACTORY_*_MODEL` settings remain supported as fallbacks.
 
-## Static example showcase
-
-The GitHub Pages build is a frontend-only release with ten fixed, precomputed example reports. It keeps the intake visible as a product preview, disables live analysis, makes no `/v1` requests, and loads committed report JSON through reload-safe `?example=<id>` links. These examples demonstrate report behavior; they are not a validated accuracy evaluation.
-
-```bash
-npm --prefix web ci
-npm --prefix web run build:pages
-uv run --project backend python scripts/validate_showcase.py
-```
-
-The bundle is served from `/sloppy-paper-checker/`. It has no backend, accepts no live submissions, stores no visitor data, and contains no credentials. Model inference for the precomputed reports used Nebius Token Factory; this static release does not use Serverless Jobs, Serverless Endpoints, PostgreSQL, or Object Storage.
-
-The workflow is committed in `.github/workflows/pages.yml`, and the public showcase is deployed at [zakhar-kogan.github.io/sloppy-paper-checker](https://zakhar-kogan.github.io/sloppy-paper-checker/).
-
 ## Docker Compose
 
-The included Compose stack runs Caddy, the web app, FastAPI, and PostgreSQL on a single host. Copy `.env.example` to `.env`, replace the placeholder API token, configure the provider key and contact emails, then run:
+The included Compose stack runs three long-lived services on one host: Caddy serves the compiled Preact frontend and proxies API traffic, FastAPI runs the application and inline analysis, and PostgreSQL stores durable state. A one-shot initialization container prepares the persistent document volume and exits. Copy `.env.example` to `.env`, replace the placeholder API token, configure the provider key and contact emails, then run:
 
 ```bash
 docker compose up --build
@@ -124,6 +110,7 @@ CI runs the repository test suites, checks backend and web linting, builds the w
 ## Documentation
 
 - [Architecture and trust boundaries](docs/architecture.md)
+- [Deployment options and agent runbook](DEPLOYMENT.md)
 - [Scoring methodology](docs/scoring.md)
 - [Evidence sources](docs/data-sources.md)
 - [Limitations and responsible interpretation](docs/limitations.md)

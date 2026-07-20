@@ -1,21 +1,13 @@
 import { defineConfig } from "vite";
 import preact from "@preact/preset-vite";
 
-export default defineConfig(({ mode }) => {
-  const pages = mode === "pages";
-  return {
-    base: pages ? "/sloppy-paper-checker/" : "/",
-    define: {
-      "import.meta.env.VITE_SHOW_EXAMPLES": JSON.stringify("true"),
-      "import.meta.env.VITE_LIVE_ANALYSIS_ENABLED": JSON.stringify(pages ? "false" : "true"),
+export default defineConfig({
+  plugins: [preact()],
+  server: {
+    port: 5173,
+    proxy: {
+      "/v1": "http://127.0.0.1:8787",
+      "/healthz": "http://127.0.0.1:8787",
     },
-    plugins: [preact()],
-    server: {
-      port: 5173,
-      proxy: {
-        "/v1": "http://127.0.0.1:8787",
-        "/healthz": "http://127.0.0.1:8787",
-      },
-    },
-  };
+  },
 });
