@@ -87,12 +87,12 @@
     },
     {
       "audit": "audits/retinopathy-dls-2017.json",
-      "concern_count": 0,
-      "content_level": "metadata",
-      "coverage": 0.0,
+      "concern_count": 1,
+      "content_level": "full_text",
+      "coverage": 0.667,
       "id": "retinopathy-dls-2017",
       "identifier": "10.1001/jama.2017.18152",
-      "profile": "common_core",
+      "profile": "computational_ml_modeling",
       "report": "reports/retinopathy-dls-2017.json",
       "title": "Development and Validation of a Deep Learning System for Diabetic Retinopathy and Related Eye Diseases Using Retinal Images From Multiethnic Populations With Diabetes",
       "year": 2017
@@ -122,6 +122,6 @@
       "year": 2016
     }
   ],
-  "generated_at": "2026-07-18T21:40:06.227007Z",
+  "generated_at": "2026-07-20T12:18:12.331863Z",
   "schema_version": "1.0"
 }

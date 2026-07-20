@@ -1,14 +1,17 @@
 {
-  "audited_at": "2026-07-18T21:38:32.391033Z",
+  "audited_at": "2026-07-20T12:17:03.438169Z",
   "case_id": "retinopathy-dls-2017",
-  "displayed_quotations_checked": 0,
+  "displayed_quotations_checked": 55,
   "identity_verified": true,
   "quotation_mismatch_count": 0,
   "quotation_mismatches": [],
   "schema_version": "1.0",
   "secret_scan": "passed",
-  "source_kind": "metadata",
+  "source_kind": "html",
   "source_verified": true,
-  "warnings": [],
+  "warnings": [
+    "PDF \u00b7 Unpaywall \u00b7 publishedVersion could not be used; analysis used HTML \u00b7 PMC \u00b7 publishedVersion instead.",
+    "JATS \u00b7 PMC \u00b7 publishedVersion could not be used; analysis used HTML \u00b7 PMC \u00b7 publishedVersion instead."
+  ],
   "warnings_reviewed": true
 }

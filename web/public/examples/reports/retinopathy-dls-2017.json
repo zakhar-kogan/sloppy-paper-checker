@@ -1,8 +1,8 @@
 {
-  "assessed_item_count": 0,
+  "assessed_item_count": 16,
   "audit_trail": [
     {
-      "at": "2026-07-18T21:18:39.754467+00:00",
+      "at": "2026-07-20T12:09:04.942445+00:00",
       "detail": null,
       "evidence_count": 0,
       "key": null,
@@ -13,7 +13,7 @@
       "state": "completed"
     },
     {
-      "at": "2026-07-18T21:18:39.755728+00:00",
+      "at": "2026-07-20T12:09:04.948416+00:00",
       "detail": null,
       "evidence_count": 0,
       "key": null,
@@ -24,7 +24,7 @@
       "state": "completed"
     },
     {
-      "at": "2026-07-18T21:18:39.772407+00:00",
+      "at": "2026-07-20T12:09:04.958575+00:00",
       "detail": null,
       "evidence_count": 0,
       "key": null,
@@ -35,7 +35,7 @@
       "state": "completed"
     },
     {
-      "at": "2026-07-18T21:18:39.773028+00:00",
+      "at": "2026-07-20T12:09:04.960435+00:00",
       "detail": "Waiting to start.",
       "evidence_count": 0,
       "key": "design",
@@ -46,7 +46,7 @@
       "state": "pending"
     },
     {
-      "at": "2026-07-18T21:18:39.773041+00:00",
+      "at": "2026-07-20T12:09:04.960470+00:00",
       "detail": "Waiting to start.",
       "evidence_count": 0,
       "key": "statistics",
@@ -57,7 +57,7 @@
       "state": "pending"
     },
     {
-      "at": "2026-07-18T21:18:39.773046+00:00",
+      "at": "2026-07-20T12:09:04.960481+00:00",
       "detail": "Waiting to start.",
       "evidence_count": 0,
       "key": "claims",
@@ -68,7 +68,7 @@
       "state": "pending"
     },
     {
-      "at": "2026-07-18T21:18:39.773049+00:00",
+      "at": "2026-07-20T12:09:04.960488+00:00",
       "detail": "Waiting to start.",
       "evidence_count": 0,
       "key": "transparency",
@@ -79,7 +79,7 @@
       "state": "pending"
     },
     {
-      "at": "2026-07-18T21:18:39.773052+00:00",
+      "at": "2026-07-20T12:09:04.960495+00:00",
       "detail": "Waiting to start.",
       "evidence_count": 0,
       "key": "disclosures",
@@ -90,62 +90,282 @@
       "state": "pending"
     },
     {
-      "at": "2026-07-18T21:18:39.773731+00:00",
-      "detail": "Requires full text content.",
+      "at": "2026-07-20T12:09:04.964579+00:00",
+      "detail": null,
       "evidence_count": 0,
       "key": "design",
       "kind": "module",
       "label": "Study design & risk of bias",
       "notes": [],
-      "progress": 42,
-      "state": "skipped"
+      "progress": 35,
+      "state": "running"
     },
     {
-      "at": "2026-07-18T21:18:39.774488+00:00",
-      "detail": "Requires full text content.",
+      "at": "2026-07-20T12:09:04.971197+00:00",
+      "detail": null,
       "evidence_count": 0,
       "key": "statistics",
       "kind": "module",
       "label": "Statistical & computational validity",
       "notes": [],
-      "progress": 48,
-      "state": "skipped"
+      "progress": 35,
+      "state": "running"
     },
     {
-      "at": "2026-07-18T21:18:39.774995+00:00",
-      "detail": "Requires abstract content.",
+      "at": "2026-07-20T12:09:04.976561+00:00",
+      "detail": null,
       "evidence_count": 0,
       "key": "claims",
       "kind": "module",
       "label": "Claim\u2013evidence alignment",
       "notes": [],
-      "progress": 55,
-      "state": "skipped"
+      "progress": 35,
+      "state": "running"
     },
     {
-      "at": "2026-07-18T21:18:39.775451+00:00",
-      "detail": "Requires full text content.",
+      "at": "2026-07-20T12:09:04.981779+00:00",
+      "detail": null,
       "evidence_count": 0,
       "key": "transparency",
       "kind": "module",
       "label": "Transparency & reporting",
       "notes": [],
-      "progress": 61,
-      "state": "skipped"
+      "progress": 35,
+      "state": "running"
     },
     {
-      "at": "2026-07-18T21:18:39.775897+00:00",
+      "at": "2026-07-20T12:09:04.986670+00:00",
       "detail": null,
       "evidence_count": 0,
       "key": "disclosures",
       "kind": "module",
       "label": "Disclosures & affiliations",
       "notes": [],
-      "progress": 61,
+      "progress": 35,
       "state": "running"
     },
     {
-      "at": "2026-07-18T21:18:41.197077+00:00",
+      "at": "2026-07-20T12:09:24.686446+00:00",
+      "detail": null,
+      "evidence_count": 5,
+      "key": "claims",
+      "kind": "module",
+      "label": "Claim\u2013evidence alignment",
+      "notes": [
+        {
+          "evidence_state": "observed",
+          "module_key": "claims",
+          "observation": "The DLS had high sensitivity and specificity for identifying diabetic retinopathy and related eye diseases.",
+          "quotes": [
+            "In this evaluation of retinal images from multiethnic cohorts of patients with diabetes, the DLS had high sensitivity and specificity for identifying diabetic retinopathy and related eye diseases."
+          ],
+          "rubric_item": "claim_strength"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "claims",
+          "observation": "The DLS demonstrated high sensitivity and specificity in detecting referable diabetic retinopathy and related eye diseases across multiple datasets.",
+          "quotes": [
+            "For referable diabetic retinopathy in the 10 additional datasets, AUC range was 0.889 to 0.983 (n = 40 752 images).",
+            "In the primary validation dataset (n = 14 880 patients; 71 896 images; mean [SD] age, 60.2 [2.2] years; 54.6% men), the prevalence of referable diabetic retinopathy was 3.0%; vision-threatening diabetic retinopathy, 0.6%; possible glaucoma, 0.1%; and AMD, 2.5%. The AUC of the DLS"
+          ],
+          "rubric_item": "results_support"
+        },
+        {
+          "evidence_state": "not_found",
+          "module_key": "claims",
+          "observation": "The study does not use causal language; it reports associations and performance metrics.",
+          "quotes": [],
+          "rubric_item": "causal_language"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "claims",
+          "observation": "The DLS was validated across 10 external datasets from diverse ethnic and clinical settings, supporting generalization.",
+          "quotes": [
+            "The performance of the DLS was comparable and clinically acceptable to the current model based on assessment of retinal images by trained professional graders and showed consistency in 10 external validation datasets of multiple ethnicities and settings, using diverse reference s"
+          ],
+          "rubric_item": "generalization"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "claims",
+          "observation": "The study acknowledges limitations related to reference standard variability and black-box nature of the DLS, which align with the claims made.",
+          "quotes": [
+            "First, the training set was not developed entirely based on the retinal specialists\u2019 grading for all images. Although the reference standard in the primary validation dataset used grading by a retinal specialist, reference standards for the external datasets were based on varying"
+          ],
+          "rubric_item": "limitations_alignment"
+        }
+      ],
+      "progress": 42,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-20T12:09:25.316378+00:00",
+      "detail": null,
+      "evidence_count": 5,
+      "key": "transparency",
+      "kind": "module",
+      "label": "Transparency & reporting",
+      "notes": [
+        {
+          "evidence_state": "not_found",
+          "module_key": "transparency",
+          "observation": "The study does not mention pre-registration of the study protocol in a public registry such as ClinicalTrials.gov or a similar platform.",
+          "quotes": [],
+          "rubric_item": "registration"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "transparency",
+          "observation": "The study received IRB approval and was conducted in accordance with the Declaration of Helsinki. Patient informed consent was waived due to the retrospective nature and use of fully anonymized images.",
+          "quotes": [
+            "This study was approved by the centralized institutional review board (IRB) of SingHealth, Singapore (protocol SHF/FG648S/2015) and conducted in accordance with the Declaration of Helsinki.",
+            "Patients\u2019 informed consent was exempted by the IRB because of the retrospective nature of study using fully anonymized retinal images."
+          ],
+          "rubric_item": "ethics"
+        },
+        {
+          "evidence_state": "ambiguous",
+          "module_key": "transparency",
+          "observation": "The study states that data and code are available through supplementary materials, but does not provide a direct link or repository URL. The supplementary materials are listed but not accessible via the provided text.",
+          "quotes": [],
+          "rubric_item": "data_code"
+        },
+        {
+          "evidence_state": "ambiguous",
+          "module_key": "transparency",
+          "observation": "The study reports performance metrics (AUC, sensitivity, specificity) across multiple datasets and subgroups, including external validation and stratified analyses. However, details on model architecture, training hyperparameters, and data preprocessing steps are limited to a brief mention of an adapted VGGNet and are not fully described.",
+          "quotes": [],
+          "rubric_item": "reporting_completeness"
+        },
+        {
+          "evidence_state": "ambiguous",
+          "module_key": "transparency",
+          "observation": "The study includes supplementary figures and tables with model performance and architecture details, but does not provide code, model weights, or detailed training procedures necessary for full reproducibility.",
+          "quotes": [],
+          "rubric_item": "reproducibility"
+        }
+      ],
+      "progress": 48,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-20T12:09:28.448679+00:00",
+      "detail": null,
+      "evidence_count": 5,
+      "key": "statistics",
+      "kind": "module",
+      "label": "Statistical & computational validity",
+      "notes": [
+        {
+          "evidence_state": "observed",
+          "module_key": "statistics",
+          "observation": "The DLS was validated on 10 additional multiethnic datasets from different countries with diverse community- and clinic-based populations with diabetes, and performance was compared against reference standards from these studies.",
+          "quotes": [
+            "For referable diabetic retinopathy in the 10 additional datasets, AUC range was 0.889 to 0.983 (n = 40 752 images).",
+            "The DLS performance was then evaluated in detection of referable possible glaucoma and referable AMD, with reference to a retinal specialist, using the primary validation dataset (SIDRP 2014-2015)."
+          ],
+          "rubric_item": "test_set_isolation"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "statistics",
+          "observation": "A classification threshold was selected that achieved a predetermined optimal sensitivity of 90% for detecting referable diabetic retinopathy, vision-threatening diabetic retinopathy, referable possible glaucoma, and referable AMD.",
+          "quotes": [
+            "For diabetic retinopathy screening, international guidelines recommended a minimum sensitivity of 60% (Australia) to 80% (United Kingdom). In Singapore, the DLS sensitivity was preset at 90% based on the trained professional graders\u2019 past performances and criteria set by the Mini"
+          ],
+          "rubric_item": "hyperparameter_search"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "statistics",
+          "observation": "Cluster-bootstrap, biased-corrected, asymptotic 2-sided 95% CIs were calculated and presented for proportions (sensitivity, specificity) and AUC, respectively.",
+          "quotes": [
+            "Cluster-bootstrap, biased-corrected, asymptotic 2-sided 95% CIs adjusted for clustering by patients were calculated and presented for proportions (sensitivity, specificity) and AUC, respectively.",
+            "In a few exceptional cases with estimate of sensitivity at the boundary of 100%, the exact Clopper-Pearson method was used instead to obtain CI estimates."
+          ],
+          "rubric_item": "uncertainty"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "statistics",
+          "observation": "The DLS was evaluated on 10 additional multiethnic datasets from different countries with diverse community- and clinic-based populations with diabetes, using varying reference standards.",
+          "quotes": [
+            "For referable diabetic retinopathy in the 10 additional datasets, AUC range was 0.889 to 0.983 (n = 40 752 images).",
+            "The DLS performance was then evaluated in detection of referable possible glaucoma and referable AMD, with reference to a retinal specialist, using the primary validation dataset (SIDRP 2014-2015)."
+          ],
+          "rubric_item": "multiple_benchmarks"
+        },
+        {
+          "evidence_state": "ambiguous",
+          "module_key": "statistics",
+          "observation": "The worker returned an observation, but its quote did not match the normalized paper exactly.",
+          "quotes": [],
+          "rubric_item": "replication_artifacts"
+        }
+      ],
+      "progress": 55,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-20T12:09:28.937382+00:00",
+      "detail": null,
+      "evidence_count": 5,
+      "key": "design",
+      "kind": "module",
+      "label": "Study design & risk of bias",
+      "notes": [
+        {
+          "evidence_state": "ambiguous",
+          "module_key": "design",
+          "observation": "The worker returned an observation, but its quote did not match the normalized paper exactly.",
+          "quotes": [],
+          "rubric_item": "dataset_provenance"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "design",
+          "observation": "The primary validation dataset was from the same SIDRP program (2014\u20132015), but the study notes that 8589 unique patients in this dataset had no overlap with the training set.",
+          "quotes": [
+            "Second, in a subset of 97.4% eyes (n = 35 055) with excellent retinal image quality (no media opacity), the AUC of the DLS for referable diabetic retinopathy increased to 0.949 (95% CI, 0.940-0.957); for vision-threatening diabetic retinopathy, it increased to 0.970 (0.968-0.973)",
+            "Five subsidiary analyses were performed. First, the DLS showed similar diagnostic performance in 8589 unique patients of SIDRP 2014-2015 (with no overlap with training set) as in the primary analysis (eTable 3 in the Supplement )."
+          ],
+          "rubric_item": "leakage"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "design",
+          "observation": "The DLS was compared against professional graders (retinal specialists, general ophthalmologists, trained graders, or optometrists) as the reference standard.",
+          "quotes": [
+            "The AUC of the DLS for referable diabetic retinopathy was 0.936 (95% CI, 0.925-0.943), sensitivity was 90.5% (95% CI, 87.3%-93.0%), and specificity was 91.6% (95% CI, 91.0%-92.2%).",
+            "For vision-threatening diabetic retinopathy, the DLS had higher sensitivity compared with trained graders (100% vs 88.5%; P < .001), but lower specificity (91.1% vs 99.6%; P < .001)."
+          ],
+          "rubric_item": "baseline_choice"
+        },
+        {
+          "evidence_state": "ambiguous",
+          "module_key": "design",
+          "observation": "The study performed five subsidiary analyses, including subgroup analyses by age, sex, and glycemic control, and evaluation of image quality, but no ablation study was explicitly described.",
+          "quotes": [],
+          "rubric_item": "ablation"
+        },
+        {
+          "evidence_state": "observed",
+          "module_key": "design",
+          "observation": "The DLS was externally validated using 10 additional multiethnic cohorts from different countries with diverse community- and clinic-based populations with diabetes, using a range of retinal cameras.",
+          "quotes": [
+            "The DLS was then externally validated using 10 additional multiethnic cohorts of participants with diabetes from different settings (community, population-based, and clinic-based). A range of retinal cameras were used, and assessment of diabetic retinopathy was facilitated by ret",
+            "Among the 10 external validation datasets, the AUC of referable diabetic retinopathy ranged from 0.889 to 0.983."
+          ],
+          "rubric_item": "external_validity"
+        }
+      ],
+      "progress": 61,
+      "state": "completed"
+    },
+    {
+      "at": "2026-07-20T12:09:29.216845+00:00",
       "detail": null,
       "evidence_count": 4,
       "key": "disclosures",
@@ -153,31 +373,42 @@
       "label": "Disclosures & affiliations",
       "notes": [
         {
-          "evidence_state": "ambiguous",
+          "evidence_state": "observed",
           "module_key": "disclosures",
-          "observation": "The worker returned no extraction note for this item.",
-          "quotes": [],
+          "observation": "The project received funding from multiple sources including the National Medical Research Council (NMRC), Ministry of Health (MOH), Singapore National Health Innovation Center (NHIC), SingHealth Foundation Research Grant, Tanoto Foundation, and unrestricted donations to the Retina Division, Johns Hopkins University School of Medicine.",
+          "quotes": [
+            "This project received funding from National Medical Research Council (NMRC), Ministry of Health (MOH), Singapore National Health Innovation Center (NHIC), Innovation to Develop Grant (NHIC-I2D-1409022); SingHealth Foundation Research Grant (SHF/FG648S/2015), and the Tanoto Founda",
+            "For the Singapore Epidemiology of Eye Diseases (SEED) study, we received funding from NMRC, MOH (grants 0796/2003, IRG07nov013, IRG09nov014, STaR/0003/2008 and STaR/2013; CG/SERI/2010) and Biomedical Research Council (grants 08/1/35/19/550 and 09/1/35/19/616)."
+          ],
           "rubric_item": "funding_statement"
         },
         {
-          "evidence_state": "ambiguous",
+          "evidence_state": "observed",
           "module_key": "disclosures",
-          "observation": "The worker returned no extraction note for this item.",
-          "quotes": [],
+          "observation": "All authors completed and submitted the ICMJE Form for Disclosure of Potential Conflicts of Interest. Several authors reported being coinventors on patents related to the deep learning system used in the study, and one author reported a patent unrelated to the deep learning system.",
+          "quotes": [
+            "All authors have completed and submitted the ICMJE Form for Disclosure of Potential Conflicts of Interest.",
+            "Drs D. S. Ting, Lim, M. L. Lee, Hsu, and T. Y. Wong reported that they are coinventors on a patent for the deep learning system used in this study; potential conflicts of interests are managed according to institutional policies of the Singapore Health System (SingHealth) and the"
+          ],
           "rubric_item": "conflict_statement"
         },
         {
-          "evidence_state": "ambiguous",
+          "evidence_state": "observed",
           "module_key": "disclosures",
-          "observation": "The worker returned no extraction note for this item.",
-          "quotes": [],
+          "observation": "The funders (NMRC, MOH, NHIC, Tanoto Foundation, and Johns Hopkins School of Medicine) had no role in the design and conduct of the study, data management, analysis, interpretation, manuscript preparation, review, approval, or decision to submit.",
+          "quotes": [
+            "The NMRC (Singapore), MOH (Singapore), NHIC (Singapore), and Tanoto Foundation, and Johns Hopkins School of Medicine had no role in the design and conduct of the study; collection, management, analysis, and interpretation of the data; preparation, review, or approval of the manus"
+          ],
           "rubric_item": "sponsor_role"
         },
         {
-          "evidence_state": "ambiguous",
+          "evidence_state": "observed",
           "module_key": "disclosures",
-          "observation": "The worker returned no extraction note for this item.",
-          "quotes": [],
+          "observation": "The corresponding author is affiliated with the Singapore National Eye Center. Other authors are affiliated with institutions including the National University of Singapore, SingHealth, Johns Hopkins University School of Medicine, and various research divisions in Singapore.",
+          "quotes": [
+            "Drs D. S. Ting, Lim, M. L. Lee, Hsu, and T. Y. Wong reported that they are coinventors on a patent for the deep learning system used in this study; potential conflicts of interests are managed according to institutional policies of the Singapore Health System (SingHealth) and the",
+            "unrestricted donations to the Retina Division, Johns Hopkins University School of Medicine."
+          ],
           "rubric_item": "affiliations"
         }
       ],
@@ -185,7 +416,7 @@
       "state": "completed"
     },
     {
-      "at": "2026-07-18T21:18:41.200449+00:00",
+      "at": "2026-07-20T12:09:29.221034+00:00",
       "detail": null,
       "evidence_count": 0,
       "key": null,
@@ -196,7 +427,7 @@
       "state": "completed"
     },
     {
-      "at": "2026-07-18T21:18:41.719555+00:00",
+      "at": "2026-07-20T12:09:29.491005+00:00",
       "detail": "Single bounded reviewer attempt; maximum 6,144 completion tokens.",
       "evidence_count": 0,
       "key": null,
@@ -207,7 +438,7 @@
       "state": "completed"
     },
     {
-      "at": "2026-07-18T21:18:50.495524+00:00",
+      "at": "2026-07-20T12:09:51.053885+00:00",
       "detail": "Checking methodology coverage and exact-quote grounding.",
       "evidence_count": 0,
       "key": null,
@@ -218,22 +449,22 @@
       "state": "running"
     },
     {
-      "at": "2026-07-18T21:18:50.499368+00:00",
+      "at": "2026-07-20T12:09:51.058328+00:00",
       "progress": 96,
       "stage": "Scored"
     }
   ],
   "banners": [],
-  "completed_at": "2026-07-18T21:18:50.499378Z",
-  "composite_score": 0.0,
+  "completed_at": "2026-07-20T12:09:51.058342Z",
+  "composite_score": 98.0,
   "confidence_components": {
-    "assessment_coverage": 0.0,
+    "assessment_coverage": 0.63,
     "evidence_module_coverage": 1.0,
-    "quote_grounding_rate": 0.0,
-    "source_quality": 0.45
+    "quote_grounding_rate": 1.0,
+    "source_quality": 0.85
   },
-  "confidence_score": 31.8,
-  "content_level": "metadata",
+  "confidence_score": 84.8,
+  "content_level": "full_text",
   "context": {
     "author_conflict_signals": [],
     "corrections": [],
@@ -244,55 +475,54 @@
     "venue_signals": []
   },
   "coverage": {
-    "available": 0.0,
-    "context": 0.0,
-    "full_review": 0.0,
+    "available": 0.667,
+    "context": 1.0,
+    "full_review": 0.667,
     "limitations": [
-      "The analysis used metadata content, not the full paper.",
       "Low full-review coverage makes the Review score provisional."
     ],
-    "overall": 0.0,
-    "paper": 0.0,
+    "overall": 0.667,
+    "paper": 0.667,
     "provisional": true
   },
   "dimensions": [
     {
-      "assessed_items": 0,
+      "assessed_items": 3,
       "key": "design",
       "label": "Study design & risk of bias",
-      "score": 0.0,
-      "total_items": 3,
+      "score": 100.0,
+      "total_items": 5,
       "weight": 30.0
     },
     {
-      "assessed_items": 0,
+      "assessed_items": 4,
       "key": "statistics",
       "label": "Statistical & computational validity",
-      "score": 0.0,
-      "total_items": 3,
+      "score": 93.8,
+      "total_items": 5,
       "weight": 25.0
     },
     {
-      "assessed_items": 0,
+      "assessed_items": 4,
       "key": "claims",
       "label": "Claim\u2013evidence alignment",
-      "score": 0.0,
+      "score": 100.0,
       "total_items": 5,
       "weight": 20.0
     },
     {
-      "assessed_items": 0,
+      "assessed_items": 1,
       "key": "transparency",
       "label": "Transparency & reporting",
-      "score": 0.0,
+      "score": 100.0,
       "total_items": 5,
       "weight": 20.0
     },
     {
-      "assessed_items": 0,
+      "assessed_items": 4,
       "key": "disclosures",
       "label": "Disclosures & affiliations",
-      "score": 0.0,
+      "score": 100.0,
       "total_items": 4,
       "weight": 5.0
     }
@@ -300,35 +530,221 @@
   "evidence_notes": [
     {
       "evidence_state": "ambiguous",
-      "module_key": "disclosures",
-      "observation": "The worker returned no extraction note for this item.",
+      "module_key": "design",
+      "observation": "The worker returned an observation, but its quote did not match the normalized paper exactly.",
       "quotes": [],
+      "rubric_item": "dataset_provenance"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "design",
+      "observation": "The primary validation dataset was from the same SIDRP program (2014\u20132015), but the study notes that 8589 unique patients in this dataset had no overlap with the training set.",
+      "quotes": [
+        "Second, in a subset of 97.4% eyes (n = 35 055) with excellent retinal image quality (no media opacity), the AUC of the DLS for referable diabetic retinopathy increased to 0.949 (95% CI, 0.940-0.957); for vision-threatening diabetic retinopathy, it increased to 0.970 (0.968-0.973)",
+        "Five subsidiary analyses were performed. First, the DLS showed similar diagnostic performance in 8589 unique patients of SIDRP 2014-2015 (with no overlap with training set) as in the primary analysis (eTable 3 in the Supplement )."
+      ],
+      "rubric_item": "leakage"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "design",
+      "observation": "The DLS was compared against professional graders (retinal specialists, general ophthalmologists, trained graders, or optometrists) as the reference standard.",
+      "quotes": [
+        "The AUC of the DLS for referable diabetic retinopathy was 0.936 (95% CI, 0.925-0.943), sensitivity was 90.5% (95% CI, 87.3%-93.0%), and specificity was 91.6% (95% CI, 91.0%-92.2%).",
+        "For vision-threatening diabetic retinopathy, the DLS had higher sensitivity compared with trained graders (100% vs 88.5%; P < .001), but lower specificity (91.1% vs 99.6%; P < .001)."
+      ],
+      "rubric_item": "baseline_choice"
+    },
+    {
+      "evidence_state": "ambiguous",
+      "module_key": "design",
+      "observation": "The study performed five subsidiary analyses, including subgroup analyses by age, sex, and glycemic control, and evaluation of image quality, but no ablation study was explicitly described.",
+      "quotes": [],
+      "rubric_item": "ablation"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "design",
+      "observation": "The DLS was externally validated using 10 additional multiethnic cohorts from different countries with diverse community- and clinic-based populations with diabetes, using a range of retinal cameras.",
+      "quotes": [
+        "The DLS was then externally validated using 10 additional multiethnic cohorts of participants with diabetes from different settings (community, population-based, and clinic-based). A range of retinal cameras were used, and assessment of diabetic retinopathy was facilitated by ret",
+        "Among the 10 external validation datasets, the AUC of referable diabetic retinopathy ranged from 0.889 to 0.983."
+      ],
+      "rubric_item": "external_validity"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "statistics",
+      "observation": "The DLS was validated on 10 additional multiethnic datasets from different countries with diverse community- and clinic-based populations with diabetes, and performance was compared against reference standards from these studies.",
+      "quotes": [
+        "For referable diabetic retinopathy in the 10 additional datasets, AUC range was 0.889 to 0.983 (n = 40 752 images).",
+        "The DLS performance was then evaluated in detection of referable possible glaucoma and referable AMD, with reference to a retinal specialist, using the primary validation dataset (SIDRP 2014-2015)."
+      ],
+      "rubric_item": "test_set_isolation"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "statistics",
+      "observation": "A classification threshold was selected that achieved a predetermined optimal sensitivity of 90% for detecting referable diabetic retinopathy, vision-threatening diabetic retinopathy, referable possible glaucoma, and referable AMD.",
+      "quotes": [
+        "For diabetic retinopathy screening, international guidelines recommended a minimum sensitivity of 60% (Australia) to 80% (United Kingdom). In Singapore, the DLS sensitivity was preset at 90% based on the trained professional graders\u2019 past performances and criteria set by the Mini"
+      ],
+      "rubric_item": "hyperparameter_search"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "statistics",
+      "observation": "Cluster-bootstrap, biased-corrected, asymptotic 2-sided 95% CIs were calculated and presented for proportions (sensitivity, specificity) and AUC, respectively.",
+      "quotes": [
+        "Cluster-bootstrap, biased-corrected, asymptotic 2-sided 95% CIs adjusted for clustering by patients were calculated and presented for proportions (sensitivity, specificity) and AUC, respectively.",
+        "In a few exceptional cases with estimate of sensitivity at the boundary of 100%, the exact Clopper-Pearson method was used instead to obtain CI estimates."
+      ],
+      "rubric_item": "uncertainty"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "statistics",
+      "observation": "The DLS was evaluated on 10 additional multiethnic datasets from different countries with diverse community- and clinic-based populations with diabetes, using varying reference standards.",
+      "quotes": [
+        "For referable diabetic retinopathy in the 10 additional datasets, AUC range was 0.889 to 0.983 (n = 40 752 images).",
+        "The DLS performance was then evaluated in detection of referable possible glaucoma and referable AMD, with reference to a retinal specialist, using the primary validation dataset (SIDRP 2014-2015)."
+      ],
+      "rubric_item": "multiple_benchmarks"
+    },
+    {
+      "evidence_state": "ambiguous",
+      "module_key": "statistics",
+      "observation": "The worker returned an observation, but its quote did not match the normalized paper exactly.",
+      "quotes": [],
+      "rubric_item": "replication_artifacts"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "claims",
+      "observation": "The DLS had high sensitivity and specificity for identifying diabetic retinopathy and related eye diseases.",
+      "quotes": [
+        "In this evaluation of retinal images from multiethnic cohorts of patients with diabetes, the DLS had high sensitivity and specificity for identifying diabetic retinopathy and related eye diseases."
+      ],
+      "rubric_item": "claim_strength"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "claims",
+      "observation": "The DLS demonstrated high sensitivity and specificity in detecting referable diabetic retinopathy and related eye diseases across multiple datasets.",
+      "quotes": [
+        "For referable diabetic retinopathy in the 10 additional datasets, AUC range was 0.889 to 0.983 (n = 40 752 images).",
+        "In the primary validation dataset (n = 14 880 patients; 71 896 images; mean [SD] age, 60.2 [2.2] years; 54.6% men), the prevalence of referable diabetic retinopathy was 3.0%; vision-threatening diabetic retinopathy, 0.6%; possible glaucoma, 0.1%; and AMD, 2.5%. The AUC of the DLS"
+      ],
+      "rubric_item": "results_support"
+    },
+    {
+      "evidence_state": "not_found",
+      "module_key": "claims",
+      "observation": "The study does not use causal language; it reports associations and performance metrics.",
+      "quotes": [],
+      "rubric_item": "causal_language"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "claims",
+      "observation": "The DLS was validated across 10 external datasets from diverse ethnic and clinical settings, supporting generalization.",
+      "quotes": [
+        "The performance of the DLS was comparable and clinically acceptable to the current model based on assessment of retinal images by trained professional graders and showed consistency in 10 external validation datasets of multiple ethnicities and settings, using diverse reference s"
+      ],
+      "rubric_item": "generalization"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "claims",
+      "observation": "The study acknowledges limitations related to reference standard variability and black-box nature of the DLS, which align with the claims made.",
+      "quotes": [
+        "First, the training set was not developed entirely based on the retinal specialists\u2019 grading for all images. Although the reference standard in the primary validation dataset used grading by a retinal specialist, reference standards for the external datasets were based on varying"
+      ],
+      "rubric_item": "limitations_alignment"
+    },
+    {
+      "evidence_state": "not_found",
+      "module_key": "transparency",
+      "observation": "The study does not mention pre-registration of the study protocol in a public registry such as ClinicalTrials.gov or a similar platform.",
+      "quotes": [],
+      "rubric_item": "registration"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "transparency",
+      "observation": "The study received IRB approval and was conducted in accordance with the Declaration of Helsinki. Patient informed consent was waived due to the retrospective nature and use of fully anonymized images.",
+      "quotes": [
+        "This study was approved by the centralized institutional review board (IRB) of SingHealth, Singapore (protocol SHF/FG648S/2015) and conducted in accordance with the Declaration of Helsinki.",
+        "Patients\u2019 informed consent was exempted by the IRB because of the retrospective nature of study using fully anonymized retinal images."
+      ],
+      "rubric_item": "ethics"
+    },
+    {
+      "evidence_state": "ambiguous",
+      "module_key": "transparency",
+      "observation": "The study states that data and code are available through supplementary materials, but does not provide a direct link or repository URL. The supplementary materials are listed but not accessible via the provided text.",
+      "quotes": [],
+      "rubric_item": "data_code"
+    },
+    {
+      "evidence_state": "ambiguous",
+      "module_key": "transparency",
+      "observation": "The study reports performance metrics (AUC, sensitivity, specificity) across multiple datasets and subgroups, including external validation and stratified analyses. However, details on model architecture, training hyperparameters, and data preprocessing steps are limited to a brief mention of an adapted VGGNet and are not fully described.",
+      "quotes": [],
+      "rubric_item": "reporting_completeness"
+    },
+    {
+      "evidence_state": "ambiguous",
+      "module_key": "transparency",
+      "observation": "The study includes supplementary figures and tables with model performance and architecture details, but does not provide code, model weights, or detailed training procedures necessary for full reproducibility.",
+      "quotes": [],
+      "rubric_item": "reproducibility"
+    },
+    {
+      "evidence_state": "observed",
+      "module_key": "disclosures",
+      "observation": "The project received funding from multiple sources including the National Medical Research Council (NMRC), Ministry of Health (MOH), Singapore National Health Innovation Center (NHIC), SingHealth Foundation Research Grant, Tanoto Foundation, and unrestricted donations to the Retina Division, Johns Hopkins University School of Medicine.",
+      "quotes": [
+        "This project received funding from National Medical Research Council (NMRC), Ministry of Health (MOH), Singapore National Health Innovation Center (NHIC), Innovation to Develop Grant (NHIC-I2D-1409022); SingHealth Foundation Research Grant (SHF/FG648S/2015), and the Tanoto Founda",
+        "For the Singapore Epidemiology of Eye Diseases (SEED) study, we received funding from NMRC, MOH (grants 0796/2003, IRG07nov013, IRG09nov014, STaR/0003/2008 and STaR/2013; CG/SERI/2010) and Biomedical Research Council (grants 08/1/35/19/550 and 09/1/35/19/616)."
+      ],
       "rubric_item": "funding_statement"
     },
     {
-      "evidence_state": "ambiguous",
+      "evidence_state": "observed",
       "module_key": "disclosures",
-      "observation": "The worker returned no extraction note for this item.",
-      "quotes": [],
+      "observation": "All authors completed and submitted the ICMJE Form for Disclosure of Potential Conflicts of Interest. Several authors reported being coinventors on patents related to the deep learning system used in the study, and one author reported a patent unrelated to the deep learning system.",
+      "quotes": [
+        "All authors have completed and submitted the ICMJE Form for Disclosure of Potential Conflicts of Interest.",
+        "Drs D. S. Ting, Lim, M. L. Lee, Hsu, and T. Y. Wong reported that they are coinventors on a patent for the deep learning system used in this study; potential conflicts of interests are managed according to institutional policies of the Singapore Health System (SingHealth) and the"
+      ],
       "rubric_item": "conflict_statement"
     },
     {
-      "evidence_state": "ambiguous",
+      "evidence_state": "observed",
       "module_key": "disclosures",
-      "observation": "The worker returned no extraction note for this item.",
-      "quotes": [],
+      "observation": "The funders (NMRC, MOH, NHIC, Tanoto Foundation, and Johns Hopkins School of Medicine) had no role in the design and conduct of the study, data management, analysis, interpretation, manuscript preparation, review, approval, or decision to submit.",
+      "quotes": [
+        "The NMRC (Singapore), MOH (Singapore), NHIC (Singapore), and Tanoto Foundation, and Johns Hopkins School of Medicine had no role in the design and conduct of the study; collection, management, analysis, and interpretation of the data; preparation, review, or approval of the manus"
+      ],
       "rubric_item": "sponsor_role"
     },
     {
-      "evidence_state": "ambiguous",
+      "evidence_state": "observed",
       "module_key": "disclosures",
-      "observation": "The worker returned no extraction note for this item.",
-      "quotes": [],
+      "observation": "The corresponding author is affiliated with the Singapore National Eye Center. Other authors are affiliated with institutions including the National University of Singapore, SingHealth, Johns Hopkins University School of Medicine, and various research divisions in Singapore.",
+      "quotes": [
+        "Drs D. S. Ting, Lim, M. L. Lee, Hsu, and T. Y. Wong reported that they are coinventors on a patent for the deep learning system used in this study; potential conflicts of interests are managed according to institutional policies of the Singapore Health System (SingHealth) and the",
+        "unrestricted donations to the Retina Division, Johns Hopkins University School of Medicine."
+      ],
       "rubric_item": "affiliations"
     }
   ],
-  "evidence_verification_rate": 0.0,
-  "execution_warnings": [],
+  "evidence_verification_rate": 1.0,
+  "execution_warnings": [
+    "PDF \u00b7 Unpaywall \u00b7 publishedVersion could not be used; analysis used HTML \u00b7 PMC \u00b7 publishedVersion instead.",
+    "JATS \u00b7 PMC \u00b7 publishedVersion could not be used; analysis used HTML \u00b7 PMC \u00b7 publishedVersion instead."
+  ],
   "failed_evidence_modules": [],
   "findings": [
     {
@@ -337,15 +753,67 @@
       "confidence": 0.0,
       "counterevidence": [],
       "critic_disposition": "accepted",
-      "explanation": "The verified evidence ledger for 'question_clarity' is empty. No evidence was provided to assess this item.",
+      "explanation": "No verified evidence provided in the ledger for this item.",
       "external_sources": [],
       "grade": "not_assessed",
-      "id": "0206f8953659",
+      "id": "606055d0f09e",
       "limitations": [],
       "paper_spans": [],
-      "rubric_item": "question_clarity",
+      "rubric_item": "dataset_provenance",
       "severity": "info",
-      "title": "Question Clarity"
+      "title": "Dataset Provenance"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "design",
+      "confidence": 0.85,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The study explicitly states that a subset of 8,589 unique patients in the primary validation dataset (SIDRP 2014\u20132015) had no overlap with the training set, indicating appropriate separation between training and validation data to prevent data leakage.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "39ff2246dc98",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 28755,
+          "page": null,
+          "paragraph": null,
+          "quote": "Five subsidiary analyses were performed. First, the DLS showed similar diagnostic performance in 8589 unique patients of SIDRP 2014-2015 (with no overlap with training set) as in the primary analysis (eTable 3 in the Supplement ).",
+          "section": "Figure 1. Receiver Operating Characteristic Curve and Area Under the Curve of the Deep Learning System for Detection of Referable Diabetic Retinopathy and Vision-Threatening Diabetic Retinopathy in the Singapore National Diabetic Retinopathy Screening Program (SIDRP 2014-2015; Primary Validation Dataset), Compared with Professional Graders\u2019 Performance, With Retinal Specialists\u2019 Grading as Reference Standard.",
+          "start": 28525
+        }
+      ],
+      "rubric_item": "leakage",
+      "severity": "info",
+      "title": "Leakage"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "design",
+      "confidence": 0.85,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The deep learning system (DLS) was compared against professional graders (retinal specialists, ophthalmologists, trained graders, or optometrists) as the reference standard, which is a clinically appropriate and well-justified baseline for diagnostic performance evaluation.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "b68372bcf75e",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 26542,
+          "page": null,
+          "paragraph": null,
+          "quote": "For vision-threatening diabetic retinopathy, the DLS had higher sensitivity compared with trained graders (100% vs 88.5%; P < .001), but lower specificity (91.1% vs 99.6%; P < .001).",
+          "section": "Table 3. Demographics, Diabetes History, and Systemic Risk Factors of Patients Attending the Singapore National Diabetes Retinopathy Screening Program Between 2010 to 2013 (Training Dataset) and 2014 to 2015 (Primary Validation Dataset).",
+          "start": 26360
+        }
+      ],
+      "rubric_item": "baseline_choice",
+      "severity": "info",
+      "title": "Baseline Choice"
     },
     {
       "affected_conclusions": [],
@@ -353,60 +821,143 @@
       "confidence": 0.0,
       "counterevidence": [],
       "critic_disposition": "accepted",
-      "explanation": "The verified evidence ledger for 'argument_structure' is empty. No evidence was provided to assess this item.",
+      "explanation": "No verified evidence provided in the ledger for this item.",
       "external_sources": [],
       "grade": "not_assessed",
-      "id": "a3a72c310f2c",
+      "id": "20802d3ec346",
       "limitations": [],
       "paper_spans": [],
-      "rubric_item": "argument_structure",
+      "rubric_item": "ablation",
       "severity": "info",
-      "title": "Argument Structure"
+      "title": "Ablation"
     },
     {
       "affected_conclusions": [],
       "category": "design",
-      "confidence": 0.0,
+      "confidence": 0.85,
       "counterevidence": [],
       "critic_disposition": "accepted",
-      "explanation": "The verified evidence ledger for 'source_relevance' is empty. No evidence was provided to assess this item.",
+      "explanation": "The DLS was externally validated on 10 additional multiethnic cohorts from diverse community-, population-, and clinic-based settings across different countries, using a range of retinal cameras, supporting strong external validity.",
       "external_sources": [],
-      "grade": "not_assessed",
-      "id": "869de229a4b8",
+      "grade": "no_concern",
+      "id": "3ebccfefc944",
       "limitations": [],
-      "paper_spans": [],
-      "rubric_item": "source_relevance",
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 15015,
+          "page": null,
+          "paragraph": null,
+          "quote": "The DLS was then externally validated using 10 additional multiethnic cohorts of participants with diabetes from different settings (community, population-based, and clinic-based). A range of retinal cameras were used, and assessment of diabetic retinopathy was facilitated by retinal specialists, general ophthalmologists, trained nonmedical professional graders, or optometrists across the cohorts ( Table 1 ).",
+          "section": "Validation Datasets",
+          "start": 14603
+        },
+        {
+          "bbox": null,
+          "end": 30194,
+          "page": null,
+          "paragraph": null,
+          "quote": "Among the 10 external validation datasets, the AUC of referable diabetic retinopathy ranged from 0.889 to 0.983.",
+          "section": "Figure 2. Receiver Operating Characteristic Curve and Area Under the Curve of the Deep Learning System for Detection of Referable Diabetic Retinopathy in SIDRP 2014-2015 (Primary Validation Set) by Age, Sex, and HbA 1c Level.",
+          "start": 30082
+        }
+      ],
+      "rubric_item": "external_validity",
       "severity": "info",
-      "title": "Source Relevance"
+      "title": "External Validity"
     },
     {
       "affected_conclusions": [],
       "category": "statistics",
-      "confidence": 0.0,
+      "confidence": 0.85,
       "counterevidence": [],
       "critic_disposition": "accepted",
-      "explanation": "The verified evidence ledger for 'quantitative_claims' is empty. No evidence was provided to assess this item.",
+      "explanation": "The DLS was evaluated on 10 external datasets with no indication of overlap with the training set, and performance was assessed using the primary validation dataset (SIDRP 2014\u20132015) that was distinct from training. This supports proper test set isolation.",
       "external_sources": [],
-      "grade": "not_assessed",
-      "id": "4b643a226f1b",
+      "grade": "no_concern",
+      "id": "dbe50ea048af",
       "limitations": [],
-      "paper_spans": [],
-      "rubric_item": "quantitative_claims",
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 7703,
+          "page": null,
+          "paragraph": null,
+          "quote": "For referable diabetic retinopathy in the 10 additional datasets, AUC range was 0.889 to 0.983 (n = 40 752 images).",
+          "section": "Results",
+          "start": 7588
+        },
+        {
+          "bbox": null,
+          "end": 21164,
+          "page": null,
+          "paragraph": null,
+          "quote": "The DLS performance was then evaluated in detection of referable possible glaucoma and referable AMD, with reference to a retinal specialist, using the primary validation dataset (SIDRP 2014-2015).",
+          "section": "Statistical Analysis",
+          "start": 20967
+        }
+      ],
+      "rubric_item": "test_set_isolation",
       "severity": "info",
-      "title": "Quantitative Claims"
+      "title": "Test Set Isolation"
     },
     {
       "affected_conclusions": [],
       "category": "statistics",
-      "confidence": 0.0,
+      "confidence": 0.85,
       "counterevidence": [],
       "critic_disposition": "accepted",
-      "explanation": "The verified evidence ledger for 'uncertainty' is empty. No evidence was provided to assess this item.",
+      "explanation": "The classification threshold was set to achieve 90% sensitivity based on prior grader performance, but there is no mention of systematic hyperparameter tuning or search procedures. The approach appears to be threshold-focused rather than comprehensive hyperparameter optimization, limiting transparency in model development.",
       "external_sources": [],
-      "grade": "not_assessed",
+      "grade": "minor_concern",
+      "id": "469f730c412a",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 19429,
+          "page": null,
+          "paragraph": null,
+          "quote": "For diabetic retinopathy screening, international guidelines recommended a minimum sensitivity of 60% (Australia) to 80% (United Kingdom). In Singapore, the DLS sensitivity was preset at 90% based on the trained professional graders\u2019 past performances and criteria set by the Ministry of Health, Singapore.",
+          "section": "Statistical Analysis",
+          "start": 19123
+        }
+      ],
+      "rubric_item": "hyperparameter_search",
+      "severity": "minor",
+      "title": "Hyperparameter Search"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "statistics",
+      "confidence": 0.85,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The study reports cluster-bootstrap, bias-corrected, asymptotic 2-sided 95% CIs adjusted for clustering by patients for sensitivity, specificity, and AUC. Exact Clopper-Pearson CIs were used in boundary cases (e.g., 100% sensitivity), demonstrating appropriate uncertainty quantification.",
+      "external_sources": [],
+      "grade": "no_concern",
       "id": "5d06b1d7dfed",
       "limitations": [],
-      "paper_spans": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 22398,
+          "page": null,
+          "paragraph": null,
+          "quote": "Cluster-bootstrap, biased-corrected, asymptotic 2-sided 95% CIs adjusted for clustering by patients were calculated and presented for proportions (sensitivity, specificity) and AUC, respectively.",
+          "section": "Statistical Analysis",
+          "start": 22203
+        },
+        {
+          "bbox": null,
+          "end": 22553,
+          "page": null,
+          "paragraph": null,
+          "quote": "In a few exceptional cases with estimate of sensitivity at the boundary of 100%, the exact Clopper-Pearson method was used instead to obtain CI estimates.",
+          "section": "Statistical Analysis",
+          "start": 22399
+        }
+      ],
       "rubric_item": "uncertainty",
       "severity": "info",
       "title": "Uncertainty"
@@ -414,31 +965,76 @@
     {
       "affected_conclusions": [],
       "category": "statistics",
+      "confidence": 0.85,
+      "counterevidence": [],
+      "critic_disposition": "accepted",
+      "explanation": "The DLS was evaluated across 10 external datasets for referable diabetic retinopathy (AUC range: 0.889\u20130.983) and also tested for referable possible glaucoma and AMD using the primary validation dataset, demonstrating performance across multiple conditions and diverse benchmarks.",
+      "external_sources": [],
+      "grade": "no_concern",
+      "id": "0ef81b32567d",
+      "limitations": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 7703,
+          "page": null,
+          "paragraph": null,
+          "quote": "For referable diabetic retinopathy in the 10 additional datasets, AUC range was 0.889 to 0.983 (n = 40 752 images).",
+          "section": "Results",
+          "start": 7588
+        },
+        {
+          "bbox": null,
+          "end": 21164,
+          "page": null,
+          "paragraph": null,
+          "quote": "The DLS performance was then evaluated in detection of referable possible glaucoma and referable AMD, with reference to a retinal specialist, using the primary validation dataset (SIDRP 2014-2015).",
+          "section": "Statistical Analysis",
+          "start": 20967
+        }
+      ],
+      "rubric_item": "multiple_benchmarks",
+      "severity": "info",
+      "title": "Multiple Benchmarks"
+    },
+    {
+      "affected_conclusions": [],
+      "category": "statistics",
       "confidence": 0.0,
       "counterevidence": [],
       "critic_disposition": "accepted",
-      "explanation": "The verified evidence ledger for 'internal_consistency' is empty. No evidence was provided to assess this item.",
+      "explanation": "No verified evidence provided in the ledger for this item.",
       "external_sources": [],
       "grade": "not_assessed",
-      "id": "5ba80e57493c",
+      "id": "85fac3598de8",
       "limitations": [],
       "paper_spans": [],
-      "rubric_item": "internal_consistency",
+      "rubric_item": "replication_artifacts",
       "severity": "info",
-      "title": "Internal Consistency"
+      "title": "Replication Artifacts"
     },
     {
       "affected_conclusions": [],
       "category": "claims",
-      "confidence": 0.0,
+      "confidence": 0.85,
       "counterevidence": [],
       "critic_disposition": "accepted",
-      "explanation": "The verified evidence ledger for 'claim_strength' is empty. No evidence was provided to assess this item.",
+      "explanation": "The claim that the DLS had high sensitivity and specificity for identifying diabetic retinopathy and related eye diseases is directly supported by the reported AUCs, sensitivity, and specificity values across multiple datasets.",
       "external_sources": [],
-      "grade": "not_assessed",
+      "grade": "no_concern",
       "id": "1d655bd7fb95",
       "limitations": [],
-      "paper_spans": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 7929,
+          "page": null,
+          "paragraph": null,
+          "quote": "In this evaluation of retinal images from multiethnic cohorts of patients with diabetes, the DLS had high sensitivity and specificity for identifying diabetic retinopathy and related eye diseases.",
+          "section": "Conclusions and Relevance",
+          "start": 7733
+        }
+      ],
       "rubric_item": "claim_strength",
       "severity": "info",
       "title": "Claim Strength"
@@ -446,15 +1042,34 @@
     {
       "affected_conclusions": [],
       "category": "claims",
-      "confidence": 0.0,
+      "confidence": 0.85,
       "counterevidence": [],
       "critic_disposition": "accepted",
-      "explanation": "The verified evidence ledger for 'results_support' is empty. No evidence was provided to assess this item.",
+      "explanation": "The results, including AUCs ranging from 0.889 to 0.983 across 10 external datasets and high sensitivity/specificity in the primary validation set, directly support the claims of strong diagnostic performance.",
       "external_sources": [],
-      "grade": "not_assessed",
+      "grade": "no_concern",
       "id": "73fac2b298c2",
       "limitations": [],
-      "paper_spans": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 7703,
+          "page": null,
+          "paragraph": null,
+          "quote": "For referable diabetic retinopathy in the 10 additional datasets, AUC range was 0.889 to 0.983 (n = 40 752 images).",
+          "section": "Results",
+          "start": 7588
+        },
+        {
+          "bbox": null,
+          "end": 7117,
+          "page": null,
+          "paragraph": null,
+          "quote": "In the primary validation dataset (n = 14 880 patients; 71 896 images; mean [SD] age, 60.2 [2.2] years; 54.6% men), the prevalence of referable diabetic retinopathy was 3.0%; vision-threatening diabetic retinopathy, 0.6%; possible glaucoma, 0.1%; and AMD, 2.5%. The AUC of the DLS for referable diabetic retinopathy was 0.936 (95% CI, 0.925-0.943), sensitivity was 90.5% (95% CI, 87.3%-93.0%), and specificity was 91.6% (95% CI, 91.0%-92.2%).",
+          "section": "Results",
+          "start": 6675
+        }
+      ],
       "rubric_item": "results_support",
       "severity": "info",
       "title": "Results Support"
@@ -465,7 +1080,7 @@
       "confidence": 0.0,
       "counterevidence": [],
       "critic_disposition": "accepted",
-      "explanation": "The verified evidence ledger for 'causal_language' is empty. No evidence was provided to assess this item.",
+      "explanation": "No verified evidence provided in the ledger for this item.",
       "external_sources": [],
       "grade": "not_assessed",
       "id": "18773ff8e67b",
@@ -478,15 +1093,25 @@
     {
       "affected_conclusions": [],
       "category": "claims",
-      "confidence": 0.0,
+      "confidence": 0.85,
       "counterevidence": [],
       "critic_disposition": "accepted",
-      "explanation": "The verified evidence ledger for 'generalization' is empty. No evidence was provided to assess this item.",
+      "explanation": "The study demonstrates consistent DLS performance across 10 external validation datasets involving multiple ethnicities, clinical settings, and reference standards, supporting valid generalization claims.",
       "external_sources": [],
-      "grade": "not_assessed",
+      "grade": "no_concern",
       "id": "c4ab4fc87dc7",
       "limitations": [],
-      "paper_spans": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 35154,
+          "page": null,
+          "paragraph": null,
+          "quote": "The performance of the DLS was comparable and clinically acceptable to the current model based on assessment of retinal images by trained professional graders and showed consistency in 10 external validation datasets of multiple ethnicities and settings, using diverse reference standards in assessment of diabetic retinopathy by professional graders, optometrists, or retinal specialists.",
+          "section": "Discussion",
+          "start": 34765
+        }
+      ],
       "rubric_item": "generalization",
       "severity": "info",
       "title": "Generalization"
@@ -494,15 +1119,25 @@
     {
       "affected_conclusions": [],
       "category": "claims",
-      "confidence": 0.0,
+      "confidence": 0.85,
       "counterevidence": [],
       "critic_disposition": "accepted",
-      "explanation": "The verified evidence ledger for 'limitations_alignment' is empty. No evidence was provided to assess this item.",
+      "explanation": "The study acknowledges limitations such as variability in reference standards across external datasets and the black-box nature of the DLS, which are directly relevant and align with the scope and claims of the study.",
       "external_sources": [],
-      "grade": "not_assessed",
+      "grade": "no_concern",
       "id": "929e81976c18",
       "limitations": [],
-      "paper_spans": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 38833,
+          "page": null,
+          "paragraph": null,
+          "quote": "First, the training set was not developed entirely based on the retinal specialists\u2019 grading for all images. Although the reference standard in the primary validation dataset used grading by a retinal specialist, reference standards for the external datasets were based on varying assessment by retinal specialists, general ophthalmologists, trained graders, or optometrists.",
+          "section": "Limitations",
+          "start": 38458
+        }
+      ],
       "rubric_item": "limitations_alignment",
       "severity": "info",
       "title": "Limitations Alignment"
@@ -513,7 +1148,7 @@
       "confidence": 0.0,
       "counterevidence": [],
       "critic_disposition": "accepted",
-      "explanation": "The verified evidence ledger for 'registration' is empty. No evidence was provided to assess this item.",
+      "explanation": "No verified evidence provided in the ledger for this item.",
       "external_sources": [],
       "grade": "not_assessed",
       "id": "019411af601d",
@@ -526,15 +1161,34 @@
     {
       "affected_conclusions": [],
       "category": "transparency",
-      "confidence": 0.0,
+      "confidence": 0.85,
       "counterevidence": [],
       "critic_disposition": "accepted",
-      "explanation": "The verified evidence ledger for 'ethics' is empty. No evidence was provided to assess this item.",
+      "explanation": "The study was approved by the SingHealth IRB and conducted in accordance with the Declaration of Helsinki. Informed consent was waived due to the retrospective use of fully anonymized images, which is ethically appropriate under these conditions.",
       "external_sources": [],
-      "grade": "not_assessed",
+      "grade": "no_concern",
       "id": "e88129dc3999",
       "limitations": [],
-      "paper_spans": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 10935,
+          "page": null,
+          "paragraph": null,
+          "quote": "This study was approved by the centralized institutional review board (IRB) of SingHealth, Singapore (protocol SHF/FG648S/2015) and conducted in accordance with the Declaration of Helsinki.",
+          "section": "Methods",
+          "start": 10746
+        },
+        {
+          "bbox": null,
+          "end": 11198,
+          "page": null,
+          "paragraph": null,
+          "quote": "Patients\u2019 informed consent was exempted by the IRB because of the retrospective nature of study using fully anonymized retinal images.",
+          "section": "Methods",
+          "start": 11064
+        }
+      ],
       "rubric_item": "ethics",
       "severity": "info",
       "title": "Ethics"
@@ -545,7 +1199,7 @@
       "confidence": 0.0,
       "counterevidence": [],
       "critic_disposition": "accepted",
-      "explanation": "The verified evidence ledger for 'data_code' is empty. No evidence was provided to assess this item.",
+      "explanation": "No verified evidence provided in the ledger for this item.",
       "external_sources": [],
       "grade": "not_assessed",
       "id": "c014a0e5ac4b",
@@ -561,7 +1215,7 @@
       "confidence": 0.0,
       "counterevidence": [],
       "critic_disposition": "accepted",
-      "explanation": "The verified evidence ledger for 'reporting_completeness' is empty. No evidence was provided to assess this item.",
+      "explanation": "No verified evidence provided in the ledger for this item.",
       "external_sources": [],
       "grade": "not_assessed",
       "id": "0dcdc7c43d12",
@@ -577,7 +1231,7 @@
       "confidence": 0.0,
       "counterevidence": [],
       "critic_disposition": "accepted",
-      "explanation": "The verified evidence ledger for 'reproducibility' is empty. No evidence was provided to assess this item.",
+      "explanation": "No verified evidence provided in the ledger for this item.",
       "external_sources": [],
       "grade": "not_assessed",
       "id": "1c6882f79821",
@@ -590,15 +1244,43 @@
     {
       "affected_conclusions": [],
       "category": "disclosures",
-      "confidence": 0.0,
+      "confidence": 0.85,
       "counterevidence": [],
       "critic_disposition": "accepted",
-      "explanation": "The verified evidence ledger for 'funding_statement' is empty. No evidence was provided to assess this item.",
+      "explanation": "A clear funding statement is provided, listing multiple sources including NMRC, MOH, NHIC, SingHealth Foundation, Tanoto Foundation, and unrestricted donations to Johns Hopkins University School of Medicine.",
       "external_sources": [],
-      "grade": "not_assessed",
+      "grade": "no_concern",
       "id": "46b512bed4af",
       "limitations": [],
-      "paper_spans": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 3271,
+          "page": null,
+          "paragraph": null,
+          "quote": "This project received funding from National Medical Research Council (NMRC), Ministry of Health (MOH), Singapore National Health Innovation Center (NHIC), Innovation to Develop Grant (NHIC-I2D-1409022); SingHealth Foundation Research Grant (SHF/FG648S/2015), and the Tanoto Foundation; unrestricted donations to the Retina Division, Johns Hopkins University School of Medicine.",
+          "section": "Tien Yin Wong , MD, PhD",
+          "start": 2894
+        },
+        {
+          "bbox": null,
+          "end": 3532,
+          "page": null,
+          "paragraph": null,
+          "quote": "For the Singapore Epidemiology of Eye Diseases (SEED) study, we received funding from NMRC, MOH (grants 0796/2003, IRG07nov013, IRG09nov014, STaR/0003/2008 and STaR/2013; CG/SERI/2010) and Biomedical Research Council (grants 08/1/35/19/550 and 09/1/35/19/616).",
+          "section": "Tien Yin Wong , MD, PhD",
+          "start": 3272
+        },
+        {
+          "bbox": null,
+          "end": 3682,
+          "page": null,
+          "paragraph": null,
+          "quote": "The Singapore Diabetic Retinopathy Program received funding from the MOH, Singapore (grants AIC/RPDD/SIDRP/SERI/FY2013/0018 and AIC/HPD/FY2016/0912).",
+          "section": "Tien Yin Wong , MD, PhD",
+          "start": 3533
+        }
+      ],
       "rubric_item": "funding_statement",
       "severity": "info",
       "title": "Funding Statement"
@@ -606,15 +1288,52 @@
     {
       "affected_conclusions": [],
       "category": "disclosures",
-      "confidence": 0.0,
+      "confidence": 0.85,
       "counterevidence": [],
       "critic_disposition": "accepted",
-      "explanation": "The verified evidence ledger for 'conflict_statement' is empty. No evidence was provided to assess this item.",
+      "explanation": "All authors completed the ICMJE conflict of interest form. Conflicts are disclosed, including patent holdings by several authors related to the DLS, with management according to institutional policies, ensuring transparency.",
       "external_sources": [],
-      "grade": "not_assessed",
+      "grade": "no_concern",
       "id": "c8a1dda9ed8e",
       "limitations": [],
-      "paper_spans": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 2145,
+          "page": null,
+          "paragraph": null,
+          "quote": "All authors have completed and submitted the ICMJE Form for Disclosure of Potential Conflicts of Interest.",
+          "section": "Tien Yin Wong , MD, PhD",
+          "start": 2039
+        },
+        {
+          "bbox": null,
+          "end": 2466,
+          "page": null,
+          "paragraph": null,
+          "quote": "Drs D. S. Ting, Lim, M. L. Lee, Hsu, and T. Y. Wong reported that they are coinventors on a patent for the deep learning system used in this study; potential conflicts of interests are managed according to institutional policies of the Singapore Health System (SingHealth) and the National University of Singapore (NUS).",
+          "section": "Tien Yin Wong , MD, PhD",
+          "start": 2146
+        },
+        {
+          "bbox": null,
+          "end": 2673,
+          "page": null,
+          "paragraph": null,
+          "quote": "Dr Bressler reported holding a patent on a system and method for automated detection of age-related macular degeneration and other retinal abnormalities, unrelated to the deep learning system in this paper.",
+          "section": "Tien Yin Wong , MD, PhD",
+          "start": 2467
+        },
+        {
+          "bbox": null,
+          "end": 2875,
+          "page": null,
+          "paragraph": null,
+          "quote": "Dr He reported holding a patent on an automated image analysis system and retinal camera for retinal diseases, unrelated to the deep learning system in this article. No other disclosures were reported.",
+          "section": "Tien Yin Wong , MD, PhD",
+          "start": 2674
+        }
+      ],
       "rubric_item": "conflict_statement",
       "severity": "info",
       "title": "Conflict Statement"
@@ -622,15 +1341,25 @@
     {
       "affected_conclusions": [],
       "category": "disclosures",
-      "confidence": 0.0,
+      "confidence": 0.85,
       "counterevidence": [],
       "critic_disposition": "accepted",
-      "explanation": "The verified evidence ledger for 'sponsor_role' is empty. No evidence was provided to assess this item.",
+      "explanation": "The funding agencies (NMRC, MOH, NHIC, Tanoto Foundation, Johns Hopkins) had no role in study design, data collection, analysis, interpretation, or manuscript approval, minimizing risk of sponsor influence.",
       "external_sources": [],
-      "grade": "not_assessed",
+      "grade": "no_concern",
       "id": "679579b2f58b",
       "limitations": [],
-      "paper_spans": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 4055,
+          "page": null,
+          "paragraph": null,
+          "quote": "The NMRC (Singapore), MOH (Singapore), NHIC (Singapore), and Tanoto Foundation, and Johns Hopkins School of Medicine had no role in the design and conduct of the study; collection, management, analysis, and interpretation of the data; preparation, review, or approval of the manuscript; and decision to submit the manuscript for publication.",
+          "section": "Tien Yin Wong , MD, PhD",
+          "start": 3714
+        }
+      ],
       "rubric_item": "sponsor_role",
       "severity": "info",
       "title": "Sponsor Role"
@@ -638,21 +1367,40 @@
     {
       "affected_conclusions": [],
       "category": "disclosures",
-      "confidence": 0.0,
+      "confidence": 0.85,
       "counterevidence": [],
       "critic_disposition": "accepted",
-      "explanation": "The verified evidence ledger for 'affiliations' is empty. No evidence was provided to assess this item.",
+      "explanation": "Author affiliations are clearly stated, including institutions such as Singapore National Eye Center, SingHealth, National University of Singapore, and Johns Hopkins University School of Medicine, providing full institutional transparency.",
       "external_sources": [],
-      "grade": "not_assessed",
+      "grade": "no_concern",
       "id": "e5c6eaec3031",
       "limitations": [],
-      "paper_spans": [],
+      "paper_spans": [
+        {
+          "bbox": null,
+          "end": 2466,
+          "page": null,
+          "paragraph": null,
+          "quote": "Drs D. S. Ting, Lim, M. L. Lee, Hsu, and T. Y. Wong reported that they are coinventors on a patent for the deep learning system used in this study; potential conflicts of interests are managed according to institutional policies of the Singapore Health System (SingHealth) and the National University of Singapore (NUS).",
+          "section": "Tien Yin Wong , MD, PhD",
+          "start": 2146
+        },
+        {
+          "bbox": null,
+          "end": 3271,
+          "page": null,
+          "paragraph": null,
+          "quote": "unrestricted donations to the Retina Division, Johns Hopkins University School of Medicine.",
+          "section": "Tien Yin Wong , MD, PhD",
+          "start": 3180
+        }
+      ],
       "rubric_item": "affiliations",
       "severity": "info",
       "title": "Affiliations"
     }
   ],
-  "id": "38f7d8e7-0562-4e66-b044-a30bbfad4d0d",
+  "id": "ab73975c-b7af-4989-8356-c98c4fcec6a5",
   "identity": {
     "arxiv_id": null,
     "authors": [
@@ -687,7 +1435,7 @@
       "Tien Yin Wong"
     ],
     "doi": "10.1001/jama.2017.18152",
-    "fingerprint": "d03a03d9cc4026068ba61bd75685b8448e7a4b6eeae59b4faafd6025adc593cc",
+    "fingerprint": "c2b6e97b109cc8ab4d24fc11262d74989837273cd9af31ebbb51ecaf40a05464",
     "journal": "JAMA",
     "pmcid": "PMC5820739",
     "pmid": "29234807",
@@ -703,50 +1451,50 @@
     "The Review score summarizes assessed methodology items; it is not the probability that the conclusions are true.",
     "No cited-paper full texts were retrieved or analyzed.",
     "English is validated first; other languages are experimental.",
-    "No usable full-text candidate; the example is scoped to available metadata or abstract.",
-    "Source candidate 5c0f7d39d88560f1 could not be prepared during release preflight.",
-    "Source candidate f189bdfb894c0d34 could not be prepared during release preflight.",
-    "The analysis used metadata content, not the full paper.",
-    "Low full-review coverage makes the Review score provisional."
+    "PDF \u00b7 Unpaywall \u00b7 publishedVersion could not be used; analysis used HTML \u00b7 PMC \u00b7 publishedVersion instead.",
+    "JATS \u00b7 PMC \u00b7 publishedVersion could not be used; analysis used HTML \u00b7 PMC \u00b7 publishedVersion instead.",
+    "Low full-review coverage makes the Review score provisional.",
+    "PDF \u00b7 Unpaywall \u00b7 publishedVersion could not be used; analysis used HTML \u00b7 PMC \u00b7 publishedVersion instead.",
+    "JATS \u00b7 PMC \u00b7 publishedVersion could not be used; analysis used HTML \u00b7 PMC \u00b7 publishedVersion instead."
   ],
   "methodology_hash": "66b93ef58957399335661945dbad5a3e6e38a565ffc1cfd42b62dc31eca72965",
   "methodology_version": "1.3",
   "missing_item_ids": [],
   "module_statuses": [
     {
-      "assessed_items": 0,
-      "expected_items": 3,
+      "assessed_items": 3,
+      "expected_items": 5,
       "key": "design",
       "label": "Study design & risk of bias",
-      "limitation": "Requires full_text.",
-      "state": "ineligible_at_content_level"
+      "limitation": null,
+      "state": "completed"
     },
     {
-      "assessed_items": 0,
-      "expected_items": 3,
+      "assessed_items": 4,
+      "expected_items": 5,
       "key": "statistics",
       "label": "Statistical & computational validity",
-      "limitation": "Requires full_text.",
-      "state": "ineligible_at_content_level"
+      "limitation": null,
+      "state": "completed"
     },
     {
-      "assessed_items": 0,
+      "assessed_items": 4,
       "expected_items": 5,
       "key": "claims",
       "label": "Claim\u2013evidence alignment",
-      "limitation": "Requires abstract.",
-      "state": "ineligible_at_content_level"
+      "limitation": null,
+      "state": "completed"
     },
     {
-      "assessed_items": 0,
+      "assessed_items": 1,
       "expected_items": 5,
       "key": "transparency",
       "label": "Transparency & reporting",
-      "limitation": "Requires full_text.",
-      "state": "ineligible_at_content_level"
+      "limitation": null,
+      "state": "completed"
     },
     {
-      "assessed_items": 0,
+      "assessed_items": 4,
       "expected_items": 4,
       "key": "disclosures",
       "label": "Disclosures & affiliations",
@@ -754,27 +1502,30 @@
       "state": "completed"
     }
   ],
-  "paper_sha256": "7fbb686ede89fa15f6519f412975e2e7b7b1da6dcf353ad9ea23df94be7df6a1",
-  "parser_name": "release-metadata",
+  "paper_sha256": "7eca26527f9b679966b5ecd285d548443cec35048ddd3eb5c7a87ef9e93ead62",
+  "parser_name": "pmc-html",
   "parser_version": "1.0",
-  "profile": "common_core",
+  "profile": "computational_ml_modeling",
   "provider_profile": "token_factory",
   "provider_protocol": "openai-compatible",
   "repaired_output": false,
-  "review_score": 0.0,
+  "review_score": 98.0,
   "reviewer_model": "Qwen/Qwen3-235B-A22B-Instruct-2507",
   "schema_version": "1.3",
   "scoring_version": "1.3",
-  "source_format": "metadata",
+  "source_format": "html",
+  "source_provider": "PMC",
+  "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5820739/",
+  "source_version": "publishedVersion",
   "summary": [
-    "No evidence-grounded methodological concern was accepted in the assessed items.",
-    "The final review assessed 0 of 20 methodology items."
+    "Hyperparameter Search. The classification threshold was set to achieve 90% sensitivity based on prior grader performance, but there is no mention of systematic hyperparameter tuning or search procedures. The approach appears to be threshold-focused rather than comprehensive hyperparameter optimization\u2026",
+    "The final review assessed 16 of 24 methodology items."
   ],
   "token_usage": {
-    "input_tokens": 1739,
-    "output_tokens": 1227,
-    "total_tokens": 2966
+    "input_tokens": 39894,
+    "output_tokens": 6965,
+    "total_tokens": 46859
   },
-  "uncapped_score": 0.0,
+  "uncapped_score": 98.0,
   "worker_model": "Qwen/Qwen3-30B-A3B-Instruct-2507"
 }
