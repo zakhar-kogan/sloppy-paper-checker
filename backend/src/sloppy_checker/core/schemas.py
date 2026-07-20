@@ -421,6 +421,7 @@ class PublicReportSummary(StrictModel):
     content_level: ContentLevel
     review_score: Annotated[float, Field(ge=0, le=100)]
     coverage: Annotated[float, Field(ge=0, le=1)]
+    provisional: bool
     concern_count: int = Field(ge=0)
     published_at: datetime
     expires_at: datetime

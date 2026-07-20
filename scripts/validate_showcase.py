@@ -44,6 +44,8 @@ def main() -> None:
         assert report.profile.value == example["profile"]
         assert report.content_level.value == example["content_level"]
         assert report.coverage.full_review == example["coverage"]
+        assert report.review_score == example["review_score"]
+        assert report.coverage.provisional == example["provisional"]
         assert concern_count(report_data) == example["concern_count"]
         audit = json.loads(audit_path.read_text(encoding="utf-8"))
         assert audit["case_id"] == example["id"]

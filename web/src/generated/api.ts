@@ -81,8 +81,8 @@ export interface paths {
         };
         get?: never;
         put?: never;
-        /** Create Jats Document */
-        post: operations["create_jats_document_v1_resolutions__resolution_id__documents__candidate_id__post"];
+        /** Create Pmc Document */
+        post: operations["create_pmc_document_v1_resolutions__resolution_id__documents__candidate_id__post"];
         delete?: never;
         options?: never;
         head?: never;
@@ -899,6 +899,8 @@ export interface components {
             review_score: number;
             /** Coverage */
             coverage: number;
+            /** Provisional */
+            provisional: boolean;
             /** Concern Count */
             concern_count: number;
             /**
@@ -1173,7 +1175,7 @@ export interface operations {
             };
         };
     };
-    create_jats_document_v1_resolutions__resolution_id__documents__candidate_id__post: {
+    create_pmc_document_v1_resolutions__resolution_id__documents__candidate_id__post: {
         parameters: {
             query?: never;
             header?: never;

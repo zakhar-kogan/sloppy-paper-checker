@@ -164,6 +164,7 @@ def test_public_selection_publishes_for_thirty_days_and_is_reversible():
             )
         assert feed.status_code == 200
         assert any(item["slug"] == slug for item in feed.json()["reports"])
+        assert next(item for item in feed.json()["reports"] if item["slug"] == slug)["provisional"]
         assert report.status_code == 200
         assert report.json()["identity"]["title"] == "Publishable paper"
         assert reusable.status_code == 200

@@ -570,13 +570,13 @@ function ExampleGallery({
               <div class="example-copy">
                 <span class="example-profile">{words(example.profile)}</span>
                 <h3>{example.title}</h3>
-                <p>{example.identifier}</p>
+                <p>{example.identifier} · {example.year}</p>
               </div>
               <dl class="example-facts">
-                <div><dt>Year</dt><dd>{example.year}</dd></div>
-                <div><dt>Content</dt><dd>{words(example.content_level)}</dd></div>
+                <div><dt>Review score</dt><dd>{Math.round(example.review_score)}/100<small>{example.provisional ? "Provisional" : "Final"}</small></dd></div>
                 <div><dt>Coverage</dt><dd>{percent(example.coverage)}</dd></div>
                 <div><dt>Concerns</dt><dd>{example.concern_count}</dd></div>
+                <div><dt>Content</dt><dd>{words(example.content_level)}</dd></div>
               </dl>
               <span class="example-open">Read review <span aria-hidden="true">↗</span></span>
             </a>
@@ -615,13 +615,13 @@ function PublicFeed({
         <div class="public-grid">
           {reports.map((item) => (
             <a class="public-card" href={`?${new URLSearchParams({ public: item.slug })}`} key={item.slug}>
-              <span class="example-profile">{words(item.profile)}</span>
+              <span class="example-profile">{words(item.profile)}{item.year ? ` · ${item.year}` : ""}</span>
               <h3>{item.title}</h3>
               <dl class="example-facts">
-                <div><dt>Year</dt><dd>{item.year ?? "—"}</dd></div>
-                <div><dt>Content</dt><dd>{words(item.content_level)}</dd></div>
+                <div><dt>Review score</dt><dd>{Math.round(item.review_score)}/100<small>{item.provisional ? "Provisional" : "Final"}</small></dd></div>
                 <div><dt>Coverage</dt><dd>{percent(item.coverage)}</dd></div>
                 <div><dt>Concerns</dt><dd>{item.concern_count}</dd></div>
+                <div><dt>Content</dt><dd>{words(item.content_level)}</dd></div>
               </dl>
               <span class="example-open">Open public review <span aria-hidden="true">↗</span></span>
             </a>

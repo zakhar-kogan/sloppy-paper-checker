@@ -8,6 +8,8 @@ export type ExampleManifestEntry = {
   profile: string;
   content_level: string;
   coverage: number;
+  review_score: number;
+  provisional: boolean;
   concern_count: number;
   report: string;
   audit: string;

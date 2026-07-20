@@ -21,6 +21,8 @@ describe("static example showcase", () => {
         profile: "computational_ml_modeling",
         content_level: "full_text",
         coverage: 0.75,
+        review_score: 88,
+        provisional: true,
         concern_count: 2,
         report: "reports/attention-2017.json",
         audit: "audits/attention-2017.json",

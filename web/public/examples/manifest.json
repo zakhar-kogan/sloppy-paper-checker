@@ -9,7 +9,9 @@
       "id": "dflash-2026",
       "identifier": "arXiv:2602.06036",
       "profile": "computational_ml_modeling",
+      "provisional": true,
       "report": "reports/dflash-2026.json",
+      "review_score": 91.5,
       "title": "DFlash: Block Diffusion for Flash Speculative Decoding",
       "year": 2026
     },
@@ -21,7 +23,9 @@
       "id": "attention-2017",
       "identifier": "arXiv:1706.03762",
       "profile": "computational_ml_modeling",
+      "provisional": true,
       "report": "reports/attention-2017.json",
+      "review_score": 95.5,
       "title": "Attention Is All You Need",
       "year": 2017
     },
@@ -33,7 +37,9 @@
       "id": "episode-2026",
       "identifier": "10.1001/jamapsychiatry.2026.0132",
       "profile": "randomized_experiment",
+      "provisional": false,
       "report": "reports/episode-2026.json",
+      "review_score": 96.5,
       "title": "Efficacy and Safety of Psilocybin in Treatment-Resistant Major Depression",
       "year": 2026
     },
@@ -45,7 +51,9 @@
       "id": "semaglutide-hiv-2024",
       "identifier": "10.1016/S2213-8587(24)00150-5",
       "profile": "randomized_experiment",
+      "provisional": false,
       "report": "reports/semaglutide-hiv-2024.json",
+      "review_score": 90.5,
       "title": "Once-weekly semaglutide in people with HIV-associated lipohypertrophy: a randomised, double-blind, placebo-controlled phase 2b single-centre clinical trial",
       "year": 2024
     },
@@ -57,7 +65,9 @@
       "id": "bnt162b2-2020",
       "identifier": "10.1056/NEJMoa2034577",
       "profile": "randomized_experiment",
+      "provisional": false,
       "report": "reports/bnt162b2-2020.json",
+      "review_score": 96.8,
       "title": "Safety and Efficacy of the BNT162b2 mRNA Covid-19 Vaccine",
       "year": 2020
     },
@@ -69,7 +79,9 @@
       "id": "cipriani-2018",
       "identifier": "10.1016/S0140-6736(17)32802-7",
       "profile": "systematic_review_meta_analysis",
+      "provisional": false,
       "report": "reports/cipriani-2018.json",
+      "review_score": 90.3,
       "title": "Comparative efficacy and acceptability of 21 antidepressant drugs for the acute treatment of adults with major depressive disorder: a systematic review and network meta-analysis",
       "year": 2018
     },
@@ -81,7 +93,9 @@
       "id": "opensafely-2020",
       "identifier": "10.1038/s41586-020-2521-4",
       "profile": "observational_study",
+      "provisional": true,
       "report": "reports/opensafely-2020.json",
+      "review_score": 98.3,
       "title": "Factors associated with COVID-19-related death using OpenSAFELY",
       "year": 2020
     },
@@ -93,7 +107,9 @@
       "id": "retinopathy-dls-2017",
       "identifier": "10.1001/jama.2017.18152",
       "profile": "computational_ml_modeling",
+      "provisional": true,
       "report": "reports/retinopathy-dls-2017.json",
+      "review_score": 98.0,
       "title": "Development and Validation of a Deep Learning System for Diabetic Retinopathy and Related Eye Diseases Using Retinal Images From Multiethnic Populations With Diabetes",
       "year": 2017
     },
@@ -105,7 +121,9 @@
       "id": "hospital-experience-2020",
       "identifier": "10.1177/2374373520942403",
       "profile": "general_empirical",
+      "provisional": true,
       "report": "reports/hospital-experience-2020.json",
+      "review_score": 100.0,
       "title": "What Do Patients Want? A Qualitative Analysis of Patient, Provider, and Administrative Perceptions and Expectations About Patients\u2019 Hospital Stays",
       "year": 2020
     },
@@ -117,11 +135,13 @@
       "id": "context-reproducibility-2016",
       "identifier": "10.1073/pnas.1521897113",
       "profile": "common_core",
+      "provisional": true,
       "report": "reports/context-reproducibility-2016.json",
+      "review_score": 93.8,
       "title": "Contextual sensitivity in scientific reproducibility",
       "year": 2016
     }
   ],
-  "generated_at": "2026-07-20T12:18:12.331863Z",
+  "generated_at": "2026-07-20T12:26:36.996708Z",
   "schema_version": "1.0"
 }

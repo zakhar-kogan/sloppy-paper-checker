@@ -81,6 +81,8 @@ def main() -> None:
             "profile": report["profile"],
             "content_level": report["content_level"],
             "coverage": report["coverage"]["full_review"],
+            "review_score": report["review_score"],
+            "provisional": report["coverage"]["provisional"],
             "concern_count": concern_count(report),
             "report": f"reports/{case_id}.json",
             "audit": f"audits/{case_id}.json",

@@ -107,7 +107,11 @@ def _public_summary(row: AnalysisRow) -> PublicReportSummary:
         content_level=report.content_level,
         review_score=report.review_score,
         coverage=report.coverage.full_review,
-        concern_count=sum(finding.grade.value != "no_concern" for finding in report.findings),
+        provisional=report.coverage.provisional,
+        concern_count=sum(
+            finding.grade.value in {"critical_concern", "major_concern", "minor_concern"}
+            for finding in report.findings
+        ),
         published_at=row.published_at.replace(tzinfo=row.published_at.tzinfo or UTC),
         expires_at=row.expires_at.replace(tzinfo=row.expires_at.tzinfo or UTC),
     )
