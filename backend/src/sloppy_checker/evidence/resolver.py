@@ -99,15 +99,27 @@ class PaperResolver:
             response = await self.client.get(url, params=params, headers=headers)
             response.raise_for_status()
             return response.json(), None
+        except httpx.HTTPStatusError as exc:
+            return {}, f"HTTPStatusError:{exc.response.status_code}"
         except (httpx.HTTPError, ValueError) as exc:
             return {}, type(exc).__name__
 
     async def resolve(self, raw: str) -> ResolvedPaper:
         value = raw.strip()
-        try:
-            doi = normalize_doi(value)
-        except ValueError:
-            doi = None
+        is_url = value.startswith(("http://", "https://"))
+        host = urlparse(value).hostname if is_url else None
+        # Publisher URLs (not doi.org links) may embed a DOI-shaped substring
+        # inside a longer path (e.g. .../articles/10.3389/fpsyg.2020.00087/full),
+        # which DOI_RE cannot reliably distinguish from a real DOI suffix. Let
+        # _resolve_url scrape the page's own citation_doi meta tag instead of
+        # trusting a regex match against the raw URL.
+        allow_doi_shortcut = not is_url or (host is not None and host.lower().endswith("doi.org"))
+        doi = None
+        if allow_doi_shortcut:
+            try:
+                doi = normalize_doi(value)
+            except ValueError:
+                doi = None
         arxiv = _arxiv_identifier(value)
         pmcid = PMCID_RE.search(value)
         pmid = PMID_URL_RE.search(value) if not pmcid else None
@@ -119,7 +131,7 @@ class PaperResolver:
             return await self._resolve_ncbi(pmid.group(1))
         if arxiv:
             return await self._resolve_arxiv(arxiv)
-        if value.startswith(("http://", "https://")):
+        if is_url:
             return await self._resolve_url(value)
         raise ValueError("Enter a DOI, arXiv ID, PMID, PMCID, or absolute scholarly URL")
 

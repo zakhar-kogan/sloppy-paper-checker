@@ -435,6 +435,60 @@ async def test_doi_providers_fail_independently(failed_provider):
     availability = {record.provider.casefold(): record.available for record in resolved.provenance}
     assert availability[failed_provider] is False
     assert sum(availability.values()) == 2
+    detail = {record.provider.casefold(): record.detail for record in resolved.provenance}
+    assert detail[failed_provider] == "HTTPStatusError:503"
+
+
+@pytest.mark.asyncio
+@respx.mock
+async def test_publisher_url_with_doi_shaped_path_scrapes_citation_doi_meta():
+    doi = "10.3389/fpsyg.2020.00087"
+    url = f"https://www.frontiersin.org/journals/psychology/articles/{doi}/full"
+    html = f"""
+    <html><head>
+    <meta name="citation_doi" content="{doi}">
+    <meta name="citation_title" content="A Frontiers paper">
+    </head><body></body></html>
+    """
+    respx.get(url).mock(return_value=Response(200, content=html, headers={"content-type": "text/html"}))
+    respx.get(f"https://api.crossref.org/works/{doi}").mock(
+        return_value=Response(200, json={"message": {"title": ["A Frontiers paper"], "author": [{"given": "A", "family": "Author"}]}})
+    )
+    respx.get(f"https://api.unpaywall.org/v2/{doi}").mock(return_value=Response(404))
+    respx.get("https://pmc.ncbi.nlm.nih.gov/tools/idconv/api/v1/articles/").mock(
+        return_value=Response(200, json={"records": [{}]})
+    )
+    resolver = resolver_module.PaperResolver(AppSettings())
+    try:
+        resolved = await resolver.resolve(url)
+    finally:
+        await resolver.close()
+    assert resolved.identity.doi == doi
+    assert resolved.identity.title == "A Frontiers paper"
+    assert resolved.identity.authors == ["A Author"]
+
+
+@pytest.mark.asyncio
+@respx.mock
+async def test_doi_org_url_uses_direct_doi_shortcut(monkeypatch):
+    resolver = resolver_module.PaperResolver(AppSettings())
+    requested: list[str] = []
+
+    async def resolve_doi(doi: str):
+        requested.append(doi)
+        return resolver._finish(PaperIdentity(doi=doi), None, [], [], [])
+
+    async def resolve_url(url: str):
+        raise AssertionError("should not scrape doi.org links")
+
+    monkeypatch.setattr(resolver, "_resolve_doi", resolve_doi)
+    monkeypatch.setattr(resolver, "_resolve_url", resolve_url)
+    try:
+        resolved = await resolver.resolve("https://doi.org/10.3389/fpsyg.2020.00087")
+    finally:
+        await resolver.close()
+    assert requested == ["10.3389/fpsyg.2020.00087"]
+    assert resolved.identity.doi == "10.3389/fpsyg.2020.00087"
 
 
 @pytest.mark.asyncio
