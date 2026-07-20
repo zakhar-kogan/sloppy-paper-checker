@@ -8,3 +8,6 @@ export type DocumentReceipt = components["schemas"]["DocumentReceipt"];
 export type AnalysisStatus = components["schemas"]["AnalysisStatus"];
 export type AnalysisReport = components["schemas"]["AnalysisReport"];
 export type SessionView = components["schemas"]["SessionView"];
+export type PublicReportList = components["schemas"]["PublicReportList"];
+export type PublicReportSummary = components["schemas"]["PublicReportSummary"];
+export type ReusableAnalysis = components["schemas"]["ReusableAnalysis"];

@@ -19,6 +19,11 @@ class AnalysisRepository(Protocol):
     def delete(self, row: AnalysisRow) -> None: ...
 
     def count_recent(self, owner_hash: str, mode: str, hours: int = 24) -> int: ...
+    def count_recent_global(self, mode: str, hours: int = 24) -> int: ...
+
+    def get_public(self, slug: str) -> AnalysisRow | None: ...
+
+    def list_public(self, limit: int = 20) -> list[AnalysisRow]: ...
 
     def count_active(self, owner_hash: str) -> int: ...
 
@@ -55,6 +60,43 @@ class SqlAlchemyAnalysisRepository:
             (row.request or {}).get("_owner_hash") == owner_hash
             and ((row.request or {}).get("provider_runtime") or {}).get("mode", "hosted") == mode
             for row in rows
+        )
+
+    def count_recent_global(self, mode: str, hours: int = 24) -> int:
+        cutoff = datetime.now(UTC) - timedelta(hours=hours)
+        rows = self.session.scalars(
+            select(AnalysisRow).where(AnalysisRow.created_at >= cutoff)
+        )
+        return sum(
+            bool((row.request or {}).get("_owner_hash"))
+            and ((row.request or {}).get("provider_runtime") or {}).get("mode", "hosted") == mode
+            for row in rows
+        )
+
+
+
+    def get_public(self, slug: str) -> AnalysisRow | None:
+        return self.session.scalar(
+            select(AnalysisRow).where(
+                AnalysisRow.public_slug == slug,
+                AnalysisRow.published_at.is_not(None),
+                AnalysisRow.expires_at > datetime.now(UTC),
+                AnalysisRow.state == "completed",
+            )
+        )
+
+    def list_public(self, limit: int = 20) -> list[AnalysisRow]:
+        return list(
+            self.session.scalars(
+                select(AnalysisRow)
+                .where(
+                    AnalysisRow.published_at.is_not(None),
+                    AnalysisRow.expires_at > datetime.now(UTC),
+                    AnalysisRow.state == "completed",
+                )
+                .order_by(AnalysisRow.published_at.desc())
+                .limit(limit)
+            )
         )
 
     def count_active(self, owner_hash: str) -> int:

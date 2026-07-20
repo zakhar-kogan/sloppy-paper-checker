@@ -237,6 +237,59 @@
         }
       }
     },
+    "/v1/documents/{document_id}/reusable-analysis": {
+      "get": {
+        "summary": "Get Reusable Analysis",
+        "operationId": "get_reusable_analysis_v1_documents__document_id__reusable_analysis_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "document_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Document Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/ReusableAnalysis"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "title": "Response Get Reusable Analysis V1 Documents  Document Id  Reusable Analysis Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/v1/analyses": {
       "post": {
         "summary": "Create Analysis",
@@ -450,6 +503,231 @@
           }
         }
       }
+    },
+    "/v1/analyses/{analysis_id}/publication": {
+      "get": {
+        "summary": "Get Publication",
+        "operationId": "get_publication_v1_analyses__analysis_id__publication_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "analysis_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Analysis Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/PublicReportSummary"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "title": "Response Get Publication V1 Analyses  Analysis Id  Publication Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/analyses/{analysis_id}/publish": {
+      "post": {
+        "summary": "Publish Analysis",
+        "operationId": "publish_analysis_v1_analyses__analysis_id__publish_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "analysis_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Analysis Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PublishRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicReportSummary"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Unpublish Analysis",
+        "operationId": "unpublish_analysis_v1_analyses__analysis_id__publish_delete",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "analysis_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Analysis Id"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/public/reports": {
+      "get": {
+        "summary": "List Public Reports",
+        "operationId": "list_public_reports_v1_public_reports_get",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 50,
+              "minimum": 1,
+              "default": 20,
+              "title": "Limit"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicReportList"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/public/reports/{slug}": {
+      "get": {
+        "summary": "Get Public Report",
+        "operationId": "get_public_report_v1_public_reports__slug__get",
+        "parameters": [
+          {
+            "name": "slug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Slug"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AnalysisReport"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -637,6 +915,42 @@
           "source_format": {
             "$ref": "#/components/schemas/SourceFormat",
             "default": "pdf"
+          },
+          "source_url": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 2083,
+                "minLength": 1,
+                "format": "uri"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Url"
+          },
+          "source_provider": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Provider"
+          },
+          "source_version": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Version"
           },
           "review_score": {
             "type": "number",
@@ -880,6 +1194,15 @@
             "type": "boolean",
             "title": "Sequential",
             "default": false
+          },
+          "visibility": {
+            "type": "string",
+            "enum": [
+              "private",
+              "public"
+            ],
+            "title": "Visibility",
+            "default": "private"
           }
         },
         "additionalProperties": false,
@@ -1729,6 +2052,42 @@
             "type": "string",
             "title": "Parser Version"
           },
+          "source_url": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 2083,
+                "minLength": 1,
+                "format": "uri"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Url"
+          },
+          "source_provider": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Provider"
+          },
+          "source_version": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Version"
+          },
           "text": {
             "type": "string",
             "maxLength": 8000000,
@@ -2042,6 +2401,108 @@
         ],
         "title": "ProvenanceRecord"
       },
+      "PublicReportList": {
+        "properties": {
+          "reports": {
+            "items": {
+              "$ref": "#/components/schemas/PublicReportSummary"
+            },
+            "type": "array",
+            "title": "Reports"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "reports"
+        ],
+        "title": "PublicReportList"
+      },
+      "PublicReportSummary": {
+        "properties": {
+          "slug": {
+            "type": "string",
+            "title": "Slug"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "year": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Year"
+          },
+          "profile": {
+            "$ref": "#/components/schemas/RubricProfile"
+          },
+          "content_level": {
+            "$ref": "#/components/schemas/ContentLevel"
+          },
+          "review_score": {
+            "type": "number",
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Review Score"
+          },
+          "coverage": {
+            "type": "number",
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Coverage"
+          },
+          "concern_count": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Concern Count"
+          },
+          "published_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Published At"
+          },
+          "expires_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Expires At"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "slug",
+          "title",
+          "profile",
+          "content_level",
+          "review_score",
+          "coverage",
+          "concern_count",
+          "published_at",
+          "expires_at"
+        ],
+        "title": "PublicReportSummary"
+      },
+      "PublishRequest": {
+        "properties": {
+          "confirm_public": {
+            "type": "boolean",
+            "const": true,
+            "title": "Confirm Public"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "confirm_public"
+        ],
+        "title": "PublishRequest"
+      },
       "ReferenceEntry": {
         "properties": {
           "id": {
@@ -2172,6 +2633,99 @@
         ],
         "title": "ResolvedPaper"
       },
+      "ReusableAnalysis": {
+        "properties": {
+          "access": {
+            "type": "string",
+            "enum": [
+              "owned",
+              "public"
+            ],
+            "title": "Access"
+          },
+          "analysis_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Analysis Id"
+          },
+          "slug": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Slug"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "completed_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Completed At"
+          },
+          "profile": {
+            "$ref": "#/components/schemas/RubricProfile"
+          },
+          "content_level": {
+            "$ref": "#/components/schemas/ContentLevel"
+          },
+          "source_format": {
+            "$ref": "#/components/schemas/SourceFormat"
+          },
+          "review_score": {
+            "type": "number",
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Review Score"
+          },
+          "coverage": {
+            "type": "number",
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Coverage"
+          },
+          "methodology_version": {
+            "type": "string",
+            "title": "Methodology Version"
+          },
+          "worker_model": {
+            "type": "string",
+            "title": "Worker Model"
+          },
+          "reviewer_model": {
+            "type": "string",
+            "title": "Reviewer Model"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "access",
+          "title",
+          "completed_at",
+          "profile",
+          "content_level",
+          "source_format",
+          "review_score",
+          "coverage",
+          "methodology_version",
+          "worker_model",
+          "reviewer_model"
+        ],
+        "title": "ReusableAnalysis"
+      },
       "RubricGrade": {
         "type": "string",
         "enum": [
@@ -2216,10 +2770,20 @@
             ],
             "title": "Hosted Remaining"
           },
+          "hosted_capacity_available": {
+            "type": "boolean",
+            "title": "Hosted Capacity Available",
+            "default": true
+          },
           "concurrent_limit": {
             "type": "integer",
             "minimum": 1.0,
             "title": "Concurrent Limit"
+          },
+          "live_analysis_enabled": {
+            "type": "boolean",
+            "title": "Live Analysis Enabled",
+            "default": true
           }
         },
         "additionalProperties": false,

@@ -4,6 +4,9 @@ import type {
   DocumentReceipt,
   PaperDocument,
   ResolvedPaper,
+  PublicReportList,
+  PublicReportSummary,
+  ReusableAnalysis,
   SessionView,
 } from "./domain";
 
@@ -63,12 +66,25 @@ export const api = {
       method: "POST",
       body: JSON.stringify({ failed_candidate_ids: failedCandidateIds }),
     }),
-  analyze: (documentId: string) =>
+  reusableAnalysis: (documentId: string) =>
+    request<ReusableAnalysis | null>(`/v1/documents/${documentId}/reusable-analysis`),
+  analyze: (documentId: string, visibility: "private" | "public") =>
     request<AnalysisStatus>("/v1/analyses", {
       method: "POST",
-      body: JSON.stringify({ source: { kind: "document", value: documentId } }),
+      body: JSON.stringify({ source: { kind: "document", value: documentId }, visibility }),
     }),
   status: (id: string) => request<AnalysisStatus>(`/v1/analyses/${id}`),
   cancel: (id: string) => request<AnalysisStatus>(`/v1/analyses/${id}/cancel`, { method: "POST" }),
   report: (id: string) => request<AnalysisReport>(`/v1/analyses/${id}/report`),
+  publication: (id: string) =>
+    request<PublicReportSummary | null>(`/v1/analyses/${id}/publication`),
+  publish: (id: string) =>
+    request<PublicReportSummary>(`/v1/analyses/${id}/publish`, {
+      method: "POST",
+      body: JSON.stringify({ confirm_public: true }),
+    }),
+  unpublish: (id: string) =>
+    request<void>(`/v1/analyses/${id}/publish`, { method: "DELETE" }),
+  publicReports: () => request<PublicReportList>("/v1/public/reports"),
+  publicReport: (slug: string) => request<AnalysisReport>(`/v1/public/reports/${slug}`),
 };

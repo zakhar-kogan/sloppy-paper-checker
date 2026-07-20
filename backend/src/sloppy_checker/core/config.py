@@ -51,9 +51,12 @@ class AppSettings(BaseSettings):
     provider_timeout_seconds: float = Field(default=120.0, ge=10, le=600)
     reviewer_deadline_seconds: float = Field(default=240.0, ge=30, le=900)
     report_retention_hours: int = Field(default=24, ge=1, le=720)
+    public_report_retention_days: int = Field(default=30, ge=1, le=365)
     resolution_ttl_seconds: int = Field(default=900, ge=60, le=3600)
     guest_cookie_name: str = "spc_guest"
     hosted_runs_per_session: int | None = Field(default=None, ge=1, le=100)
+    hosted_runs_global_24h: int | None = Field(default=None, ge=1, le=10000)
+    live_analysis_enabled: bool = True
     concurrent_runs_per_session: int = Field(default=1, ge=1, le=10)
     observability_enabled: bool = False
     otel_exporter_otlp_endpoint: str | None = None
@@ -125,6 +128,13 @@ class AppSettings(BaseSettings):
     @property
     def configured_provider_reviewer_model(self) -> str:
         return self.provider_reviewer_model or self.token_factory_reviewer_model
+
+    @property
+    def guest_session_lifetime_seconds(self) -> int:
+        return max(
+            self.report_retention_hours * 3600,
+            self.public_report_retention_days * 86400,
+        )
 
     @property
     def provider_credential_env_name(self) -> str:

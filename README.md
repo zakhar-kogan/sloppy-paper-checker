@@ -7,6 +7,8 @@ Sloppy Paper Checker reviews the methodology of scientific papers and shows the 
 
 Use the score to navigate the report alongside its evidence, coverage, and limitations.
 
+[Use the live application](https://papers.teleogenic.com/) or [view the static ten-example showcase](https://zakhar-kogan.github.io/sloppy-paper-checker/).
+
 ![Example methodology report showing evidence-linked findings, the review score, and coverage diagnostics](docs/assets/report-example.png)
 
 ## What it does
@@ -16,7 +18,10 @@ Use the score to navigate the report alongside its evidence, coverage, and limit
 - Separates evidence collection from final assessment: specialist workers find relevant passages, then a reviewer grades the applicable criteria.
 - Verifies quotations against the normalized paper before including them as evidence.
 - Preserves unavailable or failed checks with an explicit unassessed status.
-- Records the methodology, parser, models, coverage, token usage, and source context used for each report.
+- Records the methodology, parser, models, coverage, token usage, source context, and canonical DOI/arXiv/PubMed links used for each report.
+- Keeps reports private by default. A user can select automatic 30-day publication before analysis, publish later, or unpublish early.
+- Offers an existing compatible review before spending inference quota: private reviews only within their owner session, and public identifier-based reviews across visitors while published.
+- Keeps a submitted or retrieved PDF available in a collapsible viewer only for the lifetime of the current browser tab.
 
 For a representative full-text test, try `10.1016/S0140-6736(17)32802-7`.
 
@@ -24,9 +29,9 @@ For a representative full-text test, try `10.1016/S0140-6736(17)32802-7`.
 
 The web app parses PDFs with PDF.js. PMC JATS documents are normalized by the FastAPI backend. The resulting text and document structure are stored temporarily while Agno workers and a final reviewer analyze the paper through a configurable OpenAI-compatible API. Nebius Token Factory is the default provider. Progress is saved in the database and displayed by polling, so reports survive page reloads.
 
-Local development uses SQLite, filesystem storage, and analysis running in the FastAPI process. A production deployment can use PostgreSQL, S3-compatible Nebius Object Storage, and one Nebius Serverless Job per analysis. These choices are configured independently.
+Local development uses SQLite, filesystem storage, and analysis running in the FastAPI process. The current public deployment uses a small single-host Compose stack with PostgreSQL and inline analysis. The same backend can instead dispatch each analysis to a Nebius Serverless Job backed by managed PostgreSQL and S3-compatible Object Storage; storage and dispatch choices are configured independently.
 
-The Chrome extension is a lightweight shortcut that detects a DOI or uses the current page URL, then opens that paper in the web app.
+The static frontend is already CDN-deployable, and the API, storage, and dispatcher boundaries preserve a future move to serverless infrastructure without changing the report contract. Serverless analysis jobs are supported today. Replacing the small stateful FastAPI control plane with a fully scale-to-zero backend would still require different session and persistence adapters and is intentionally not part of the current deployment.
 
 See [Architecture and trust boundaries](docs/architecture.md) for the complete data flow.
 
@@ -34,7 +39,7 @@ See [Architecture and trust boundaries](docs/architecture.md) for the complete d
 
 PDF.js parses local PDFs in the browser and sends the extracted text and document structure to the API. For papers discovered online, the API relays the PDF to the browser for the same parsing step. The backend fetches and normalizes PMC JATS content directly.
 
-The normalized document is deleted after a successful analysis. Deployments should also configure storage lifecycle rules to clean up documents left by failed or cancelled analyses. Reports are scoped to the anonymous browser session that created them, which expires after 24 hours by default.
+Private reports and leftover documents expire after 24 hours by default. Public reports expire after 30 days and may be unpublished sooner. An idempotent hourly cleanup removes expired terminal analyses, stale source-resolution records, and unreferenced stored documents. Reports are scoped to the anonymous browser session that created them unless explicitly published; original PDFs are never published or retained merely for viewing.
 
 The configured model provider receives paper content during analysis. Choose a deployment and provider whose data-handling policies are appropriate for the material you submit.
 
@@ -89,18 +94,7 @@ uv run --project backend python scripts/validate_showcase.py
 
 The bundle is served from `/sloppy-paper-checker/`. It has no backend, accepts no live submissions, stores no visitor data, and contains no credentials. Model inference for the precomputed reports used Nebius Token Factory; this static release does not use Serverless Jobs, Serverless Endpoints, PostgreSQL, or Object Storage.
 
-The workflow is committed in `.github/workflows/pages.yml`. Publishing still requires explicitly selecting GitHub Actions as the Pages source in the repository settings.
-
-## Chrome extension
-
-Build the extension and load `extension/dist` as an unpacked extension in Chrome or Chromium:
-
-```bash
-npm --prefix extension ci
-npm --prefix extension run build
-```
-
-Development builds open `http://127.0.0.1:5173/`. Set `VITE_WEB_APP_URL` while building to point the extension at a deployed web app.
+The workflow is committed in `.github/workflows/pages.yml`, and the public showcase is deployed at [zakhar-kogan.github.io/sloppy-paper-checker](https://zakhar-kogan.github.io/sloppy-paper-checker/).
 
 ## Docker Compose
 
@@ -111,6 +105,8 @@ docker compose up --build
 ```
 
 This deployment uses inline analysis and a persistent local document volume. For a distributed Nebius deployment using Managed PostgreSQL, Object Storage, MysteryBox, and Serverless Jobs, follow the [Nebius deployment guide](docs/nebius.md).
+
+The live Compose frontend includes both the curated example gallery and live analysis. Public-beta spending is bounded by a configurable per-browser allowance, a server-side global safety cap, one concurrent analysis per browser, and the emergency `SPC_LIVE_ANALYSIS_ENABLED` switch. The current example configuration allows ten hosted analyses per browser in a rolling 24-hour window. Visitors see whether hosted analysis is available, not the global remaining count; compatible existing reports remain accessible when fresh capacity is exhausted.
 
 Optional OTLP/HTTP tracing is disabled by default. When enabled, its allowlist is limited to operational metadata such as stages, model identifiers, timings, token counts, coverage, and outcomes.
 
@@ -123,7 +119,7 @@ make build
 make openapi
 ```
 
-CI runs all three test suites, checks backend and web linting, builds the web app and extension, and verifies that the committed OpenAPI schema is current. PostgreSQL contract tests also run when `SPC_TEST_POSTGRES_URL` is set.
+CI runs the repository test suites, checks backend and web linting, builds the web app, and verifies that the committed OpenAPI schema is current. PostgreSQL contract tests also run when `SPC_TEST_POSTGRES_URL` is set.
 
 ## Documentation
 

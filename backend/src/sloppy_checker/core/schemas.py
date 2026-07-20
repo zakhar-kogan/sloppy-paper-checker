@@ -145,6 +145,9 @@ class PaperDocument(StrictModel):
     sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
     parser_name: str
     parser_version: str
+    source_url: HttpUrl | None = None
+    source_provider: str | None = None
+    source_version: str | None = None
     text: str = Field(max_length=8_000_000)
     pages: list[DocumentPage] = Field(default_factory=list, max_length=300)
     spans: list[DocumentSpan] = Field(default_factory=list, max_length=100000)
@@ -313,6 +316,7 @@ class AnalysisRequest(StrictModel):
     enabled_checks: list[str] = Field(default_factory=list)
     max_cost_usd: float | None = Field(default=None, gt=0, le=100)
     sequential: bool = False
+    visibility: Literal["private", "public"] = "private"
 
 
 class AnalysisEvidenceNote(StrictModel):
@@ -356,6 +360,9 @@ class AnalysisReport(StrictModel):
     language: str
     content_level: ContentLevel = ContentLevel.FULL_TEXT
     source_format: SourceFormat = SourceFormat.PDF
+    source_url: HttpUrl | None = None
+    source_provider: str | None = None
+    source_version: str | None = None
     review_score: Annotated[float, Field(ge=0, le=100)] = 0
     composite_score: Annotated[float, Field(ge=0, le=100)]
     uncapped_score: Annotated[float, Field(ge=0, le=100)]
@@ -402,7 +409,46 @@ class AnalysisReport(StrictModel):
         return value
 
 
+class PublishRequest(StrictModel):
+    confirm_public: Literal[True]
+
+
+class PublicReportSummary(StrictModel):
+    slug: str
+    title: str
+    year: int | None = None
+    profile: RubricProfile
+    content_level: ContentLevel
+    review_score: Annotated[float, Field(ge=0, le=100)]
+    coverage: Annotated[float, Field(ge=0, le=1)]
+    concern_count: int = Field(ge=0)
+    published_at: datetime
+    expires_at: datetime
+
+
+class PublicReportList(StrictModel):
+    reports: list[PublicReportSummary]
+class ReusableAnalysis(StrictModel):
+    access: Literal["owned", "public"]
+    analysis_id: UUID | None = None
+    slug: str | None = None
+    title: str
+    completed_at: datetime
+    profile: RubricProfile
+    content_level: ContentLevel
+    source_format: SourceFormat
+    review_score: Annotated[float, Field(ge=0, le=100)]
+    coverage: Annotated[float, Field(ge=0, le=1)]
+    methodology_version: str
+    worker_model: str
+    reviewer_model: str
+
+
+
+
 class SessionView(StrictModel):
     expires_at: datetime
     hosted_remaining: int | None = Field(default=None, ge=0)
+    hosted_capacity_available: bool = True
     concurrent_limit: int = Field(ge=1)
+    live_analysis_enabled: bool = True

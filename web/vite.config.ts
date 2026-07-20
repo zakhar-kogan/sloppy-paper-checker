@@ -6,7 +6,8 @@ export default defineConfig(({ mode }) => {
   return {
     base: pages ? "/sloppy-paper-checker/" : "/",
     define: {
-      "import.meta.env.VITE_STATIC_SHOWCASE": JSON.stringify(pages ? "true" : "false"),
+      "import.meta.env.VITE_SHOW_EXAMPLES": JSON.stringify("true"),
+      "import.meta.env.VITE_LIVE_ANALYSIS_ENABLED": JSON.stringify(pages ? "false" : "true"),
     },
     plugins: [preact()],
     server: {

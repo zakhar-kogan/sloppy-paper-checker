@@ -1,7 +1,8 @@
 /// <reference types="vite/client" />
 
 interface ImportMetaEnv {
-  readonly VITE_STATIC_SHOWCASE: string;
+  readonly VITE_SHOW_EXAMPLES: string;
+  readonly VITE_LIVE_ANALYSIS_ENABLED: string;
 }
 
 interface ImportMeta {

@@ -3,6 +3,7 @@ services:
   gateway:
     image: caddy:2.10-alpine
     env_file: .env
+    restart: unless-stopped
     ports: ["80:80", "443:443", "443:443/udp"]
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile:ro
@@ -12,12 +13,20 @@ services:
       web: {condition: service_started}
   web:
     build: ./web
+    restart: unless-stopped
     depends_on:
       api: {condition: service_started}
+  document-init:
+    build: ./backend
+    user: root
+    command: sh -c "chown -R app:app /app/data/documents"
+    volumes: ["documents:/app/data/documents"]
+    restart: "no"
   api:
     build: ./backend
     command: sh -c "alembic upgrade head && uvicorn sloppy_checker.main:app --host 0.0.0.0 --port 8787 --proxy-headers --forwarded-allow-ips=*"
     env_file: .env
+    restart: unless-stopped
     environment:
       SPC_DOCUMENT_STORE: filesystem
       SPC_DOCUMENT_STORE_PATH: /app/data/documents
@@ -25,9 +34,11 @@ services:
     ports: ["127.0.0.1:8787:8787"]
     volumes: ["documents:/app/data/documents"]
     depends_on:
+      document-init: {condition: service_completed_successfully}
       postgres: {condition: service_healthy}
   postgres:
     image: postgres:17-alpine
+    restart: unless-stopped
     environment:
       POSTGRES_USER: paper
       POSTGRES_PASSWORD: paper

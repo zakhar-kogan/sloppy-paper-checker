@@ -1,17 +1,35 @@
-from contextlib import asynccontextmanager
+import asyncio
+import logging
+from contextlib import asynccontextmanager, suppress
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.trustedhost import TrustedHostMiddleware
 
 from sloppy_checker import __version__
-from sloppy_checker.api.routes import router
+from sloppy_checker.api.routes import public_router, router
 from sloppy_checker.core.config import get_settings
 from sloppy_checker.core.database import AnalysisRow, SessionLocal, create_schema
 from sloppy_checker.core.methodology import load_methodology
+from sloppy_checker.core.retention import cleanup_expired
 from sloppy_checker.core.security import add_security_headers
 
 settings = get_settings()
+logger = logging.getLogger(__name__)
+
+
+async def _retention_loop() -> None:
+    while True:
+        await asyncio.sleep(3600)
+        try:
+            with SessionLocal() as db:
+                result = cleanup_expired(db, settings)
+            if result.analyses or result.documents or result.resolutions or result.document_errors:
+                logger.info("Retention cleanup completed: %s", result)
+        except Exception:
+            logger.exception("Retention cleanup failed")
+
+
 
 
 @asynccontextmanager
@@ -30,7 +48,14 @@ async def lifespan(_: FastAPI):
                 row.stage = "Analysis failed"
                 row.error = "Inline analysis was interrupted when the API process restarted"
         db.commit()
-    yield
+        cleanup_expired(db, settings)
+    cleanup_task = asyncio.create_task(_retention_loop())
+    try:
+        yield
+    finally:
+        cleanup_task.cancel()
+        with suppress(asyncio.CancelledError):
+            await cleanup_task
 
 
 app = FastAPI(
@@ -51,6 +76,7 @@ if settings.cors_origins:
     )
 app.middleware("http")(add_security_headers)
 app.include_router(router)
+app.include_router(public_router)
 
 
 @app.get("/healthz", include_in_schema=False)

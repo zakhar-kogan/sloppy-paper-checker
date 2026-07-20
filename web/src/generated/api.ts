@@ -89,6 +89,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/documents/{document_id}/reusable-analysis": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Reusable Analysis */
+        get: operations["get_reusable_analysis_v1_documents__document_id__reusable_analysis_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/analyses": {
         parameters: {
             query?: never;
@@ -150,6 +167,75 @@ export interface paths {
         };
         /** Get Report */
         get: operations["get_report_v1_analyses__analysis_id__report_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/analyses/{analysis_id}/publication": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Publication */
+        get: operations["get_publication_v1_analyses__analysis_id__publication_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/analyses/{analysis_id}/publish": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Publish Analysis */
+        post: operations["publish_analysis_v1_analyses__analysis_id__publish_post"];
+        /** Unpublish Analysis */
+        delete: operations["unpublish_analysis_v1_analyses__analysis_id__publish_delete"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/public/reports": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List Public Reports */
+        get: operations["list_public_reports_v1_public_reports_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/public/reports/{slug}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Public Report */
+        get: operations["get_public_report_v1_public_reports__slug__get"];
         put?: never;
         post?: never;
         delete?: never;
@@ -245,6 +331,12 @@ export interface components {
             content_level: components["schemas"]["ContentLevel"];
             /** @default pdf */
             source_format: components["schemas"]["SourceFormat"];
+            /** Source Url */
+            source_url?: string | null;
+            /** Source Provider */
+            source_provider?: string | null;
+            /** Source Version */
+            source_version?: string | null;
             /**
              * Review Score
              * @default 0
@@ -370,6 +462,12 @@ export interface components {
              * @default false
              */
             sequential: boolean;
+            /**
+             * Visibility
+             * @default private
+             * @enum {string}
+             */
+            visibility: "private" | "public";
         };
         /**
          * AnalysisState
@@ -691,6 +789,12 @@ export interface components {
             parser_name: string;
             /** Parser Version */
             parser_version: string;
+            /** Source Url */
+            source_url?: string | null;
+            /** Source Provider */
+            source_provider?: string | null;
+            /** Source Version */
+            source_version?: string | null;
             /** Text */
             text: string;
             /** Pages */
@@ -776,6 +880,46 @@ export interface components {
              */
             accessed_at: string;
         };
+        /** PublicReportList */
+        PublicReportList: {
+            /** Reports */
+            reports: components["schemas"]["PublicReportSummary"][];
+        };
+        /** PublicReportSummary */
+        PublicReportSummary: {
+            /** Slug */
+            slug: string;
+            /** Title */
+            title: string;
+            /** Year */
+            year?: number | null;
+            profile: components["schemas"]["RubricProfile"];
+            content_level: components["schemas"]["ContentLevel"];
+            /** Review Score */
+            review_score: number;
+            /** Coverage */
+            coverage: number;
+            /** Concern Count */
+            concern_count: number;
+            /**
+             * Published At
+             * Format: date-time
+             */
+            published_at: string;
+            /**
+             * Expires At
+             * Format: date-time
+             */
+            expires_at: string;
+        };
+        /** PublishRequest */
+        PublishRequest: {
+            /**
+             * Confirm Public
+             * @constant
+             */
+            confirm_public: true;
+        };
         /** ReferenceEntry */
         ReferenceEntry: {
             /** Id */
@@ -820,6 +964,38 @@ export interface components {
              */
             expires_at: string;
         };
+        /** ReusableAnalysis */
+        ReusableAnalysis: {
+            /**
+             * Access
+             * @enum {string}
+             */
+            access: "owned" | "public";
+            /** Analysis Id */
+            analysis_id?: string | null;
+            /** Slug */
+            slug?: string | null;
+            /** Title */
+            title: string;
+            /**
+             * Completed At
+             * Format: date-time
+             */
+            completed_at: string;
+            profile: components["schemas"]["RubricProfile"];
+            content_level: components["schemas"]["ContentLevel"];
+            source_format: components["schemas"]["SourceFormat"];
+            /** Review Score */
+            review_score: number;
+            /** Coverage */
+            coverage: number;
+            /** Methodology Version */
+            methodology_version: string;
+            /** Worker Model */
+            worker_model: string;
+            /** Reviewer Model */
+            reviewer_model: string;
+        };
         /**
          * RubricGrade
          * @enum {string}
@@ -839,8 +1015,18 @@ export interface components {
             expires_at: string;
             /** Hosted Remaining */
             hosted_remaining?: number | null;
+            /**
+             * Hosted Capacity Available
+             * @default true
+             */
+            hosted_capacity_available: boolean;
             /** Concurrent Limit */
             concurrent_limit: number;
+            /**
+             * Live Analysis Enabled
+             * @default true
+             */
+            live_analysis_enabled: boolean;
         };
         /**
          * SourceFormat
@@ -1023,6 +1209,37 @@ export interface operations {
             };
         };
     };
+    get_reusable_analysis_v1_documents__document_id__reusable_analysis_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                document_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ReusableAnalysis"] | null;
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
     create_analysis_v1_analyses_post: {
         parameters: {
             query?: never;
@@ -1153,6 +1370,163 @@ export interface operations {
             header?: never;
             path: {
                 analysis_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AnalysisReport"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_publication_v1_analyses__analysis_id__publication_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                analysis_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PublicReportSummary"] | null;
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    publish_analysis_v1_analyses__analysis_id__publish_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                analysis_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PublishRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PublicReportSummary"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    unpublish_analysis_v1_analyses__analysis_id__publish_delete: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                analysis_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    list_public_reports_v1_public_reports_get: {
+        parameters: {
+            query?: {
+                limit?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PublicReportList"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_public_report_v1_public_reports__slug__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                slug: string;
             };
             cookie?: never;
         };

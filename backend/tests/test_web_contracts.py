@@ -1,5 +1,6 @@
 import hashlib
 import json
+from datetime import UTC, datetime, timedelta
 from pathlib import Path
 
 import pytest
@@ -7,8 +8,10 @@ import respx
 from fastapi.testclient import TestClient
 from httpx import Response
 
-from sloppy_checker.core.config import AppSettings
+from sloppy_checker.core.config import AppSettings, get_settings
+from sloppy_checker.core.database import SessionLocal
 from sloppy_checker.core.methodology import load_methodology
+from sloppy_checker.core.repository import SqlAlchemyAnalysisRepository
 from sloppy_checker.core.schemas import (
     AnalysisRequest,
     ContentCandidate,
@@ -24,11 +27,11 @@ from sloppy_checker.main import app
 from sloppy_checker.workflows.routing import chunk_document, route_chunks
 
 
-def metadata_document() -> dict:
-    text = "Title: A metadata-only test paper"
+def metadata_document(title: str = "A metadata-only test paper") -> dict:
+    text = f"Title: {title}"
     return {
         "schema_version": "1.0",
-        "identity": {"title": "A metadata-only test paper"},
+        "identity": {"title": title},
         "content_level": "metadata",
         "source_format": "metadata",
         "sha256": hashlib.sha256(text.encode()).hexdigest(),
@@ -53,6 +56,13 @@ def test_anonymous_session_owns_document_and_report():
         assert analysis.status_code == 202
         analysis_id = analysis.json()["id"]
         assert owner.get(f"/v1/analyses/{analysis_id}/report").status_code == 200
+        duplicate = owner.post("/v1/documents", json=metadata_document())
+        reusable = owner.get(
+            f"/v1/documents/{duplicate.json()['id']}/reusable-analysis"
+        )
+        assert reusable.status_code == 200
+        assert reusable.json()["access"] == "owned"
+        assert reusable.json()["analysis_id"] == analysis_id
         stranger.post("/v1/session")
         assert stranger.get(f"/v1/analyses/{analysis_id}/report").status_code == 404
 
@@ -70,6 +80,94 @@ def test_guest_run_quota_is_disabled_but_concurrency_limit_remains_visible():
         session = client.post("/v1/session").json()
     assert session["hosted_remaining"] is None
     assert session["concurrent_limit"] == 1
+
+
+def test_global_quota_and_emergency_switch_are_enforced():
+    with TestClient(app), SessionLocal() as db:
+        used = SqlAlchemyAnalysisRepository(db).count_recent_global("hosted")
+    quota_settings = get_settings().model_copy(
+        update={"hosted_runs_global_24h": used + 1, "hosted_runs_per_session": None}
+    )
+    app.dependency_overrides[get_settings] = lambda: quota_settings
+    try:
+        with TestClient(app) as client:
+            session = client.post("/v1/session")
+            assert session.json()["hosted_capacity_available"] is True
+            assert "global_hosted_remaining" not in session.json()
+            assert session.json()["live_analysis_enabled"] is True
+            first = client.post("/v1/documents", json=metadata_document("First quota paper"))
+            assert first.status_code == 201
+            assert client.post(
+                "/v1/analyses",
+                json={"source": {"kind": "document", "value": first.json()["id"]}},
+            ).status_code == 202
+            exhausted_session = client.post("/v1/session")
+            assert exhausted_session.json()["hosted_capacity_available"] is False
+            second = client.post("/v1/documents", json=metadata_document("Second quota paper"))
+            blocked = client.post(
+                "/v1/analyses",
+                json={"source": {"kind": "document", "value": second.json()["id"]}},
+            )
+            assert blocked.status_code == 429
+            assert blocked.headers["X-SPC-Error-Code"] == "global_quota_reached"
+            assert blocked.headers["Retry-After"]
+
+        paused_settings = quota_settings.model_copy(
+            update={"hosted_runs_global_24h": None, "live_analysis_enabled": False}
+        )
+        app.dependency_overrides[get_settings] = lambda: paused_settings
+        with TestClient(app) as client:
+            client.post("/v1/session")
+            receipt = client.post("/v1/documents", json=metadata_document("Paused paper"))
+            blocked = client.post(
+                "/v1/analyses",
+                json={"source": {"kind": "document", "value": receipt.json()["id"]}},
+            )
+            assert blocked.status_code == 503
+            assert blocked.headers["X-SPC-Error-Code"] == "analysis_paused"
+    finally:
+        app.dependency_overrides.pop(get_settings, None)
+
+
+def test_public_selection_publishes_for_thirty_days_and_is_reversible():
+    payload = metadata_document("Publishable paper")
+    payload["identity"]["doi"] = "10.5555/public-paper"
+    with TestClient(app) as owner:
+        owner.post("/v1/session")
+        receipt = owner.post("/v1/documents", json=payload)
+        analysis = owner.post(
+            "/v1/analyses",
+            json={
+                "source": {"kind": "document", "value": receipt.json()["id"]},
+                "visibility": "public",
+            },
+        )
+        analysis_id = analysis.json()["id"]
+        published = owner.get(f"/v1/analyses/{analysis_id}/publication")
+        assert published.status_code == 200
+        slug = published.json()["slug"]
+        expires_at = datetime.fromisoformat(published.json()["expires_at"])
+        assert datetime.now(UTC) + timedelta(days=29) < expires_at
+        assert expires_at < datetime.now(UTC) + timedelta(days=31)
+
+        with TestClient(app) as public:
+            feed = public.get("/v1/public/reports")
+            report = public.get(f"/v1/public/reports/{slug}")
+            public.post("/v1/session")
+            duplicate = public.post("/v1/documents", json=payload)
+            reusable = public.get(
+                f"/v1/documents/{duplicate.json()['id']}/reusable-analysis"
+            )
+        assert feed.status_code == 200
+        assert any(item["slug"] == slug for item in feed.json()["reports"])
+        assert report.status_code == 200
+        assert report.json()["identity"]["title"] == "Publishable paper"
+        assert reusable.status_code == 200
+        assert reusable.json()["access"] == "public"
+        assert reusable.json()["slug"] == slug
+
+        assert owner.delete(f"/v1/analyses/{analysis_id}/publish").status_code == 204
+        assert owner.get(f"/v1/public/reports/{slug}").status_code == 404
 
 
 def test_paper_document_rejects_out_of_bounds_anchors():
@@ -411,3 +509,30 @@ async def test_namespaced_pmc_jats_produces_stable_paragraph_anchors(monkeypatch
     ]
     assert document.parser_version == "1.2"
     assert document.references[0].doi == "10.1234/test.1"
+
+
+@pytest.mark.asyncio
+@respx.mock
+async def test_pmc_oai_error_is_rejected_as_an_unavailable_candidate(monkeypatch):
+    monkeypatch.setattr(resolver_module, "validate_public_url", lambda url: url)
+    url = "https://pmc.example/oai"
+    respx.get(url).mock(
+        return_value=Response(
+            200,
+            content=(
+                b'<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/">'
+                b'<error code="cannotDisseminateFormat">Unsupported metadata format</error>'
+                b"</OAI-PMH>"
+            ),
+        )
+    )
+    candidate = ContentCandidate(
+        id="candidate",
+        format=SourceFormat.JATS,
+        url=url,
+        provider="PMC",
+        content_level=ContentLevel.FULL_TEXT,
+        rank=1,
+    )
+    with pytest.raises(ValueError, match="did not contain JATS full text"):
+        await fetch_jats_document(candidate, PaperIdentity(pmcid="PMC1"), AppSettings())

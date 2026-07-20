@@ -22,6 +22,7 @@ from sloppy_checker.core.database import AnalysisRow, DocumentRow
 from sloppy_checker.core.ingest import fingerprint_text
 from sloppy_checker.core.methodology import content_allows, load_methodology
 from sloppy_checker.core.observability import AnalysisTelemetry
+from sloppy_checker.core.publication import publish_report
 from sloppy_checker.core.rubrics import rubric_items, rubric_prompt
 from sloppy_checker.core.schemas import (
     AnalysisEvidenceNote,
@@ -1339,6 +1340,9 @@ async def execute_analysis(
             language="en",
             content_level=content_level,
             source_format=source_format,
+            source_url=document.source_url,
+            source_provider=document.source_provider,
+            source_version=document.source_version,
             review_score=score.composite,
             composite_score=score.composite,
             uncapped_score=score.uncapped,
@@ -1374,6 +1378,8 @@ async def execute_analysis(
         )
         row.report = report.model_dump(mode="json")
         row.state = "completed"
+        if (row.request or {}).get("visibility") == "public":
+            publish_report(row, db, app)
         telemetry.annotate(
             **{
                 "analysis.methodology_version": bundle.definition.version,

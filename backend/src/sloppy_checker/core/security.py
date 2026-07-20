@@ -38,7 +38,7 @@ def issue_guest_session(
             session_id = current_value.rsplit(".", 2)[0]
         except (ValueError, TypeError):
             pass
-    expires_at = datetime.now(UTC) + timedelta(hours=settings.report_retention_hours)
+    expires_at = datetime.now(UTC) + timedelta(seconds=settings.guest_session_lifetime_seconds)
     expires = int(expires_at.timestamp())
     value = f"{session_id}.{expires}.{_guest_signature(session_id, expires, settings)}"
     owner_hash = hashlib.sha256(session_id.encode()).hexdigest()

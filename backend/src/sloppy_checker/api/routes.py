@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import hashlib
-from datetime import UTC
+from datetime import UTC, datetime, timedelta
 from uuid import UUID
 
 import httpx
@@ -10,10 +10,12 @@ from fastapi import (
     BackgroundTasks,
     Depends,
     HTTPException,
+    Query,
     Request,
     Response,
 )
 from fastapi.responses import Response as BinaryResponse
+from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from sloppy_checker.core.config import AppSettings, get_settings
@@ -23,7 +25,13 @@ from sloppy_checker.core.database import (
     get_db,
 )
 from sloppy_checker.core.dispatch import get_analysis_dispatcher
+from sloppy_checker.core.publication import publish_report
 from sloppy_checker.core.repository import ResolutionRepository, SqlAlchemyAnalysisRepository
+from sloppy_checker.core.reuse import (
+    document_compatibility_hash,
+    has_public_identifier,
+    report_compatibility_hash,
+)
 from sloppy_checker.core.schemas import (
     AnalysisReport,
     AnalysisRequest,
@@ -32,9 +40,13 @@ from sloppy_checker.core.schemas import (
     ContentCandidate,
     DocumentReceipt,
     PaperDocument,
+    PublicReportList,
+    PublicReportSummary,
+    PublishRequest,
     ResolvedDocumentPreparation,
     ResolvedPaper,
     ResolveRequest,
+    ReusableAnalysis,
     SessionView,
 )
 from sloppy_checker.core.security import (
@@ -44,9 +56,10 @@ from sloppy_checker.core.security import (
 )
 from sloppy_checker.core.storage import get_document_store
 from sloppy_checker.evidence.resolver import PaperResolver, fetch_bounded_pdf, fetch_jats_document
-from sloppy_checker.workflows.analysis import execute_analysis
+from sloppy_checker.workflows.analysis import classify_profile, execute_analysis
 
 router = APIRouter(prefix="/v1", dependencies=[Depends(require_client_access)])
+public_router = APIRouter(prefix="/v1/public")
 RESOLUTION_CACHE_VERSION = "2"
 
 
@@ -80,6 +93,26 @@ def _authorize_row(row: AnalysisRow, access: AccessContext) -> None:
     owner = (row.request or {}).get("_owner_hash")
     if not access.is_admin and (not owner or owner != access.owner_hash):
         raise HTTPException(404, "Analysis not found")
+def _public_summary(row: AnalysisRow) -> PublicReportSummary:
+    if not row.public_slug or not row.published_at or not row.report:
+        raise ValueError("Analysis is not published")
+    report = AnalysisReport.model_validate(row.report)
+    published = report.identity.published_at or ""
+    year = int(published[:4]) if len(published) >= 4 and published[:4].isdigit() else None
+    return PublicReportSummary(
+        slug=row.public_slug,
+        title=report.identity.title or "Untitled paper",
+        year=year,
+        profile=report.profile,
+        content_level=report.content_level,
+        review_score=report.review_score,
+        coverage=report.coverage.full_review,
+        concern_count=sum(finding.grade.value != "no_concern" for finding in report.findings),
+        published_at=row.published_at.replace(tzinfo=row.published_at.tzinfo or UTC),
+        expires_at=row.expires_at.replace(tzinfo=row.expires_at.tzinfo or UTC),
+    )
+
+
 
 
 def _get_resolution(resolution_id: UUID, db: Session) -> ResolvedPaper:
@@ -139,16 +172,28 @@ def create_session(
     response.set_cookie(
         settings.guest_cookie_name,
         value,
-        max_age=settings.report_retention_hours * 3600,
+        max_age=settings.guest_session_lifetime_seconds,
         httponly=True,
         secure=settings.env == "production",
         samesite="lax",
         path="/",
     )
+    repository = SqlAlchemyAnalysisRepository(db)
+    session_limit = settings.hosted_runs_per_session
+    global_limit = settings.hosted_runs_global_24h
     return SessionView(
         expires_at=expires_at,
-        hosted_remaining=None,
+        hosted_remaining=(
+            None
+            if session_limit is None
+            else max(0, session_limit - repository.count_recent(owner_hash, "hosted"))
+        ),
+        hosted_capacity_available=(
+            global_limit is None
+            or repository.count_recent_global("hosted") < global_limit
+        ),
         concurrent_limit=settings.concurrent_runs_per_session,
+        live_analysis_enabled=settings.live_analysis_enabled,
     )
 
 
@@ -258,6 +303,9 @@ async def create_jats_document(
             "The selected JATS source could not be retrieved or validated.",
             headers={"X-SPC-Error-Code": "source_unavailable"},
         ) from exc
+    document.source_url = candidate.url
+    document.source_provider = candidate.provider
+    document.source_version = candidate.version
     document.extraction_warnings.extend(
         _fallback_warnings(
             resolution,
@@ -267,6 +315,75 @@ async def create_jats_document(
     )
     return _save_document(document, access.owner_hash, db, settings)
 
+@router.get(
+    "/documents/{document_id}/reusable-analysis",
+    response_model=ReusableAnalysis | None,
+)
+def get_reusable_analysis(
+    document_id: UUID,
+    access: AccessContext = Depends(require_client_access),
+    db: Session = Depends(get_db),
+    settings: AppSettings = Depends(get_settings),
+) -> ReusableAnalysis | None:
+    document_row = db.get(DocumentRow, str(document_id))
+    if not document_row or (not access.is_admin and document_row.owner_hash != access.owner_hash):
+        raise HTTPException(404, "Document not found")
+    document = get_document_store(settings).get(document_row.object_key)
+    compatibility_hash = document_compatibility_hash(
+        document,
+        classify_profile(document.text),
+        settings,
+    )
+    now = datetime.now(UTC)
+    rows = list(
+        db.scalars(
+            select(AnalysisRow)
+            .where(
+                AnalysisRow.state == "completed",
+                AnalysisRow.expires_at > now,
+                AnalysisRow.report.is_not(None),
+            )
+            .order_by(AnalysisRow.updated_at.desc())
+        )
+    )
+    owned: AnalysisRow | None = None
+    public: AnalysisRow | None = None
+    for row in rows:
+        report = AnalysisReport.model_validate(row.report)
+        if report_compatibility_hash(report) != compatibility_hash:
+            continue
+        if (row.request or {}).get("_owner_hash") == access.owner_hash:
+            owned = row
+            break
+        if (
+            public is None
+            and row.published_at is not None
+            and row.public_slug is not None
+            and has_public_identifier(report)
+        ):
+            public = row
+    match = owned or public
+    if not match or not match.report:
+        return None
+    report = AnalysisReport.model_validate(match.report)
+    return ReusableAnalysis(
+        access="owned" if match is owned else "public",
+        analysis_id=UUID(match.id) if match is owned else None,
+        slug=match.public_slug if match is public else None,
+        title=report.identity.title or report.identity.doi or "Untitled paper",
+        completed_at=report.completed_at,
+        profile=report.profile,
+        content_level=report.content_level,
+        source_format=report.source_format,
+        review_score=report.review_score,
+        coverage=report.coverage.full_review,
+        methodology_version=report.methodology_version,
+        worker_model=report.worker_model,
+        reviewer_model=report.reviewer_model,
+    )
+
+
+
 
 def _enforce_quota(
     access: AccessContext,
@@ -275,14 +392,37 @@ def _enforce_quota(
     db: Session,
     settings: AppSettings,
 ) -> None:
-    if access.is_admin or not access.owner_hash:
+    if access.is_admin:
         return
+    if not settings.live_analysis_enabled:
+        raise HTTPException(
+            503,
+            "Live analysis is temporarily paused",
+            headers={"Retry-After": "3600", "X-SPC-Error-Code": "analysis_paused"},
+        )
+    if not access.owner_hash:
+        raise HTTPException(401, "A guest session is required")
     repository = SqlAlchemyAnalysisRepository(db)
     if repository.count_active(access.owner_hash) >= settings.concurrent_runs_per_session:
-        raise HTTPException(429, "This anonymous session already has an active analysis")
+        raise HTTPException(
+            429,
+            "This anonymous session already has an active analysis",
+            headers={"Retry-After": "60"},
+        )
     limit = settings.hosted_runs_per_session
     if limit is not None and repository.count_recent(access.owner_hash, mode) >= limit:
-        raise HTTPException(429, f"Anonymous {mode} analysis quota reached")
+        raise HTTPException(
+            429,
+            f"Anonymous {mode} analysis quota reached",
+            headers={"Retry-After": "86400"},
+        )
+    global_limit = settings.hosted_runs_global_24h
+    if global_limit is not None and repository.count_recent_global(mode) >= global_limit:
+        raise HTTPException(
+            429,
+            f"Global {mode} analysis capacity reached",
+            headers={"Retry-After": "86400", "X-SPC-Error-Code": "global_quota_reached"},
+        )
 
 
 @router.post("/analyses", response_model=AnalysisStatus, status_code=202)
@@ -312,7 +452,12 @@ async def create_analysis(
         "profile": settings.provider_profile,
     }
     source = {"kind": "document", "value": value}
-    row = AnalysisRow(source=source, request=persisted_request, events=[])
+    row = AnalysisRow(
+        source=source,
+        request=persisted_request,
+        events=[],
+        expires_at=datetime.now(UTC) + timedelta(hours=settings.report_retention_hours),
+    )
     SqlAlchemyAnalysisRepository(db).add(row)
     try:
         dispatcher = get_analysis_dispatcher(settings, _run_background)
@@ -392,4 +537,84 @@ def get_report(
     _authorize_row(row, access)
     if row.state != "completed" or not row.report:
         raise HTTPException(409, "Report is not ready")
+    return AnalysisReport.model_validate(row.report)
+@router.get(
+    "/analyses/{analysis_id}/publication",
+    response_model=PublicReportSummary | None,
+)
+def get_publication(
+    analysis_id: UUID,
+    access: AccessContext = Depends(require_client_access),
+    db: Session = Depends(get_db),
+) -> PublicReportSummary | None:
+    row = db.get(AnalysisRow, str(analysis_id))
+    if not row:
+        raise HTTPException(404, "Analysis not found")
+    _authorize_row(row, access)
+    if not row.public_slug or not row.published_at:
+        return None
+    return _public_summary(row)
+
+
+
+
+@router.post(
+    "/analyses/{analysis_id}/publish",
+    response_model=PublicReportSummary,
+)
+def publish_analysis(
+    analysis_id: UUID,
+    payload: PublishRequest,
+    access: AccessContext = Depends(require_client_access),
+    db: Session = Depends(get_db),
+    settings: AppSettings = Depends(get_settings),
+) -> PublicReportSummary:
+    row = db.get(AnalysisRow, str(analysis_id))
+    if not row:
+        raise HTTPException(404, "Analysis not found")
+    _authorize_row(row, access)
+    if row.state != "completed" or not row.report:
+        raise HTTPException(409, "Only completed reports can be published")
+    if not payload.confirm_public:
+        raise HTTPException(422, "Public sharing must be explicitly confirmed")
+    try:
+        publish_report(row, db, settings)
+    except RuntimeError as exc:
+        raise HTTPException(503, str(exc)) from exc
+    db.commit()
+    db.refresh(row)
+    return _public_summary(row)
+
+
+@router.delete("/analyses/{analysis_id}/publish", status_code=204)
+def unpublish_analysis(
+    analysis_id: UUID,
+    access: AccessContext = Depends(require_client_access),
+    db: Session = Depends(get_db),
+    settings: AppSettings = Depends(get_settings),
+) -> None:
+    row = db.get(AnalysisRow, str(analysis_id))
+    if not row:
+        raise HTTPException(404, "Analysis not found")
+    _authorize_row(row, access)
+    row.public_slug = None
+    row.published_at = None
+    row.expires_at = datetime.now(UTC) + timedelta(hours=settings.report_retention_hours)
+    db.commit()
+
+
+@public_router.get("/reports", response_model=PublicReportList)
+def list_public_reports(
+    limit: int = Query(default=20, ge=1, le=50),
+    db: Session = Depends(get_db),
+) -> PublicReportList:
+    rows = SqlAlchemyAnalysisRepository(db).list_public(limit)
+    return PublicReportList(reports=[_public_summary(row) for row in rows])
+
+
+@public_router.get("/reports/{slug}", response_model=AnalysisReport)
+def get_public_report(slug: str, db: Session = Depends(get_db)) -> AnalysisReport:
+    row = SqlAlchemyAnalysisRepository(db).get_public(slug)
+    if not row or not row.report:
+        raise HTTPException(404, "Public report not found")
     return AnalysisReport.model_validate(row.report)
