@@ -9,9 +9,7 @@ from fastapi.testclient import TestClient
 from httpx import Response
 
 from sloppy_checker.core.config import AppSettings, get_settings
-from sloppy_checker.core.database import SessionLocal
 from sloppy_checker.core.methodology import load_methodology
-from sloppy_checker.core.repository import SqlAlchemyAnalysisRepository
 from sloppy_checker.core.schemas import (
     AnalysisRequest,
     ContentCandidate,
@@ -86,42 +84,13 @@ def test_guest_run_quota_is_disabled_but_concurrency_limit_remains_visible():
     assert session["concurrent_limit"] == 1
 
 
-def test_global_quota_and_emergency_switch_are_enforced():
-    with TestClient(app), SessionLocal() as db:
-        used = SqlAlchemyAnalysisRepository(db).count_recent_global("hosted")
-    quota_settings = get_settings().model_copy(
-        update={"hosted_runs_global_24h": used + 1, "hosted_runs_per_session": None}
-    )
-    app.dependency_overrides[get_settings] = lambda: quota_settings
+def test_emergency_switch_is_enforced():
+    paused_settings = get_settings().model_copy(update={"live_analysis_enabled": False})
+    app.dependency_overrides[get_settings] = lambda: paused_settings
     try:
         with TestClient(app) as client:
             session = client.post("/v1/session")
-            assert session.json()["hosted_capacity_available"] is True
-            assert "global_hosted_remaining" not in session.json()
-            assert session.json()["live_analysis_enabled"] is True
-            first = client.post("/v1/documents", json=metadata_document("First quota paper"))
-            assert first.status_code == 201
-            assert client.post(
-                "/v1/analyses",
-                json={"source": {"kind": "document", "value": first.json()["id"]}},
-            ).status_code == 202
-            exhausted_session = client.post("/v1/session")
-            assert exhausted_session.json()["hosted_capacity_available"] is False
-            second = client.post("/v1/documents", json=metadata_document("Second quota paper"))
-            blocked = client.post(
-                "/v1/analyses",
-                json={"source": {"kind": "document", "value": second.json()["id"]}},
-            )
-            assert blocked.status_code == 429
-            assert blocked.headers["X-SPC-Error-Code"] == "global_quota_reached"
-            assert blocked.headers["Retry-After"]
-
-        paused_settings = quota_settings.model_copy(
-            update={"hosted_runs_global_24h": None, "live_analysis_enabled": False}
-        )
-        app.dependency_overrides[get_settings] = lambda: paused_settings
-        with TestClient(app) as client:
-            client.post("/v1/session")
+            assert session.json()["live_analysis_enabled"] is False
             receipt = client.post("/v1/documents", json=metadata_document("Paused paper"))
             blocked = client.post(
                 "/v1/analyses",

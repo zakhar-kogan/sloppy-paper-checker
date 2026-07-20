@@ -41,7 +41,7 @@ export class ApiError extends Error {
 }
 
 export const api = {
-  session: () => request<SessionView>("/v1/session", { method: "POST" }),
+  session: (signal?: AbortSignal) => request<SessionView>("/v1/session", { method: "POST", signal }),
   resolve: (value: string) =>
     request<ResolvedPaper>("/v1/resolve", { method: "POST", body: JSON.stringify({ value }) }),
   relayPdf: async (resolutionId: string, candidateId: string) => {

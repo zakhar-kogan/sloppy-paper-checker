@@ -450,6 +450,5 @@ class ReusableAnalysis(StrictModel):
 class SessionView(StrictModel):
     expires_at: datetime
     hosted_remaining: int | None = Field(default=None, ge=0)
-    hosted_capacity_available: bool = True
     concurrent_limit: int = Field(ge=1)
     live_analysis_enabled: bool = True

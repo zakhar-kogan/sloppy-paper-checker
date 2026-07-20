@@ -2775,11 +2775,6 @@
             ],
             "title": "Hosted Remaining"
           },
-          "hosted_capacity_available": {
-            "type": "boolean",
-            "title": "Hosted Capacity Available",
-            "default": true
-          },
           "concurrent_limit": {
             "type": "integer",
             "minimum": 1.0,

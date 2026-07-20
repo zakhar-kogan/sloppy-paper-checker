@@ -23,13 +23,15 @@ class AnalysisRow(Base):
     stage: Mapped[str] = mapped_column(String(120), default="Queued")
     source: Mapped[dict] = mapped_column(JSON)
     request: Mapped[dict] = mapped_column(JSON)
+    owner_hash: Mapped[str | None] = mapped_column(String(64), nullable=True, index=True)
+    provider_mode: Mapped[str] = mapped_column(String(24), default="hosted", index=True)
     report: Mapped[dict | None] = mapped_column(JSON, nullable=True)
     events: Mapped[list] = mapped_column(JSON, default=list)
     error: Mapped[str | None] = mapped_column(Text, nullable=True)
     cancel_requested: Mapped[bool] = mapped_column(default=False)
     task_id: Mapped[str | None] = mapped_column(String(100), nullable=True)
     created_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), default=lambda: datetime.now(UTC)
+        DateTime(timezone=True), default=lambda: datetime.now(UTC), index=True
     )
     updated_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), default=lambda: datetime.now(UTC), onupdate=lambda: datetime.now(UTC)

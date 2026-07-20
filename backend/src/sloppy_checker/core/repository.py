@@ -3,7 +3,7 @@ from __future__ import annotations
 from datetime import UTC, datetime, timedelta
 from typing import Protocol
 
-from sqlalchemy import select
+from sqlalchemy import func, select
 from sqlalchemy.orm import Session
 
 from .database import AnalysisRow, ResolutionRow
@@ -19,7 +19,6 @@ class AnalysisRepository(Protocol):
     def delete(self, row: AnalysisRow) -> None: ...
 
     def count_recent(self, owner_hash: str, mode: str, hours: int = 24) -> int: ...
-    def count_recent_global(self, mode: str, hours: int = 24) -> int: ...
 
     def get_public(self, slug: str) -> AnalysisRow | None: ...
 
@@ -35,6 +34,13 @@ class SqlAlchemyAnalysisRepository:
         self.session = session
 
     def add(self, row: AnalysisRow) -> AnalysisRow:
+        if row.owner_hash is None:
+            row.owner_hash = (row.request or {}).get("_owner_hash")
+        row.provider_mode = (
+            ((row.request or {}).get("provider_runtime") or {}).get("mode")
+            or row.provider_mode
+            or "hosted"
+        )
         self.session.add(row)
         self.session.commit()
         self.session.refresh(row)
@@ -53,27 +59,18 @@ class SqlAlchemyAnalysisRepository:
 
     def count_recent(self, owner_hash: str, mode: str, hours: int = 24) -> int:
         cutoff = datetime.now(UTC) - timedelta(hours=hours)
-        rows = self.session.scalars(
-            select(AnalysisRow).where(AnalysisRow.created_at >= cutoff)
+        return int(
+            self.session.scalar(
+                select(func.count())
+                .select_from(AnalysisRow)
+                .where(
+                    AnalysisRow.created_at >= cutoff,
+                    AnalysisRow.owner_hash == owner_hash,
+                    AnalysisRow.provider_mode == mode,
+                )
+            )
+            or 0
         )
-        return sum(
-            (row.request or {}).get("_owner_hash") == owner_hash
-            and ((row.request or {}).get("provider_runtime") or {}).get("mode", "hosted") == mode
-            for row in rows
-        )
-
-    def count_recent_global(self, mode: str, hours: int = 24) -> int:
-        cutoff = datetime.now(UTC) - timedelta(hours=hours)
-        rows = self.session.scalars(
-            select(AnalysisRow).where(AnalysisRow.created_at >= cutoff)
-        )
-        return sum(
-            bool((row.request or {}).get("_owner_hash"))
-            and ((row.request or {}).get("provider_runtime") or {}).get("mode", "hosted") == mode
-            for row in rows
-        )
-
-
 
     def get_public(self, slug: str) -> AnalysisRow | None:
         return self.session.scalar(
@@ -100,10 +97,17 @@ class SqlAlchemyAnalysisRepository:
         )
 
     def count_active(self, owner_hash: str) -> int:
-        rows = self.session.scalars(
-            select(AnalysisRow).where(AnalysisRow.state.in_(("queued", "running")))
+        return int(
+            self.session.scalar(
+                select(func.count())
+                .select_from(AnalysisRow)
+                .where(
+                    AnalysisRow.state.in_(("queued", "running")),
+                    AnalysisRow.owner_hash == owner_hash,
+                )
+            )
+            or 0
         )
-        return sum((row.request or {}).get("_owner_hash") == owner_hash for row in rows)
 
 
 class ResolutionRepository:

@@ -184,17 +184,12 @@ def create_session(
     )
     repository = SqlAlchemyAnalysisRepository(db)
     session_limit = settings.hosted_runs_per_session
-    global_limit = settings.hosted_runs_global_24h
     return SessionView(
         expires_at=expires_at,
         hosted_remaining=(
             None
             if session_limit is None
             else max(0, session_limit - repository.count_recent(owner_hash, "hosted"))
-        ),
-        hosted_capacity_available=(
-            global_limit is None
-            or repository.count_recent_global("hosted") < global_limit
         ),
         concurrent_limit=settings.concurrent_runs_per_session,
         live_analysis_enabled=settings.live_analysis_enabled,
@@ -420,13 +415,6 @@ def _enforce_quota(
             f"Anonymous {mode} analysis quota reached",
             headers={"Retry-After": "86400"},
         )
-    global_limit = settings.hosted_runs_global_24h
-    if global_limit is not None and repository.count_recent_global(mode) >= global_limit:
-        raise HTTPException(
-            429,
-            f"Global {mode} analysis capacity reached",
-            headers={"Retry-After": "86400", "X-SPC-Error-Code": "global_quota_reached"},
-        )
 
 
 @router.post("/analyses", response_model=AnalysisStatus, status_code=202)
@@ -459,6 +447,8 @@ async def create_analysis(
     row = AnalysisRow(
         source=source,
         request=persisted_request,
+        owner_hash=access.owner_hash,
+        provider_mode=mode,
         events=[],
         expires_at=datetime.now(UTC) + timedelta(hours=settings.report_retention_hours),
     )

@@ -1017,11 +1017,6 @@ export interface components {
             expires_at: string;
             /** Hosted Remaining */
             hosted_remaining?: number | null;
-            /**
-             * Hosted Capacity Available
-             * @default true
-             */
-            hosted_capacity_available: boolean;
             /** Concurrent Limit */
             concurrent_limit: number;
             /**

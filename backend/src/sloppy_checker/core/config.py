@@ -55,7 +55,6 @@ class AppSettings(BaseSettings):
     resolution_ttl_seconds: int = Field(default=900, ge=60, le=3600)
     guest_cookie_name: str = "spc_guest"
     hosted_runs_per_session: int | None = Field(default=None, ge=1, le=100)
-    hosted_runs_global_24h: int | None = Field(default=None, ge=1, le=10000)
     live_analysis_enabled: bool = True
     concurrent_runs_per_session: int = Field(default=1, ge=1, le=10)
     observability_enabled: bool = False
