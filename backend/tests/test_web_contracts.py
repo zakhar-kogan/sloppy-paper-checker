@@ -328,6 +328,39 @@ async def test_nested_lancet_pii_variants_resolve_through_doi(monkeypatch, url):
 
 
 @pytest.mark.asyncio
+@respx.mock
+async def test_sciencedirect_compact_pii_resolves_through_elsevier_metadata(monkeypatch):
+    resolver = resolver_module.PaperResolver(AppSettings())
+    requested: list[str] = []
+
+    async def resolve_doi(doi: str):
+        requested.append(doi)
+        return resolver._finish(PaperIdentity(doi=doi), None, [], [], [])
+
+    monkeypatch.setattr(resolver, "_resolve_doi", resolve_doi)
+    respx.get(
+        "https://api.elsevier.com/content/article/pii/S1053811909712029"
+    ).mock(
+        return_value=Response(
+            200,
+            json={
+                "full-text-retrieval-response": {
+                    "coredata": {"prism:doi": "10.1016/S1053-8119(09)71202-9"}
+                }
+            },
+        )
+    )
+    try:
+        resolved = await resolver.resolve(
+            "https://www.sciencedirect.com/science/article/abs/pii/S1053811909712029"
+        )
+    finally:
+        await resolver.close()
+    assert requested == ["10.1016/s1053-8119(09)71202-9"]
+    assert resolved.identity.doi == requested[0]
+
+
+@pytest.mark.asyncio
 async def test_publisher_numeric_path_cannot_become_an_arxiv_identifier(monkeypatch):
     resolver = resolver_module.PaperResolver(AppSettings())
     seen: list[str] = []
@@ -568,6 +601,34 @@ async def test_pmc_html_produces_stable_paragraph_anchors(monkeypatch):
     request = respx.calls.last.request
     assert request.headers["Sec-Fetch-Dest"] == "document"
     assert request.headers["Sec-Fetch-Mode"] == "navigate"
+
+
+@pytest.mark.asyncio
+@respx.mock
+async def test_pmc_html_retries_a_transient_non_article_response(monkeypatch):
+    monkeypatch.setattr(resolver_module, "validate_public_url", lambda url: url)
+    url = "https://pmc.example/articles/PMC1/"
+    respx.get(url).mock(
+        side_effect=[
+            Response(200, content=b"<html><body>Temporary response.</body></html>", headers={"content-type": "text/html"}),
+            Response(
+                200,
+                content=b"<html><body><article><h1>Test article</h1><p>Full text.</p></article></body></html>",
+                headers={"content-type": "text/html"},
+            ),
+        ]
+    )
+    candidate = ContentCandidate(
+        id="candidate",
+        format=SourceFormat.HTML,
+        url=url,
+        provider="PMC",
+        content_level=ContentLevel.FULL_TEXT,
+        rank=1,
+    )
+    document = await fetch_pmc_html_document(candidate, PaperIdentity(pmcid="PMC1"), AppSettings())
+    assert "[Test article]\nFull text." in document.text
+    assert respx.calls.call_count == 2
 
 
 @pytest.mark.asyncio

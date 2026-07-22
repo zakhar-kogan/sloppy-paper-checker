@@ -264,6 +264,17 @@ class PaperResolver:
             _candidate(SourceFormat.HTML, "PMC", 26, self._pmc_html_url(pmcid), "publishedVersion"),
         ] if pmcid else []
         return self._finish(identity, abstract, candidates, [ProvenanceRecord(provider="NCBI", available=not id_error, detail=id_error, accessed_at=now)], limitations)
+    async def _resolve_elsevier_pii(self, pii: str) -> ResolvedPaper | None:
+        payload, error = await self._json(
+            f"https://api.elsevier.com/content/article/pii/{pii}",
+            headers={"Accept": "application/json"},
+        )
+        coredata = payload.get("full-text-retrieval-response", {}).get("coredata", {})
+        doi = coredata.get("prism:doi")
+        if error or not doi:
+            return None
+        return await self._resolve_doi(normalize_doi(doi))
+
 
     async def _resolve_url(self, url: str) -> ResolvedPaper:
         validate_public_url(url)
@@ -275,6 +286,11 @@ class PaperResolver:
             pii = ELSEVIER_PII_RE.search(parsed.path)
             if pii:
                 return await self._resolve_doi(f"10.1016/{pii.group(1)}".lower())
+            compact_pii = re.search(r"/pii/(S[0-9A-Z]+)", parsed.path, re.I)
+            if compact_pii:
+                resolved = await self._resolve_elsevier_pii(compact_pii.group(1))
+                if resolved:
+                    return resolved
         if parsed.path.lower().endswith(".pdf") or "/pdf/" in parsed.path.lower():
             return self._finish(PaperIdentity(), None, [_candidate(SourceFormat.PDF, parsed.hostname or "URL", 40, url)], [ProvenanceRecord(provider="Direct URL", accessed_at=datetime.now(UTC))], [])
         try:
@@ -576,28 +592,31 @@ async def fetch_pmc_html_document(candidate: ContentCandidate, identity: PaperId
     if not candidate.url:
         raise ValueError("PMC HTML candidate has no URL")
     url = validate_public_url(str(candidate.url))
-    async with httpx.AsyncClient(timeout=settings.upstream_timeout_seconds, follow_redirects=False) as client:
-        response = await client.get(
-            url,
-            headers={
-                "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-                "Accept-Language": "en-US,en;q=0.9",
-                "Sec-Fetch-Dest": "document",
-                "Sec-Fetch-Mode": "navigate",
-                "Sec-Fetch-Site": "none",
-                "User-Agent": "Mozilla/5.0",
-            },
-        )
-        response.raise_for_status()
-    if len(response.content) > settings.max_upload_bytes:
-        raise ValueError("PMC HTML document exceeds the configured size limit")
-    if "html" not in response.headers.get("content-type", "").lower():
-        raise ValueError("PMC response is not HTML")
-    parser = _PmcArticleParser()
-    parser.feed(response.text)
-    parser.close()
-    if not parser.paragraphs:
-        raise ValueError("PMC HTML response did not contain full text")
+    for attempt in range(2):
+        async with httpx.AsyncClient(timeout=settings.upstream_timeout_seconds, follow_redirects=False) as client:
+            response = await client.get(
+                url,
+                headers={
+                    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+                    "Accept-Language": "en-US,en;q=0.9",
+                    "Sec-Fetch-Dest": "document",
+                    "Sec-Fetch-Mode": "navigate",
+                    "Sec-Fetch-Site": "none",
+                    "User-Agent": "Mozilla/5.0",
+                },
+            )
+            response.raise_for_status()
+        if len(response.content) > settings.max_upload_bytes:
+            raise ValueError("PMC HTML document exceeds the configured size limit")
+        if "html" not in response.headers.get("content-type", "").lower():
+            raise ValueError("PMC response is not HTML")
+        parser = _PmcArticleParser()
+        parser.feed(response.text)
+        parser.close()
+        if parser.paragraphs:
+            break
+        if attempt:
+            raise ValueError("PMC HTML response did not contain full text")
     pieces: list[str] = []
     spans: list[DocumentSpan] = []
     sections: list[DocumentSection] = []
